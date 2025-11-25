@@ -1,0 +1,165 @@
+openapi: 3.0.3
+info:
+  title: users service api
+  version: 1.0.0
+  description: API для сервиса users
+
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    # auth/register
+    UserRegistrationRequest:
+      type: object
+      properties:
+        email:
+          type: string
+        phone:
+          type: string
+        username:
+          type: string
+        hashed_password:
+          type: string
+      required:
+        - username
+        - hashed_password
+
+    UserRegistrationResponse:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ResponseStatus'
+        successResponse:
+          jwt_token:
+            type: string
+        errorResponse:
+          $ref: '#/components/schemas/Error'
+      required:
+        - status
+
+
+    # /auth/login
+    UserLoginRequest:
+      type: object
+      properties:
+        email:
+          type: string
+        phone:
+          type: string
+        username:
+          type: string
+        hashed_password:
+          type: string
+      required:
+        - hashed_password
+
+    UserLoginResponse:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ResponseStatus'
+        successResponse:
+          jwt_token:
+            type: string
+        errorResponse:
+          $ref: '#/components/schemas/Error'
+      required:
+        - status
+
+
+    # /token/public-jwt
+    PublicJwtResponse:
+      type: object
+      properties:
+        public_key:
+          type: string
+      required:
+        - public_key
+
+
+    # /token/refresh-token
+    RefreshTokenResponse:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ResponseStatus'
+        successResponse:
+          refresh_token:
+            type: string
+        errorResponse:
+          $ref: '#/components/schemas/Error'
+      required:
+        - status
+
+
+    # /auth/logout
+    LogoutResponse:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ResponseStatus'
+        errorResponse:
+          $ref: '#/components/schemas/Error'
+      required:
+        - status
+
+
+    # /users/get-user-credentials
+    GetUserCredentialsResponse:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ResponseStatus'
+        successResponse:
+          $ref: '#/components/schemas/UserCredentials'
+        errorResponse:
+          $ref: '#/components/schemas/Error'
+      required:
+        - status
+
+
+    # common models
+    UserCredentials:
+      type: object
+      properties:
+        email:
+          type: string
+        phone:
+          type: string
+        username:
+          type: string
+        status:
+          type: string
+          enum:
+            - ACTIVE
+            - DISABLED
+            - BANNED
+        created_at:
+          type: timestamp
+      required:
+        - username
+        - created_at
+        - status
+
+    ResponseStatus:
+      type: string
+      enum:
+        - SUCCESS
+        - ERROR
+      required : true
+
+    Error:
+      type: object
+      description: Статус и описание ошибки сервера
+      properties:
+        error_code:
+          type: string
+        error_message:
+          type: string
+
+
