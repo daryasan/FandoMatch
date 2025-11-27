@@ -1,10 +1,23 @@
 plugins {
     kotlin("jvm") version "2.0.20"
+    kotlin("kapt") version "2.0.0"
+    id("org.springframework.boot") version "3.5.0"
+    id("io.spring.dependency-management") version "1.1.7"
     id("org.openapi.generator") version "7.17.0"
 }
 
-group = "com.fandomatch"
+group = "org.example"
 version = "1.0-SNAPSHOT"
+
+repositories {
+    mavenCentral()
+}
+
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.cloud:spring-cloud-dependencies:2025.0.0")
+    }
+}
 
 sourceSets {
     main {
@@ -17,7 +30,7 @@ sourceSets {
 
 openApiGenerate {
     generatorName = "kotlin-spring"
-    inputSpec = "$rootDir/services/users/src/main/specs/api.yaml"
+    inputSpec = "$rootDir/services/users/specs/api.yaml"
     outputDir = "$buildDir/generated-sources"
     apiPackage = "com.fandomatch.users.api"
     modelPackage = "com.fandomatch.users.model"
@@ -50,13 +63,12 @@ dependencies {
     testImplementation(kotlin("test"))
 
     // spring
-    implementation("org.springframework.boot:spring-boot-starter-websocket:3.3.3")
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa:3.3.3")
-    implementation("org.springframework.boot:spring-boot-starter-security:3.3.3")
-    implementation("org.springframework.boot:spring-boot-starter-test:3.3.3")
-    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor:3.3.3")
-    implementation("org.springframework.boot:spring-boot-starter-web:3.3.3")
-    testImplementation("org.springframework.security:spring-security-test:6.3.3")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("org.springframework.boot:spring-boot-starter-test")
+    kapt("org.springframework.boot:spring-boot-configuration-processor")
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    testImplementation("org.springframework.security:spring-security-test")
     implementation("org.springframework.boot:spring-boot-starter-logging")
     implementation("org.springframework.boot:spring-boot-starter-validation")
 
@@ -67,7 +79,6 @@ dependencies {
     implementation("org.openapitools:jackson-databind-nullable:0.2.8")
 
 }
-
 
 
 tasks.test {

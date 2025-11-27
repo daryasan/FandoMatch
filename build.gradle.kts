@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm") version "2.0.20"
+    kotlin("kapt") version "2.0.0"
 }
 
 group = "com.fandomatch"
