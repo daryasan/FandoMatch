@@ -60,6 +60,7 @@ repositories {
 }
 
 dependencies {
+    // test
     testImplementation(kotlin("test"))
 
     // spring
@@ -77,6 +78,9 @@ dependencies {
     implementation("javax.validation:validation-api:2.0.1.Final")
     implementation("javax.annotation:javax.annotation-api:1.3.2")
     implementation("org.openapitools:jackson-databind-nullable:0.2.8")
+
+    // logging
+    implementation("io.github.oshai:kotlin-logging-jvm:7.0.3")
 
 }
 
