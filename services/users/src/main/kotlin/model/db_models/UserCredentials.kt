@@ -1,4 +1,4 @@
-package org.example.models
+package org.example.model.db_models
 
 import jakarta.persistence.*
 import java.time.LocalDateTime

@@ -1,6 +1,6 @@
 # Сервис users
 ## Как генерить open api спеки?
-Командой `gradlew.bat openApiGenerate` 
+Командой `.\gradlew.bat openApiGenerate` 
 
 # Диаграммы последовательностей
 

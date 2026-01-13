@@ -27,7 +27,6 @@ sourceSets {
     }
 }
 
-
 openApiGenerate {
     generatorName = "kotlin-spring"
     inputSpec = "$rootDir/services/users/specs/api.yaml"
@@ -40,9 +39,9 @@ openApiGenerate {
     )
 }
 
-tasks.named("compileKotlin") {
-    dependsOn("openApiGenerate")
-}
+//tasks.named("compileKotlin") {
+//    dependsOn("openApiGenerate")
+//}
 
 tasks.named("openApiGenerate") {
     outputs.dir(layout.buildDirectory.dir("generated-sources"))
@@ -62,6 +61,9 @@ repositories {
 dependencies {
     // test
     testImplementation(kotlin("test"))
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("io.mockk:mockk:1.13.9")
+    testImplementation("org.assertj:assertj-core:3.25.3")
 
     // spring
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
@@ -81,6 +83,12 @@ dependencies {
 
     // logging
     implementation("io.github.oshai:kotlin-logging-jvm:7.0.3")
+
+    // jwt
+    implementation("io.jsonwebtoken:jjwt-api:0.12.3")
+    implementation("io.jsonwebtoken:jjwt-impl:0.12.3")
+    implementation("io.jsonwebtoken:jjwt-jackson:0.12.3")
+    implementation("jakarta.servlet:jakarta.servlet-api:6.0.0")
 
 }
 
