@@ -1,4 +1,2 @@
 jwt:
-  privateKey: ${JWT_PRIVATE_KEY}
-  publicKey: ${JWT_PUBLIC_KEY}
-  expiration: ${JWT_EXPIRATION}
+  expiration: 3600000

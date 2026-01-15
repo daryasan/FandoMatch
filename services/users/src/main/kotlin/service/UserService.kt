@@ -4,7 +4,7 @@ import io.github.oshai.kotlinlogging.KLogging
 import org.example.exception.InvalidUserInputData
 import org.example.exception.UsernameAlreadyExistsException
 import org.example.model.db_models.User
-import org.example.repositories.UserRepository
+import org.example.repository.UserRepository
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.stereotype.Service
 

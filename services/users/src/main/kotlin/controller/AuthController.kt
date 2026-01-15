@@ -20,7 +20,8 @@ class AuthController(
             authService.register(
                 email = userRegistrationRequest.email,
                 phone = userRegistrationRequest.phone,
-                username = userRegistrationRequest.username
+                username = userRegistrationRequest.username,
+                hashedPassword = userRegistrationRequest.hashedPassword,
             )
         } catch (e: BusinessException) {
             return ResponseEntity.ok(getErrorRegistrationResponse(e))

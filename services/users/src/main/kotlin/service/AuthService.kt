@@ -9,6 +9,7 @@ class AuthService(
     private val userService: UserService,
     private val jwtService: JwtService,
     private val tokenService: TokenService,
+    private val userCredentialsService: UserCredentialsService
 ) {
 
     companion object : KLogging()
@@ -17,6 +18,7 @@ class AuthService(
         email: String?,
         phone: String?,
         username: String,
+        hashedPassword : String
     ): String {
         logger.info { "Got request for user registration with username=$username" }
 
@@ -25,6 +27,8 @@ class AuthService(
             phone = phone,
             username = username,
         )
+
+        userCredentialsService.createCredentials(savedUser, hashedPassword)
 
         val token = jwtService.generateToken(savedUser)
         tokenService.saveAccessToken(savedUser, token)

@@ -1,27 +1,32 @@
 package service
 
-import BaseTest
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
+import io.mockk.junit5.MockKExtension
 import io.mockk.verify
 import org.example.exception.InvalidUserInputData
 import org.example.exception.UsernameAlreadyExistsException
 import org.example.repository.UserRepository
 import org.example.service.UserService
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import org.springframework.beans.factory.annotation.Autowired
+import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.dao.DataIntegrityViolationException
 import utils.createUser
 
-class UserServiceTest : BaseTest() {
-
+@ExtendWith(MockKExtension::class)
+class UserServiceTest {
     @MockK
-    private lateinit var userRepository: UserRepository
+    lateinit var userRepository: UserRepository
 
-    @Autowired
-    private lateinit var userService: UserService
+    lateinit var userService: UserService
+
+    @BeforeEach
+    fun setup() {
+        userService = UserService(userRepository)
+    }
 
     @Test
     fun `createUser should save user and return saved instance`() {

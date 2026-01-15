@@ -2,6 +2,7 @@ package org.example.service.security
 
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
+import jakarta.annotation.PostConstruct
 import org.example.model.GeneratedToken
 import org.example.model.db_models.User
 import org.springframework.beans.factory.annotation.Value
@@ -14,7 +15,6 @@ import java.security.spec.PKCS8EncodedKeySpec
 import java.security.spec.X509EncodedKeySpec
 import java.time.ZoneId
 import java.util.*
-import javax.annotation.PostConstruct
 
 @Service
 class JwtService(
