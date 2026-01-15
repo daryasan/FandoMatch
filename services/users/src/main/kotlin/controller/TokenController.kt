@@ -1,4 +1,4 @@
-package org.example.controllers
+package org.example.controller
 
 import com.fandomatch.users.api.TokenApi
 import com.fandomatch.users.model.PublicJwtResponse
