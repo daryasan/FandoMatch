@@ -6,10 +6,10 @@ import java.util.*
 
 @Entity
 @Table(name = "\"user\"")
-data class User(
+class User(
     @Id
-    @Column(name = "internal_id", nullable = false, updatable = false)
-    val internalId: UUID = UUID.randomUUID(),
+    @GeneratedValue(strategy = GenerationType.UUID)
+    var uid: UUID? = null,
 
     @Column(name = "email", unique = true)
     val email: String? = null,
@@ -30,6 +30,12 @@ data class User(
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = [CascadeType.ALL], orphanRemoval = true)
     val tokens: Set<Token> = emptySet(),
 
-    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = [CascadeType.ALL], orphanRemoval = true)
-    val credentials: UserCredentials? = null
+    @OneToMany(
+        mappedBy = "user",
+        fetch = FetchType.LAZY,
+        cascade = [CascadeType.ALL],
+        orphanRemoval = true
+    )
+    val credentials: MutableSet<UserCredential> = mutableSetOf()
+
 )

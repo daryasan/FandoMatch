@@ -44,7 +44,7 @@ class JwtServiceTest : BaseTest() {
         assertNotNull(generated.expiresAt)
 
         val extractedId = jwtService.extractUserId(generated.token)
-        assertEquals(user.internalId, extractedId)
+        assertEquals(user.uid, extractedId)
     }
 
     @Test
@@ -66,6 +66,6 @@ class JwtServiceTest : BaseTest() {
 
         val extracted = jwtService.extractUserId(generated.token)
 
-        assertEquals(user.internalId, extracted)
+        assertEquals(user.uid, extracted)
     }
 }

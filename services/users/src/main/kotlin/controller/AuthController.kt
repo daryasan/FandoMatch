@@ -4,6 +4,7 @@ import com.fandomatch.users.api.AuthApi
 import com.fandomatch.users.model.*
 import org.example.exception.BusinessException
 import org.example.service.AuthService
+import org.example.utils.getErrorLoginResponse
 import org.example.utils.getErrorRegistrationResponse
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
@@ -21,7 +22,7 @@ class AuthController(
                 email = userRegistrationRequest.email,
                 phone = userRegistrationRequest.phone,
                 username = userRegistrationRequest.username,
-                hashedPassword = userRegistrationRequest.hashedPassword,
+                password = userRegistrationRequest.hashedPassword,
             )
         } catch (e: BusinessException) {
             return ResponseEntity.ok(getErrorRegistrationResponse(e))
@@ -32,7 +33,17 @@ class AuthController(
     override fun authLoginPost(
         userLoginRequest: UserLoginRequest
     ): ResponseEntity<UserLoginResponse> {
-        return ResponseEntity.ok(UserLoginResponse(status = ResponseStatus.SUCCESS))
+        val jwtToken = try {
+            authService.login(
+                email = userLoginRequest.email,
+                phone = userLoginRequest.phone,
+                username = userLoginRequest.username,
+                password = userLoginRequest.hashedPassword,
+            )
+        } catch (e: BusinessException) {
+            return ResponseEntity.ok(getErrorLoginResponse(e))
+        }
+        return ResponseEntity.ok(UserLoginResponse(status = ResponseStatus.SUCCESS, successResponse = jwtToken))
     }
 
     override fun authLogoutPost(): ResponseEntity<LogoutResponse> {
