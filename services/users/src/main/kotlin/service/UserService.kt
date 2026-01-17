@@ -2,6 +2,7 @@ package org.example.service
 
 import io.github.oshai.kotlinlogging.KLogging
 import org.example.exception.InvalidUserInputData
+import org.example.exception.UserNotFoundException
 import org.example.exception.UsernameAlreadyExistsException
 import org.example.model.db_models.User
 import org.example.repository.UserRepository
@@ -27,12 +28,40 @@ class UserService(
             username = username,
         )
         try {
-            userRepository.save(userToSave)
-            logger.info { "Created user with uid: ${userToSave.internalId}, username: $username" }
+            userRepository.saveAndFlush(userToSave)
+            logger.info { "Created user with uid: ${userToSave.uid}, username: $username" }
             return userToSave
         } catch (e: DataIntegrityViolationException) {
             logger.error { "Error creating user: username $username already exists" }
             throw UsernameAlreadyExistsException(username)
         }
+    }
+
+    fun findUser(
+        email: String?,
+        phone: String?,
+        username: String?,
+    ): User {
+        if (email == null && phone == null && username == null)
+            throw InvalidUserInputData("Cannot find user when all credentails are null")
+        username?.let { runCatching { return findByUsername(it) } }
+        email?.let { runCatching { return findByEmail(it) } }
+        phone?.let { runCatching { return findByPhone(it) } }
+        throw UserNotFoundException("User not found by provided credentials")
+    }
+
+    fun findByUsername(username: String): User {
+        val user = userRepository.findByUsername(username)
+        return user ?: throw UserNotFoundException(username)
+    }
+
+    private fun findByEmail(email: String): User {
+        val user = userRepository.findByEmail(email)
+        return user ?: throw UserNotFoundException(email)
+    }
+
+    private fun findByPhone(phone: String): User {
+        val user = userRepository.findByPhone(phone)
+        return user ?: throw UserNotFoundException(phone)
     }
 }

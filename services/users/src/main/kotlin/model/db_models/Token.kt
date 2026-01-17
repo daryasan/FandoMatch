@@ -6,10 +6,10 @@ import java.util.*
 
 @Entity
 @Table(name = "tokens")
-data class Token(
+class Token(
     @Id
-    @Column(name = "id", nullable = false, updatable = false)
-    val id: UUID = UUID.randomUUID(),
+    @GeneratedValue(strategy = GenerationType.UUID)
+    var internalId: UUID? = null,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)

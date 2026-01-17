@@ -1,7 +1,6 @@
 package org.example.service.security
 
 import io.jsonwebtoken.Jwts
-import io.jsonwebtoken.SignatureAlgorithm
 import jakarta.annotation.PostConstruct
 import org.example.model.GeneratedToken
 import org.example.model.db_models.User
@@ -51,11 +50,12 @@ class JwtService(
         val expiry = Date(now.time + expiration)
 
         val token = Jwts.builder()
-            .setSubject(user.internalId.toString())
+            .id(UUID.randomUUID().toString())
+            .subject(user.uid.toString())
             .claim("username", user.username)
-            .setIssuedAt(now)
-            .setExpiration(expiry)
-            .signWith(privateKey, SignatureAlgorithm.RS256)
+            .issuedAt(now)
+            .expiration(expiry)
+            .signWith(privateKey)
             .compact()
 
         return GeneratedToken(

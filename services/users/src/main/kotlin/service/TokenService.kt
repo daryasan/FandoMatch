@@ -1,7 +1,6 @@
 package org.example.service
 
 import io.github.oshai.kotlinlogging.KLogging
-import org.example.model.GeneratedToken
 import org.example.model.db_models.Token
 import org.example.model.db_models.User
 import org.example.repository.TokenRepository
@@ -17,7 +16,9 @@ class TokenService(
 
     companion object : KLogging()
 
-    fun saveAccessToken(user: User, token: GeneratedToken) {
+    fun generateAndSaveToken(user: User): String {
+        val token = jwtService.generateToken(user)
+
         val now = LocalDateTime.now()
         val tokenToSave = Token(
             user = user,
@@ -28,6 +29,7 @@ class TokenService(
         )
         tokenRepository.save(tokenToSave)
         logger.info { "Saved access token for user ${user.username}" }
+        return token.token
     }
 
 }

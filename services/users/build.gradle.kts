@@ -5,6 +5,7 @@ plugins {
     id("io.spring.dependency-management") version "1.1.7"
     id("org.openapi.generator") version "7.6.0"
     kotlin("plugin.jpa") version "1.9.0"
+    id("org.jetbrains.kotlin.plugin.spring") version "1.9.22"
 }
 
 group = "org.example"
@@ -92,6 +93,9 @@ dependencies {
     implementation("io.swagger.core.v3:swagger-annotations:2.2.41")
     implementation("io.swagger.core.v3:swagger-models:2.2.21")
 
+    // crypto
+    implementation("org.springframework.security:spring-security-crypto")
+    implementation("org.bouncycastle:bcprov-jdk18on:1.78.1")
 
     // logging
     implementation("io.github.oshai:kotlin-logging-jvm:7.0.3")

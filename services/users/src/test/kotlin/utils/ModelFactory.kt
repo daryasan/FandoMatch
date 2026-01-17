@@ -3,9 +3,9 @@ package utils
 import org.example.model.db_models.User
 
 fun createUser(
-    email: String? = "email@email.ru",
-    phone: String? = "89123456789",
-    username: String = "username"
+    email: String? = Constants.EMAIL,
+    phone: String? = Constants.PHONE,
+    username: String = Constants.USERNAME
 ): User = User(
     email = email,
     phone = phone,

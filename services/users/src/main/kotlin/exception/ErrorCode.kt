@@ -3,4 +3,8 @@ package org.example.exception
 enum class ErrorCode {
     USERNAME_ALREADY_EXISTS,
     INVALID_USER_DATA,
+    USER_NOT_FOUND,
+    USER_INACTIVE,
+    CREDENTIALS_MISMATCH,
+    CREDENTIAL_TYPE_NOT_FOUND,
 }
