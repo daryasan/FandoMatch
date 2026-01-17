@@ -1,8 +1,11 @@
 package org.example.service
 
 import io.github.oshai.kotlinlogging.KLogging
+import org.example.exception.TokenRefreshingException
+import org.example.model.AuthTokens
 import org.example.model.db_models.Token
 import org.example.model.db_models.User
+import org.example.model.db_models.enums.TokenType
 import org.example.repository.TokenRepository
 import org.example.service.security.JwtService
 import org.springframework.stereotype.Service
@@ -16,20 +19,79 @@ class TokenService(
 
     companion object : KLogging()
 
-    fun generateAndSaveToken(user: User): String {
-        val token = jwtService.generateToken(user)
-
+    fun generateAndSaveTokens(user: User): AuthTokens {
+        val access = jwtService.generateAccessToken(user)
         val now = LocalDateTime.now()
-        val tokenToSave = Token(
-            user = user,
-            tokenHash = jwtService.getTokenHash(token.token),
-            issuedAt = now,
-            expiresAt = token.expiresAt,
-            revoked = false
+
+        tokenRepository.save(
+            Token(
+                user = user,
+                tokenType = TokenType.ACCESS,
+                tokenValue = jwtService.getTokenHash(access.token),
+                issuedAt = now,
+                expiresAt = access.expiresAt,
+                revoked = false
+            )
         )
-        tokenRepository.save(tokenToSave)
+
         logger.info { "Saved access token for user ${user.username}" }
-        return token.token
+
+        val refresh = jwtService.generateRefreshToken()
+        tokenRepository.save(
+            Token(
+                user = user,
+                tokenType = TokenType.REFRESH,
+                tokenValue = refresh.token,
+                issuedAt = now,
+                expiresAt = refresh.expiresAt,
+                revoked = false
+            )
+        )
+
+        logger.info { "Saved refresh token for user ${user.username}" }
+
+        return AuthTokens(
+            accessToken = access.token,
+            refreshToken = refresh.token
+        )
     }
 
+    fun refreshAccessToken(refreshToken: String): AuthTokens {
+        val token = tokenRepository.findByTokenValueAndTokenType(refreshToken, TokenType.REFRESH)
+            ?: throw TokenRefreshingException("Could not find refresh token")
+
+        if (token.revoked || token.expiresAt.isBefore(LocalDateTime.now())) {
+            logger.warn { "Refresh token expired" }
+            throw TokenRefreshingException("Refresh token expired")
+        }
+
+        val user = token.user
+
+        val activeAccessTokens = tokenRepository.findAllByUserAndTokenTypeAndRevokedFalse(
+            user,
+            TokenType.ACCESS
+        )
+        activeAccessTokens.forEach {
+            it.revoked = true
+            tokenRepository.save(it)
+        }
+
+        val newAccess = jwtService.generateAccessToken(user)
+
+        tokenRepository.save(
+            Token(
+                user = user,
+                tokenType = TokenType.ACCESS,
+                tokenValue = jwtService.getTokenHash(newAccess.token),
+                issuedAt = LocalDateTime.now(),
+                expiresAt = newAccess.expiresAt,
+                revoked = false
+            )
+        )
+
+        return AuthTokens(
+            accessToken = newAccess.token,
+            refreshToken = refreshToken
+        )
+    }
 }

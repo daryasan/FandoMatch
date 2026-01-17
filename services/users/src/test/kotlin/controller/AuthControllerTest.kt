@@ -20,6 +20,8 @@ class AuthControllerTest : BaseTest() {
 
         assertEquals(ResponseStatus.SUCCESS, response.status)
         assertNotNull(response.successResponse)
+        assertNotNull(response.successResponse?.accessToken)
+        assertNotNull(response.successResponse?.refreshToken)
     }
 
     @Test
@@ -28,7 +30,6 @@ class AuthControllerTest : BaseTest() {
         val request2 = userRegistrationRequest(email = "another_email@mail.ru", phone = null)
 
         performRegisterRequestAndReturn(request1)
-        // second time
         val response = performRegisterRequestAndReturn(request2)
 
         assertEquals(ResponseStatus.ERROR, response.status)
@@ -59,6 +60,8 @@ class AuthControllerTest : BaseTest() {
 
         assertEquals(ResponseStatus.SUCCESS, response.status)
         assertNotNull(response.successResponse)
+        assertNotNull(response.successResponse?.accessToken)
+        assertNotNull(response.successResponse?.refreshToken)
     }
 
     @Test

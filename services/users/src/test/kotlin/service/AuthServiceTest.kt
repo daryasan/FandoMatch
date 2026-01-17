@@ -4,6 +4,7 @@ import io.mockk.*
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
 import io.mockk.junit5.MockKExtension
+import org.example.model.AuthTokens
 import org.example.service.AuthService
 import org.example.service.TokenService
 import org.example.service.UserCredentialsService
@@ -37,14 +38,17 @@ class AuthServiceTest {
     private lateinit var authService: AuthService
 
     @Test
-    fun `register should create user, save credentials, generate token`() {
+    fun `register should create user, save credentials, generate tokens`() {
         // given
         val user = createUser(EMAIL, PHONE, USERNAME)
-        val expectedToken = "jwt-token-123"
+        val expectedTokens = AuthTokens(
+            accessToken = "access-123",
+            refreshToken = "refresh-123"
+        )
 
         every { userService.createUser(EMAIL, PHONE, USERNAME) } returns user
-        every { userCredentialsService.createCredentials(user, PASSWORD) } returns mockk()
-        every { tokenService.generateAndSaveToken(user) } returns expectedToken
+        every { userCredentialsService.createCredentials(user, PASSWORD) } just awaits
+        every { tokenService.generateAndSaveTokens(user) } returns expectedTokens
 
         // when
         val result = authService.register(EMAIL, PHONE, USERNAME, PASSWORD)
@@ -52,21 +56,24 @@ class AuthServiceTest {
         // then
         verify(exactly = 1) { userService.createUser(EMAIL, PHONE, USERNAME) }
         verify(exactly = 1) { userCredentialsService.createCredentials(user, PASSWORD) }
-        verify(exactly = 1) { tokenService.generateAndSaveToken(user) }
+        verify(exactly = 1) { tokenService.generateAndSaveTokens(user) }
 
-        assertEquals(expectedToken, result)
+        assertEquals(expectedTokens, result)
     }
 
     @Test
-    fun `login should find user, validate, verify credentials and generate token`() {
+    fun `login should find user, validate, verify credentials and generate tokens`() {
         // given
         val user = createUser(EMAIL, PHONE, USERNAME)
-        val expectedToken = "jwt-login-token"
+        val expectedTokens = AuthTokens(
+            accessToken = "access-login",
+            refreshToken = "refresh-login"
+        )
 
         every { userService.findUser(EMAIL, PHONE, USERNAME) } returns user
         every { userValidator.validateUserBeforeLogin(user) } just runs
         every { userCredentialsService.verifyCredential(user, PASSWORD) } just runs
-        every { tokenService.generateAndSaveToken(user) } returns expectedToken
+        every { tokenService.generateAndSaveTokens(user) } returns expectedTokens
 
         // when
         val result = authService.login(EMAIL, PHONE, USERNAME, PASSWORD)
@@ -75,8 +82,8 @@ class AuthServiceTest {
         verify(exactly = 1) { userService.findUser(EMAIL, PHONE, USERNAME) }
         verify(exactly = 1) { userValidator.validateUserBeforeLogin(user) }
         verify(exactly = 1) { userCredentialsService.verifyCredential(user, PASSWORD) }
-        verify(exactly = 1) { tokenService.generateAndSaveToken(user) }
+        verify(exactly = 1) { tokenService.generateAndSaveTokens(user) }
 
-        assertEquals(expectedToken, result)
+        assertEquals(expectedTokens, result)
     }
 }

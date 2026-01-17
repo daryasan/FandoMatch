@@ -35,15 +35,14 @@ components:
         status:
           $ref: '#/components/schemas/ResponseStatus'
         successResponse:
-          jwt_token:
-            type: string
+          $ref: '#/components/schemas/RefreshAndAccessTokens'
         errorResponse:
           $ref: '#/components/schemas/Error'
       required:
         - status
 
 
-    # /auth/login
+      # /auth/login
     UserLoginRequest:
       type: object
       properties:
@@ -64,12 +63,12 @@ components:
         status:
           $ref: '#/components/schemas/ResponseStatus'
         successResponse:
-          jwt_token:
-            type: string
+          $ref: '#/components/schemas/RefreshAndAccessTokens'
         errorResponse:
           $ref: '#/components/schemas/Error'
       required:
         - status
+
 
 
     # /token/public-jwt
@@ -89,8 +88,7 @@ components:
         status:
           $ref: '#/components/schemas/ResponseStatus'
         successResponse:
-          refresh_token:
-            type: string
+          $ref: '#/components/schemas/RefreshAndAccessTokens'
         errorResponse:
           $ref: '#/components/schemas/Error'
       required:
@@ -151,7 +149,7 @@ components:
       enum:
         - SUCCESS
         - ERROR
-      required : true
+      required: true
 
     Error:
       type: object
@@ -161,5 +159,24 @@ components:
           type: string
         error_message:
           type: string
+
+    RefreshToken:
+      type: object
+      properties:
+        refresh_token:
+          type: string
+      required:
+        - refresh_token
+
+    RefreshAndAccessTokens:
+      type: object
+      properties:
+        access_token:
+          type: string
+        refresh_token:
+          type: string
+      required:
+        - access_token
+        - refresh_token
 
 
