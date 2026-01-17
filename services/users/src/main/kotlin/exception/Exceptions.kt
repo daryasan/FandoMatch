@@ -1,6 +1,6 @@
 package org.example.exception
 
-import org.example.model.db_models.UserStatus
+import org.example.model.db_models.enums.UserStatus
 
 abstract class BusinessException(val code: String, message: String) : Exception(message)
 
@@ -27,3 +27,7 @@ class UserCredentialNotFoundException(credentialType: String) :
         ErrorCode.CREDENTIAL_TYPE_NOT_FOUND.name,
         "User does not have credentials with type:$credentialType"
     )
+
+class TokenRefreshingException(message: String) : BusinessException(
+    ErrorCode.REFRESH_TOKEN_INVALID.name, message
+)

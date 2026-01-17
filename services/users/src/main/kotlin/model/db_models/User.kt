@@ -1,6 +1,7 @@
 package org.example.model.db_models
 
 import jakarta.persistence.*
+import org.example.model.db_models.enums.UserStatus
 import java.time.LocalDateTime
 import java.util.*
 

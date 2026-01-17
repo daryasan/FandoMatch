@@ -17,6 +17,7 @@ open class SecurityConfig {
             .authorizeHttpRequests {
                 it.requestMatchers("/auth/register").permitAll()
                 it.requestMatchers("/auth/login").permitAll()
+                it.requestMatchers("/token/refresh").permitAll()
                 it.anyRequest().authenticated()
             }
         return http.build()

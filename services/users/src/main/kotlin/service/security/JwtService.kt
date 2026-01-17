@@ -2,6 +2,7 @@ package org.example.service.security
 
 import io.jsonwebtoken.Jwts
 import jakarta.annotation.PostConstruct
+import org.example.config.JwtProperties
 import org.example.model.GeneratedToken
 import org.example.model.db_models.User
 import org.springframework.beans.factory.annotation.Value
@@ -12,14 +13,17 @@ import java.security.PrivateKey
 import java.security.PublicKey
 import java.security.spec.PKCS8EncodedKeySpec
 import java.security.spec.X509EncodedKeySpec
+import java.time.LocalDateTime
 import java.time.ZoneId
 import java.util.*
 
 @Service
 class JwtService(
-    @Value("\${jwt.privateKey}") private val privateKeyBase64: String,
-    @Value("\${jwt.publicKey}") private val publicKeyBase64: String,
-    @Value("\${jwt.expiration}") private val expiration: Long,
+    @Value("\${jwt.privateKey}")
+    private val privateKeyBase64: String,
+    @Value("\${jwt.publicKey}")
+    private val publicKeyBase64: String,
+    private val expirationProperties: JwtProperties
 ) {
 
     private lateinit var privateKey: PrivateKey
@@ -45,9 +49,9 @@ class JwtService(
         return KeyFactory.getInstance("RSA").generatePublic(spec)
     }
 
-    fun generateToken(user: User): GeneratedToken {
+    fun generateAccessToken(user: User): GeneratedToken {
         val now = Date()
-        val expiry = Date(now.time + expiration)
+        val expiry = Date(now.time + expirationProperties.accessExpiration)
 
         val token = Jwts.builder()
             .id(UUID.randomUUID().toString())
@@ -64,6 +68,10 @@ class JwtService(
         )
     }
 
+    fun generateRefreshToken() = GeneratedToken(
+        UUID.randomUUID().toString(), LocalDateTime.now().plusDays(expirationProperties.refreshExpirationDays)
+    )
+
 
     fun getTokenHash(token: String): String {
         val digest = MessageDigest.getInstance("SHA-256")
@@ -73,11 +81,12 @@ class JwtService(
 
     fun extractUserId(token: String): UUID {
         val claims = Jwts.parser()
-            .setSigningKey(publicKey)
+            .verifyWith(publicKey)
             .build()
             .parseSignedClaims(token)
             .payload
 
         return UUID.fromString(claims.subject)
     }
+
 }

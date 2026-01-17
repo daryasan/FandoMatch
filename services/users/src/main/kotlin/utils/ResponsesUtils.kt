@@ -1,9 +1,6 @@
 package org.example.utils
 
-import com.fandomatch.users.model.Error
-import com.fandomatch.users.model.ResponseStatus
-import com.fandomatch.users.model.UserLoginResponse
-import com.fandomatch.users.model.UserRegistrationResponse
+import com.fandomatch.users.model.*
 import org.example.exception.BusinessException
 
 fun getErrorRegistrationResponse(exception: BusinessException) = UserRegistrationResponse(
@@ -15,6 +12,14 @@ fun getErrorRegistrationResponse(exception: BusinessException) = UserRegistratio
 
 fun getErrorLoginResponse(exception: BusinessException) = UserLoginResponse(
     status = ResponseStatus.ERROR, errorResponse = Error(
+        errorCode = exception.code,
+        errorMessage = exception.message
+    )
+)
+
+fun getRefreshTokenErrorResponse(exception: BusinessException) = RefreshTokenResponse(
+    status = ResponseStatus.ERROR,
+    errorResponse = Error(
         errorCode = exception.code,
         errorMessage = exception.message
     )

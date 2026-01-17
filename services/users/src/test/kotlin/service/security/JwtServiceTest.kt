@@ -1,18 +1,22 @@
 package service.security
 
-import BaseTest
+import org.example.UsersApplication
 import org.example.model.GeneratedToken
 import org.example.service.security.JwtService
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.DynamicPropertyRegistry
 import org.springframework.test.context.DynamicPropertySource
 import utils.createUser
 import java.security.KeyPairGenerator
 import java.util.*
 
-class JwtServiceTest : BaseTest() {
+@SpringBootTest(classes = [UsersApplication::class])
+@ActiveProfiles("test")
+class JwtServiceTest {
 
     @Autowired
     lateinit var jwtService: JwtService
@@ -24,13 +28,14 @@ class JwtServiceTest : BaseTest() {
 
         private val publicKeyBase64 =
             Base64.getEncoder().encodeToString(keyPair.public.encoded)
-        
+
         @JvmStatic
         @DynamicPropertySource
         fun registerProps(registry: DynamicPropertyRegistry) {
             registry.add("jwt.privateKey") { privateKeyBase64 }
             registry.add("jwt.publicKey") { publicKeyBase64 }
-            registry.add("jwt.expiration") { 3600000 }
+            registry.add("jwt.access-expiration") { 3600000 }
+            registry.add("jwt.refresh-expiration-days") { 60 }
         }
     }
 
@@ -38,7 +43,7 @@ class JwtServiceTest : BaseTest() {
     fun `generateToken should create valid JWT and expiration`() {
         val user = createUser("test@example.com", "+123456789", "testuser")
 
-        val generated: GeneratedToken = jwtService.generateToken(user)
+        val generated: GeneratedToken = jwtService.generateAccessToken(user)
 
         assertNotNull(generated.token)
         assertNotNull(generated.expiresAt)
@@ -62,7 +67,7 @@ class JwtServiceTest : BaseTest() {
     fun `extractUserId should return correct UUID from token`() {
         val user = createUser("test@example.com", "+123456789", "testuser")
 
-        val generated = jwtService.generateToken(user)
+        val generated = jwtService.generateAccessToken(user)
 
         val extracted = jwtService.extractUserId(generated.token)
 

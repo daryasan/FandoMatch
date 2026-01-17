@@ -17,7 +17,7 @@ class AuthController(
     override fun authRegisterPost(
         userRegistrationRequest: UserRegistrationRequest
     ): ResponseEntity<UserRegistrationResponse> {
-        val jwtToken = try {
+        val tokens = try {
             authService.register(
                 email = userRegistrationRequest.email,
                 phone = userRegistrationRequest.phone,
@@ -27,13 +27,21 @@ class AuthController(
         } catch (e: BusinessException) {
             return ResponseEntity.ok(getErrorRegistrationResponse(e))
         }
-        return ResponseEntity.ok(UserRegistrationResponse(status = ResponseStatus.SUCCESS, successResponse = jwtToken))
+        return ResponseEntity.ok(
+            UserRegistrationResponse(
+                status = ResponseStatus.SUCCESS,
+                successResponse = RefreshAndAccessTokens(
+                    accessToken = tokens.accessToken,
+                    refreshToken = tokens.refreshToken
+                )
+            )
+        )
     }
 
     override fun authLoginPost(
         userLoginRequest: UserLoginRequest
     ): ResponseEntity<UserLoginResponse> {
-        val jwtToken = try {
+        val tokens = try {
             authService.login(
                 email = userLoginRequest.email,
                 phone = userLoginRequest.phone,
@@ -43,7 +51,15 @@ class AuthController(
         } catch (e: BusinessException) {
             return ResponseEntity.ok(getErrorLoginResponse(e))
         }
-        return ResponseEntity.ok(UserLoginResponse(status = ResponseStatus.SUCCESS, successResponse = jwtToken))
+        return ResponseEntity.ok(
+            UserLoginResponse(
+                status = ResponseStatus.SUCCESS,
+                successResponse = RefreshAndAccessTokens(
+                    accessToken = tokens.accessToken,
+                    refreshToken = tokens.refreshToken
+                )
+            )
+        )
     }
 
     override fun authLogoutPost(): ResponseEntity<LogoutResponse> {

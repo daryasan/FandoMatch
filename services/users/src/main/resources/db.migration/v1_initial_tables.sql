@@ -1,11 +1,13 @@
 create TABLE IF NOT EXISTS tokens (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id UUID NOT NULL,
-  token_hash TEXT NOT NULL UNIQUE,
+  token_type TEXT NOT NULL CHECK (token_type IN ('ACCESS', 'REFRESH')),
+  token_value TEXT NOT NULL UNIQUE,
   issued_at TIMESTAMP NOT NULL,
   expires_at TIMESTAMP NOT NULL,
   revoked BOOLEAN NOT NULL DEFAULT false
 );
+
 
 create index IF NOT EXISTS token_index_user_id ON tokens(user_id);
 

@@ -1,6 +1,7 @@
 package org.example.service
 
 import io.github.oshai.kotlinlogging.KLogging
+import org.example.model.AuthTokens
 import org.example.service.validation.UserValidator
 import org.springframework.stereotype.Service
 
@@ -19,7 +20,7 @@ class AuthService(
         phone: String?,
         username: String,
         password: String
-    ): String {
+    ): AuthTokens {
         logger.info { "Got request for user registration with username=$username" }
 
         val savedUser = userService.createUser(
@@ -30,7 +31,7 @@ class AuthService(
 
         userCredentialsService.createCredentials(savedUser, password)
 
-        return tokenService.generateAndSaveToken(savedUser)
+        return tokenService.generateAndSaveTokens(savedUser)
     }
 
     fun login(
@@ -38,14 +39,14 @@ class AuthService(
         phone: String?,
         username: String?,
         password: String
-    ): String {
+    ): AuthTokens {
         logger.info { "Got request for user login with username=$username" }
 
         val foundUser = userService.findUser(email, phone, username)
         userValidator.validateUserBeforeLogin(foundUser)
 
         userCredentialsService.verifyCredential(foundUser, password)
-        return tokenService.generateAndSaveToken(foundUser)
+        return tokenService.generateAndSaveTokens(foundUser)
     }
 
 

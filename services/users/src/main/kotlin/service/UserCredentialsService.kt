@@ -2,9 +2,9 @@ package org.example.service
 
 import org.example.exception.UserCredentialMismatchException
 import org.example.exception.UserCredentialNotFoundException
-import org.example.model.db_models.CredentialType
 import org.example.model.db_models.User
 import org.example.model.db_models.UserCredential
+import org.example.model.db_models.enums.CredentialType
 import org.example.repository.UserCredentialsRepository
 import org.example.service.AuthService.Companion.logger
 import org.example.service.validation.PasswordHasherService

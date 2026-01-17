@@ -87,20 +87,22 @@ paths:
               schema:
                 $ref: '#./definitions.yaml#/components/schemas/PublicJwtResponse'
 
-  /token/refresh-token:
+  /token/refresh:
     post:
-      description: Обновление access-токена
+      description: Обновление access-токена по refresh-токену
       tags:
         - token
-      security:
-        - bearerAuth: [ ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#./definitions.yaml#/components/schemas/RefreshToken'
       responses:
         '200':
-          description: Обновленный access token
+          description: Новый access token
           content:
             application/json:
               schema:
                 $ref: '#./definitions.yaml#/components/schemas/RefreshTokenResponse'
-
-
 

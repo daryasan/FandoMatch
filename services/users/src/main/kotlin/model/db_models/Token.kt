@@ -1,12 +1,14 @@
 package org.example.model.db_models
 
 import jakarta.persistence.*
+import org.example.model.db_models.enums.TokenType
 import java.time.LocalDateTime
 import java.util.*
 
 @Entity
 @Table(name = "tokens")
 class Token(
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     var internalId: UUID? = null,
@@ -15,15 +17,19 @@ class Token(
     @JoinColumn(name = "user_id", nullable = false)
     val user: User,
 
-    @Column(name = "token_hash", nullable = false, unique = true)
-    val tokenHash: String,
+    @Enumerated(EnumType.STRING)
+    @Column(name = "token_type", nullable = false)
+    val tokenType: TokenType,
+
+    @Column(name = "token_value", nullable = false, unique = true)
+    val tokenValue: String,
 
     @Column(name = "issued_at", nullable = false)
     val issuedAt: LocalDateTime,
 
     @Column(name = "expires_at", nullable = false)
-    val expiresAt: LocalDateTime,
+    var expiresAt: LocalDateTime,
 
     @Column(name = "revoked", nullable = false)
-    val revoked: Boolean = false
+    var revoked: Boolean = false
 )
