@@ -6,6 +6,7 @@ plugins {
     id("org.openapi.generator") version "7.6.0"
     kotlin("plugin.jpa") version "1.9.0"
     id("org.jetbrains.kotlin.plugin.spring") version "1.9.22"
+    jacoco
 }
 
 group = "org.example"
@@ -63,6 +64,14 @@ tasks.named("openApiGenerate") {
         if (generatedDir.exists()) {
             generatedDir.deleteRecursively()
         }
+    }
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
     }
 }
 
