@@ -49,8 +49,11 @@ jobs:
       - name: Grant execute permission for Gradle Wrapper
         run: chmod +x gradlew
 
+      - name: Generate OpenAPI models
+        run: ./gradlew openApiGenerate
+
       - name: Run tests with coverage
-        run: ./gradlew clean test jacocoTestReport
+        run: ./gradlew test jacocoTestReport
 
       - name: Generate coverage report summary
         id: jacoco

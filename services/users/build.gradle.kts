@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.internal.KaptGenerateStubsTask
+
 plugins {
     kotlin("jvm") version "2.0.20"
     kotlin("kapt") version "2.0.0"
@@ -6,7 +8,6 @@ plugins {
     id("org.openapi.generator") version "7.6.0"
     kotlin("plugin.jpa") version "1.9.0"
     id("org.jetbrains.kotlin.plugin.spring") version "1.9.22"
-    jacoco
 }
 
 group = "org.example"
@@ -22,11 +23,11 @@ dependencyManagement {
     }
 }
 
+val generatedSourcesDir = layout.buildDirectory.dir("generated-sources/src/main/kotlin")
+
 sourceSets {
     main {
-        kotlin {
-            srcDir("$buildDir/generated-sources/src/main/kotlin")
-        }
+        kotlin.srcDir(generatedSourcesDir)
     }
 }
 
@@ -45,6 +46,7 @@ openApiGenerate {
 }
 
 tasks.named("openApiGenerate") {
+    outputs.dir(generatedSourcesDir)
     doLast {
         val apiDir = file("$buildDir/generated-sources/src/main/kotlin/com/fandomatch/users/api")
 
@@ -56,24 +58,14 @@ tasks.named("openApiGenerate") {
     }
 }
 
-
-tasks.named("openApiGenerate") {
-    outputs.dir(layout.buildDirectory.dir("generated-sources"))
-    doFirst {
-        val generatedDir = file("$buildDir/generated-sources")
-        if (generatedDir.exists()) {
-            generatedDir.deleteRecursively()
-        }
-    }
+tasks.withType<KaptGenerateStubsTask>().configureEach {
+    dependsOn("openApiGenerate")
 }
 
-tasks.jacocoTestReport {
-    dependsOn(tasks.test)
-    reports {
-        xml.required.set(true)
-        html.required.set(true)
-    }
+tasks.named("compileKotlin") {
+    dependsOn("openApiGenerate")
 }
+
 
 repositories {
     mavenCentral()
