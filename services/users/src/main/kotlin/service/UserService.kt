@@ -28,7 +28,7 @@ class UserService(
             username = username,
         )
         try {
-            userRepository.saveAndFlush(userToSave)
+            userRepository.save(userToSave)
             logger.info { "Created user with uid: ${userToSave.uid}, username: $username" }
             return userToSave
         } catch (e: DataIntegrityViolationException) {

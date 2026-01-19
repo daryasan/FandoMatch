@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.internal.KaptGenerateStubsTask
+
 plugins {
     kotlin("jvm") version "2.0.20"
     kotlin("kapt") version "2.0.0"
@@ -21,11 +23,11 @@ dependencyManagement {
     }
 }
 
+val generatedSourcesDir = layout.buildDirectory.dir("generated-sources/src/main/kotlin")
+
 sourceSets {
     main {
-        kotlin {
-            srcDir("$buildDir/generated-sources/src/main/kotlin")
-        }
+        kotlin.srcDir(generatedSourcesDir)
     }
 }
 
@@ -44,6 +46,7 @@ openApiGenerate {
 }
 
 tasks.named("openApiGenerate") {
+    outputs.dir(generatedSourcesDir)
     doLast {
         val apiDir = file("$buildDir/generated-sources/src/main/kotlin/com/fandomatch/users/api")
 
@@ -55,16 +58,14 @@ tasks.named("openApiGenerate") {
     }
 }
 
-
-tasks.named("openApiGenerate") {
-    outputs.dir(layout.buildDirectory.dir("generated-sources"))
-    doFirst {
-        val generatedDir = file("$buildDir/generated-sources")
-        if (generatedDir.exists()) {
-            generatedDir.deleteRecursively()
-        }
-    }
+tasks.withType<KaptGenerateStubsTask>().configureEach {
+    dependsOn("openApiGenerate")
 }
+
+tasks.named("compileKotlin") {
+    dependsOn("openApiGenerate")
+}
+
 
 repositories {
     mavenCentral()
@@ -76,7 +77,8 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.mockk:mockk:1.13.9")
     testImplementation("org.assertj:assertj-core:3.25.3")
-    testImplementation("com.h2database:h2")
+    testImplementation("org.testcontainers:junit-jupiter")
+    testImplementation("org.testcontainers:postgresql")
 
 
     // spring
@@ -106,6 +108,10 @@ dependencies {
     implementation("io.jsonwebtoken:jjwt-api:0.12.3")
     implementation("io.jsonwebtoken:jjwt-impl:0.12.3")
     implementation("io.jsonwebtoken:jjwt-jackson:0.12.3")
+
+    // db
+    implementation("org.postgresql:postgresql:42.7.3")
+
 }
 
 tasks.test {

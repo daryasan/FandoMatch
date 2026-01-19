@@ -1,12 +1,12 @@
 package org.example.service
 
+import io.github.oshai.kotlinlogging.KLogging
 import org.example.exception.UserCredentialMismatchException
 import org.example.exception.UserCredentialNotFoundException
 import org.example.model.db_models.User
 import org.example.model.db_models.UserCredential
 import org.example.model.db_models.enums.CredentialType
 import org.example.repository.UserCredentialsRepository
-import org.example.service.AuthService.Companion.logger
 import org.example.service.validation.PasswordHasherService
 import org.example.service.validation.SaltGenerator
 import org.springframework.stereotype.Service
@@ -17,6 +17,8 @@ class UserCredentialsService(
     private val passwordHasherService: PasswordHasherService,
     private val saltGenerator: SaltGenerator,
 ) {
+
+    companion object : KLogging()
 
     fun createCredentials(user: User, password: String): UserCredential {
         val passwordSalt = saltGenerator.generateSalt()

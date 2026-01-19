@@ -1,10 +1,15 @@
 package service
 
-import io.mockk.*
+import io.mockk.every
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
 import io.mockk.junit5.MockKExtension
+import io.mockk.just
+import io.mockk.runs
+import io.mockk.verify
 import org.example.model.AuthTokens
+import org.example.model.db_models.UserCredential
+import org.example.model.db_models.enums.CredentialType
 import org.example.service.AuthService
 import org.example.service.TokenService
 import org.example.service.UserCredentialsService
@@ -47,7 +52,10 @@ class AuthServiceTest {
         )
 
         every { userService.createUser(EMAIL, PHONE, USERNAME) } returns user
-        every { userCredentialsService.createCredentials(user, PASSWORD) } just awaits
+        every { userCredentialsService.createCredentials(user, PASSWORD) } returns UserCredential(
+            user = user,
+            credentialType = CredentialType.PASSWORD
+        )
         every { tokenService.generateAndSaveTokens(user) } returns expectedTokens
 
         // when
