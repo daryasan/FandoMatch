@@ -6,13 +6,17 @@ import org.testcontainers.utility.DockerImageName
 
 class TestDatabaseConfig : ApplicationContextInitializer<ConfigurableApplicationContext> {
     override fun initialize(context: ConfigurableApplicationContext) {
-        TestPostgresContainer.start()
+        val isCi = System.getenv("CI") == "true"
 
-        TestPropertyValues.of(
-            "spring.datasource.url=${TestPostgresContainer.jdbcUrl}",
-            "spring.datasource.username=${TestPostgresContainer.username}",
-            "spring.datasource.password=${TestPostgresContainer.password}",
-        ).applyTo(context.environment)
+        if (!isCi) {
+            TestPostgresContainer.start()
+
+            TestPropertyValues.of(
+                "spring.datasource.url=${TestPostgresContainer.jdbcUrl}",
+                "spring.datasource.username=${TestPostgresContainer.username}",
+                "spring.datasource.password=${TestPostgresContainer.password}",
+            ).applyTo(context.environment)
+        }
     }
 }
 

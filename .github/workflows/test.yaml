@@ -31,7 +31,7 @@ jobs:
       SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/fdmatch_users_test
       SPRING_DATASOURCE_USERNAME: testuser
       SPRING_DATASOURCE_PASSWORD: testpassword
-      SPRING_PROFILES_ACTIVE: test
+      SPRING_PROFILES_ACTIVE: ci
       LANG: en_US.UTF-8
       LC_ALL: en_US.UTF-8
 
@@ -45,6 +45,9 @@ jobs:
           distribution: temurin
           java-version: 17
           cache: gradle
+
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v3
 
       - name: Grant execute permission for Gradle Wrapper
         run: chmod +x gradlew
