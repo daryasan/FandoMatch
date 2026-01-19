@@ -7,11 +7,13 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
 import org.springframework.test.annotation.DirtiesContext
 import org.springframework.test.context.ActiveProfiles
+import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.post
 
 @SpringBootTest(classes = [UsersApplication::class])
 @ActiveProfiles("test")
+@ContextConfiguration(initializers = [TestDatabaseConfig::class])
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 class BaseTest {
 
@@ -46,7 +48,7 @@ class BaseTest {
     fun performLogoutRequestAndReturn(): LogoutResponse =
         performPostRequest("/auth/logout", Unit, LogoutResponse::class.java)
 
-    fun performTokenRefreshRequestAndReturn(refreshToken : String) : RefreshTokenResponse =
+    fun performTokenRefreshRequestAndReturn(refreshToken: String): RefreshTokenResponse =
         performPostRequest("/token/refresh", RefreshToken(refreshToken), RefreshTokenResponse::class.java)
 
 }

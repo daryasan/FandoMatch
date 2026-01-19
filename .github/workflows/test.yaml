@@ -16,19 +16,19 @@ jobs:
       postgres:
         image: postgres:15
         env:
-          POSTGRES_DB: teamup_users_test
+          POSTGRES_DB: fdmatch_users_test
           POSTGRES_USER: testuser
           POSTGRES_PASSWORD: testpassword
         ports:
           - 5432:5432
         options: >-
-          --health-cmd "pg_isready -U testuser -d teamup_users_test"
+          --health-cmd "pg_isready -U testuser -d fdmatch_users_test"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
 
     env:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/teamup_users_test
+      SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/fdmatch_users_test
       SPRING_DATASOURCE_USERNAME: testuser
       SPRING_DATASOURCE_PASSWORD: testpassword
       SPRING_PROFILES_ACTIVE: test
