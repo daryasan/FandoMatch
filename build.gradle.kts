@@ -41,3 +41,25 @@ subprojects {
         }
     }
 }
+
+tasks.register<JacocoReport>("jacocoRootReport") {
+    dependsOn(subprojects.map { it.tasks.named("test") })
+
+    executionData.setFrom(
+        subprojects.map { it.file("build/jacoco/test.exec") }
+    )
+
+    sourceDirectories.setFrom(
+        subprojects.map { it.file("src/main/kotlin") }
+    )
+
+    classDirectories.setFrom(
+        subprojects.map { it.file("build/classes/kotlin/main") }
+    )
+
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+    }
+}
+
