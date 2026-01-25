@@ -12,6 +12,15 @@ components:
       scheme: bearer
       bearerFormat: JWT
 
+  parameters:
+    TokenHeader:
+      name: Authorization
+      in: header
+      required: true
+      schema:
+        type: string
+        description: Bearer JWT token
+
   schemas:
     # auth/register
     UserRegistrationRequest:
@@ -138,7 +147,7 @@ components:
             - DISABLED
             - BANNED
         created_at:
-          type: timestamp
+          type: date-time
       required:
         - username
         - created_at

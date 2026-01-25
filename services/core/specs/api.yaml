@@ -1,0 +1,101 @@
+openapi: 3.0.3
+info:
+  title: core service api
+  version: 1.0.0
+  description: API для core‑модуля
+
+paths:
+  /core/user/full-profile:
+    get:
+      parameters:
+        - $ref: './definitions.yaml#/components/parameters/TokenHeader'
+      description: Получение расширенной информации о пользователе
+      tags:
+        - user
+      security:
+        - bearerAuth: [ ]
+      responses:
+        '200':
+          description: Полная информация о пользователе
+          content:
+            application/json:
+              schema:
+                $ref: '#./definitions.yaml#/components/schemas/FullUserProfileResponse'
+
+  /core/user/profile/edit:
+    patch:
+      parameters:
+        - $ref: './definitions.yaml#/components/parameters/TokenHeader'
+      description: Редактирование профиля пользователя
+      tags:
+        - user
+      security:
+        - bearerAuth: [ ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#./definitions.yaml#/components/schemas/EditUserProfileRequest'
+      responses:
+        '200':
+          description: Обновлённый профиль пользователя
+          content:
+            application/json:
+              schema:
+                $ref: '#./definitions.yaml#/components/schemas/EditUserProfileResponse'
+
+  /core/fandoms/get:
+    post:
+      description: Получение списка фандомов пользователя
+      tags:
+        - fandom
+      responses:
+        '200':
+          description: Список фандомов
+          content:
+            application/json:
+              schema:
+                $ref: '#./definitions.yaml#/components/schemas/FandomListResponse'
+
+  /core/posts/get:
+    post:
+      description: Получение всех постов пользователя
+      tags:
+        - posts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#./definitions.yaml#/components/schemas/PostsGetRequest'
+      responses:
+        '200':
+          description: Список постов
+          content:
+            application/json:
+              schema:
+                $ref: '#./definitions.yaml#/components/schemas/PostListResponse'
+
+  /core/posts/create:
+    post:
+      parameters:
+        - $ref: './definitions.yaml#/components/parameters/TokenHeader'
+      description: Создание поста
+      tags:
+        - posts
+      security:
+        - bearerAuth: [ ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#./definitions.yaml#/components/schemas/CreatePostRequest'
+      responses:
+        '200':
+          description: Созданный пост
+          content:
+            application/json:
+              schema:
+                $ref: '#./definitions.yaml#/components/schemas/CreatePostResponse'

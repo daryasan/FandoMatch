@@ -19,6 +19,12 @@ class TokenService(
 
     companion object : KLogging()
 
+    fun getUserIdByToken(accessToken : String) = jwtService.extractUserId(accessToken)
+
+    fun getPublicKey() : String {
+        return jwtService.getPublicKey().toString()
+    }
+
     fun generateAndSaveTokens(user: User): AuthTokens {
         val access = jwtService.generateAccessToken(user)
         val now = LocalDateTime.now()

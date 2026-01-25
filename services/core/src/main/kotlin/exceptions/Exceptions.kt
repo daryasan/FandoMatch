@@ -1,6 +1,4 @@
-package org.example.exception
-
-import org.example.model.db_models.enums.UserStatus
+package org.example.exceptions
 
 open class BusinessException(val code: String, message: String) : Exception(message)
 
@@ -12,9 +10,6 @@ class InvalidUserInputData(message: String) :
 
 class UserNotFoundException(byField: String) :
     BusinessException(ErrorCode.USER_NOT_FOUND.name, "User not found with by field value=$byField")
-
-class UserInactiveException(status: UserStatus) :
-    BusinessException(ErrorCode.USER_INACTIVE.name, "User is not in ACTIVE status, user status is:${status.name}")
 
 class UserCredentialMismatchException(credentialType: String) :
     BusinessException(

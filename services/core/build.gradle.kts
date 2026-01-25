@@ -1,21 +1,17 @@
-import org.jetbrains.kotlin.gradle.internal.KaptGenerateStubsTask
-
 plugins {
     kotlin("jvm") version "2.0.20"
-    kotlin("kapt") version "2.0.0"
     id("org.springframework.boot") version "3.5.0"
     id("io.spring.dependency-management") version "1.1.7"
     id("org.openapi.generator") version "7.6.0"
-    kotlin("plugin.jpa") version "1.9.0"
-    id("org.jetbrains.kotlin.plugin.spring") version "1.9.22"
 }
 
-group = "org.example"
+group = "com.fandomatch"
 version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
 }
+
 
 dependencyManagement {
     imports {
@@ -33,10 +29,10 @@ sourceSets {
 
 openApiGenerate {
     generatorName = "kotlin-spring"
-    inputSpec = "$rootDir/services/users/specs/api.yaml"
+    inputSpec = "$rootDir/services/core/specs/api.yaml"
     outputDir = "$buildDir/generated-sources"
-    apiPackage = "com.fandomatch.users.api"
-    modelPackage = "com.fandomatch.users.model"
+    apiPackage = "com.fandomatch.core.api"
+    modelPackage = "com.fandomatch.core.model"
     configOptions = mapOf(
         "interfaceOnly" to "true",
         "useTags" to "true",
@@ -48,7 +44,7 @@ openApiGenerate {
 tasks.named("openApiGenerate") {
     outputs.dir(generatedSourcesDir)
     doLast {
-        val apiDir = file("$buildDir/generated-sources/src/main/kotlin/com/fandomatch/users/api")
+        val apiDir = file("$buildDir/generated-sources/src/main/kotlin/com/fandomatch/core/api")
 
         file("$apiDir/ApiUtil.kt").delete()
         file("$apiDir/DefaultExceptionHandler.kt").delete()
@@ -56,19 +52,6 @@ tasks.named("openApiGenerate") {
         file("$apiDir/SpringDocConfiguration.kt").delete()
         file("$apiDir/Exceptions.kt").delete()
     }
-}
-
-tasks.withType<KaptGenerateStubsTask>().configureEach {
-    dependsOn("openApiGenerate")
-}
-
-tasks.named("compileKotlin") {
-    dependsOn("openApiGenerate")
-}
-
-
-repositories {
-    mavenCentral()
 }
 
 dependencies {
@@ -97,29 +80,21 @@ dependencies {
     implementation("io.swagger.core.v3:swagger-annotations:2.2.41")
     implementation("io.swagger.core.v3:swagger-models:2.2.21")
 
-    // crypto
-    implementation("org.springframework.security:spring-security-crypto")
-    implementation("org.bouncycastle:bcprov-jdk18on:1.78.1")
-
     // logging
     implementation("io.github.oshai:kotlin-logging-jvm:7.0.3")
-
-    // jwt
-    implementation("io.jsonwebtoken:jjwt-api:0.12.3")
-    implementation("io.jsonwebtoken:jjwt-impl:0.12.3")
-    implementation("io.jsonwebtoken:jjwt-jackson:0.12.3")
 
     // db
     implementation("org.postgresql:postgresql:42.7.3")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 
-
+    implementation("io.jsonwebtoken:jjwt-api:0.12.3")
+    implementation("io.jsonwebtoken:jjwt-impl:0.12.3")
+    implementation("io.jsonwebtoken:jjwt-jackson:0.12.3")
 }
 
 tasks.test {
     useJUnitPlatform()
 }
-
 kotlin {
     jvmToolchain(21)
 }

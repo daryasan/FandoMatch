@@ -9,6 +9,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/services" />
+            <option value="$PROJECT_DIR$/services/core" />
             <option value="$PROJECT_DIR$/services/gateway" />
             <option value="$PROJECT_DIR$/services/users" />
           </set>
