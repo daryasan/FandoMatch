@@ -22,7 +22,7 @@ comment on table tokens is 'Таблица с токенами пользова�
 
 create TABLE IF NOT EXISTS user_credentials (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id UUID NOT NULL
+  user_id UUID NOT NULL,
   credential_type TEXT NOT NULL,
   hash TEXT NOT NULL,
   salt TEXT,

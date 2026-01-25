@@ -60,6 +60,8 @@ paths:
 
   /users/get-user-credentials:
     get:
+      parameters:
+        - $ref: './definitions.yaml#/components/parameters/TokenHeader'
       description: Получение credentials пользователя по токену
       tags:
         - user

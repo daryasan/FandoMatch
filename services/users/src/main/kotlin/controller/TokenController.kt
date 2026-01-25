@@ -14,7 +14,7 @@ class TokenController(
 ) : TokenApi {
 
     override fun tokenPublicJwtGet(): ResponseEntity<PublicJwtResponse> {
-        return ResponseEntity.ok(PublicJwtResponse("public key"))
+        return ResponseEntity.ok(PublicJwtResponse(tokenService.getPublicKey()))
     }
 
     override fun tokenRefreshPost(refreshToken: RefreshToken): ResponseEntity<RefreshTokenResponse> {

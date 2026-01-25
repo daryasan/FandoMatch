@@ -1,3 +1,6 @@
 jwt:
   privateKey: ${JWT_PRIVATE_KEY}
   publicKey: ${JWT_PUBLIC_KEY}
+
+server:
+  port: 8081

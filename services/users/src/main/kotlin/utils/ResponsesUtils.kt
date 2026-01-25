@@ -24,3 +24,11 @@ fun getRefreshTokenErrorResponse(exception: BusinessException) = RefreshTokenRes
         errorMessage = exception.message
     )
 )
+
+fun getUserCredentialsErrorResponse(exception: BusinessException) = GetUserCredentialsResponse(
+    status = ResponseStatus.ERROR,
+    errorResponse = Error(
+        errorCode = exception.code,
+        errorMessage = exception.message
+    )
+)

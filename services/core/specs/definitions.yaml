@@ -1,0 +1,152 @@
+openapi: 3.0.3
+info:
+  title: core service api
+  version: 1.0.0
+  description: API для core‑модуля
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  parameters:
+    TokenHeader:
+      name: Authorization
+      in: header
+      required: true
+      schema:
+        type: string
+      description: Bearer JWT token
+
+  schemas:
+
+    FandomsGetRequest:
+      type: object
+      properties:
+        username:
+          type: string
+      required:
+        - username
+
+    PostsGetRequest:
+      type: object
+      properties:
+        username:
+          type: string
+      required:
+        - username
+
+
+    # -------------------------
+    # USER FULL PROFILE
+    # -------------------------
+    FullUserProfileResponse:
+      type: object
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        status:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        bio:
+          type: string
+        avatar_url:
+          type: string
+      required:
+        - username
+        - status
+        - created_at
+
+    EditUserProfileRequest:
+      type: object
+      properties:
+        bio:
+          type: string
+        avatar_url:
+          type: string
+
+    EditUserProfileResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [SUCCESS, ERROR]
+        updated_profile:
+          $ref: '#/components/schemas/FullUserProfileResponse'
+      required:
+        - status
+
+    # -------------------------
+    # FANDOMS
+    # -------------------------
+    FandomListResponse:
+      type: object
+      properties:
+        fandoms:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              name:
+                type: string
+              description:
+                type: string
+            required:
+              - id
+              - name
+      required:
+        - fandoms
+
+    # -------------------------
+    # POSTS
+    # -------------------------
+    CreatePostRequest:
+      type: object
+      properties:
+        title:
+          type: string
+        content:
+          type: string
+        fandom_id:
+          type: string
+      required:
+        - title
+        - content
+
+    CreatePostResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        content:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+      required:
+        - id
+        - title
+        - content
+        - created_at
+
+    PostListResponse:
+      type: object
+      properties:
+        posts:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreatePostResponse'
+      required:
+        - posts

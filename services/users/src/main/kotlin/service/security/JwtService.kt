@@ -1,10 +1,13 @@
 package org.example.service.security
 
+import io.github.oshai.kotlinlogging.KLogging
 import io.jsonwebtoken.Jwts
 import jakarta.annotation.PostConstruct
 import org.example.config.JwtProperties
+import org.example.exception.BusinessException
 import org.example.model.GeneratedToken
 import org.example.model.db_models.User
+import org.example.repository.UserRepository
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 import java.security.KeyFactory
@@ -23,8 +26,11 @@ class JwtService(
     private val privateKeyBase64: String,
     @Value("\${jwt.publicKey}")
     private val publicKeyBase64: String,
-    private val expirationProperties: JwtProperties
+    private val expirationProperties: JwtProperties,
+    private val userRepository: UserRepository
 ) {
+
+    companion object : KLogging()
 
     private lateinit var privateKey: PrivateKey
     private lateinit var publicKey: PublicKey
@@ -34,6 +40,8 @@ class JwtService(
         privateKey = loadPrivateKey(privateKeyBase64)
         publicKey = loadPublicKey(publicKeyBase64)
     }
+
+    fun getPublicKey() = publicKey
 
     private fun loadPrivateKey(base64: String): PrivateKey {
         val cleaned = base64.replace("\n", "").trim()
@@ -47,6 +55,19 @@ class JwtService(
         val keyBytes = Base64.getDecoder().decode(cleaned)
         val spec = X509EncodedKeySpec(keyBytes)
         return KeyFactory.getInstance("RSA").generatePublic(spec)
+    }
+
+    fun validateAndLoadUser(token: String): User {
+        val claims = try {
+            extractUserId(token)
+        } catch (e: Exception) {
+            throw BusinessException("INVALID_TOKEN", "Invalid token")
+        }
+        val user = userRepository.findById(claims) ?: throw BusinessException(
+            "USER_NOT_FOUND",
+            "Пользователь не найден"
+        )
+        return user.get()
     }
 
     fun generateAccessToken(user: User): GeneratedToken {
@@ -80,13 +101,18 @@ class JwtService(
     }
 
     fun extractUserId(token: String): UUID {
-        val claims = Jwts.parser()
-            .verifyWith(publicKey)
-            .build()
-            .parseSignedClaims(token)
-            .payload
+        try {
+            val claims = Jwts.parser()
+                .verifyWith(publicKey)
+                .build()
+                .parseSignedClaims(token)
+                .payload
+            return UUID.fromString(claims.subject)
+        } catch (e: Exception) {
+            logger.info {"TOKEN VALIDATION ERROR: ${e::class.simpleName} - ${e.message}"}
+            throw e
+        }
 
-        return UUID.fromString(claims.subject)
     }
 
 }

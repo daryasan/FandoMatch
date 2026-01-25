@@ -1,6 +1,5 @@
 package org.example.config
 
-import org.example.service.security.JwtService
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -10,15 +9,12 @@ import org.springframework.security.web.SecurityFilterChain
 @Configuration
 @EnableWebSecurity
 open class SecurityConfig(
-    private val jwtService: JwtService
 ) {
 
     @Bean
     open fun filterChain(http: HttpSecurity): SecurityFilterChain {
-        http.csrf { it.disable() }
-
-            //  .addFilterAfter(JwtAuthFilter(jwtService), SecurityContextHolderFilter::class.java)
-
+        http
+            .csrf { it.disable() }
         return http.build()
     }
 }

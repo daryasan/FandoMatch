@@ -11,7 +11,8 @@ import org.springframework.stereotype.Service
 
 @Service
 class UserService(
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val tokenService: TokenService,
 ) {
 
     companion object : KLogging()
@@ -35,6 +36,11 @@ class UserService(
             logger.error { "Error creating user: username $username already exists" }
             throw UsernameAlreadyExistsException(username)
         }
+    }
+
+    fun findUserByToken(accessToken: String): User {
+        val uuid = tokenService.getUserIdByToken(accessToken)
+        return userRepository.findById(uuid).orElseThrow { throw UserNotFoundException("id") }
     }
 
     fun findUser(

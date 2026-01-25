@@ -6,3 +6,5 @@ include("services:users")
 include("services:gateway")
 findProject(":services:users")?.name = "users"
 findProject(":services:gateway")?.name = "gateway"
+include("services:core")
+findProject(":services:core")?.name = "core"
