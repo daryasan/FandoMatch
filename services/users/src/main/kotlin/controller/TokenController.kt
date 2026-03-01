@@ -15,7 +15,7 @@ class TokenController(
     private val tokenService: TokenService
 ) {
 
-    @GetMapping("/public/jwt")
+    @GetMapping("/public-jwt")
     fun tokenPublicJwtGet(): ResponseEntity<PublicJwtResponse> {
         return ResponseEntity.ok(PublicJwtResponse(tokenService.getPublicKey()))
     }

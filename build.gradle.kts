@@ -4,11 +4,13 @@ plugins {
     jacoco
 }
 
-group = "com.fandomatch"
-version = "1.0-SNAPSHOT"
+allprojects {
+    group = "com.fandomatch"
+    version = "1.0-SNAPSHOT"
 
-repositories {
-    mavenCentral()
+    repositories {
+        mavenCentral()
+    }
 }
 
 dependencies {
@@ -18,6 +20,7 @@ dependencies {
 tasks.test {
     useJUnitPlatform()
 }
+
 kotlin {
     jvmToolchain(21)
 }

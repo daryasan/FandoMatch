@@ -1,0 +1,72 @@
+version: "3.9"
+
+services:
+
+  # ---------------- DATABASES ----------------
+
+  users-db:
+    image: postgres:15
+    container_name: users-db
+    environment:
+      POSTGRES_DB: fdmatch_users
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      retries: 5
+
+  core-db:
+    image: postgres:15
+    container_name: core-db
+    environment:
+      POSTGRES_DB: fdmatch_core
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5434:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      retries: 5
+
+  # ---------------- MICROSERVICES ----------------
+
+  gateway:
+    build: ./services/gateway
+    container_name: gateway
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: uat
+    depends_on:
+      users:
+        condition: service_started
+      core:
+        condition: service_started
+
+  users:
+    build: ./services/users
+    container_name: users
+    environment:
+      SPRING_PROFILES_ACTIVE: uat
+      JWT_PRIVATE_KEY: ${JWT_PRIVATE_KEY}
+      JWT_PUBLIC_KEY: ${JWT_PUBLIC_KEY}
+    depends_on:
+      users-db:
+        condition: service_healthy
+
+  core:
+    build: ./services/core
+    container_name: core
+    environment:
+      SPRING_PROFILES_ACTIVE: uat
+      JWT_PRIVATE_KEY: ${JWT_PRIVATE_KEY}
+      JWT_PUBLIC_KEY: ${JWT_PUBLIC_KEY}
+    depends_on:
+      core-db:
+        condition: service_healthy
+      users:
+        condition: service_started

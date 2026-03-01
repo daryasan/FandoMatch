@@ -1,6 +1,12 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+
 jwt:
   privateKey: ${JWT_PRIVATE_KEY}
   publicKey: ${JWT_PUBLIC_KEY}
-
-server:
-  port: 8081

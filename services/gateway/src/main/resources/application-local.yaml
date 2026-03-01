@@ -1,0 +1,8 @@
+server:
+  port: 8080
+
+routes:
+  url:
+    users: http://localhost:8081
+    core: http://localhost:8082
+    chats: http://localhost:8083
