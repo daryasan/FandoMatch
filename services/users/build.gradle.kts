@@ -1,4 +1,7 @@
+
 import org.jetbrains.kotlin.gradle.internal.KaptGenerateStubsTask
+import org.openapitools.generator.gradle.plugin.tasks.GenerateTask
+
 
 plugins {
     kotlin("jvm") version "2.0.20"
@@ -23,38 +26,34 @@ dependencyManagement {
     }
 }
 
+val openApiGenerator by configurations.creating {
+    isCanBeConsumed = false
+    isCanBeResolved = true
+}
+
+val openApi by configurations.creating {
+    isCanBeConsumed = true
+    isCanBeResolved = false
+
+    attributes.attribute(Usage.USAGE_ATTRIBUTE, objects.named(Usage.JAVA_API))
+    attributes.attribute(LibraryElements.LIBRARY_ELEMENTS_ATTRIBUTE, objects.named("jar"))
+}
+
+
+val openApiRuntime by configurations.creating {
+    isCanBeConsumed = true
+    isCanBeResolved = false
+
+    attributes.attribute(Usage.USAGE_ATTRIBUTE, objects.named(Usage.JAVA_RUNTIME))
+    attributes.attribute(LibraryElements.LIBRARY_ELEMENTS_ATTRIBUTE, objects.named("jar"))
+}
+
+
 val generatedSourcesDir = layout.buildDirectory.dir("generated-sources/src/main/kotlin")
 
 sourceSets {
     main {
         kotlin.srcDir(generatedSourcesDir)
-    }
-}
-
-openApiGenerate {
-    generatorName = "kotlin-spring"
-    inputSpec = "$rootDir/services/users/specs/api.yaml"
-    outputDir = "$buildDir/generated-sources"
-    apiPackage = "com.fandomatch.users.api"
-    modelPackage = "com.fandomatch.users.model"
-    configOptions = mapOf(
-        "interfaceOnly" to "true",
-        "useTags" to "true",
-        "jakarta" to "true",
-        "useBeanValidation" to "false"
-    )
-}
-
-tasks.named("openApiGenerate") {
-    outputs.dir(generatedSourcesDir)
-    doLast {
-        val apiDir = file("$buildDir/generated-sources/src/main/kotlin/com/fandomatch/users/api")
-
-        file("$apiDir/ApiUtil.kt").delete()
-        file("$apiDir/DefaultExceptionHandler.kt").delete()
-        file("$apiDir/ApiException.kt").delete()
-        file("$apiDir/SpringDocConfiguration.kt").delete()
-        file("$apiDir/Exceptions.kt").delete()
     }
 }
 
@@ -65,7 +64,6 @@ tasks.withType<KaptGenerateStubsTask>().configureEach {
 tasks.named("compileKotlin") {
     dependsOn("openApiGenerate")
 }
-
 
 repositories {
     mavenCentral()
@@ -93,9 +91,15 @@ dependencies {
 
 
     // open api specs
+    openApiGenerator("org.openapitools:openapi-generator-cli:7.6.0")
+    openApiGenerator("com.fasterxml.jackson.core:jackson-core:2.17.2")
+    openApiGenerator("com.fasterxml.jackson.core:jackson-databind:2.17.2")
+    openApiGenerator("com.fasterxml.jackson.core:jackson-annotations:2.17.2")
+    openApiGenerator("com.fasterxml.jackson.module:jackson-module-kotlin:2.17.2")
     implementation("org.openapitools:jackson-databind-nullable:0.2.6")
     implementation("io.swagger.core.v3:swagger-annotations:2.2.41")
     implementation("io.swagger.core.v3:swagger-models:2.2.21")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.17.2")
 
     // crypto
     implementation("org.springframework.security:spring-security-crypto")
@@ -112,9 +116,66 @@ dependencies {
     // db
     implementation("org.postgresql:postgresql:42.7.3")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-
-
 }
+
+tasks.named<GenerateTask>("openApiGenerate") {
+    generatorName.set("kotlin")
+    inputSpec.set("$rootDir/services/users/specs/api.yaml")
+    outputDir.set("$buildDir/generated-sources")
+    apiPackage.set("com.fandomatch.users.api")
+    modelPackage.set("com.fandomatch.users.model")
+    configOptions.set(
+        mapOf(
+            "library" to "jvm-spring-restclient",
+            "useSpringBoot3" to "true",
+            "serializationLibrary" to "jackson"
+        )
+    )
+
+    outputs.dir(generatedSourcesDir)
+    doLast {
+        val apiDir = file("$buildDir/generated-sources/src/main/kotlin/com/fandomatch/users/api")
+
+        file("$apiDir/ApiUtil.kt").delete()
+        file("$apiDir/DefaultExceptionHandler.kt").delete()
+        file("$apiDir/ApiException.kt").delete()
+        file("$apiDir/SpringDocConfiguration.kt").delete()
+        file("$apiDir/Exceptions.kt").delete()
+    }
+}
+
+tasks.named("openApiGenerate") {
+    val cfg = project.configurations.getByName("openApiGenerator")
+    doFirst {
+        try {
+            val method =
+                this::class.java.methods.firstOrNull { it.name == "setGeneratorClasspath" && it.parameterTypes.size == 1 }
+            if (method != null) {
+                method.invoke(this, cfg)
+            } else {
+                val field = this::class.java.declaredFields.firstOrNull { it.name == "generatorClasspath" }
+                if (field != null) {
+                    field.isAccessible = true
+                    field.set(this, cfg)
+                }
+            }
+        } catch (t: Throwable) {
+            throw GradleException("Failed to set generatorClasspath for openApiGenerate: ${t.message}", t)
+        }
+    }
+}
+
+
+
+tasks.register<Jar>("openApiJar") {
+    archiveClassifier.set("openapi")
+    dependsOn(tasks.named("openApiGenerate"))
+    dependsOn(tasks.named("classes"))
+    from(fileTree("${buildDir}/classes/kotlin/main") { include("**/*.class") })
+}
+
+openApi.outgoing.artifact(tasks.named("openApiJar"))
+openApiRuntime.outgoing.artifact(tasks.named("openApiJar"))
 
 tasks.test {
     useJUnitPlatform()

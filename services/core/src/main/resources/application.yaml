@@ -17,3 +17,9 @@ spring:
 jwt:
   privateKey: ${JWT_PRIVATE_KEY}
   publicKey: ${JWT_PUBLIC_KEY}
+
+clients:
+  users-service:
+    url:
+      http://localhost:8080
+
