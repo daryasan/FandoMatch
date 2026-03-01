@@ -1,6 +1,6 @@
 plugins {
-    kotlin("jvm") version "2.0.20"
-    kotlin("kapt") version "2.0.0"
+    kotlin("jvm") version "1.9.24"
+    kotlin("kapt") version "1.9.24"
     id("org.springframework.boot") version "3.5.0"
     id("io.spring.dependency-management") version "1.1.7"
 }

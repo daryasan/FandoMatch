@@ -48,7 +48,9 @@ services:
         condition: service_started
 
   users:
-    build: ./services/users
+    build:
+      context: .
+      dockerfile: services/users/Dockerfile
     container_name: users
     environment:
       SPRING_PROFILES_ACTIVE: uat
@@ -59,7 +61,9 @@ services:
         condition: service_healthy
 
   core:
-    build: ./services/core
+    build:
+      context: .
+      dockerfile: services/core/Dockerfile
     container_name: core
     environment:
       SPRING_PROFILES_ACTIVE: uat

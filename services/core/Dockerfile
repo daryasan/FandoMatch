@@ -1,14 +1,9 @@
-# ---------- BUILD STAGE ----------
 FROM gradle:8.5-jdk21 AS builder
 WORKDIR /app
 COPY . .
-RUN gradle clean bootJar --no-daemon
+RUN gradle :services:core:bootJar --no-daemon
 
-# ---------- RUNTIME STAGE ----------
 FROM eclipse-temurin:21-jre
 WORKDIR /app
-COPY --from=builder /app/build/libs/*.jar app.jar
-
-EXPOSE 8082
-
-ENTRYPOINT ["java", "-jar", "app.jar"]
+COPY --from=builder /app/services/core/build/libs/*.jar app.jar
+ENTRYPOINT ["java","-jar","app.jar"]

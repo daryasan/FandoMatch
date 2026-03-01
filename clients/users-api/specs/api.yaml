@@ -1,0 +1,110 @@
+openapi: 3.0.3
+info:
+  title: users service api
+  version: 1.0.0
+  description: API для сервиса users
+
+paths:
+  /auth/register:
+    post:
+      description: Регистрация пользователя
+      tags:
+        - auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#./definitions.yaml#/components/schemas/UserRegistrationRequest'
+      responses:
+        '200':
+          description: Ответ сервера с данными о регистрации
+          content:
+            application/json:
+              schema:
+                $ref: '#./definitions.yaml#/components/schemas/UserRegistrationResponse'
+
+  /auth/login:
+    post:
+      description: Вход в систему
+      tags:
+        - auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#./definitions.yaml#/components/schemas/UserLoginRequest'
+      responses:
+        '200':
+          description: Ответ сервера с данными о регистрации
+          content:
+            application/json:
+              schema:
+                $ref: '#./definitions.yaml#/components/schemas/UserLoginResponse'
+
+  /auth/logout:
+    post:
+      description: Выход из аккаунта
+      tags:
+        - auth
+      security:
+        - bearerAuth: [ ]
+      responses:
+        '200':
+          description: Информация о выходе из аккаунта (если ок то пустое тело)
+          content:
+            application/json:
+              schema:
+                $ref: '#./definitions.yaml#/components/schemas/LogoutResponse'
+
+  /users/get-user-credentials:
+    get:
+      parameters:
+        - $ref: './definitions.yaml#/components/parameters/TokenHeader'
+      description: Получение credentials пользователя по токену
+      tags:
+        - user
+      security:
+        - bearerAuth: [ ]
+      responses:
+        '200':
+          description: Информация о пользователе
+          content:
+            application/json:
+              schema:
+                $ref: '#./definitions.yaml#/components/schemas/GetUserCredentialsResponse'
+
+
+  /token/public-jwt:
+    get:
+      description: Получает публичный ключ для шифрования jwt токенов
+      tags:
+        - token
+      responses:
+        '200':
+          description: Публичный jwt ключ
+          content:
+            application/json:
+              schema:
+                $ref: '#./definitions.yaml#/components/schemas/PublicJwtResponse'
+
+  /token/refresh:
+    post:
+      description: Обновление access-токена по refresh-токену
+      tags:
+        - token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#./definitions.yaml#/components/schemas/RefreshToken'
+      responses:
+        '200':
+          description: Новый access token
+          content:
+            application/json:
+              schema:
+                $ref: '#./definitions.yaml#/components/schemas/RefreshTokenResponse'
+

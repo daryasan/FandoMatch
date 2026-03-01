@@ -1,0 +1,405 @@
+openapi: 3.0.3
+info:
+  title: core service api
+  version: 1.3.0
+  description: API для core‑модуля
+
+components:
+
+  # -------------------------
+  # SECURITY
+  # -------------------------
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  parameters:
+    TokenHeader:
+      name: Authorization
+      in: header
+      required: true
+      schema:
+        type: string
+      description: Bearer JWT token
+
+
+  # -------------------------
+  # SCHEMAS
+  # -------------------------
+
+  schemas:
+
+    # -------------------------
+    # USER PROFILE
+    # -------------------------
+
+    UserProfileRequest:
+      type: object
+      properties:
+        username:
+          type: string
+      required:
+        - username
+
+    UserProfileResponse:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/PublicUserProfileResponse'
+        is_self:
+          type: boolean
+      required:
+        - user
+        - is_self
+
+    FullUserProfileResponse:
+      type: object
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        status:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        bio:
+          type: string
+        avatar_url:
+          type: string
+        background_url:
+          type: string
+        name:
+          type: string
+        gender:
+          type: string
+        birth_date:
+          type: string
+          format: date
+        city:
+          type: string
+        fandoms:
+          type: array
+          items:
+            $ref: '#/components/schemas/Fandom'
+      required:
+        - username
+        - status
+        - created_at
+        - name
+        - birth_date
+
+    PublicUserProfileResponse:
+      type: object
+      properties:
+        username:
+          type: string
+        name:
+          type: string
+        bio:
+          type: string
+        avatar_url:
+          type: string
+        background_url:
+          type: string
+        city:
+          type: string
+        fandoms:
+          type: array
+          items:
+            $ref: '#/components/schemas/Fandom'
+      required:
+        - username
+        - name
+
+    EditUserProfileRequest:
+      type: object
+      properties:
+        bio:
+          type: string
+        avatar_url:
+          type: string
+        background_url:
+          type: string
+        name:
+          type: string
+        gender:
+          type: string
+        birth_date:
+          type: string
+          format: date
+        city:
+          type: string
+
+    EditUserProfileResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+            - SUCCESS
+            - ERROR
+        updated_profile:
+          $ref: '#/components/schemas/FullUserProfileResponse'
+      required:
+        - status
+
+
+    # -------------------------
+    # MATCHING
+    # -------------------------
+
+    MatchBatchRequest:
+      type: object
+      properties:
+        batch_size:
+          type: integer
+      required:
+        - batch_size
+
+    MatchCandidateBatchResponse:
+      type: object
+      properties:
+        candidates:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatchCandidateResponse'
+      required:
+        - candidates
+
+    MatchCandidateResponse:
+      type: object
+      properties:
+        username:
+          type: string
+        name:
+          type: string
+        age:
+          type: integer
+        city:
+          type: string
+        avatar_url:
+          type: string
+        fandoms:
+          type: array
+          items:
+            type: string
+        compatibility:
+          type: integer
+      required:
+        - username
+
+    MatchActionRequest:
+      type: object
+      properties:
+        target_username:
+          type: string
+        action:
+          type: string
+          enum:
+            - LIKE
+            - DISLIKE
+      required:
+        - target_username
+        - action
+
+    MatchActionResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+            - LIKED
+            - DISLIKED
+            - MATCH
+        match_chat_id:
+          type: string
+          nullable: true
+
+
+    MatchFilterRequest:
+      type: object
+      properties:
+        gender:
+          type: string
+        age_from:
+          type: integer
+        age_to:
+          type: integer
+        city:
+          type: string
+        fandom_category:
+          type: string
+        fandom_id:
+          type: string
+
+    MatchFilterResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+            - SUCCESS
+
+
+    # -------------------------
+    # POSTS
+    # -------------------------
+
+    PostsGetRequest:
+      type: object
+      properties:
+        username:
+          type: string
+        page:
+          type: integer
+        size:
+          type: integer
+      required:
+        - username
+
+    CreatePostRequest:
+      type: object
+      properties:
+        title:
+          type: string
+        content:
+          type: string
+        fandom_id:
+          type: string
+      required:
+        - title
+        - content
+
+    CreatePostResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        content:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+      required:
+        - id
+        - title
+        - content
+        - created_at
+
+    PostListResponse:
+      type: object
+      properties:
+        posts:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreatePostResponse'
+      required:
+        - posts
+
+    CommentListResponse:
+      type: object
+      properties:
+        comments:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              author:
+                type: string
+              content:
+                type: string
+              created_at:
+                type: string
+                format: date-time
+      required:
+        - comments
+
+    PostLikeResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+            - LIKED
+
+
+    # -------------------------
+    # FANDOMS
+    # -------------------------
+
+    FandomsGetRequest:
+      type: object
+      properties:
+        username:
+          type: string
+      required:
+        - username
+
+
+
+    FandomListResponse:
+      type: object
+      properties:
+        fandoms:
+          type: array
+          items:
+            $ref: '#/components/schemas/Fandom'
+      required:
+        - fandoms
+
+    Fandom:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+      required:
+        - id
+        - name
+
+    FandomCategoryListResponse:
+      type: object
+      properties:
+        categories:
+          type: array
+          items:
+            type: string
+      required:
+        - categories
+
+    FandomRequestCreate:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        category:
+          type: string
+        author_username:
+          type: string
+      required:
+        - name
+        - author_username
+
+    FandomRequestCreateResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+            - RECEIVED

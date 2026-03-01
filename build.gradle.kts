@@ -1,7 +1,8 @@
 plugins {
-    kotlin("jvm") version "2.0.20"
-    kotlin("kapt") version "2.0.0"
-    jacoco
+    kotlin("jvm")
+    kotlin("kapt")
+    id("io.spring.dependency-management")
+    id("jacoco")
 }
 
 allprojects {
@@ -13,23 +14,17 @@ allprojects {
     }
 }
 
-dependencies {
-    testImplementation(kotlin("test"))
-}
-
-tasks.test {
-    useJUnitPlatform()
-}
-
-kotlin {
-    jvmToolchain(21)
-}
-
 subprojects {
     apply(plugin = "jacoco")
 
     tasks.withType<Test> {
+        useJUnitPlatform()
         finalizedBy("jacocoTestReport")
+    }
+
+    // Настройка toolchain для всех Kotlin-задач
+    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+        kotlinOptions.jvmTarget = "21"
     }
 
     jacoco {
@@ -65,4 +60,3 @@ tasks.register<JacocoReport>("jacocoRootReport") {
         html.required.set(true)
     }
 }
-
