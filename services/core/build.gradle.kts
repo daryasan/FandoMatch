@@ -28,16 +28,15 @@ sourceSets {
 }
 
 openApiGenerate {
-    generatorName = "kotlin-spring"
+    generatorName = "kotlin"
     inputSpec = "$rootDir/services/core/specs/api.yaml"
     outputDir = "$buildDir/generated-sources"
     apiPackage = "com.fandomatch.core.api"
     modelPackage = "com.fandomatch.core.model"
     configOptions = mapOf(
-        "interfaceOnly" to "true",
-        "useTags" to "true",
-        "jakarta" to "true",
-        "useBeanValidation" to "false"
+        "library" to "jvm-spring-restclient",
+        "useSpringBoot3" to "true",
+        "serializationLibrary" to "jackson"
     )
 }
 
@@ -53,15 +52,20 @@ tasks.named("openApiGenerate") {
         file("$apiDir/Exceptions.kt").delete()
     }
 }
-
 dependencies {
+//    compileOnly(project(mapOf("path" to ":services:users", "configuration" to "openApi")))
+//    testCompileOnly(project(mapOf("path" to ":services:users", "configuration" to "openApi")))
+
+    implementation(project(":services:users"))
+
     // test
     testImplementation(kotlin("test"))
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.mockk:mockk:1.13.9")
-    testImplementation("org.assertj:assertj-core:3.25.3")
+    testImplementation("org.assertj:assertj-core:3.27.7")
     testImplementation("org.testcontainers:junit-jupiter")
     testImplementation("org.testcontainers:postgresql")
+    testImplementation("org.springframework.security:spring-security-test")
 
 
     // spring
@@ -69,10 +73,10 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-test")
     implementation("org.springframework.boot:spring-boot-starter-web")
-    testImplementation("org.springframework.security:spring-security-test")
     implementation("org.springframework.boot:spring-boot-starter-logging")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-configuration-processor")
+    implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
 
 
     // open api specs

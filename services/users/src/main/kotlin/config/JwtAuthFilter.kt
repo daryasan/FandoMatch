@@ -31,7 +31,7 @@ class JwtAuthFilter(
         val token = header.removePrefix("Bearer ").trim()
 
         val userDetails = jwtService.validateAndLoadUser(token)
-        val auth = UsernamePasswordAuthenticationToken(userDetails, null, listOf( SimpleGrantedAuthority("ROLE_USER")))
+        val auth = UsernamePasswordAuthenticationToken(userDetails, null, listOf(SimpleGrantedAuthority("ROLE_USER")))
 
         SecurityContextHolder.getContext().authentication = auth
 

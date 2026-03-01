@@ -1,23 +1,27 @@
 package org.example.controller
 
-import com.fandomatch.users.api.TokenApi
 import com.fandomatch.users.model.*
+import com.fandomatch.users.model.ResponseStatus
 import org.example.exception.BusinessException
 import org.example.service.TokenService
 import org.example.utils.getRefreshTokenErrorResponse
 import org.springframework.http.ResponseEntity
-import org.springframework.stereotype.Controller
+import org.springframework.web.bind.annotation.*
 
-@Controller
+
+@RestController
+@RequestMapping("/token")
 class TokenController(
     private val tokenService: TokenService
-) : TokenApi {
+) {
 
-    override fun tokenPublicJwtGet(): ResponseEntity<PublicJwtResponse> {
+    @GetMapping("/public/jwt")
+    fun tokenPublicJwtGet(): ResponseEntity<PublicJwtResponse> {
         return ResponseEntity.ok(PublicJwtResponse(tokenService.getPublicKey()))
     }
 
-    override fun tokenRefreshPost(refreshToken: RefreshToken): ResponseEntity<RefreshTokenResponse> {
+    @PostMapping("/refresh")
+    fun tokenRefreshPost(@RequestBody refreshToken: RefreshToken): ResponseEntity<RefreshTokenResponse> {
         val tokens = try {
             tokenService.refreshAccessToken(refreshToken.refreshToken)
         } catch (e: BusinessException) {
@@ -34,5 +38,4 @@ class TokenController(
             )
         )
     }
-
 }
