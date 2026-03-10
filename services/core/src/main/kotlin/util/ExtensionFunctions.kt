@@ -7,10 +7,11 @@ import org.springframework.http.ResponseEntity
 inline fun <T : Any> onControllerRequest(
     logger: KLogger,
     operationName: String,
+    metaUuid: String? = null,
     errorMapper: (BusinessException) -> T,
     block: () -> T
 ): ResponseEntity<T> {
-    logger.info("$operationName called")
+    logger.info("$operationName called for uuid: $metaUuid")
     return try {
         ResponseEntity.ok(block())
     } catch (e: BusinessException) {
