@@ -1,6 +1,7 @@
 package org.example.controller
 
 import com.fandomatch.core.model.*
+import com.fandomatch.core.model.ResponseStatus
 import io.github.oshai.kotlinlogging.KLogging
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -18,7 +19,10 @@ class MatchController {
     ): ResponseEntity<MatchCandidateBatchResponse> {
         logger.info { "POST /core/match/next called (batch_size=${request.batchSize})" }
 
-        val response = MatchCandidateBatchResponse(candidates = emptyList())
+        val response = MatchCandidateBatchResponse(
+            status = ResponseStatus.SUCCESS,
+            successResponse = MatchCandidateBatchData(emptyList())
+        )
 
         logger.info { "POST /core/match/next returning 200" }
         return ResponseEntity.ok(response)
@@ -32,8 +36,11 @@ class MatchController {
         logger.info { "POST /core/match/react called, target=${request.targetUsername}, action=${request.action}" }
 
         val response = MatchActionResponse(
-            status = MatchActionResponse.Status.LIKED,
-            matchChatId = null
+            status = ResponseStatus.SUCCESS,
+            successResponse = MatchActionResult(
+                status = MatchActionResult.Status.LIKED,
+                matchChatId = null
+            )
         )
 
         logger.info { "POST /core/match/react returning 200" }
@@ -48,7 +55,11 @@ class MatchController {
         logger.info { "POST /core/match/filter called" }
 
         val response = MatchFilterResponse(
-            status = MatchFilterResponse.Status.SUCCESS
+            status = ResponseStatus.SUCCESS,
+            successResponse = MatchActionResult(
+                status = MatchActionResult.Status.LIKED,
+                matchChatId = null
+            )
         )
 
         logger.info { "POST /core/match/filter returning 200" }

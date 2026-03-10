@@ -11,6 +11,11 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: Сервисный API-ключ для внутренних вызовов
 
   parameters:
     TokenHeader:
@@ -20,6 +25,13 @@ components:
       schema:
         type: string
         description: Bearer JWT token
+    ApiKeyHeader:
+      name: X-API-Key
+      in: header
+      required: false
+      schema:
+        type: string
+      description: Сервисный API-ключ для внутренних вызовов
 
   schemas:
     # auth/register
@@ -128,6 +140,16 @@ components:
           $ref: '#/components/schemas/Error'
       required:
         - status
+
+    UserByIdRequest:
+      type: object
+      properties:
+        user_id:
+          type: string
+          format: uuid
+          description: UUID пользователя
+      required:
+        - user_id
 
 
     # common models

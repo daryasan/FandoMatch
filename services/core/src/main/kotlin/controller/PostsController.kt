@@ -1,6 +1,7 @@
 package org.example.controller
 
 import com.fandomatch.core.model.*
+import com.fandomatch.core.model.ResponseStatus
 import io.github.oshai.kotlinlogging.KLogging
 import org.example.service.PostsService
 import org.springframework.http.ResponseEntity
@@ -20,7 +21,10 @@ class PostsController(
     ): ResponseEntity<PostListResponse> {
         logger.info { "POST /core/posts/get called with username=${request.username}" }
 
-        val response = PostListResponse(posts = emptyList())
+        val response = PostListResponse(
+            status = ResponseStatus.SUCCESS,
+            successResponse = PostListData(emptyList())
+        )
 
         logger.info { "POST /core/posts/get returning 200" }
         return ResponseEntity.ok(response)
@@ -34,10 +38,13 @@ class PostsController(
         logger.info { "POST /core/posts/create called, title=${request.title}" }
 
         val response = CreatePostResponse(
-            id = "stub-id",
-            title = request.title,
-            content = request.content,
-            createdAt = java.time.OffsetDateTime.now()
+            status = ResponseStatus.SUCCESS,
+            successResponse = Post(
+                id = "stub-id",
+                title = request.title,
+                content = request.content,
+                createdAt = java.time.OffsetDateTime.now()
+            )
         )
 
         logger.info { "POST /core/posts/create returning 200" }
@@ -51,10 +58,13 @@ class PostsController(
         logger.info { "GET /core/posts/$postId called" }
 
         val response = CreatePostResponse(
-            id = postId,
-            title = "Stub title",
-            content = "Stub content",
-            createdAt = java.time.OffsetDateTime.now()
+            status = ResponseStatus.SUCCESS,
+            successResponse = Post(
+                id = postId,
+                title = "Stub title",
+                content = "Stub content",
+                createdAt = java.time.OffsetDateTime.now()
+            )
         )
 
         logger.info { "GET /core/posts/$postId returning 200" }
@@ -69,7 +79,10 @@ class PostsController(
     ): ResponseEntity<CommentListResponse> {
         logger.info { "GET /core/posts/$postId/comments called (page=$page, size=$size)" }
 
-        val response = CommentListResponse(comments = emptyList())
+        val response = CommentListResponse(
+            status = ResponseStatus.SUCCESS,
+            successResponse = CommentListData(emptyList())
+        )
 
         logger.info { "GET /core/posts/$postId/comments returning 200" }
         return ResponseEntity.ok(response)
@@ -82,7 +95,10 @@ class PostsController(
     ): ResponseEntity<PostLikeResponse> {
         logger.info { "POST /core/posts/$postId/like called" }
 
-        val response = PostLikeResponse(status = PostLikeResponse.Status.LIKED)
+        val response = PostLikeResponse(
+            status = ResponseStatus.SUCCESS,
+            successResponse = PostLikeSuccess(status = PostLikeSuccess.Status.LIKED)
+        )
 
         logger.info { "POST /core/posts/$postId/like returning 200" }
         return ResponseEntity.ok(response)

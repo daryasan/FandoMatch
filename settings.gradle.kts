@@ -15,6 +15,9 @@ pluginManagement {
 
         // OpenAPI Generator
         id("org.openapi.generator") version "7.6.0"
+
+        // Jooq Codegen
+        id("nu.studer.jooq") version "9.0"
     }
 }
 plugins {

@@ -108,3 +108,27 @@ paths:
               schema:
                 $ref: '#./definitions.yaml#/components/schemas/RefreshTokenResponse'
 
+  /users/get-by-id:
+    post:
+      description: Получение credentials пользователя по ID (поддерживает пользовательский JWT или сервисный API-ключ)
+      tags:
+        - user
+      security:
+        - bearerAuth: [ ]
+        - apiKeyAuth: [ ]
+      parameters:
+        - $ref: '../definitions.yaml#/components/parameters/ApiKeyHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../definitions.yaml#/components/schemas/UserByIdRequest'
+      responses:
+        '200':
+          description: Информация о пользователе
+          content:
+            application/json:
+              schema:
+                $ref: '../definitions.yaml#/components/schemas/GetUserCredentialsResponse'
+

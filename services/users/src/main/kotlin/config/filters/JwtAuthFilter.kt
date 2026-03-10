@@ -1,4 +1,4 @@
-package org.example.config
+package org.example.config.filters
 
 import io.github.oshai.kotlinlogging.KLogging
 import jakarta.servlet.FilterChain

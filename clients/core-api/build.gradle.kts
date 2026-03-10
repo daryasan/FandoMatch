@@ -38,7 +38,11 @@ tasks.named<org.openapitools.generator.gradle.plugin.tasks.GenerateTask>("openAp
         mapOf(
             "library" to "jvm-spring-restclient",
             "useSpringBoot3" to "true",
-            "serializationLibrary" to "jackson"
+            "serializationLibrary" to "jackson",
+            "useOneOfInterfaces" to "true",
+            "interfaceOnly" to "false",
+            "serializableModel" to "true",
+            "useAbstractClassForOneOf" to "true",
         )
     )
 }

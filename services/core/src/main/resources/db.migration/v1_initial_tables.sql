@@ -1,5 +1,6 @@
 create table if not exists user_profile (
   user_id uuid primary key,
+  username text not null,
   name text not null,
   bio text,
   avatar_url text,

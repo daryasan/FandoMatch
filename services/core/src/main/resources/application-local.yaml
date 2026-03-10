@@ -22,3 +22,7 @@ jwt:
 clients:
   users-service:
     url: http://localhost:8081
+
+service:
+  api-key:
+    some-api-key

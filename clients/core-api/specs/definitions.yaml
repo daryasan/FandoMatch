@@ -33,6 +33,34 @@ components:
   schemas:
 
     # -------------------------
+    # COMMON
+    # -------------------------
+
+    ResponseStatus:
+      type: string
+      enum:
+        - SUCCESS
+        - ERROR
+      description: Статус выполнения запроса
+
+    Error:
+      type: object
+      properties:
+        error_code:
+          type: string
+          description: Код ошибки (например, BUSINESS_ERROR, VALIDATION_ERROR)
+        error_message:
+          type: string
+          description: Описание ошибки
+      required:
+        - error_code
+
+    EmptySuccess:
+      type: object
+      properties: {}
+      description: Пустой объект для успешных ответов без данных
+
+    # -------------------------
     # USER PROFILE
     # -------------------------
 
@@ -47,76 +75,125 @@ components:
     UserProfileResponse:
       type: object
       properties:
-        user:
-          $ref: '#/components/schemas/PublicUserProfileResponse'
-        is_self:
-          type: boolean
+        status:
+          $ref: '#/components/schemas/ResponseStatus'
+        successResponse:
+          $ref: '#/components/schemas/BaseUserProfile'
+        errorResponse:
+          $ref: '#/components/schemas/Error'
       required:
-        - user
-        - is_self
+        - status
+
+    BaseUserProfile:
+      type: object
+      discriminator:
+        propertyName: profile_type
+        mapping:
+          OWN: '#/components/schemas/FullUserProfileResponse'
+          FRIEND: '#/components/schemas/FriendUserProfileResponse'
+          OTHER: '#/components/schemas/PublicUserProfileResponse'
+      properties:
+        profile_type:
+          $ref: '#/components/schemas/ProfileType'
+      required:
+        - profile_type
+
+    ProfileType:
+      type: string
+      enum:
+        - OWN
+        - FRIEND
+        - OTHER
+      description: Тип профиля относительно текущего пользователя
 
     FullUserProfileResponse:
-      type: object
-      properties:
-        username:
-          type: string
-        email:
-          type: string
-        phone:
-          type: string
-        status:
-          type: string
-        created_at:
-          type: string
-          format: date-time
-        bio:
-          type: string
-        avatar_url:
-          type: string
-        background_url:
-          type: string
-        name:
-          type: string
-        gender:
-          type: string
-        birth_date:
-          type: string
-          format: date
-        city:
-          type: string
-        fandoms:
-          type: array
-          items:
-            $ref: '#/components/schemas/Fandom'
-      required:
-        - username
-        - status
-        - created_at
-        - name
-        - birth_date
+      allOf:
+        - $ref: '#/components/schemas/BaseUserProfile'
+        - type: object
+          properties:
+            username:
+              type: string
+            email:
+              type: string
+            phone:
+              type: string
+            status:
+              type: string
+            created_at:
+              type: string
+              format: date-time
+            bio:
+              type: string
+            avatar_url:
+              type: string
+            background_url:
+              type: string
+            name:
+              type: string
+            gender:
+              type: string
+            birth_date:
+              type: string
+              format: date
+            city:
+              type: string
+            fandoms:
+              type: array
+              items:
+                $ref: '#/components/schemas/Fandom'
+          required:
+            - username
+            - status
+            - created_at
+            - name
+            - birth_date
 
     PublicUserProfileResponse:
-      type: object
-      properties:
-        username:
-          type: string
-        name:
-          type: string
-        bio:
-          type: string
-        avatar_url:
-          type: string
-        background_url:
-          type: string
-        city:
-          type: string
-        fandoms:
-          type: array
-          items:
-            $ref: '#/components/schemas/Fandom'
-      required:
-        - username
-        - name
+      allOf:
+        - $ref: '#/components/schemas/BaseUserProfile'
+        - type: object
+          properties:
+            username:
+              type: string
+            name:
+              type: string
+            bio:
+              type: string
+            avatar_url:
+              type: string
+            background_url:
+              type: string
+            city:
+              type: string
+            fandoms:
+              type: array
+              items:
+                $ref: '#/components/schemas/Fandom'
+          required:
+            - username
+            - name
+
+    FriendUserProfileResponse:
+      allOf:
+        - $ref: '#/components/schemas/BaseUserProfile'
+        - type: object
+          properties:
+            name:
+              type: string
+            bio:
+              type: string
+            avatar_url:
+              type: string
+            background_url:
+              type: string
+            city:
+              type: string
+            fandoms:
+              type: array
+              items:
+                $ref: '#/components/schemas/Fandom'
+          required:
+            - name
 
     EditUserProfileRequest:
       type: object
@@ -141,12 +218,11 @@ components:
       type: object
       properties:
         status:
-          type: string
-          enum:
-            - SUCCESS
-            - ERROR
-        updated_profile:
+          $ref: '#/components/schemas/ResponseStatus'
+        successResponse:
           $ref: '#/components/schemas/FullUserProfileResponse'
+        errorResponse:
+          $ref: '#/components/schemas/Error'
       required:
         - status
 
@@ -163,7 +239,7 @@ components:
       required:
         - batch_size
 
-    MatchCandidateBatchResponse:
+    MatchCandidateBatchData:
       type: object
       properties:
         candidates:
@@ -172,6 +248,18 @@ components:
             $ref: '#/components/schemas/MatchCandidateResponse'
       required:
         - candidates
+
+    MatchCandidateBatchResponse:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ResponseStatus'
+        successResponse:
+          $ref: '#/components/schemas/MatchCandidateBatchData'
+        errorResponse:
+          $ref: '#/components/schemas/Error'
+      required:
+        - status
 
     MatchCandidateResponse:
       type: object
@@ -209,7 +297,7 @@ components:
         - target_username
         - action
 
-    MatchActionResponse:
+    MatchActionResult:
       type: object
       properties:
         status:
@@ -221,7 +309,20 @@ components:
         match_chat_id:
           type: string
           nullable: true
+      required:
+        - status
 
+    MatchActionResponse:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ResponseStatus'
+        successResponse:
+          $ref: '#/components/schemas/MatchActionResult'
+        errorResponse:
+          $ref: '#/components/schemas/Error'
+      required:
+        - status
 
     MatchFilterRequest:
       type: object
@@ -239,13 +340,21 @@ components:
         fandom_id:
           type: string
 
+    MatchFilterSuccess:
+      type: object
+      properties: {}
+
     MatchFilterResponse:
       type: object
       properties:
         status:
-          type: string
-          enum:
-            - SUCCESS
+          $ref: '#/components/schemas/ResponseStatus'
+        successResponse:
+          $ref: '#/components/schemas/MatchFilterSuccess'
+        errorResponse:
+          $ref: '#/components/schemas/Error'
+      required:
+        - status
 
 
     # -------------------------
@@ -277,7 +386,7 @@ components:
         - title
         - content
 
-    CreatePostResponse:
+    Post:
       type: object
       properties:
         id:
@@ -295,17 +404,41 @@ components:
         - content
         - created_at
 
-    PostListResponse:
+    CreatePostResponse:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ResponseStatus'
+        successResponse:
+          $ref: '#/components/schemas/Post'
+        errorResponse:
+          $ref: '#/components/schemas/Error'
+      required:
+        - status
+
+    PostListData:
       type: object
       properties:
         posts:
           type: array
           items:
-            $ref: '#/components/schemas/CreatePostResponse'
+            $ref: '#/components/schemas/Post'
       required:
         - posts
 
-    CommentListResponse:
+    PostListResponse:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ResponseStatus'
+        successResponse:
+          $ref: '#/components/schemas/PostListData'
+        errorResponse:
+          $ref: '#/components/schemas/Error'
+      required:
+        - status
+
+    CommentListData:
       type: object
       properties:
         comments:
@@ -325,13 +458,36 @@ components:
       required:
         - comments
 
-    PostLikeResponse:
+    CommentListResponse:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ResponseStatus'
+        successResponse:
+          $ref: '#/components/schemas/CommentListData'
+        errorResponse:
+          $ref: '#/components/schemas/Error'
+      required:
+        - status
+
+    PostLikeSuccess:
       type: object
       properties:
         status:
           type: string
-          enum:
-            - LIKED
+          enum: [LIKED]
+
+    PostLikeResponse:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ResponseStatus'
+        successResponse:
+          $ref: '#/components/schemas/PostLikeSuccess'
+        errorResponse:
+          $ref: '#/components/schemas/Error'
+      required:
+        - status
 
 
     # -------------------------
@@ -346,9 +502,7 @@ components:
       required:
         - username
 
-
-
-    FandomListResponse:
+    FandomListData:
       type: object
       properties:
         fandoms:
@@ -357,6 +511,18 @@ components:
             $ref: '#/components/schemas/Fandom'
       required:
         - fandoms
+
+    FandomListResponse:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ResponseStatus'
+        successResponse:
+          $ref: '#/components/schemas/FandomListData'
+        errorResponse:
+          $ref: '#/components/schemas/Error'
+      required:
+        - status
 
     Fandom:
       type: object
@@ -371,7 +537,7 @@ components:
         - id
         - name
 
-    FandomCategoryListResponse:
+    FandomCategoryListData:
       type: object
       properties:
         categories:
@@ -380,6 +546,18 @@ components:
             type: string
       required:
         - categories
+
+    FandomCategoryListResponse:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ResponseStatus'
+        successResponse:
+          $ref: '#/components/schemas/FandomCategoryListData'
+        errorResponse:
+          $ref: '#/components/schemas/Error'
+      required:
+        - status
 
     FandomRequestCreate:
       type: object
@@ -396,10 +574,21 @@ components:
         - name
         - author_username
 
-    FandomRequestCreateResponse:
+    FandomRequestCreateSuccess:
       type: object
       properties:
         status:
           type: string
-          enum:
-            - RECEIVED
+          enum: [RECEIVED]
+
+    FandomRequestCreateResponse:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ResponseStatus'
+        successResponse:
+          $ref: '#/components/schemas/FandomRequestCreateSuccess'
+        errorResponse:
+          $ref: '#/components/schemas/Error'
+      required:
+        - status

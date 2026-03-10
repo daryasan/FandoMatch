@@ -1,7 +1,9 @@
 package org.example.controller
 
-import com.fandomatch.core.model.CreatePostResponse
+import com.fandomatch.core.model.Post
+import com.fandomatch.core.model.PostListData
 import com.fandomatch.core.model.PostListResponse
+import com.fandomatch.core.model.ResponseStatus
 import io.github.oshai.kotlinlogging.KLogging
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -21,7 +23,7 @@ class FeedController {
     ): ResponseEntity<PostListResponse> {
         logger.info { "GET /core/feed called (page=$page, size=$size)" }
 
-        val stubPost = CreatePostResponse(
+        val stubPost = Post(
             id = "stub-id",
             title = "Feed Stub Post",
             content = "Stub content from feed",
@@ -29,7 +31,8 @@ class FeedController {
         )
 
         val response = PostListResponse(
-            posts = listOf(stubPost)
+            status = ResponseStatus.SUCCESS,
+            successResponse = PostListData(listOf(stubPost))
         )
 
         logger.info { "GET /core/feed returning 200" }

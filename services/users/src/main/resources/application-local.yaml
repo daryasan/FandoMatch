@@ -19,3 +19,7 @@ spring:
 clients:
   core-service:
     url: http://localhost:8082
+
+service:
+  api-key:
+    some-api-key
