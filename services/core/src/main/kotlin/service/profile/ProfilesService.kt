@@ -1,8 +1,6 @@
 package org.example.service.profile
 
-import com.fandomatch.core.model.ProfileType
-import com.fandomatch.core.model.ResponseStatus
-import com.fandomatch.core.model.UserProfileResponse
+import com.fandomatch.core.model.*
 import org.example.client.UsersAdapter
 import org.example.exceptions.UserNotFoundException
 import org.example.models.ProfileData
@@ -11,6 +9,7 @@ import org.example.service.FandomService
 import org.example.service.MatchesService
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.time.Instant
 import java.util.*
 import kotlin.jvm.optionals.getOrNull
 
@@ -40,6 +39,40 @@ class ProfilesService(
 
         val strategy = strategyFactory.getStrategy(profileType, profileData)
         return UserProfileResponse(status = ResponseStatus.SUCCESS, successResponse = strategy.construct())
+    }
+
+    @Transactional
+    fun editProfile(currentUuid: UUID, request: EditUserProfileRequest): EditUserProfileResponse {
+        val existing = userProfileRepository.findById(currentUuid)
+            .orElseThrow { UserNotFoundException(currentUuid.toString()) }
+
+        val updated = existing.copy(
+            name = request.name ?: existing.name,
+            bio = request.bio ?: existing.bio,
+            avatarUrl = request.avatarUrl ?: existing.avatarUrl,
+            backgroundUrl = request.backgroundUrl ?: existing.backgroundUrl,
+            gender = request.gender ?: existing.gender,
+            birthDate = request.birthDate ?: existing.birthDate,
+            city = request.city ?: existing.city,
+            updatedAt = Instant.now()
+        )
+
+        userProfileRepository.save(updated)
+
+        val creds = usersAdapter.getUserCredentialsByUuid(currentUuid)
+        val fandoms = fandomService.getFandoms(currentUuid)
+
+        val profileData = ProfileData(
+            userCredentials = creds,
+            userProfile = updated,
+            fandoms = fandoms
+        )
+        val strategy = strategyFactory.getStrategy(ProfileType.OWN, profileData)
+
+        return EditUserProfileResponse(
+            status = ResponseStatus.SUCCESS,
+            successResponse = strategy.construct() as FullUserProfileResponse
+        )
     }
 
     private fun determineProfileType(currentUuid: UUID, targetUuid: UUID): ProfileType {
