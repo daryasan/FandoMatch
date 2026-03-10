@@ -1,0 +1,20 @@
+server:
+  port: 8082
+
+spring:
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+
+jwt:
+  privateKey: ${JWT_PRIVATE_KEY}
+  publicKey: ${JWT_PUBLIC_KEY}
+
+clients:
+  users-service:
+    url: ${USERS_SERVICE_URL}

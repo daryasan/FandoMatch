@@ -1,17 +1,16 @@
 plugins {
-    kotlin("jvm") version "2.0.20"
-    id("org.springframework.boot") version "3.5.0"
-    id("io.spring.dependency-management") version "1.1.7"
-    id("org.openapi.generator") version "7.6.0"
+    kotlin("jvm")
+    kotlin("kapt")
+    kotlin("plugin.spring")
+    kotlin("plugin.jpa")
+    id("org.springframework.boot")
+    id("io.spring.dependency-management")
+    id("nu.studer.jooq")
 }
 
-group = "com.fandomatch"
-version = "1.0-SNAPSHOT"
-
-repositories {
-    mavenCentral()
+jooq {
+    version = "3.18.7"
 }
-
 
 dependencyManagement {
     imports {
@@ -19,44 +18,9 @@ dependencyManagement {
     }
 }
 
-val generatedSourcesDir = layout.buildDirectory.dir("generated-sources/src/main/kotlin")
-
-sourceSets {
-    main {
-        kotlin.srcDir(generatedSourcesDir)
-    }
-}
-
-openApiGenerate {
-    generatorName = "kotlin"
-    inputSpec = "$rootDir/services/core/specs/api.yaml"
-    outputDir = "$buildDir/generated-sources"
-    apiPackage = "com.fandomatch.core.api"
-    modelPackage = "com.fandomatch.core.model"
-    configOptions = mapOf(
-        "library" to "jvm-spring-restclient",
-        "useSpringBoot3" to "true",
-        "serializationLibrary" to "jackson"
-    )
-}
-
-tasks.named("openApiGenerate") {
-    outputs.dir(generatedSourcesDir)
-    doLast {
-        val apiDir = file("$buildDir/generated-sources/src/main/kotlin/com/fandomatch/core/api")
-
-        file("$apiDir/ApiUtil.kt").delete()
-        file("$apiDir/DefaultExceptionHandler.kt").delete()
-        file("$apiDir/ApiException.kt").delete()
-        file("$apiDir/SpringDocConfiguration.kt").delete()
-        file("$apiDir/Exceptions.kt").delete()
-    }
-}
 dependencies {
-//    compileOnly(project(mapOf("path" to ":services:users", "configuration" to "openApi")))
-//    testCompileOnly(project(mapOf("path" to ":services:users", "configuration" to "openApi")))
-
-    implementation(project(":services:users"))
+    implementation(project(":clients:users-api"))
+    implementation(project(":clients:core-api"))
 
     // test
     testImplementation(kotlin("test"))
@@ -76,13 +40,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-logging")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-configuration-processor")
-    implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
-
-
-    // open api specs
-    implementation("org.openapitools:jackson-databind-nullable:0.2.6")
-    implementation("io.swagger.core.v3:swagger-annotations:2.2.41")
-    implementation("io.swagger.core.v3:swagger-models:2.2.21")
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation("org.springframework.boot:spring-boot-starter-jooq")
 
     // logging
     implementation("io.github.oshai:kotlin-logging-jvm:7.0.3")
@@ -90,15 +49,18 @@ dependencies {
     // db
     implementation("org.postgresql:postgresql:42.7.3")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
+    jooqGenerator("org.postgresql:postgresql")
 
     implementation("io.jsonwebtoken:jjwt-api:0.12.3")
     implementation("io.jsonwebtoken:jjwt-impl:0.12.3")
     implementation("io.jsonwebtoken:jjwt-jackson:0.12.3")
 }
 
+
 tasks.test {
     useJUnitPlatform()
 }
+
 kotlin {
     jvmToolchain(21)
 }

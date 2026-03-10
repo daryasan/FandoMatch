@@ -8,6 +8,7 @@ import org.example.model.db_models.User
 import org.example.repository.UserRepository
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.stereotype.Service
+import java.util.*
 
 @Service
 class UserService(
@@ -40,6 +41,10 @@ class UserService(
 
     fun findUserByToken(accessToken: String): User {
         val uuid = tokenService.getUserIdByToken(accessToken)
+        return userRepository.findById(uuid).orElseThrow { throw UserNotFoundException("id") }
+    }
+
+    fun findUserByUuid(uuid: UUID): User {
         return userRepository.findById(uuid).orElseThrow { throw UserNotFoundException("id") }
     }
 
