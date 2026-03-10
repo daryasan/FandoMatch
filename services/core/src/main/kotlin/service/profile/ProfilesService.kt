@@ -1,14 +1,14 @@
-package org.example.service
+package org.example.service.profile
 
-import com.fandomatch.core.model.Fandom
 import com.fandomatch.core.model.ProfileType
 import com.fandomatch.core.model.ResponseStatus
 import com.fandomatch.core.model.UserProfileResponse
 import org.example.client.UsersAdapter
 import org.example.exceptions.UserNotFoundException
 import org.example.models.ProfileData
-import org.example.repository.FandomRepository
 import org.example.repository.UserProfileRepository
+import org.example.service.FandomService
+import org.example.service.MatchesService
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.util.*
@@ -17,9 +17,10 @@ import kotlin.jvm.optionals.getOrNull
 @Service
 class ProfilesService(
     private val userProfileRepository: UserProfileRepository,
-    private val fandomRepository: FandomRepository,
+    private val fandomService: FandomService,
     private val usersAdapter: UsersAdapter,
-    private val strategyFactory: ProfileStrategyFactory
+    private val strategyFactory: ProfileStrategyFactory,
+    private val matchesService: MatchesService,
 ) {
 
     @Transactional(readOnly = true)
@@ -28,15 +29,8 @@ class ProfilesService(
             ?: throw UserNotFoundException(targetUsername)
         val currentUserCredentials = usersAdapter.getUserCredentialsByUuid(currentUuid)
 
-        val fandoms = fandomRepository.findAllByUserId(targetProfile.userId).map { fandom ->
-            Fandom(
-                id = fandom.id.toString(),
-                name = fandom.name,
-                description = fandom.description
-            )
-        }
-
-        val profileType = determineProfileType(currentUserCredentials.username, targetProfile.username)
+        val fandoms = fandomService.getFandoms(targetProfile.userId)
+        val profileType = determineProfileType(currentUuid, targetProfile.userId)
 
         val profileData = ProfileData(
             userCredentials = currentUserCredentials,
@@ -48,29 +42,13 @@ class ProfilesService(
         return UserProfileResponse(status = ResponseStatus.SUCCESS, successResponse = strategy.construct())
     }
 
-    private fun determineProfileType(currentUsername: String, targetUsername: String): ProfileType {
-        if (currentUsername == targetUsername) {
+    private fun determineProfileType(currentUuid: UUID, targetUuid: UUID): ProfileType {
+        if (currentUuid == targetUuid) {
             return ProfileType.OWN
         }
-        if (areFriends(currentUsername, targetUsername)) {
+        if (matchesService.areFriends(currentUuid, targetUuid)) {
             return ProfileType.FRIEND
         }
         return ProfileType.OTHER
     }
-
-    private fun areFriends(currentUsername: String, targetUsername: String): Boolean {
-// TODO
-        return false
-    }
-
-    private fun getFandoms(userId: UUID): List<Fandom> {
-        return fandomRepository.findAllByUserId(userId).map { entity ->
-            Fandom(
-                id = entity.id.toString(),
-                name = entity.name,
-                description = entity.description
-            )
-        }
-    }
-
 }

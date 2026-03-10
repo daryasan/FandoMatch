@@ -1,4 +1,4 @@
-package org.example.service
+package org.example.service.profile
 
 import com.fandomatch.core.model.*
 import org.example.models.ProfileData

@@ -3,7 +3,7 @@ package org.example.controller
 import com.fandomatch.core.model.*
 import com.fandomatch.core.model.ResponseStatus
 import io.github.oshai.kotlinlogging.KLogging
-import org.example.service.ProfilesService
+import org.example.service.profile.ProfilesService
 import org.example.service.TokenParserService
 import org.example.util.getUserProfileErrorResponse
 import org.example.util.onControllerRequest
