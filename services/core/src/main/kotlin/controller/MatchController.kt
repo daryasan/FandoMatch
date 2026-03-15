@@ -3,12 +3,19 @@ package org.example.controller
 import com.fandomatch.core.model.*
 import com.fandomatch.core.model.ResponseStatus
 import io.github.oshai.kotlinlogging.KLogging
+import org.example.service.MatchesService
+import org.example.service.TokenParserService
+import org.example.util.getMatchCandidateBatchErrorResponse
+import org.example.util.onControllerRequest
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/core/match")
-class MatchController {
+class MatchController(
+    private val matchesService: MatchesService,
+    private val tokenParserService: TokenParserService,
+) {
 
     companion object : KLogging()
 
@@ -17,15 +24,17 @@ class MatchController {
         @RequestHeader("Authorization") token: String,
         @RequestBody request: MatchBatchRequest
     ): ResponseEntity<MatchCandidateBatchResponse> {
-        logger.info { "POST /core/match/next called (batch_size=${request.batchSize})" }
 
-        val response = MatchCandidateBatchResponse(
-            status = ResponseStatus.SUCCESS,
-            successResponse = MatchCandidateBatchData(emptyList())
-        )
-
-        logger.info { "POST /core/match/next returning 200" }
-        return ResponseEntity.ok(response)
+        val uuid = tokenParserService.parse(token).userId
+        return onControllerRequest(
+            logger = logger,
+            operationName = "POST /core/match/next",
+            metaUuid = uuid.toString(),
+            errorMapper = { getMatchCandidateBatchErrorResponse(it) }
+        ) {
+            val suggested = matchesService.getNextCandidates(userId = uuid, batchSize = request.batchSize)
+            return ResponseEntity.ok(suggested)
+        }
     }
 
     @PostMapping("/react")

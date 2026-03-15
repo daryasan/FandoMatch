@@ -16,4 +16,6 @@ class FandomService(private val fandomRepository: FandomRepository) {
         )
     }
 
+    fun getAllFandoms() = fandomRepository.findAll()
+
 }

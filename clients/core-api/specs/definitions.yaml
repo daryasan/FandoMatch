@@ -264,6 +264,8 @@ components:
     MatchCandidateResponse:
       type: object
       properties:
+        uuid:
+          type: string
         username:
           type: string
         name:

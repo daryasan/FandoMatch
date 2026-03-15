@@ -113,7 +113,6 @@ create table if not exists match_action (
         unique (user_id, target_user_id)
 );
 
-> darya sudakova:
 CREATE INDEX IF NOT EXISTS match_action_idx_user   ON match_action (user_id);
 create index if not exists match_action_idx_target on match_action (target_user_id);
 
