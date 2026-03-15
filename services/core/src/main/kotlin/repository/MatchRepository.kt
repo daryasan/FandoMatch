@@ -4,11 +4,12 @@ import org.example.models.db_models.Match
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param
+import org.springframework.stereotype.Repository
 import java.util.*
 
+@Repository
 interface MatchRepository : JpaRepository<Match, UUID> {
 
-    // are friends
     fun existsByUserId1AndUserId2(userId1: UUID, userId2: UUID): Boolean
 
     @Query("""

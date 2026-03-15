@@ -1,9 +1,6 @@
-name: Users Microservice Test Coverage
+name: Microservice Test Coverage
 
 on:
-  push:
-    branches:
-      - dasha
   pull_request:
     branches:
       - master
