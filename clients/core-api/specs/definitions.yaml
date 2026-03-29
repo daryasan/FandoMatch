@@ -145,8 +145,6 @@ components:
             - username
             - status
             - created_at
-            - name
-            - birth_date
 
     PublicUserProfileResponse:
       allOf:

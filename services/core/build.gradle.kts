@@ -21,6 +21,7 @@ dependencyManagement {
 dependencies {
     implementation(project(":clients:users-api"))
     implementation(project(":clients:core-api"))
+    implementation(project(":clients:common-models"))
 
     // test
     testImplementation(kotlin("test"))
@@ -51,9 +52,13 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     jooqGenerator("org.postgresql:postgresql")
 
+    // jwt
     implementation("io.jsonwebtoken:jjwt-api:0.12.3")
     implementation("io.jsonwebtoken:jjwt-impl:0.12.3")
     implementation("io.jsonwebtoken:jjwt-jackson:0.12.3")
+
+    // kafka
+    implementation("org.springframework.kafka:spring-kafka")
 }
 
 

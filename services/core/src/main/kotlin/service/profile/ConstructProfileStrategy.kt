@@ -43,7 +43,7 @@ class ConstructFriendProfile(profileData: ProfileData) :
         val prof = profileData.userProfile
         return FriendUserProfileResponse(
             profileType = selector,
-            name = prof.name,
+            name = prof.name!!,
             bio = prof.bio,
             avatarUrl = prof.avatarUrl,
             backgroundUrl = prof.backgroundUrl,
@@ -61,7 +61,7 @@ class ConstructOtherProfile(profileData: ProfileData) :
         return PublicUserProfileResponse(
             profileType = selector,
             username = prof.username,
-            name = prof.name,
+            name = prof.name!!,
             bio = prof.bio,
             avatarUrl = prof.avatarUrl,
             backgroundUrl = prof.backgroundUrl,

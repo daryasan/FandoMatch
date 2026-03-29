@@ -15,6 +15,7 @@ dependencyManagement {
 
 dependencies {
     implementation(project(":clients:users-api"))
+    implementation(project(":clients:common-models"))
 
     // test
     testImplementation(kotlin("test"))
@@ -51,6 +52,9 @@ dependencies {
     // db
     implementation("org.postgresql:postgresql:42.7.3")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
+
+    // kafka
+    implementation("org.springframework.kafka:spring-kafka")
 }
 
 tasks.test {

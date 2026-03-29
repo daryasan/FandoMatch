@@ -9,10 +9,8 @@ import java.util.*
 
 @Repository
 interface FandomRepository : JpaRepository<Fandom, UUID> {
-    @Query("""
-        SELECT f FROM Fandom f
-        JOIN UserFandom uf ON f.id = uf.fandomId
-        WHERE uf.userId = :userId
-    """)
+    @Query("SELECT uf.fandom " +
+            "FROM UserFandom uf " +
+            "WHERE uf.userId = :userId")
     fun findAllByUserId(@Param("userId") userId: UUID): List<Fandom>
 }

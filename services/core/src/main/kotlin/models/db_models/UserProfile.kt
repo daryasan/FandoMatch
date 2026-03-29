@@ -15,8 +15,7 @@ data class UserProfile(
     @Column(name = "user_id")
     val userId: UUID,
 
-    @Column(nullable = false)
-    val name: String,
+    val name: String?,
 
     @Column(nullable = false)
     val username: String,
@@ -31,8 +30,8 @@ data class UserProfile(
 
     val gender: String?,
 
-    @Column(name = "birth_date", nullable = false)
-    val birthDate: LocalDate,
+    @Column(name = "birth_date")
+    val birthDate: LocalDate?,
 
     val city: String?,
 

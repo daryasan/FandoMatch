@@ -10,6 +10,7 @@ import org.example.repository.TokenRepository
 import org.example.service.security.JwtService
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
+import java.util.*
 
 @Service
 class TokenService(
@@ -17,11 +18,13 @@ class TokenService(
     private val jwtService: JwtService,
 ) {
 
-    companion object : KLogging()
+    companion object : KLogging() {
+        const val TOKEN_PREFIX = "Bearer "
+    }
 
-    fun getUserIdByToken(accessToken : String) = jwtService.extractUserId(accessToken)
+    fun getUserIdByToken(accessToken: String) = jwtService.extractUserId(accessToken)
 
-    fun getPublicKey() : String {
+    fun getPublicKey(): String {
         return jwtService.getPublicKey()
     }
 

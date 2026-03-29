@@ -1,0 +1,61 @@
+openapi: 3.0.3
+info:
+  title: core service api
+  version: 1.3.0
+  description: API для core‑модуля
+
+paths: {}
+components:
+  schemas:
+    # -----------------------
+    # --- KAFKA MODELS ------
+    # -----------------------
+    UserChangedEvent:
+      type: object
+      properties:
+        uid:
+          type: string
+          description: "Уникальный идентификатор пользователя"
+        email:
+          type: string
+          format: email
+          nullable: true
+          description: "Email пользователя, может быть null"
+        phone:
+          type: string
+          nullable: true
+          description: "Телефон пользователя, может быть null"
+        username:
+          type: string
+          description: "Имя пользователя"
+        createdAt:
+          type: string
+          format: date-time
+          description: "Время создания события в формате ISO 8601"
+        status:
+          $ref: '#/components/schemas/UserStatus'
+        eventType:
+          $ref: '#/components/schemas/EventType'
+      required:
+        - uid
+        - username
+        - createdAt
+        - status
+        - eventType
+
+    EventType:
+      type: string
+      description: "Тип события"
+      enum:
+        - CREATED
+        - UPDATED
+
+    UserStatus:
+      type: string
+      description: "Статус пользователя"
+      enum:
+        - ACTIVE
+        - DISABLED
+        - BANNED
+
+

@@ -1,12 +1,12 @@
 create table if not exists user_profile (
     user_id        uuid primary key,
     username       text not null unique,
-    name           TEXT NOT NULL,
+    name           TEXT,
     bio            text,
     avatar_url     text,
     background_url text,
     gender         text,
-    birth_date     date not null,
+    birth_date     date,
     city           text,
     updated_at     timestamp not null default now()
 );
