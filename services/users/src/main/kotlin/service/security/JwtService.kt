@@ -41,7 +41,7 @@ class JwtService(
         publicKey = loadPublicKey(publicKeyBase64)
     }
 
-    fun getPublicKey() = publicKey
+    fun getPublicKey() = publicKeyBase64
 
     private fun loadPrivateKey(base64: String): PrivateKey {
         val cleaned = base64.replace("\n", "").trim()

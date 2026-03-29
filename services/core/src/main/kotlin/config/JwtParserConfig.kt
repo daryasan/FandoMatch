@@ -10,5 +10,5 @@ open class JwtParserConfig(
     private val keyInitializer: JwtKeyInitializer
 ) {
     @Bean
-    open fun jwtParserFactory(): () -> JwtParser = { Jwts.parser().verifyWith(keyInitializer.publicKey).build() }
+    open fun jwtParserFactory(): JwtParser = Jwts.parser().verifyWith(keyInitializer.publicKey).build()
 }

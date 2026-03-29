@@ -1,5 +1,6 @@
 server:
   port: 8082
+  forward-headers-strategy: framework
 
 spring:
   datasource:
@@ -22,3 +23,6 @@ jwt:
 clients:
   users-service:
     url: http://users:8081
+
+service:
+  api-key: {SERVICE_API_KEY}

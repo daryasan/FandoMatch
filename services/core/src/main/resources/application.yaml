@@ -1,9 +1,13 @@
 spring:
   jpa:
     open-in-view: false
+  profiles.active: local
 
 management:
   endpoints:
     web:
       exposure:
         include: health
+logging:
+  level:
+    root: DEBUG

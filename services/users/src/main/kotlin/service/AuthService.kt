@@ -1,6 +1,7 @@
 package org.example.service
 
 import io.github.oshai.kotlinlogging.KLogging
+import jakarta.transaction.Transactional
 import org.example.model.AuthTokens
 import org.example.service.validation.UserValidator
 import org.springframework.stereotype.Service
@@ -34,6 +35,7 @@ class AuthService(
         return tokenService.generateAndSaveTokens(savedUser)
     }
 
+    @Transactional
     fun login(
         email: String?,
         phone: String?,

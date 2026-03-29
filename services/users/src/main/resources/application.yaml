@@ -11,3 +11,4 @@ management:
 spring:
   jpa:
     open-in-view: false
+  profiles.active: local

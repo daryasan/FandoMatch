@@ -22,7 +22,7 @@ class TokenService(
     fun getUserIdByToken(accessToken : String) = jwtService.extractUserId(accessToken)
 
     fun getPublicKey() : String {
-        return jwtService.getPublicKey().toString()
+        return jwtService.getPublicKey()
     }
 
     fun generateAndSaveTokens(user: User): AuthTokens {

@@ -18,3 +18,6 @@ jwt:
   publicKey: "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtTrvLQQNcmaTOC8POtqfz/5PNYGpF/ImxHFaCbdHR6eiYeJFauQsxa/SjB1RceTXLFwq4MHwvUhi7sxBXNPrRT2lVKm+ys3bSXnEFm1LUjsYEv5smz5FKKEGEXIGB0df1l0ilQkbWTmXwCUtaRdf9a3obi5B+rQVIFLgDWUlVWpZOJoT0WN2MW8nqRimXnuXOxGiF47/JdqRFHzeTEPglvSVVtTytlbTcsRt3gdP8xtqrTOquB9SWP0Z7kVOwZqrpLwFZGc6hbHthKUgo2bfCAUCtqJDxkuAq/c7BS2MPslqPYBirMNhe5GwLkuuwVkTXsF9FeOpUttJDcAqaGdjGwIDAQAB"
   access-expiration: 3600000
   refresh-expiration-days: 60
+
+service:
+  api-key: some-api-key
