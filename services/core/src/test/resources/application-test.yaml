@@ -19,3 +19,6 @@ clients:
 logging:
   level:
     root: DEBUG
+
+service:
+  api-key: some-api-key

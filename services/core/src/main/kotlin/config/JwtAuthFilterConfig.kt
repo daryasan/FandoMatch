@@ -1,3 +1,5 @@
+package org.example.config
+
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
@@ -27,21 +29,19 @@ class JwtAuthFilterConfig(
             return
         }
 
-        val token = header.removePrefix("Bearer ").trim()
-
         try {
             val auth = UsernamePasswordAuthenticationToken(
-                tokenParserService.parse(token),
+                tokenParserService.parse(header),
                 null,
                 listOf(SimpleGrantedAuthority("ROLE_USER"))
             )
 
             SecurityContextHolder.getContext().authentication = auth
+            filterChain.doFilter(request, response)
         } catch (e: Exception) {
             logger.warn { "Invalid JWT: ${e.message}" }
+            response.sendError(HttpServletResponse.SC_FORBIDDEN, "Invalid or expired token")
         }
-
-        filterChain.doFilter(request, response)
     }
 }
 

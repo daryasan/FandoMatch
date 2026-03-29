@@ -8,6 +8,7 @@ import org.example.exception.BusinessException
 import org.example.model.GeneratedToken
 import org.example.model.db_models.User
 import org.example.repository.UserRepository
+import org.example.service.TokenService.Companion.TOKEN_PREFIX
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 import java.security.KeyFactory
@@ -41,7 +42,7 @@ class JwtService(
         publicKey = loadPublicKey(publicKeyBase64)
     }
 
-    fun getPublicKey() = publicKey
+    fun getPublicKey() = publicKeyBase64
 
     private fun loadPrivateKey(base64: String): PrivateKey {
         val cleaned = base64.replace("\n", "").trim()
@@ -101,11 +102,12 @@ class JwtService(
     }
 
     fun extractUserId(token: String): UUID {
+        val tokenWithoutPrefix = token.removePrefix(TOKEN_PREFIX)
         try {
             val claims = Jwts.parser()
                 .verifyWith(publicKey)
                 .build()
-                .parseSignedClaims(token)
+                .parseSignedClaims(tokenWithoutPrefix)
                 .payload
             return UUID.fromString(claims.subject)
         } catch (e: Exception) {

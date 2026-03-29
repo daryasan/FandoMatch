@@ -29,6 +29,7 @@ rootProject.name = "fandomatch"
 include(
     "clients:users-api",
     "clients:core-api",
+    "clients:common-models",
     "services:users",
     "services:core",
     "services:gateway"

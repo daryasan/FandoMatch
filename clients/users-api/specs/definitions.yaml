@@ -156,6 +156,8 @@ components:
     UserCredentials:
       type: object
       properties:
+        uuid:
+          type: string
         email:
           type: string
         phone:

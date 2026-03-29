@@ -7,6 +7,8 @@ import org.example.models.ProfileData
 import org.example.repository.UserProfileRepository
 import org.example.service.FandomService
 import org.example.service.MatchesService
+import org.example.stream.`in`.UserEventConsumer.Companion.logger
+import org.example.util.toUserProfile
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.time.Instant
@@ -22,10 +24,12 @@ class ProfilesService(
     private val matchesService: MatchesService,
 ) {
 
+    fun findByUsername(username: String) = userProfileRepository.findByUsername(username)
+        .orElseThrow { UserNotFoundException("User not found: $username") }
+
     @Transactional(readOnly = true)
     fun getProfile(currentUuid: UUID, targetUsername: String): UserProfileResponse {
-        val targetProfile = userProfileRepository.findByUsername(targetUsername).getOrNull()
-            ?: throw UserNotFoundException(targetUsername)
+        val targetProfile = findByUsername(targetUsername)
         val currentUserCredentials = usersAdapter.getUserCredentialsByUuid(currentUuid)
 
         val fandoms = fandomService.getFandoms(targetProfile.userId)
@@ -73,6 +77,34 @@ class ProfilesService(
             status = ResponseStatus.SUCCESS,
             successResponse = strategy.construct() as FullUserProfileResponse
         )
+    }
+
+    fun createProfile(userChangedEvent: UserChangedEvent) {
+        if (userProfileRepository.existsById(UUID.fromString(userChangedEvent.uid))) {
+            logger.warn { "UserProfile already exists for userId=${userChangedEvent.uid}, skipping CREATED" }
+            return
+        }
+
+        val newProfile = userChangedEvent.toUserProfile()
+        userProfileRepository.save(newProfile)
+        logger.info { "UserProfile created for userId=${userChangedEvent.uid}" }
+    }
+
+    fun updateProfileCredentials(userChangedEvent: UserChangedEvent) {
+        val userId = UUID.fromString(userChangedEvent.uid)
+        val existing = userProfileRepository.findById(userId)
+
+        if (existing.isPresent) {
+            val updated = existing.get().copy(
+                username = userChangedEvent.username,
+                updatedAt = Instant.now()
+            )
+            userProfileRepository.save(updated)
+            logger.info { "UserProfile updated for userId=$userId" }
+        } else {
+            logger.warn { "UserProfile not found for userId=$userId on UPDATED, creating" }
+            createProfile(userChangedEvent)
+        }
     }
 
     private fun determineProfileType(currentUuid: UUID, targetUuid: UUID): ProfileType {

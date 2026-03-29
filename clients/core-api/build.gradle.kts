@@ -1,3 +1,5 @@
+import org.openapitools.generator.gradle.plugin.tasks.GenerateTask
+
 plugins {
     kotlin("jvm")
     kotlin("kapt")
@@ -20,7 +22,7 @@ dependencies {
 }
 
 
-tasks.named<org.openapitools.generator.gradle.plugin.tasks.GenerateTask>("openApiGenerate") {
+tasks.named<GenerateTask>("openApiGenerate") {
     generatorName.set("kotlin")
     inputSpec.set("$projectDir/specs/api.yaml")
     outputDir.set(generatedDir.get().asFile.path)

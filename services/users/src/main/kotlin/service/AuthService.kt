@@ -1,8 +1,11 @@
 package org.example.service
 
+import com.fandomatch.core.model.EventType
 import io.github.oshai.kotlinlogging.KLogging
+import jakarta.transaction.Transactional
 import org.example.model.AuthTokens
 import org.example.service.validation.UserValidator
+import org.example.stream.out.UserEventsSender
 import org.springframework.stereotype.Service
 
 @Service
@@ -10,7 +13,8 @@ class AuthService(
     private val userService: UserService,
     private val tokenService: TokenService,
     private val userCredentialsService: UserCredentialsService,
-    private val userValidator: UserValidator
+    private val userValidator: UserValidator,
+    private val userEventsSender: UserEventsSender,
 ) {
 
     companion object : KLogging()
@@ -30,10 +34,12 @@ class AuthService(
         )
 
         userCredentialsService.createCredentials(savedUser, password)
+        userEventsSender.sendUserCreatedEvent(savedUser, EventType.CREATED)
 
         return tokenService.generateAndSaveTokens(savedUser)
     }
 
+    @Transactional
     fun login(
         email: String?,
         phone: String?,

@@ -1,5 +1,7 @@
 package org.example.utils
 
+import com.fandomatch.core.model.EventType
+import com.fandomatch.core.model.UserChangedEvent
 import com.fandomatch.users.model.UserCredentials
 import org.example.model.db_models.User
 import org.example.model.db_models.enums.UserStatus
@@ -7,6 +9,7 @@ import java.time.ZoneOffset
 
 fun User.toUserCredentials() = UserCredentials(
     username = username,
+    uuid = uid.toString(),
     status = when (status) {
         UserStatus.ACTIVE -> UserCredentials.Status.ACTIVE
         UserStatus.BANNED -> UserCredentials.Status.BANNED
@@ -15,4 +18,18 @@ fun User.toUserCredentials() = UserCredentials(
     createdAt = createdAt.atOffset(ZoneOffset.ofHours(3)),
     email = email,
     phone = phone
+)
+
+fun User.toChangedEvent(eventType: EventType) = UserChangedEvent(
+    uid = this.uid.toString(),
+    email = this.email,
+    phone = this.phone,
+    username = this.username,
+    createdAt = this.createdAt.atOffset(ZoneOffset.UTC),
+    status = when (this.status) {
+        UserStatus.ACTIVE -> com.fandomatch.core.model.UserStatus.ACTIVE
+        UserStatus.BANNED -> com.fandomatch.core.model.UserStatus.BANNED
+        UserStatus.DISABLED -> com.fandomatch.core.model.UserStatus.DISABLED
+    },
+    eventType = eventType
 )

@@ -1,7 +1,3 @@
-jwt:
-  access-expiration: 900000
-  refresh-expiration-days: 60
-
 management:
   endpoints:
     web:
@@ -11,3 +7,18 @@ management:
 spring:
   jpa:
     open-in-view: false
+  profiles.active: local
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      group-id: core-service-group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+        spring.json.type.mapping: userChangedEvent:com.fandomatch.core.model.UserChangedEvent
+    admin:
+      auto-create: true

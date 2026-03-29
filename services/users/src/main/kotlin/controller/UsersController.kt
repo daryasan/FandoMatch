@@ -16,7 +16,7 @@ class UsersController(
     private val userService: UserService
 ) {
 
-    @GetMapping("/credentials")
+    @GetMapping("/get-user-credentials")
     fun usersGetUserCredentialsGet(@RequestHeader("Authorization") authorization: String): ResponseEntity<GetUserCredentialsResponse> {
         val user = try {
             userService.findUserByToken(authorization)

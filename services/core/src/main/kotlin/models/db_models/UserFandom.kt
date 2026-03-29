@@ -19,5 +19,10 @@ data class UserFandom(
 
     @Id
     @Column(name = "fandom_id")
-    val fandomId: UUID
+    val fandomId: UUID,
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fandom_id", insertable = false, updatable = false)
+    val fandom: Fandom? = null
 )

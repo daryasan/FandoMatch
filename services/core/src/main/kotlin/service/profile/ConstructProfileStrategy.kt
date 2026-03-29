@@ -2,7 +2,6 @@ package org.example.service.profile
 
 import com.fandomatch.core.model.*
 import org.example.models.ProfileData
-import org.springframework.stereotype.Component
 
 abstract class ConstructProfileStrategy(
     val selector: ProfileType,
@@ -12,7 +11,6 @@ abstract class ConstructProfileStrategy(
     abstract fun construct(): BaseUserProfile
 }
 
-@Component
 class ConstructOwnProfile(profileData: ProfileData) :
     ConstructProfileStrategy(ProfileType.OWN, profileData) {
 
@@ -38,7 +36,6 @@ class ConstructOwnProfile(profileData: ProfileData) :
     }
 }
 
-@Component
 class ConstructFriendProfile(profileData: ProfileData) :
     ConstructProfileStrategy(ProfileType.FRIEND, profileData) {
 
@@ -46,7 +43,7 @@ class ConstructFriendProfile(profileData: ProfileData) :
         val prof = profileData.userProfile
         return FriendUserProfileResponse(
             profileType = selector,
-            name = prof.name,
+            name = prof.name!!,
             bio = prof.bio,
             avatarUrl = prof.avatarUrl,
             backgroundUrl = prof.backgroundUrl,
@@ -56,7 +53,6 @@ class ConstructFriendProfile(profileData: ProfileData) :
     }
 }
 
-@Component
 class ConstructOtherProfile(profileData: ProfileData) :
     ConstructProfileStrategy(ProfileType.OTHER, profileData) {
 
@@ -65,7 +61,7 @@ class ConstructOtherProfile(profileData: ProfileData) :
         return PublicUserProfileResponse(
             profileType = selector,
             username = prof.username,
-            name = prof.name,
+            name = prof.name!!,
             bio = prof.bio,
             avatarUrl = prof.avatarUrl,
             backgroundUrl = prof.backgroundUrl,

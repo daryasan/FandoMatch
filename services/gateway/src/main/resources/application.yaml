@@ -3,3 +3,10 @@ management:
     web:
       exposure:
         include: health
+
+spring:
+  profiles.active: local
+
+logging:
+  level:
+    root: DEBUG
