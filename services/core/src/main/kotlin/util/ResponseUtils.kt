@@ -42,3 +42,59 @@ fun getMatchFilterErrorResponse(exception: BusinessException) = MatchFilterRespo
         errorMessage = exception.message,
     )
 )
+
+fun getPostListErrorResponse(exception: BusinessException) = PostListResponse(
+    status = ResponseStatus.ERROR,
+    errorResponse = Error(
+        errorCode = exception.code,
+        errorMessage = exception.message,
+    )
+)
+
+fun getCreatePostErrorResponse(exception: BusinessException) = CreatePostResponse(
+    status = ResponseStatus.ERROR,
+    errorResponse = Error(
+        errorCode = exception.code,
+        errorMessage = exception.message,
+    )
+)
+
+fun getCommentListErrorResponse(exception: BusinessException) = CommentListResponse(
+    status = ResponseStatus.ERROR,
+    errorResponse = Error(
+        errorCode = exception.code,
+        errorMessage = exception.message,
+    )
+)
+
+fun getPostLikeErrorResponse(exception: BusinessException) = PostLikeResponse(
+    status = ResponseStatus.ERROR,
+    errorResponse = Error(
+        errorCode = exception.code,
+        errorMessage = exception.message,
+    )
+)
+
+fun getFandomListErrorResponse(exception: BusinessException) = FandomListResponse(
+    status = ResponseStatus.ERROR,
+    errorResponse = Error(
+        errorCode = exception.code,
+        errorMessage = exception.message,
+    )
+)
+
+fun getFandomCategoryListErrorResponse(exception: BusinessException) = FandomCategoryListResponse(
+    status = ResponseStatus.ERROR,
+    errorResponse = Error(
+        errorCode = exception.code,
+        errorMessage = exception.message,
+    )
+)
+
+fun getFandomRequestCreateErrorResponse(exception: BusinessException) = FandomRequestCreateResponse(
+    status = ResponseStatus.ERROR,
+    errorResponse = Error(
+        errorCode = exception.code,
+        errorMessage = exception.message,
+    )
+)

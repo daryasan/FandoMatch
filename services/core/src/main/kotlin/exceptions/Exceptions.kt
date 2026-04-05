@@ -11,3 +11,6 @@ class UserNotFoundException(id : String) :
 
 class AlreadyReactedException(username: String) :
     BusinessException(ErrorCode.ALREADY_REACTED.name, "Already reacted to user $username")
+
+class PostNotFoundException(postId: String) :
+    BusinessException(ErrorCode.POST_NOT_FOUND.name, "Post $postId not found")

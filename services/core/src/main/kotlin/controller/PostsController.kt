@@ -1,16 +1,18 @@
 package org.example.controller
 
 import com.fandomatch.core.model.*
-import com.fandomatch.core.model.ResponseStatus
 import io.github.oshai.kotlinlogging.KLogging
 import org.example.service.PostsService
+import org.example.service.TokenParserService
+import org.example.util.*
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/core/posts")
 class PostsController(
-    private val postsService: PostsService
+    private val postsService: PostsService,
+    private val tokenParserService: TokenParserService
 ) {
 
     companion object : KLogging()
@@ -19,15 +21,14 @@ class PostsController(
     fun getPosts(
         @RequestBody request: PostsGetRequest
     ): ResponseEntity<PostListResponse> {
-        logger.info { "POST /core/posts/get called with username=${request.username}" }
-
-        val response = PostListResponse(
-            status = ResponseStatus.SUCCESS,
-            successResponse = PostListData(emptyList())
-        )
-
-        logger.info { "POST /core/posts/get returning 200" }
-        return ResponseEntity.ok(response)
+        return onControllerRequest(
+            logger = logger,
+            operationName = "POST /core/posts/get",
+            metaUuid = request.username,
+            errorMapper = { getPostListErrorResponse(it) }
+        ) {
+            postsService.getPosts(request.username, request.page, request.size)
+        }
     }
 
     @PostMapping("/create")
@@ -35,40 +36,29 @@ class PostsController(
         @RequestHeader("Authorization") token: String,
         @RequestBody request: CreatePostRequest
     ): ResponseEntity<CreatePostResponse> {
-        logger.info { "POST /core/posts/create called, title=${request.title}" }
-
-        val response = CreatePostResponse(
-            status = ResponseStatus.SUCCESS,
-            successResponse = Post(
-                id = "stub-id",
-                title = request.title,
-                content = request.content,
-                createdAt = java.time.OffsetDateTime.now()
-            )
-        )
-
-        logger.info { "POST /core/posts/create returning 200" }
-        return ResponseEntity.ok(response)
+        val uuid = tokenParserService.parse(token).userId
+        return onControllerRequest(
+            logger = logger,
+            operationName = "POST /core/posts/create",
+            metaUuid = uuid.toString(),
+            errorMapper = { getCreatePostErrorResponse(it) }
+        ) {
+            postsService.createPost(uuid, request)
+        }
     }
 
     @GetMapping("/{post_id}")
     fun getPost(
         @PathVariable("post_id") postId: String
     ): ResponseEntity<CreatePostResponse> {
-        logger.info { "GET /core/posts/$postId called" }
-
-        val response = CreatePostResponse(
-            status = ResponseStatus.SUCCESS,
-            successResponse = Post(
-                id = postId,
-                title = "Stub title",
-                content = "Stub content",
-                createdAt = java.time.OffsetDateTime.now()
-            )
-        )
-
-        logger.info { "GET /core/posts/$postId returning 200" }
-        return ResponseEntity.ok(response)
+        return onControllerRequest(
+            logger = logger,
+            operationName = "GET /core/posts/$postId",
+            metaUuid = postId,
+            errorMapper = { getCreatePostErrorResponse(it) }
+        ) {
+            postsService.getPost(postId)
+        }
     }
 
     @GetMapping("/{post_id}/comments")
@@ -77,15 +67,14 @@ class PostsController(
         @RequestParam(required = false) page: Int?,
         @RequestParam(required = false) size: Int?
     ): ResponseEntity<CommentListResponse> {
-        logger.info { "GET /core/posts/$postId/comments called (page=$page, size=$size)" }
-
-        val response = CommentListResponse(
-            status = ResponseStatus.SUCCESS,
-            successResponse = CommentListData(emptyList())
-        )
-
-        logger.info { "GET /core/posts/$postId/comments returning 200" }
-        return ResponseEntity.ok(response)
+        return onControllerRequest(
+            logger = logger,
+            operationName = "GET /core/posts/$postId/comments",
+            metaUuid = postId,
+            errorMapper = { getCommentListErrorResponse(it) }
+        ) {
+            postsService.getComments(postId, page, size)
+        }
     }
 
     @PostMapping("/{post_id}/like")
@@ -93,14 +82,14 @@ class PostsController(
         @RequestHeader("Authorization") token: String,
         @PathVariable("post_id") postId: String
     ): ResponseEntity<PostLikeResponse> {
-        logger.info { "POST /core/posts/$postId/like called" }
-
-        val response = PostLikeResponse(
-            status = ResponseStatus.SUCCESS,
-            successResponse = PostLikeSuccess(status = PostLikeSuccess.Status.LIKED)
-        )
-
-        logger.info { "POST /core/posts/$postId/like returning 200" }
-        return ResponseEntity.ok(response)
+        val uuid = tokenParserService.parse(token).userId
+        return onControllerRequest(
+            logger = logger,
+            operationName = "POST /core/posts/$postId/like",
+            metaUuid = uuid.toString(),
+            errorMapper = { getPostLikeErrorResponse(it) }
+        ) {
+            postsService.likePost(uuid, postId)
+        }
     }
 }

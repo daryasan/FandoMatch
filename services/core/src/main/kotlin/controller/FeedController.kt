@@ -1,17 +1,20 @@
 package org.example.controller
 
-import com.fandomatch.core.model.Post
-import com.fandomatch.core.model.PostListData
 import com.fandomatch.core.model.PostListResponse
-import com.fandomatch.core.model.ResponseStatus
 import io.github.oshai.kotlinlogging.KLogging
+import org.example.service.FeedService
+import org.example.service.TokenParserService
+import org.example.util.getPostListErrorResponse
+import org.example.util.onControllerRequest
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import java.time.OffsetDateTime
 
 @RestController
 @RequestMapping("/core")
-class FeedController {
+class FeedController(
+    private val feedService: FeedService,
+    private val tokenParserService: TokenParserService
+) {
 
     companion object : KLogging()
 
@@ -21,21 +24,14 @@ class FeedController {
         @RequestParam(required = false) page: Int?,
         @RequestParam(required = false) size: Int?
     ): ResponseEntity<PostListResponse> {
-        logger.info { "GET /core/feed called (page=$page, size=$size)" }
-
-        val stubPost = Post(
-            id = "stub-id",
-            title = "Feed Stub Post",
-            content = "Stub content from feed",
-            createdAt = OffsetDateTime.now()
-        )
-
-        val response = PostListResponse(
-            status = ResponseStatus.SUCCESS,
-            successResponse = PostListData(listOf(stubPost))
-        )
-
-        logger.info { "GET /core/feed returning 200" }
-        return ResponseEntity.ok(response)
+        val uuid = tokenParserService.parse(token).userId
+        return onControllerRequest(
+            logger = logger,
+            operationName = "GET /core/feed",
+            metaUuid = uuid.toString(),
+            errorMapper = { getPostListErrorResponse(it) }
+        ) {
+            feedService.getFeed(uuid, page, size)
+        }
     }
 }

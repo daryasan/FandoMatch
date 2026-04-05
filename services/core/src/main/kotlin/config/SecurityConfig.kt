@@ -17,6 +17,19 @@ open class SecurityConfig(
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         http.csrf { it.disable() }
             .authorizeHttpRequests {
+                it.requestMatchers(
+                    org.springframework.http.HttpMethod.POST,
+                    "/core/posts/get",
+                    "/core/fandoms/user",
+                    "/core/fandoms/request-new"
+                ).permitAll()
+                it.requestMatchers(
+                    org.springframework.http.HttpMethod.GET,
+                    "/core/posts/{post_id}",
+                    "/core/posts/{post_id}/comments",
+                    "/core/fandoms/all",
+                    "/core/fandoms/categories"
+                ).permitAll()
                 it.anyRequest().authenticated()
             }
             .addFilterBefore(
