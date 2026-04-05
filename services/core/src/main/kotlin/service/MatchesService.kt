@@ -2,6 +2,7 @@ package org.example.service
 
 import com.fandomatch.core.model.*
 import jakarta.transaction.Transactional
+import org.example.exceptions.AlreadyReactedException
 import org.example.exceptions.UserNotFoundException
 import org.example.models.db_models.Match
 import org.example.models.db_models.MatchAction
@@ -47,6 +48,7 @@ class MatchesService(
             ageFrom = filters.ageFrom,
             ageTo = filters.ageTo,
             fandomId = filters.fandomId,
+            fandomCategory = filters.fandomCategory,
             pageable = PageRequest.of(0, poolSize)
         )
 
@@ -80,6 +82,11 @@ class MatchesService(
             .orElseThrow { UserNotFoundException(targetUsername) }
         val targetUserId = targetProfile.userId
 
+        val existingAction = matchActionRepository.findByUserIdAndTargetUserId(userId, targetUserId)
+        if (existingAction != null) {
+            throw AlreadyReactedException(targetUsername)
+        }
+
         val matchAction = MatchAction(
             userId = userId,
             targetUserId = targetUserId,
@@ -99,12 +106,10 @@ class MatchesService(
 
             MatchActionResult(
                 status = MatchActionResult.Status.MATCH,
-                matchChatId = match.id.toString()
             )
         } else {
             MatchActionResult(
                 status = if (action == LIKE) MatchActionResult.Status.LIKED else MatchActionResult.Status.DISLIKED,
-                matchChatId = null
             )
         }
 
@@ -125,5 +130,22 @@ class MatchesService(
         return if (currentUserFandoms.isNotEmpty() && candidateFandoms.isNotEmpty()) {
             (common * 100).toDouble() / min(currentUserFandoms.size, candidateFandoms.size)
         } else 0.0
+    }
+
+    fun setFilter(userId: UUID, request: MatchFilterRequest): MatchFilterResponse {
+        val filter = MatchFilter(
+            userId = userId,
+            gender = request.gender,
+            city = request.city,
+            ageFrom = request.ageFrom,
+            ageTo = request.ageTo,
+            fandomCategory = request.fandomCategory?.let { UUID.fromString(it) },
+            fandomId = request.fandomId?.let { UUID.fromString(it) }
+        )
+        matchFilterRepository.save(filter)
+
+        return MatchFilterResponse(
+            status = ResponseStatus.SUCCESS,
+        )
     }
 }

@@ -34,3 +34,11 @@ fun getMatchActionErrorResponse(exception: BusinessException) = MatchActionRespo
         errorMessage = exception.message,
     )
 )
+
+fun getMatchFilterErrorResponse(exception: BusinessException) = MatchFilterResponse(
+    status = ResponseStatus.ERROR,
+    errorResponse = Error(
+        errorCode = exception.code,
+        errorMessage = exception.message,
+    )
+)
