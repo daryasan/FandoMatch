@@ -45,15 +45,15 @@ tasks.register<JacocoReport>("jacocoRootReport") {
     dependsOn(subprojects.map { it.tasks.named("test") })
 
     executionData.setFrom(
-        subprojects.map { it.file("build/jacoco/test.exec") }
+        subprojects.map { it.fileTree("build/jacoco") { include("*.exec") } }
     )
 
     sourceDirectories.setFrom(
-        subprojects.map { it.file("src/main/kotlin") }
+        subprojects.map { it.fileTree("src/main/kotlin") }
     )
 
     classDirectories.setFrom(
-        subprojects.map { it.file("build/classes/kotlin/main") }
+        subprojects.map { it.fileTree("build/classes/kotlin/main") }
     )
 
     reports {
