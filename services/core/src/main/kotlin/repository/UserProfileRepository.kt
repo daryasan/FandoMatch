@@ -29,7 +29,6 @@ interface UserProfileRepository : JpaRepository<UserProfile, UUID> {
           AND (:fandomId IS NULL OR up.userId IN (
               SELECT uf.userId FROM UserFandom uf WHERE uf.fandomId = :fandomId
           ))
-        ORDER BY up.updatedAt DESC
     """)
     fun findCandidates(
         @Param("userId") userId: UUID,

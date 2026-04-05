@@ -21,11 +21,11 @@ spring:
     admin:
       auto-create: true
 
-#  logging:
-#    level:
-#      org.apache.kafka: INFO
-#      org.apache.kafka.clients: INFO
-#      org.apache.kafka.clients.NetworkClient: INFO
-#      org.apache.kafka.clients.FetchSessionHandler: INFO
-#      org.springframework.kafka: INFO
-#      root: DEBUG
+  logging:
+    level:
+      org.apache.kafka: INFO
+      org.apache.kafka.clients: INFO
+      org.apache.kafka.clients.NetworkClient: INFO
+      org.apache.kafka.clients.FetchSessionHandler: INFO
+      org.springframework.kafka: INFO
+      root: DEBUG

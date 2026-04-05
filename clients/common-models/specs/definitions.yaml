@@ -58,4 +58,17 @@ components:
         - DISABLED
         - BANNED
 
+    MatchEvent:
+      type: object
+      properties:
+        matchId:
+          type: string
+        userId1:
+          type: string
+        userId2:
+          type: string
+      required:
+        - matchId
+        - userId1
+        - userId2
 
