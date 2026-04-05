@@ -7,9 +7,7 @@ management:
 spring:
   jpa:
     open-in-view: false
-  profiles.active: local
   kafka:
-    bootstrap-servers: localhost:9092
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
@@ -22,3 +20,11 @@ spring:
         spring.json.type.mapping: userChangedEvent:com.fandomatch.core.model.UserChangedEvent
     admin:
       auto-create: true
+#  logging:
+#    level:
+#      org.apache.kafka: INFO
+#      org.apache.kafka.clients: INFO
+#      org.apache.kafka.clients.NetworkClient: INFO
+#      org.apache.kafka.clients.FetchSessionHandler: INFO
+#      org.springframework.kafka: INFO
+#      root: DEBUG

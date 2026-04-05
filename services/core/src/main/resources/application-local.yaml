@@ -15,6 +15,9 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
 
+  kafka:
+    bootstrap-servers: localhost:9092
+
 clients:
   users-service:
     url: http://localhost:8081
@@ -22,12 +25,3 @@ clients:
 service:
   api-key:
     some-api-key
-
-logging:
-  level:
-    root: DEBUG
-    org.apache.kafka: INFO
-    org.apache.kafka.clients: INFO
-    org.apache.kafka.clients.NetworkClient: INFO
-    org.apache.kafka.clients.FetchSessionHandler: INFO
-    org.springframework.kafka: INFO
