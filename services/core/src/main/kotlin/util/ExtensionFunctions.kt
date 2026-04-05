@@ -37,6 +37,7 @@ fun MatchCandidateResponse.toMatchPending(currentUserUuid: UUID) = MatchPending(
 fun UserProfile.toMatchCandidateResponse(compatibility: Double, fandoms: List<Fandom>) = MatchCandidateResponse(
     username = username,
     name = name,
+    uuid = userId.toString(),
     age = calculateAge(birthDate!!),
     city = city,
     avatarUrl = avatarUrl,

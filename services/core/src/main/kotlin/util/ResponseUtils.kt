@@ -26,3 +26,19 @@ fun getMatchCandidateBatchErrorResponse(exception: BusinessException) = MatchCan
         errorMessage = exception.message,
     )
 )
+
+fun getMatchActionErrorResponse(exception: BusinessException) = MatchActionResponse(
+    status = ResponseStatus.ERROR,
+    errorResponse = Error(
+        errorCode = exception.code,
+        errorMessage = exception.message,
+    )
+)
+
+fun getMatchFilterErrorResponse(exception: BusinessException) = MatchFilterResponse(
+    status = ResponseStatus.ERROR,
+    errorResponse = Error(
+        errorCode = exception.code,
+        errorMessage = exception.message,
+    )
+)

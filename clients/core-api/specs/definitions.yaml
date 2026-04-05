@@ -306,9 +306,6 @@ components:
             - LIKED
             - DISLIKED
             - MATCH
-        match_chat_id:
-          type: string
-          nullable: true
       required:
         - status
 
@@ -340,17 +337,11 @@ components:
         fandom_id:
           type: string
 
-    MatchFilterSuccess:
-      type: object
-      properties: {}
-
     MatchFilterResponse:
       type: object
       properties:
         status:
           $ref: '#/components/schemas/ResponseStatus'
-        successResponse:
-          $ref: '#/components/schemas/MatchFilterSuccess'
         errorResponse:
           $ref: '#/components/schemas/Error'
       required:

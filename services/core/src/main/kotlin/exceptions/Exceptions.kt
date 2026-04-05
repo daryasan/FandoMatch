@@ -8,3 +8,6 @@ class UsersNotRespondingException(errorCode : String) :
 
 class UserNotFoundException(id : String) :
     BusinessException(ErrorCode.USER_NOT_FOUND.name, "User $id not found in core")
+
+class AlreadyReactedException(username: String) :
+    BusinessException(ErrorCode.ALREADY_REACTED.name, "Already reacted to user $username")

@@ -54,6 +54,16 @@ open class Routes {
                     .filters { f -> f.stripPrefix(0) }
                     .uri(coreServiceUrl)
             }
+            .route("core-match") { r ->
+                r.path("/core/match/**")
+                    .filters { f -> f.stripPrefix(0) }
+                    .uri(coreServiceUrl)
+            }
+            .route("core-feed") { r ->
+                r.path("/core/feed/**")
+                    .filters { f -> f.stripPrefix(0) }
+                    .uri(coreServiceUrl)
+            }
 
             .build()
     }
