@@ -42,18 +42,19 @@ subprojects {
 }
 
 tasks.register<JacocoReport>("jacocoRootReport") {
-    dependsOn(subprojects.map { it.tasks.named("test") })
+    val testableProjects = subprojects.filter { it.tasks.findByName("test") != null }
+    dependsOn(testableProjects.map { it.tasks.named("test") })
 
     executionData.setFrom(
-        subprojects.map { it.fileTree("build/jacoco") { include("*.exec") } }
+        testableProjects.map { it.fileTree("build/jacoco") { include("*.exec") } }
     )
 
     sourceDirectories.setFrom(
-        subprojects.map { it.fileTree("src/main/kotlin") }
+        testableProjects.map { it.fileTree("src/main/kotlin") }
     )
 
     classDirectories.setFrom(
-        subprojects.map { it.fileTree("build/classes/kotlin/main") }
+        testableProjects.map { it.fileTree("build/classes/kotlin/main") }
     )
 
     reports {
