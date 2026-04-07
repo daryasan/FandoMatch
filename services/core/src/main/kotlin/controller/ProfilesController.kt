@@ -34,8 +34,7 @@ class ProfilesController(
             metaUuid = uuid.toString(),
             errorMapper = { getUserProfileErrorResponse(it) }
         ) {
-            val profile = profilesService.getProfile(uuid, request.username)
-            return ResponseEntity.ok(profile)
+            profilesService.getProfile(uuid, request.username)
         }
     }
 
@@ -52,8 +51,7 @@ class ProfilesController(
             operationName = "POST /core/user/profile/edit",
             errorMapper = { getEditUserProfileErrorResponse(it) }
         ) {
-            val profile = profilesService.editProfile(uuid, request)
-            return ResponseEntity.ok(profile)
+            profilesService.editProfile(uuid, request)
         }
     }
 

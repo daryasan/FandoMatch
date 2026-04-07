@@ -12,11 +12,8 @@ class User(
     @GeneratedValue(strategy = GenerationType.UUID)
     var uid: UUID? = null,
 
-    @Column(name = "email", unique = true)
-    val email: String? = null,
-
-    @Column(name = "phone", unique = true)
-    val phone: String? = null,
+    @Column(name = "email", nullable = false, unique = true)
+    val email: String,
 
     @Column(name = "username", nullable = false, unique = true)
     val username: String,

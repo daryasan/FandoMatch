@@ -17,14 +17,14 @@ fun User.toUserCredentials() = UserCredentials(
     },
     createdAt = createdAt.atOffset(ZoneOffset.ofHours(3)),
     email = email,
-    phone = phone
 )
 
-fun User.toChangedEvent(eventType: EventType) = UserChangedEvent(
+fun User.toChangedEvent(eventType: EventType, name: String, birthDate: Long) = UserChangedEvent(
     uid = this.uid.toString(),
     email = this.email,
-    phone = this.phone,
     username = this.username,
+    name = name,
+    birthDate = birthDate,
     createdAt = this.createdAt.atOffset(ZoneOffset.UTC),
     status = when (this.status) {
         UserStatus.ACTIVE -> com.fandomatch.core.model.UserStatus.ACTIVE

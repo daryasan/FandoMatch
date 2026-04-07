@@ -17,6 +17,13 @@ fun getErrorLoginResponse(exception: BusinessException) = UserLoginResponse(
     )
 )
 
+fun getErrorChangePasswordResponse(exception: BusinessException) = ChangePasswordResponse(
+    status = ResponseStatus.ERROR, errorResponse = Error(
+        errorCode = exception.code,
+        errorMessage = exception.message
+    )
+)
+
 fun getRefreshTokenErrorResponse(exception: BusinessException) = RefreshTokenResponse(
     status = ResponseStatus.ERROR,
     errorResponse = Error(

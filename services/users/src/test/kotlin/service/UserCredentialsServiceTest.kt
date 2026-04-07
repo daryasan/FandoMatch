@@ -20,7 +20,6 @@ import org.junit.jupiter.api.extension.ExtendWith
 import utils.Constants.EMAIL
 import utils.Constants.PASSWORD
 import utils.Constants.PASSWORD_SALT
-import utils.Constants.PHONE
 import utils.Constants.USERNAME
 import utils.createUser
 import java.util.*
@@ -43,7 +42,7 @@ class UserCredentialsServiceTest {
     @Test
     fun `createCredentials should save credentials and return saved instance`() {
         // given
-        val user = createUser(EMAIL, PHONE, USERNAME)
+        val user = createUser(EMAIL, USERNAME)
         val rawPassword = "front_hash_123"
         val backendHash = "argon2_hash"
 
@@ -77,7 +76,7 @@ class UserCredentialsServiceTest {
 
     @Test
     fun `verifyCredential should succeed when password matches`() {
-        val user = createUser(EMAIL, PHONE, USERNAME)
+        val user = createUser(EMAIL, USERNAME)
         val storedHash = "argon2_hash"
 
         val credential = UserCredential(
@@ -99,7 +98,7 @@ class UserCredentialsServiceTest {
 
     @Test
     fun `verifyCredential should throw UserCredentialNotFoundException when no credential of given type exists`() {
-        val user = createUser(EMAIL, PHONE, USERNAME)
+        val user = createUser(EMAIL, USERNAME)
 
         assertThrows<UserCredentialNotFoundException> {
             credentialsService.verifyCredential(user, PASSWORD)
@@ -108,7 +107,7 @@ class UserCredentialsServiceTest {
 
     @Test
     fun `verifyCredential should throw UserCredentialMismatchException when password does not match`() {
-        val user = createUser(EMAIL, PHONE, USERNAME)
+        val user = createUser(EMAIL, USERNAME)
         val storedHash = "argon2_hash"
         val wrongPassword = "wrongPassword"
 

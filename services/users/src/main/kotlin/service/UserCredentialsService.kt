@@ -49,4 +49,20 @@ class UserCredentialsService(
 
         logger.info { "Credential match successful for user ${user.username}" }
     }
+
+    fun changePassword(user: User, oldPassword: String, newPassword: String) {
+        verifyCredential(user, oldPassword)
+
+        val passwordCredential = user.credentials.find { it.credentialType == CredentialType.PASSWORD }
+            ?: throw UserCredentialNotFoundException(CredentialType.PASSWORD.name)
+
+        val newSalt = saltGenerator.generateSalt()
+        val newHash = passwordHasherService.hash(newPassword, newSalt)
+
+        passwordCredential.hash = newHash
+        passwordCredential.salt = newSalt
+
+        credentialsRepository.save(passwordCredential)
+        logger.info { "Password changed successfully for user ${user.username}" }
+    }
 }

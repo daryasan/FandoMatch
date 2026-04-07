@@ -43,6 +43,29 @@ paths:
               schema:
                 $ref: '#./definitions.yaml#/components/schemas/UserLoginResponse'
 
+  /auth/change-password:
+    post:
+      description: Смена пароля пользователя
+      tags:
+        - auth
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - $ref: './definitions.yaml#/components/parameters/TokenHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#./definitions.yaml#/components/schemas/ChangePasswordRequest'
+      responses:
+        '200':
+          description: Результат смены пароля
+          content:
+            application/json:
+              schema:
+                $ref: '#./definitions.yaml#/components/schemas/ChangePasswordResponse'
+
   /auth/logout:
     post:
       description: Выход из аккаунта

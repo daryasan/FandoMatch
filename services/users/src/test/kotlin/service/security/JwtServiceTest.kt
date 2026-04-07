@@ -41,7 +41,7 @@ class JwtServiceTest {
 
     @Test
     fun `generateToken should create valid JWT and expiration`() {
-        val user = createUser("test@example.com", "+123456789", "testuser")
+        val user = createUser("test@example.com", "testuser")
 
         val generated: GeneratedToken = jwtService.generateAccessToken(user)
 
@@ -65,7 +65,7 @@ class JwtServiceTest {
 
     @Test
     fun `extractUserId should return correct UUID from token`() {
-        val user = createUser("test@example.com", "+123456789", "testuser")
+        val user = createUser("test@example.com", "testuser")
 
         val generated = jwtService.generateAccessToken(user)
 

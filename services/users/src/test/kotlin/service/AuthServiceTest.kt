@@ -15,12 +15,14 @@ import org.example.service.TokenService
 import org.example.service.UserCredentialsService
 import org.example.service.UserService
 import org.example.service.validation.UserValidator
+import org.example.stream.out.UserEventsSender
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
+import utils.Constants.BIRTH_DATE
 import utils.Constants.EMAIL
+import utils.Constants.NAME
 import utils.Constants.PASSWORD
-import utils.Constants.PHONE
 import utils.Constants.USERNAME
 import utils.createUser
 
@@ -39,31 +41,36 @@ class AuthServiceTest {
     @MockK
     lateinit var userValidator: UserValidator
 
+    @MockK
+    lateinit var userEventsSender: UserEventsSender
+
     @InjectMockKs
     private lateinit var authService: AuthService
 
     @Test
-    fun `register should create user, save credentials, generate tokens`() {
+    fun `register should create user, save credentials, send event, generate tokens`() {
         // given
-        val user = createUser(EMAIL, PHONE, USERNAME)
+        val user = createUser(EMAIL, USERNAME)
         val expectedTokens = AuthTokens(
             accessToken = "access-123",
             refreshToken = "refresh-123"
         )
 
-        every { userService.createUser(EMAIL, PHONE, USERNAME) } returns user
+        every { userService.createUser(EMAIL, USERNAME) } returns user
         every { userCredentialsService.createCredentials(user, PASSWORD) } returns UserCredential(
             user = user,
             credentialType = CredentialType.PASSWORD
         )
+        every { userEventsSender.sendUserCreatedEvent(user, any(), NAME, BIRTH_DATE) } just runs
         every { tokenService.generateAndSaveTokens(user) } returns expectedTokens
 
         // when
-        val result = authService.register(EMAIL, PHONE, USERNAME, PASSWORD)
+        val result = authService.register(EMAIL, USERNAME, PASSWORD, BIRTH_DATE, NAME)
 
         // then
-        verify(exactly = 1) { userService.createUser(EMAIL, PHONE, USERNAME) }
+        verify(exactly = 1) { userService.createUser(EMAIL, USERNAME) }
         verify(exactly = 1) { userCredentialsService.createCredentials(user, PASSWORD) }
+        verify(exactly = 1) { userEventsSender.sendUserCreatedEvent(user, any(), NAME, BIRTH_DATE) }
         verify(exactly = 1) { tokenService.generateAndSaveTokens(user) }
 
         assertEquals(expectedTokens, result)
@@ -72,22 +79,22 @@ class AuthServiceTest {
     @Test
     fun `login should find user, validate, verify credentials and generate tokens`() {
         // given
-        val user = createUser(EMAIL, PHONE, USERNAME)
+        val user = createUser(EMAIL, USERNAME)
         val expectedTokens = AuthTokens(
             accessToken = "access-login",
             refreshToken = "refresh-login"
         )
 
-        every { userService.findUser(EMAIL, PHONE, USERNAME) } returns user
+        every { userService.findUser(EMAIL, USERNAME) } returns user
         every { userValidator.validateUserBeforeLogin(user) } just runs
         every { userCredentialsService.verifyCredential(user, PASSWORD) } just runs
         every { tokenService.generateAndSaveTokens(user) } returns expectedTokens
 
         // when
-        val result = authService.login(EMAIL, PHONE, USERNAME, PASSWORD)
+        val result = authService.login(EMAIL, USERNAME, PASSWORD)
 
         // then
-        verify(exactly = 1) { userService.findUser(EMAIL, PHONE, USERNAME) }
+        verify(exactly = 1) { userService.findUser(EMAIL, USERNAME) }
         verify(exactly = 1) { userValidator.validateUserBeforeLogin(user) }
         verify(exactly = 1) { userCredentialsService.verifyCredential(user, PASSWORD) }
         verify(exactly = 1) { tokenService.generateAndSaveTokens(user) }

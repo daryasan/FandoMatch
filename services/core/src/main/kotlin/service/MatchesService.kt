@@ -53,11 +53,12 @@ class MatchesService(
         )
 
         val random = Random()
+        val currentUserFandoms = fandomService.getFandoms(userId)
 
         val suggested = candidates
             .map { candidate ->
                 val candidateFandoms = fandomService.getFandoms(candidate.userId)
-                val compatibility = calculateCompatibility(userId, candidate.userId)
+                val compatibility = calculateCompatibility(currentUserFandoms, candidateFandoms)
                 val jitteredScore = compatibility + random.nextDouble(-JITTER_RANGE, JITTER_RANGE)
                 Triple(candidate.toMatchCandidateResponse(compatibility, candidateFandoms), jitteredScore, compatibility)
             }
@@ -77,14 +78,15 @@ class MatchesService(
 
 
     @Transactional
-    fun react(userId: UUID, targetUsername: String, action: String): MatchActionResponse {
-        val targetProfile = userProfilesRepository.findByUsername(targetUsername)
-            .orElseThrow { UserNotFoundException(targetUsername) }
-        val targetUserId = targetProfile.userId
+    fun react(userId: UUID, targetUuid: UUID, action: String): MatchActionResponse {
+        if (!userProfilesRepository.existsById(targetUuid)) {
+            throw UserNotFoundException(targetUuid.toString())
+        }
+        val targetUserId = targetUuid
 
         val existingAction = matchActionRepository.findByUserIdAndTargetUserId(userId, targetUserId)
         if (existingAction != null) {
-            throw AlreadyReactedException(targetUsername)
+            throw AlreadyReactedException(targetUserId.toString())
         }
 
         val matchAction = MatchAction(
@@ -101,8 +103,8 @@ class MatchesService(
         val result = if (isMutual) {
             val (first, second) = if (userId < targetUserId) userId to targetUserId else targetUserId to userId
             val match = Match(userId1 = first, userId2 = second)
-            matchRepository.save(match)
-            matchEventProducer.sendMatchEvent(match.id!!, first, second)
+            val savedMatch = matchRepository.save(match)
+            matchEventProducer.sendMatchEvent(savedMatch.id!!, first, second)
 
             MatchActionResult(
                 status = MatchActionResult.Status.MATCH,
@@ -122,21 +124,21 @@ class MatchesService(
     fun hasTargetUserLikedCurrentUser(currentUserId: UUID, targetUserId: UUID) =
         matchActionRepository.findByUserIdAndTargetUserId(targetUserId, currentUserId)
 
-    private fun calculateCompatibility(currentUserId: UUID, candidateId: UUID): Double {
-        val currentUserFandoms = fandomService.getFandoms(currentUserId).toSet()
-        val candidateFandoms = fandomService.getFandoms(candidateId).toSet()
+    private fun calculateCompatibility(currentUserFandoms: List<Fandom>, candidateFandoms: List<Fandom>): Double {
+        val currentSet = currentUserFandoms.toSet()
+        val candidateSet = candidateFandoms.toSet()
 
-        val common = currentUserFandoms.intersect(candidateFandoms).size
-        return if (currentUserFandoms.isNotEmpty() && candidateFandoms.isNotEmpty()) {
-            (common * 100).toDouble() / min(currentUserFandoms.size, candidateFandoms.size)
+        val common = currentSet.intersect(candidateSet).size
+        return if (currentSet.isNotEmpty() && candidateSet.isNotEmpty()) {
+            (common * 100).toDouble() / min(currentSet.size, candidateSet.size)
         } else 0.0
     }
 
     fun setFilter(userId: UUID, request: MatchFilterRequest): MatchFilterResponse {
         val filter = MatchFilter(
             userId = userId,
-            gender = request.gender,
-            city = request.city,
+            gender = request.gender?.value,
+            city = request.city?.code?.value,
             ageFrom = request.ageFrom,
             ageTo = request.ageTo,
             fandomCategory = request.fandomCategory?.let { UUID.fromString(it) },

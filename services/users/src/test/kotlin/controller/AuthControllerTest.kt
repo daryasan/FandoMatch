@@ -27,26 +27,13 @@ class AuthControllerTest : BaseTest() {
     @Test
     fun `duplicate username returns ERROR with UsernameAlreadyExistsException`() {
         val request1 = userRegistrationRequest()
-        val request2 = userRegistrationRequest(email = "another_email@mail.ru", phone = null)
+        val request2 = userRegistrationRequest(email = "another_email@mail.ru")
 
         performRegisterRequestAndReturn(request1)
         val response = performRegisterRequestAndReturn(request2)
 
         assertEquals(ResponseStatus.ERROR, response.status)
         assertEquals("USERNAME_ALREADY_EXISTS", response.errorResponse?.errorCode)
-    }
-
-    @Test
-    fun `invalid input returns ERROR with InvalidUserInputData`() {
-        val request = userRegistrationRequest(
-            email = null,
-            phone = null,
-        )
-
-        val response = performRegisterRequestAndReturn(request)
-
-        assertEquals(ResponseStatus.ERROR, response.status)
-        assertEquals("INVALID_USER_DATA", response.errorResponse?.errorCode)
     }
 
     @Test

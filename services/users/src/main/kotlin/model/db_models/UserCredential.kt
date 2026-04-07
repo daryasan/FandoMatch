@@ -21,10 +21,10 @@ class UserCredential(
     val credentialType: CredentialType,
 
     @Column(name = "hash")
-    val hash: String? = null,
+    var hash: String? = null,
 
     @Column(name = "salt")
-    val salt: String? = null,
+    var salt: String? = null,
 
     @Column(name = "created_at", nullable = false)
     val createdAt: LocalDateTime = LocalDateTime.now()
