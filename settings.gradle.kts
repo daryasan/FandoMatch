@@ -34,6 +34,7 @@ include(
     "services:users",
     "services:core",
     "services:gateway",
-    "libs:media-lib"
+    "libs:media-lib",
+    "libs:notifications-lib"
 )
 include("services:messaging")

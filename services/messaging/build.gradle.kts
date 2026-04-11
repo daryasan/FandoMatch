@@ -18,6 +18,7 @@ dependencies {
     implementation(project(":clients:users-api"))
     implementation(project(":clients:common-models"))
     implementation(project(":libs:media-lib"))
+    implementation(project(":libs:notifications-lib"))
 
     // test
     testImplementation(kotlin("test"))

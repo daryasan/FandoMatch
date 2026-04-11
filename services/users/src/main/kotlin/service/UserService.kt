@@ -5,16 +5,20 @@ import org.example.exception.EmailAlreadyExistsException
 import org.example.exception.InvalidUserInputData
 import org.example.exception.UserNotFoundException
 import org.example.exception.UsernameAlreadyExistsException
+import org.example.model.db_models.DeviceToken
 import org.example.model.db_models.User
+import org.example.repository.DeviceTokenRepository
 import org.example.repository.UserRepository
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.stereotype.Service
+import java.time.Instant
 import java.util.*
 
 @Service
 class UserService(
     private val userRepository: UserRepository,
     private val tokenService: TokenService,
+    private val deviceTokenRepository: DeviceTokenRepository,
 ) {
 
     companion object : KLogging()
@@ -72,5 +76,21 @@ class UserService(
     private fun findByEmail(email: String): User {
         val user = userRepository.findByEmail(email)
         return user ?: throw UserNotFoundException(email)
+    }
+
+    fun saveDeviceToken(userId: UUID, fcmToken: String) {
+        val existing = deviceTokenRepository.findById(userId).orElse(null)
+        if (existing != null) {
+            existing.fcmToken = fcmToken
+            existing.updatedAt = Instant.now()
+            deviceTokenRepository.save(existing)
+        } else {
+            deviceTokenRepository.save(DeviceToken(userId = userId, fcmToken = fcmToken))
+        }
+        logger.info { "Saved FCM token for user $userId" }
+    }
+
+    fun getFcmToken(userId: UUID): String? {
+        return deviceTokenRepository.findById(userId).orElse(null)?.fcmToken
     }
 }

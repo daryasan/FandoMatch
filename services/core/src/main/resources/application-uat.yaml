@@ -36,3 +36,8 @@ media:
     secret-key: ${S3_SECRET_KEY}
     upload-ttl-minutes: 5
     download-ttl-minutes: 60
+
+notifications:
+  firebase:
+    credentials-json: ${FIREBASE_CREDENTIALS_JSON}
+    project-id: ${FIREBASE_PROJECT_ID}

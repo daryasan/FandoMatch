@@ -1,5 +1,8 @@
 package org.example.controller
 
+import com.fandomatch.users.model.DeviceTokenRequest
+import com.fandomatch.users.model.FcmTokenResponse
+import com.fandomatch.users.model.GetFcmTokenRequest
 import com.fandomatch.users.model.GetUserCredentialsResponse
 import com.fandomatch.users.model.ResponseStatus
 import com.fandomatch.users.model.UserByIdRequest
@@ -9,6 +12,7 @@ import org.example.utils.getUserCredentialsErrorResponse
 import org.example.utils.toUserCredentials
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import java.util.UUID
 
 @RestController
 @RequestMapping("/users")
@@ -47,5 +51,25 @@ class UsersController(
                 successResponse = user.toUserCredentials()
             )
         )
+    }
+
+    @PutMapping("/device-token")
+    fun saveDeviceToken(
+        @RequestHeader("Authorization") authorization: String,
+        @RequestBody request: DeviceTokenRequest
+    ): ResponseEntity<Void> {
+        val user = userService.findUserByToken(authorization)
+        userService.saveDeviceToken(user.uid!!, request.fcmToken)
+        return ResponseEntity.ok().build()
+    }
+
+    @PostMapping("/internal/device-token")
+    fun getDeviceToken(
+        @RequestHeader(value = "X-API-Key", required = false) xApiKey: String,
+        @RequestBody request: GetFcmTokenRequest
+    ): ResponseEntity<FcmTokenResponse> {
+        val userId = UUID.fromString(request.userId)
+        val token = userService.getFcmToken(userId)
+        return ResponseEntity.ok(FcmTokenResponse(fcmToken = token))
     }
 }

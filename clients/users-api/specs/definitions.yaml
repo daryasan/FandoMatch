@@ -236,4 +236,27 @@ components:
         - access_token
         - refresh_token
 
+    DeviceTokenRequest:
+      type: object
+      properties:
+        fcm_token:
+          type: string
+      required:
+        - fcm_token
+
+    GetFcmTokenRequest:
+      type: object
+      properties:
+        user_id:
+          type: string
+      required:
+        - user_id
+
+    FcmTokenResponse:
+      type: object
+      properties:
+        fcm_token:
+          type: string
+          nullable: true
+
 

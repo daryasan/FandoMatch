@@ -131,6 +131,48 @@ paths:
               schema:
                 $ref: '#./definitions.yaml#/components/schemas/RefreshTokenResponse'
 
+  /users/device-token:
+    put:
+      description: Сохранить FCM-токен устройства текущего пользователя
+      tags:
+        - user
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - $ref: './definitions.yaml#/components/parameters/TokenHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './definitions.yaml#/components/schemas/DeviceTokenRequest'
+      responses:
+        '200':
+          description: Токен сохранён
+
+  /users/internal/device-token:
+    post:
+      description: Получить FCM-токен пользователя по userId (только для сервисов)
+      tags:
+        - user
+      security:
+        - apiKeyAuth: [ ]
+      parameters:
+        - $ref: '../definitions.yaml#/components/parameters/ApiKeyHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './definitions.yaml#/components/schemas/GetFcmTokenRequest'
+      responses:
+        '200':
+          description: FCM-токен пользователя
+          content:
+            application/json:
+              schema:
+                $ref: './definitions.yaml#/components/schemas/FcmTokenResponse'
+
   /users/get-by-id:
     post:
       description: Получение credentials пользователя по ID (поддерживает пользовательский JWT или сервисный API-ключ)
