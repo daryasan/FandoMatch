@@ -26,7 +26,8 @@ class ChatsService(
     private val mediaItemRepository: MediaItemRepository,
     private val usersAdapter: UsersAdapter,
     private val coreAdapter: CoreAdapter,
-    private val mediaService: MediaService
+    private val mediaService: MediaService,
+    private val notificationService: NotificationService
 ) {
 
     @Transactional(readOnly = true)
@@ -117,6 +118,41 @@ class ChatsService(
                 content = request.content,
                 mediaIds = request.mediaIds?.toTypedArray() ?: emptyArray(),
                 timestamp = request.timestamp
+            )
+        )
+
+        val mediaTypeMap = if (message.mediaIds.isNotEmpty()) {
+            mediaItemRepository.findAllByMediaIdIn(message.mediaIds.toList()).associate { it.mediaId to it.mediaType }
+        } else {
+            emptyMap()
+        }
+
+        notificationService.pushMessage(targetUserId, currentUserId, message.toDto(targetUserId, mediaTypeMap))
+
+        val senderName = resolveDisplayName(currentUserId)
+        val recipientName = resolveDisplayName(targetUserId)
+        val recipientUnreadCount = messageRepository.countByChatIdAndSenderIdNotAndIsReadFalse(chat.id, targetUserId)
+
+        notificationService.pushChatPreviewUpdate(
+            currentUserId,
+            ChatPreview(
+                chatId = chat.id.toString(),
+                participantName = recipientName,
+                lastMessage = message.content,
+                isLastMessageFromThisUser = true,
+                lastMessageTimestamp = message.timestamp,
+                newMessagesCount = 0
+            )
+        )
+        notificationService.pushChatPreviewUpdate(
+            targetUserId,
+            ChatPreview(
+                chatId = chat.id.toString(),
+                participantName = senderName,
+                lastMessage = message.content,
+                isLastMessageFromThisUser = false,
+                lastMessageTimestamp = message.timestamp,
+                newMessagesCount = recipientUnreadCount
             )
         )
 

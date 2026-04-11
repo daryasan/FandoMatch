@@ -49,8 +49,11 @@ dependencies {
     implementation("io.jsonwebtoken:jjwt-impl:0.12.3")
     implementation("io.jsonwebtoken:jjwt-jackson:0.12.3")
 
-    // kafka (consumer добавим позже вместе с веб-сокетами)
+    // kafka
     implementation("org.springframework.kafka:spring-kafka")
+
+    // websocket
+    implementation("org.springframework.boot:spring-boot-starter-websocket")
 }
 
 tasks.test {
