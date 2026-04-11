@@ -33,6 +33,30 @@ components:
   schemas:
 
     # -------------------------
+    # MEDIA (inline — importMappings в build.gradle.kts переиспользует com.fandomatch.core.model)
+    # -------------------------
+
+    MediaType:
+      type: string
+      enum:
+        - IMAGE
+        - VIDEO
+
+    MediaItem:
+      type: object
+      properties:
+        media_id:
+          type: string
+        media_type:
+          $ref: '#/components/schemas/MediaType'
+        url:
+          type: string
+      required:
+        - media_id
+        - media_type
+        - url
+
+    # -------------------------
     # COMMON
     # -------------------------
 
@@ -124,10 +148,10 @@ components:
               format: date-time
             bio:
               type: string
-            avatar_url:
-              type: string
-            background_url:
-              type: string
+            avatar:
+              $ref: '#/components/schemas/MediaItem'
+            background:
+              $ref: '#/components/schemas/MediaItem'
             name:
               type: string
             gender:
@@ -164,10 +188,10 @@ components:
               type: string
             bio:
               type: string
-            avatar_url:
-              type: string
-            background_url:
-              type: string
+            avatar:
+              $ref: '#/components/schemas/MediaItem'
+            background:
+              $ref: '#/components/schemas/MediaItem'
             city:
               $ref: '#/components/schemas/City'
             fandoms:
@@ -191,10 +215,10 @@ components:
               type: string
             bio:
               type: string
-            avatar_url:
-              type: string
-            background_url:
-              type: string
+            avatar:
+              $ref: '#/components/schemas/MediaItem'
+            background:
+              $ref: '#/components/schemas/MediaItem'
             city:
               $ref: '#/components/schemas/City'
             fandoms:
@@ -211,9 +235,9 @@ components:
       properties:
         bio:
           type: string
-        avatar_url:
+        avatar_media_id:
           type: string
-        background_url:
+        background_media_id:
           type: string
         name:
           type: string
@@ -322,8 +346,8 @@ components:
           type: integer
         city:
           $ref: '#/components/schemas/City'
-        avatar_url:
-          type: string
+        avatar:
+          $ref: '#/components/schemas/MediaItem'
         fandoms:
           type: array
           items:
@@ -428,6 +452,10 @@ components:
           type: string
         fandom_id:
           type: string
+        media_ids:
+          type: array
+          items:
+            type: string
       required:
         - title
         - content
@@ -444,6 +472,10 @@ components:
         created_at:
           type: string
           format: date-time
+        media_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/MediaItem'
       required:
         - id
         - title

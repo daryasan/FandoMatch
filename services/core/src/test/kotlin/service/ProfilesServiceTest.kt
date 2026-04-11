@@ -1,6 +1,7 @@
 package service
 
 import com.fandomatch.core.model.*
+import com.fandomatch.media.MediaService
 import io.mockk.*
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
@@ -47,6 +48,9 @@ class ProfilesServiceTest {
     @MockK
     lateinit var matchesService: MatchesService
 
+    @MockK(relaxed = true)
+    lateinit var mediaService: MediaService
+
     @InjectMockKs
     private lateinit var profilesService: ProfilesService
 
@@ -60,7 +64,7 @@ class ProfilesServiceTest {
         every { usersAdapter.getUserCredentialsByUuid(USER_ID) } returns creds
         every { fandomService.getFandoms(USER_ID) } returns fandoms
         every { strategyFactory.getStrategy(ProfileType.OWN, any()) } answers {
-            ConstructOwnProfile(secondArg())
+            ConstructOwnProfile(secondArg(), mediaService)
         }
 
         val result = profilesService.getProfile(USER_ID, USERNAME)
@@ -79,7 +83,7 @@ class ProfilesServiceTest {
         every { fandomService.getFandoms(TARGET_USER_ID) } returns fandoms
         every { matchesService.areFriends(USER_ID, TARGET_USER_ID) } returns true
         every { strategyFactory.getStrategy(ProfileType.FRIEND, any()) } answers {
-            ConstructFriendProfile(secondArg())
+            ConstructFriendProfile(secondArg(), mediaService)
         }
 
         val result = profilesService.getProfile(USER_ID, TARGET_USERNAME)
@@ -98,7 +102,7 @@ class ProfilesServiceTest {
         every { fandomService.getFandoms(TARGET_USER_ID) } returns fandoms
         every { matchesService.areFriends(USER_ID, TARGET_USER_ID) } returns false
         every { strategyFactory.getStrategy(ProfileType.OTHER, any()) } answers {
-            ConstructOtherProfile(secondArg())
+            ConstructOtherProfile(secondArg(), mediaService)
         }
 
         val result = profilesService.getProfile(USER_ID, TARGET_USERNAME)
@@ -133,7 +137,7 @@ class ProfilesServiceTest {
         every { usersAdapter.getUserCredentialsByUuid(USER_ID) } returns creds
         every { fandomService.getFandoms(USER_ID) } returns fandoms
         every { strategyFactory.getStrategy(ProfileType.OWN, any()) } answers {
-            ConstructOwnProfile(secondArg())
+            ConstructOwnProfile(secondArg(), mediaService)
         }
 
         val result = profilesService.editProfile(USER_ID, request)

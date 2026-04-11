@@ -1,0 +1,326 @@
+openapi: 3.0.3
+info:
+  title: messaging service models
+  version: 1.3.0
+  description: API для messaging‑модуля
+
+components:
+
+  # -------------------------
+  # SECURITY
+  # -------------------------
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  parameters:
+    TokenHeader:
+      name: Authorization
+      in: header
+      required: true
+      schema:
+        type: string
+      description: Bearer JWT token
+
+
+  # -------------------------
+  # SCHEMAS
+  # -------------------------
+
+  schemas:
+
+    # -------------------------
+    # COMMON
+    # -------------------------
+
+    ResponseStatus:
+      type: string
+      enum:
+        - SUCCESS
+        - ERROR
+      description: Статус выполнения запроса
+
+    Error:
+      type: object
+      properties:
+        error_code:
+          type: string
+          description: Код ошибки (например, BUSINESS_ERROR, VALIDATION_ERROR)
+        error_message:
+          type: string
+          description: Описание ошибки
+      required:
+        - error_code
+
+
+    # -------------------------
+    # MEDIA (inline — importMappings в build.gradle.kts переиспользует com.fandomatch.core.model)
+    # -------------------------
+
+    MediaType:
+      type: string
+      enum:
+        - IMAGE
+        - VIDEO
+
+    MediaItem:
+      type: object
+      properties:
+        media_id:
+          type: string
+        media_type:
+          $ref: '#/components/schemas/MediaType'
+        url:
+          type: string
+      required:
+        - media_id
+        - media_type
+        - url
+
+    PresignedUploadRequest:
+      type: object
+      properties:
+        media_type:
+          $ref: '#/components/schemas/MediaType'
+      required:
+        - media_type
+
+    PresignedUploadData:
+      type: object
+      properties:
+        media_id:
+          type: string
+          description: "Уникальный идентификатор медиа в S3"
+        upload_url:
+          type: string
+          description: "Presigned URL для загрузки файла"
+        expires_at:
+          type: integer
+          format: int64
+          description: "Время истечения ссылки (epoch millis)"
+      required:
+        - media_id
+        - upload_url
+        - expires_at
+
+    PresignedUploadResponse:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ResponseStatus'
+        successResponse:
+          $ref: '#/components/schemas/PresignedUploadData'
+        errorResponse:
+          $ref: '#/components/schemas/Error'
+      required:
+        - status
+
+    # -------------------------
+    # MODELS
+    # -------------------------
+
+    Chat:
+      type: object
+      properties:
+        chat_id:
+          type: string
+        participant_id:
+          type: string
+        participant_name:
+          type: string
+        participant_avatar_url:
+          type: string
+      required:
+        - chat_id
+        - participant_id
+        - participant_name
+
+    ChatPreview:
+      type: object
+      properties:
+        chat_id:
+          type: string
+        participant_name:
+          type: string
+        participant_avatar_url:
+          type: string
+        last_message:
+          type: string
+        is_last_message_from_this_user:
+          type: boolean
+        last_message_timestamp:
+          type: integer
+          format: int64
+          description: Время последнего сообщения (epoch millis)
+        new_messages_count:
+          type: integer
+      required:
+        - chat_id
+        - participant_name
+        - last_message
+        - is_last_message_from_this_user
+        - last_message_timestamp
+        - new_messages_count
+
+    Message:
+      type: object
+      properties:
+        message_id:
+          type: string
+        is_from_this_user:
+          type: boolean
+        content:
+          type: string
+        timestamp:
+          type: integer
+          format: int64
+          description: Время отправки (epoch millis)
+        media_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/MediaItem'
+      required:
+        - message_id
+        - is_from_this_user
+        - content
+        - timestamp
+
+
+    # -------------------------
+    # CHAT PREVIEWS
+    # -------------------------
+
+    ChatPreviewsRequest:
+      type: object
+      properties:
+        before_timestamp:
+          type: integer
+          format: int64
+          description: Курсор — вернуть чаты старше этого timestamp (epoch millis)
+        size:
+          type: integer
+      required:
+        - size
+
+    ChatPreviewsData:
+      type: object
+      properties:
+        previews:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatPreview'
+      required:
+        - previews
+
+    ChatPreviewsResponse:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ResponseStatus'
+        successResponse:
+          $ref: '#/components/schemas/ChatPreviewsData'
+        errorResponse:
+          $ref: '#/components/schemas/Error'
+      required:
+        - status
+
+
+    # -------------------------
+    # CHAT INFO
+    # -------------------------
+
+    ChatResponse:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ResponseStatus'
+        successResponse:
+          $ref: '#/components/schemas/Chat'
+        errorResponse:
+          $ref: '#/components/schemas/Error'
+      required:
+        - status
+
+
+    # -------------------------
+    # CHAT MESSAGES
+    # -------------------------
+
+    ChatMessagesRequest:
+      type: object
+      properties:
+        before_timestamp:
+          type: integer
+          format: int64
+          description: Курсор — вернуть сообщения старше этого timestamp (epoch millis)
+        size:
+          type: integer
+      required:
+        - size
+
+    ChatMessagesData:
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Message'
+      required:
+        - messages
+
+    ChatMessagesResponse:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ResponseStatus'
+        successResponse:
+          $ref: '#/components/schemas/ChatMessagesData'
+        errorResponse:
+          $ref: '#/components/schemas/Error'
+      required:
+        - status
+
+
+    # -------------------------
+    # SEND MESSAGE
+    # -------------------------
+
+    SendMessageRequest:
+      type: object
+      properties:
+        content:
+          type: string
+        media_ids:
+          type: array
+          items:
+            type: string
+        timestamp:
+          type: integer
+          format: int64
+          description: Время отправки на клиенте (epoch millis)
+      required:
+        - content
+        - timestamp
+
+    SendMessageData:
+      type: object
+      properties:
+        message_id:
+          type: string
+      required:
+        - message_id
+
+    SendMessageResponse:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ResponseStatus'
+        successResponse:
+          $ref: '#/components/schemas/SendMessageData'
+        errorResponse:
+          $ref: '#/components/schemas/Error'
+      required:
+        - status

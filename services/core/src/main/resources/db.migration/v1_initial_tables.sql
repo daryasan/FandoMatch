@@ -1,14 +1,14 @@
 create table if not exists user_profile (
-    user_id        uuid primary key,
-    username       text not null unique,
-    name           TEXT,
-    bio            text,
-    avatar_url     text,
-    background_url text,
-    gender         text,
-    birth_date     date,
-    city           text,
-    updated_at     timestamp not null default now()
+    user_id          uuid primary key,
+    username         text not null unique,
+    name             TEXT,
+    bio              text,
+    avatar_media_id  text,
+    background_media_id text,
+    gender           text,
+    birth_date       date,
+    city             text,
+    updated_at       timestamp not null default now()
 );
 
 create table if not exists fandom_category (
@@ -62,6 +62,7 @@ create table if not exists post (
     fandom_id  uuid,
     title      text not null,
     content    text not null,
+    media_ids  text[] not null default '{}',
     created_at timestamp not null default now(),
     updated_at timestamp,
 

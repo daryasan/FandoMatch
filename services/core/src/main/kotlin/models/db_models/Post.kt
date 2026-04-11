@@ -23,6 +23,9 @@ data class Post(
     @Column(nullable = false)
     val content: String,
 
+    @Column(name = "media_ids", columnDefinition = "text[]")
+    val mediaIds: Array<String> = emptyArray(),
+
     @Column(name = "created_at", nullable = false)
     val createdAt: Instant = Instant.now(),
 

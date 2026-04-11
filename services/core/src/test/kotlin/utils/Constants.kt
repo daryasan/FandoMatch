@@ -12,7 +12,7 @@ object Constants {
     const val TARGET_NAME = "Target User"
     const val EMAIL = "test@example.com"
     const val BIO = "Test bio"
-    const val AVATAR_URL = "https://example.com/avatar.png"
-    const val BACKGROUND_URL = "https://example.com/bg.png"
+    const val AVATAR_MEDIA_ID = "avatar-media-id-001"
+    const val BACKGROUND_MEDIA_ID = "background-media-id-001"
     const val BIRTH_DATE_EPOCH = 946684800L // 2000-01-01
 }

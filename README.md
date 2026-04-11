@@ -8,7 +8,7 @@
 Командой ``./gradlew clean test jacocoTestReport``
 
 ## Как запустить DEV / LOCAL среду
-0. _**Предусловия:_** Наличие скачанных PGadmin, docker desktop, опциональьно bruno для запросов к серверу
+0. _**Предусловия:**_  Наличие скачанных PGadmin, docker desktop, опциональьно bruno для запросов к серверу
 1. Склонировать репозиторий
 2. Сгенерировть API клиенты. Для этого из корня проекта запускаем команду  ``.\gradlew.bat openApiGenerate``
 3. Создать базы данных. Для этого в PG Admin создаем БД с названиями и паролями ровно как указано в application.yaml каждого из сервисов в папке ``services``. Создаем таблицы с помощью SQL скриптов из папок `services/{service_name}/resources/db.migration`
@@ -28,3 +28,28 @@
    - ``docker compose up -d`` - если не хотим видеть логи добавляем к любой из команд флаг -d
 Когда проект поднимется - можно делать запросы через bruno (его я тоже могу дать), например, или с вашего мобильного клиента.
 Тут сохраняются тестовые пользаки
+## Media Flow
+
+### Пример 1 — сообщение с картинкой
+
+```
+1. POST /media/presigned-upload  { media_type: IMAGE }
+   ← { media_id, upload_url, expires_at }
+2. PUT {upload_url}  ← байты файла
+3. POST /messaging/chats/{user_id}/send
+   → { content, media_ids: ["<id>"], timestamp }
+4. POST /messaging/chats/{user_id}/messages
+   ← { messages: [{ content, media_items: [{ media_id, media_type: IMAGE, url: "<signed>" }] }] }
+```
+
+### Пример 2 — аватар профиля
+
+```
+1. POST /media/presigned-upload  { media_type: IMAGE }
+   ← { media_id, upload_url, expires_at }
+2. PUT {upload_url}  ← байты файла
+3. PATCH /core/user/profile/edit
+   → { avatar_media_id: "<id>" }
+4. POST /core/user/profile
+   ← { avatar: { media_id, media_type: IMAGE, url: "<signed>" } }
+```

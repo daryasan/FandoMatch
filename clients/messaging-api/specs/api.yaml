@@ -1,0 +1,139 @@
+openapi: 3.0.3
+info:
+  title: messaging service api
+  version: 1.3.0
+  description: API для messaging‑модуля
+
+paths:
+
+  # -------------------------
+  # MEDIA
+  # -------------------------
+
+  /messaging/media/presigned-upload:
+    post:
+      description: Получить presigned URL для загрузки медиа-файла
+      tags:
+        - media
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './definitions.yaml#/components/parameters/TokenHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './definitions.yaml#/components/schemas/PresignedUploadRequest'
+      responses:
+        '200':
+          description: Presigned upload URL
+          content:
+            application/json:
+              schema:
+                $ref: './definitions.yaml#/components/schemas/PresignedUploadResponse'
+
+  # -------------------------
+  # CHATS
+  # -------------------------
+
+  /messaging/chats/previews:
+    post:
+      description: Получение списка превью чатов (cursor-based пагинация)
+      tags:
+        - chats
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './definitions.yaml#/components/parameters/TokenHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './definitions.yaml#/components/schemas/ChatPreviewsRequest'
+      responses:
+        '200':
+          description: Список превью чатов
+          content:
+            application/json:
+              schema:
+                $ref: './definitions.yaml#/components/schemas/ChatPreviewsResponse'
+
+  /messaging/chats/{user_id}:
+    get:
+      description: Получение информации о чате с пользователем
+      tags:
+        - chats
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './definitions.yaml#/components/parameters/TokenHeader'
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Информация о чате
+          content:
+            application/json:
+              schema:
+                $ref: './definitions.yaml#/components/schemas/ChatResponse'
+
+  /messaging/chats/{user_id}/messages:
+    post:
+      description: Получение сообщений в чате (cursor-based пагинация)
+      tags:
+        - chats
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './definitions.yaml#/components/parameters/TokenHeader'
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './definitions.yaml#/components/schemas/ChatMessagesRequest'
+      responses:
+        '200':
+          description: Список сообщений
+          content:
+            application/json:
+              schema:
+                $ref: './definitions.yaml#/components/schemas/ChatMessagesResponse'
+
+  /messaging/chats/{user_id}/send:
+    post:
+      description: Отправка сообщения пользователю
+      tags:
+        - chats
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './definitions.yaml#/components/parameters/TokenHeader'
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './definitions.yaml#/components/schemas/SendMessageRequest'
+      responses:
+        '200':
+          description: Сообщение отправлено
+          content:
+            application/json:
+              schema:
+                $ref: './definitions.yaml#/components/schemas/SendMessageResponse'

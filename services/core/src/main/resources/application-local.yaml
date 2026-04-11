@@ -25,3 +25,12 @@ clients:
 service:
   api-key:
     some-api-key
+
+media:
+  s3:
+    bucket: fandomatch-local
+    region: ru-central1
+    access-key: minioadmin
+    secret-key: minioadmin
+    upload-ttl-minutes: 5
+    download-ttl-minutes: 60

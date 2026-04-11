@@ -1,6 +1,7 @@
 package org.example.util
 
 import com.fandomatch.core.model.*
+import com.fandomatch.media.MediaService
 import io.github.oshai.kotlinlogging.KLogger
 import org.example.exceptions.BusinessException
 import org.example.models.db_models.MatchPending
@@ -33,13 +34,17 @@ fun MatchCandidateResponse.toMatchPending(currentUserUuid: UUID) = MatchPending(
     suggestedUserId = UUID.fromString(uuid)
 )
 
-fun UserProfile.toMatchCandidateResponse(compatibility: Double, fandoms: List<Fandom>) = MatchCandidateResponse(
+fun UserProfile.toMatchCandidateResponse(
+    compatibility: Double,
+    fandoms: List<Fandom>,
+    mediaService: MediaService
+) = MatchCandidateResponse(
     username = username,
     name = name!!,
     uuid = userId.toString(),
     age = calculateAge(birthDate!!),
     city = cityCodeToCity(city),
-    avatarUrl = avatarUrl,
+    avatar = avatarMediaId?.let { MediaItem(mediaId = it, mediaType = MediaType.IMAGE, url = mediaService.generateSignedDownloadUrl(it)) },
     compatibility = compatibility.toInt(),
     fandoms = fandoms.map { it.name }
 )
@@ -91,14 +96,13 @@ fun cityCodeToCity(code: String?): City? {
     return CITY_MAP[code] ?: City(code = City.Code.OTHER, nameEn = code, nameRu = code)
 }
 
-
 fun UserChangedEvent.toUserProfile(): UserProfile {
     return UserProfile(
         userId = UUID.fromString(this.uid),
         username = this.username,
         bio = null,
-        avatarUrl = null,
-        backgroundUrl = null,
+        avatarMediaId = null,
+        backgroundMediaId = null,
         gender = null,
         city = null,
         name = this.name,
