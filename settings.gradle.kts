@@ -36,3 +36,4 @@ include(
     "services:gateway",
     "libs:media-lib"
 )
+include("services:messaging")
