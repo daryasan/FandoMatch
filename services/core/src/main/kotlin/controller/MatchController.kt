@@ -10,6 +10,7 @@ import org.example.util.getMatchFilterErrorResponse
 import org.example.util.onControllerRequest
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import java.util.*
 
 @RestController
 @RequestMapping("/core/match")
@@ -51,7 +52,7 @@ class MatchController(
         ) {
             matchesService.react(
                 userId = uuid,
-                targetUsername = request.targetUsername,
+                targetUuid = UUID.fromString(request.targetUuid),
                 action = request.action.value
             )
         }

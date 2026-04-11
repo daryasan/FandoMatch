@@ -1,6 +1,7 @@
 package org.example.service
 
 import io.github.oshai.kotlinlogging.KLogging
+import org.example.exception.EmailAlreadyExistsException
 import org.example.exception.InvalidUserInputData
 import org.example.exception.UserNotFoundException
 import org.example.exception.UsernameAlreadyExistsException
@@ -19,14 +20,18 @@ class UserService(
     companion object : KLogging()
 
     fun createUser(
-        email: String?,
-        phone: String?,
+        email: String,
         username: String,
     ): User {
-        if (email == null && phone == null) throw InvalidUserInputData("Either phone or email must be nit null")
+        userRepository.findByUsername(username)?.let {
+            throw UsernameAlreadyExistsException(username)
+        }
+        userRepository.findByEmail(email)?.let {
+            throw EmailAlreadyExistsException(email)
+        }
+
         val userToSave = User(
             email = email,
-            phone = phone,
             username = username,
         )
         try {
@@ -34,7 +39,7 @@ class UserService(
             logger.info { "Created user with uid: ${userToSave.uid}, username: $username" }
             return userToSave
         } catch (e: DataIntegrityViolationException) {
-            logger.error { "Error creating user: username $username already exists" }
+            logger.error { "Error creating user: duplicate data for username=$username, email=$email" }
             throw UsernameAlreadyExistsException(username)
         }
     }
@@ -50,14 +55,12 @@ class UserService(
 
     fun findUser(
         email: String?,
-        phone: String?,
         username: String?,
     ): User {
-        if (email == null && phone == null && username == null)
-            throw InvalidUserInputData("Cannot find user when all credentails are null")
+        if (email == null && username == null)
+            throw InvalidUserInputData("Cannot find user when all credentials are null")
         username?.let { runCatching { return findByUsername(it) } }
         email?.let { runCatching { return findByEmail(it) } }
-        phone?.let { runCatching { return findByPhone(it) } }
         throw UserNotFoundException("User not found by provided credentials")
     }
 
@@ -69,10 +72,5 @@ class UserService(
     private fun findByEmail(email: String): User {
         val user = userRepository.findByEmail(email)
         return user ?: throw UserNotFoundException(email)
-    }
-
-    private fun findByPhone(phone: String): User {
-        val user = userRepository.findByPhone(phone)
-        return user ?: throw UserNotFoundException(phone)
     }
 }

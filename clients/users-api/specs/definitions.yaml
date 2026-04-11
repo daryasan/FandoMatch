@@ -40,15 +40,21 @@ components:
       properties:
         email:
           type: string
-        phone:
-          type: string
         username:
+          type: string
+        birth_date:
+          type: long
+          description: birth date in epoch seconds
+        name:
           type: string
         hashed_password:
           type: string
       required:
+        - email
         - username
         - hashed_password
+        - name
+        - birth_date
 
     UserRegistrationResponse:
       type: object
@@ -68,8 +74,6 @@ components:
       type: object
       properties:
         email:
-          type: string
-        phone:
           type: string
         username:
           type: string
@@ -160,8 +164,6 @@ components:
           type: string
         email:
           type: string
-        phone:
-          type: string
         username:
           type: string
         status:
@@ -200,6 +202,28 @@ components:
           type: string
       required:
         - refresh_token
+
+    # /auth/change-password
+    ChangePasswordRequest:
+      type: object
+      properties:
+        old_password:
+          type: string
+        new_password:
+          type: string
+      required:
+        - old_password
+        - new_password
+
+    ChangePasswordResponse:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ResponseStatus'
+        errorResponse:
+          $ref: '#/components/schemas/Error'
+      required:
+        - status
 
     RefreshAndAccessTokens:
       type: object

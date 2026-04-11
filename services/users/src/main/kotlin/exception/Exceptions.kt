@@ -7,6 +7,9 @@ open class BusinessException(val code: String, message: String) : Exception(mess
 class UsernameAlreadyExistsException(username: String) :
     BusinessException(ErrorCode.USERNAME_ALREADY_EXISTS.name, "Username $username already exists")
 
+class EmailAlreadyExistsException(email: String) :
+    BusinessException(ErrorCode.EMAIL_ALREADY_EXISTS.name, "Email $email already exists")
+
 class InvalidUserInputData(message: String) :
     BusinessException(ErrorCode.INVALID_USER_DATA.name, "Some fields were invalid while creating user:$message")
 

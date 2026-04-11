@@ -17,7 +17,6 @@ import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import utils.Constants.EMAIL
-import utils.Constants.PHONE
 import utils.Constants.USERNAME
 import utils.createUser
 import java.time.LocalDateTime
@@ -36,7 +35,7 @@ class TokenServiceTest {
 
     @Test
     fun `generateAndSaveTokens should save access and refresh tokens`() {
-        val user = createUser(EMAIL, PHONE, USERNAME)
+        val user = createUser(EMAIL, USERNAME)
 
         val rawAccessToken = "raw.jwt.token"
         val accessExpires = LocalDateTime.now().plusHours(1)
@@ -82,7 +81,7 @@ class TokenServiceTest {
 
     @Test
     fun `refreshAccessToken should revoke old access tokens and create new one`() {
-        val user = createUser(EMAIL, PHONE, USERNAME)
+        val user = createUser(EMAIL, USERNAME)
 
         val refreshTokenValue = "refresh-123"
         val refreshTokenEntity = Token(
@@ -183,7 +182,7 @@ class TokenServiceTest {
 
     @Test
     fun `refreshAccessToken should throw when refresh token is revoked`() {
-        val user = createUser(EMAIL, PHONE, USERNAME)
+        val user = createUser(EMAIL, USERNAME)
         val refreshToken = "revoked-refresh"
 
         val refreshEntity = Token(
@@ -214,7 +213,7 @@ class TokenServiceTest {
 
     @Test
     fun `refreshAccessToken should throw when refresh token is expired`() {
-        val user = createUser(EMAIL, PHONE, USERNAME)
+        val user = createUser(EMAIL, USERNAME)
         val refreshToken = "expired-refresh"
 
         val refreshEntity = Token(

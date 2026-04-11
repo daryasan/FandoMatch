@@ -21,13 +21,18 @@ components:
           format: email
           nullable: true
           description: "Email пользователя, может быть null"
-        phone:
-          type: string
-          nullable: true
-          description: "Телефон пользователя, может быть null"
         username:
           type: string
           description: "Имя пользователя"
+        name:
+          type: string
+          nullable: true
+          description: "Отображаемое имя; для CREATED передаётся при регистрации"
+        birthDate:
+          type: integer
+          format: int64
+          nullable: true
+          description: "Дата рождения, Unix epoch seconds (UTC)"
         createdAt:
           type: string
           format: date-time

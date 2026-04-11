@@ -3,11 +3,13 @@ package org.example.controller
 import com.fandomatch.users.model.*
 import org.example.exception.BusinessException
 import org.example.service.AuthService
+import org.example.utils.getErrorChangePasswordResponse
 import org.example.utils.getErrorLoginResponse
 import org.example.utils.getErrorRegistrationResponse
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
@@ -22,9 +24,10 @@ class AuthController(
         val tokens = try {
             authService.register(
                 email = userRegistrationRequest.email,
-                phone = userRegistrationRequest.phone,
                 username = userRegistrationRequest.username,
                 password = userRegistrationRequest.hashedPassword,
+                birthDate = userRegistrationRequest.birthDate,
+                name = userRegistrationRequest.name,
             )
         } catch (e: BusinessException) {
             return ResponseEntity.ok(getErrorRegistrationResponse(e))
@@ -45,7 +48,6 @@ class AuthController(
         val tokens = try {
             authService.login(
                 email = userLoginRequest.email,
-                phone = userLoginRequest.phone,
                 username = userLoginRequest.username,
                 password = userLoginRequest.hashedPassword,
             )
@@ -60,6 +62,25 @@ class AuthController(
                     refreshToken = tokens.refreshToken
                 )
             )
+        )
+    }
+
+    @PostMapping("/change-password")
+    fun authChangePasswordPost(
+        @RequestHeader("Authorization") authorization: String,
+        @RequestBody changePasswordRequest: ChangePasswordRequest
+    ): ResponseEntity<ChangePasswordResponse> {
+        try {
+            authService.changePassword(
+                accessToken = authorization,
+                oldPassword = changePasswordRequest.oldPassword,
+                newPassword = changePasswordRequest.newPassword,
+            )
+        } catch (e: BusinessException) {
+            return ResponseEntity.ok(getErrorChangePasswordResponse(e))
+        }
+        return ResponseEntity.ok(
+            ChangePasswordResponse(status = ResponseStatus.SUCCESS)
         )
     }
 

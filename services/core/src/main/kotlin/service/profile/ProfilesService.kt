@@ -8,6 +8,7 @@ import org.example.repository.UserProfileRepository
 import org.example.service.FandomService
 import org.example.service.MatchesService
 import org.example.stream.`in`.UserEventConsumer.Companion.logger
+import org.example.util.epochSecondsToBirthDate
 import org.example.util.toUserProfile
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -30,10 +31,13 @@ class ProfilesService(
     @Transactional(readOnly = true)
     fun getProfile(currentUuid: UUID, targetUsername: String): UserProfileResponse {
         val targetProfile = findByUsername(targetUsername)
-        val currentUserCredentials = usersAdapter.getUserCredentialsByUuid(currentUuid)
+        val profileType = determineProfileType(currentUuid, targetProfile.userId)
+
+        val currentUserCredentials = if (profileType == ProfileType.OWN) {
+            usersAdapter.getUserCredentialsByUuid(currentUuid)
+        } else null
 
         val fandoms = fandomService.getFandoms(targetProfile.userId)
-        val profileType = determineProfileType(currentUuid, targetProfile.userId)
 
         val profileData = ProfileData(
             userCredentials = currentUserCredentials,
@@ -55,9 +59,9 @@ class ProfilesService(
             bio = request.bio ?: existing.bio,
             avatarUrl = request.avatarUrl ?: existing.avatarUrl,
             backgroundUrl = request.backgroundUrl ?: existing.backgroundUrl,
-            gender = request.gender ?: existing.gender,
-            birthDate = request.birthDate ?: existing.birthDate,
-            city = request.city ?: existing.city,
+            gender = request.gender?.value ?: existing.gender,
+            birthDate = request.birthDate?.let { epochSecondsToBirthDate(it) } ?: existing.birthDate,
+            city = request.city?.code?.value ?: existing.city,
             updatedAt = Instant.now()
         )
 

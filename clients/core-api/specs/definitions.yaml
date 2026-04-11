@@ -111,11 +111,11 @@ components:
         - $ref: '#/components/schemas/BaseUserProfile'
         - type: object
           properties:
+            uid:
+              type: string
             username:
               type: string
             email:
-              type: string
-            phone:
               type: string
             status:
               type: string
@@ -131,18 +131,25 @@ components:
             name:
               type: string
             gender:
-              type: string
+              $ref: '#/components/schemas/Gender'
             birth_date:
-              type: string
-              format: date
+              type: long
+              description: birth date in epoch seconds
+            age:
+              type: long
+              description: age in epoch seconds
             city:
-              type: string
+              $ref: '#/components/schemas/City'
             fandoms:
               type: array
               items:
                 $ref: '#/components/schemas/Fandom'
           required:
+            - uid
             - username
+            - name
+            - birth_date
+            - age
             - status
             - created_at
 
@@ -151,6 +158,33 @@ components:
         - $ref: '#/components/schemas/BaseUserProfile'
         - type: object
           properties:
+            uid:
+              type: string
+            name:
+              type: string
+            bio:
+              type: string
+            avatar_url:
+              type: string
+            background_url:
+              type: string
+            city:
+              $ref: '#/components/schemas/City'
+            fandoms:
+              type: array
+              items:
+                $ref: '#/components/schemas/Fandom'
+          required:
+            - uid
+            - name
+
+    FriendUserProfileResponse:
+      allOf:
+        - $ref: '#/components/schemas/BaseUserProfile'
+        - type: object
+          properties:
+            uid:
+              type: string
             username:
               type: string
             name:
@@ -162,35 +196,14 @@ components:
             background_url:
               type: string
             city:
-              type: string
+              $ref: '#/components/schemas/City'
             fandoms:
               type: array
               items:
                 $ref: '#/components/schemas/Fandom'
           required:
+            - uid
             - username
-            - name
-
-    FriendUserProfileResponse:
-      allOf:
-        - $ref: '#/components/schemas/BaseUserProfile'
-        - type: object
-          properties:
-            name:
-              type: string
-            bio:
-              type: string
-            avatar_url:
-              type: string
-            background_url:
-              type: string
-            city:
-              type: string
-            fandoms:
-              type: array
-              items:
-                $ref: '#/components/schemas/Fandom'
-          required:
             - name
 
     EditUserProfileRequest:
@@ -205,12 +218,49 @@ components:
         name:
           type: string
         gender:
-          type: string
+          $ref: '#/components/schemas/Gender'
         birth_date:
-          type: string
-          format: date
+          type: long
+          description: birth date in epoch seconds
         city:
+          $ref: '#/components/schemas/City'
+
+    Gender:
+      type: string
+      enum:
+        - MALE
+        - FEMALE
+        - OTHER
+
+    City:
+      type: object
+      properties:
+        code:
           type: string
+          enum:
+            - MOSCOW
+            - SAINT_PETERSBURG
+            - NOVOSIBIRSK
+            - YEKATERINBURG
+            - KAZAN
+            - NIZHNY_NOVGOROD
+            - CHELYABINSK
+            - SAMARA
+            - ROSTOV_ON_DON
+            - UFA
+            - KRASNOYARSK
+            - VORONEZH
+            - PERM
+            - VOLGOGRAD
+            - OTHER
+        name_en:
+          type: string
+        name_ru:
+          type: string
+      required:
+        - code
+        - name_en
+        - name_ru
 
     EditUserProfileResponse:
       type: object
@@ -271,7 +321,7 @@ components:
         age:
           type: integer
         city:
-          type: string
+          $ref: '#/components/schemas/City'
         avatar_url:
           type: string
         fandoms:
@@ -281,12 +331,17 @@ components:
         compatibility:
           type: integer
       required:
+        - uuid
+        - name
+        - age
+        - compatibility
+        - fandoms
         - username
 
     MatchActionRequest:
       type: object
       properties:
-        target_username:
+        target_uuid:
           type: string
         action:
           type: string
@@ -294,7 +349,7 @@ components:
             - LIKE
             - DISLIKE
       required:
-        - target_username
+        - target_uuid
         - action
 
     MatchActionResult:
@@ -325,13 +380,13 @@ components:
       type: object
       properties:
         gender:
-          type: string
+          $ref: '#/components/schemas/Gender'
         age_from:
           type: integer
         age_to:
           type: integer
         city:
-          type: string
+          $ref: '#/components/schemas/City'
         fandom_category:
           type: string
         fandom_id:

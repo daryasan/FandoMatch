@@ -17,8 +17,8 @@ class UserEventsSender(
         const val TOPIC_NAME = "user-changed-events"
     }
 
-    fun sendUserCreatedEvent(user: User, eventType: EventType) {
-        val event = user.toChangedEvent(eventType)
+    fun sendUserCreatedEvent(user: User, eventType: EventType, name: String, birthDate: Long) {
+        val event = user.toChangedEvent(eventType, name, birthDate)
         kafkaTemplate.send(TOPIC_NAME, event.uid, event)
             .whenComplete { result, ex ->
                 if (ex == null) {

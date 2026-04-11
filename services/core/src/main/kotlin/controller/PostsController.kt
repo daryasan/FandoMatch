@@ -27,7 +27,7 @@ class PostsController(
             metaUuid = request.username,
             errorMapper = { getPostListErrorResponse(it) }
         ) {
-            postsService.getPosts(request.username, request.page, request.size)
+            postsService.getPosts(request.username, request.page, request.propertySize)
         }
     }
 

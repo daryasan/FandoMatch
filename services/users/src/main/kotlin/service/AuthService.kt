@@ -20,21 +20,21 @@ class AuthService(
     companion object : KLogging()
 
     fun register(
-        email: String?,
-        phone: String?,
+        email: String,
         username: String,
-        password: String
+        password: String,
+        birthDate: Long,
+        name: String
     ): AuthTokens {
         logger.info { "Got request for user registration with username=$username" }
 
         val savedUser = userService.createUser(
             email = email,
-            phone = phone,
             username = username,
         )
 
         userCredentialsService.createCredentials(savedUser, password)
-        userEventsSender.sendUserCreatedEvent(savedUser, EventType.CREATED)
+        userEventsSender.sendUserCreatedEvent(savedUser, EventType.CREATED, name, birthDate)
 
         return tokenService.generateAndSaveTokens(savedUser)
     }
@@ -42,18 +42,20 @@ class AuthService(
     @Transactional
     fun login(
         email: String?,
-        phone: String?,
         username: String?,
         password: String
     ): AuthTokens {
         logger.info { "Got request for user login with username=$username" }
 
-        val foundUser = userService.findUser(email, phone, username)
+        val foundUser = userService.findUser(email, username)
         userValidator.validateUserBeforeLogin(foundUser)
 
         userCredentialsService.verifyCredential(foundUser, password)
         return tokenService.generateAndSaveTokens(foundUser)
     }
 
-
+    fun changePassword(accessToken: String, oldPassword: String, newPassword: String) {
+        val user = userService.findUserByToken(accessToken)
+        userCredentialsService.changePassword(user, oldPassword, newPassword)
+    }
 }

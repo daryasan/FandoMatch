@@ -43,8 +43,7 @@ comment on table user_credentials is 'Информация о входе пол�
 
 create TABLE IF NOT EXISTS "user" (
   uid UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  email TEXT UNIQUE,
-  phone TEXT UNIQUE,
+  email TEXT NOT NULL UNIQUE,
   username TEXT NOT NULL UNIQUE,
   created_at TIMESTAMP NOT NULL DEFAULT now(),
   status TEXT NOT NULL DEFAULT 'ACTIVE',
