@@ -1,4 +1,5 @@
 import BaseTest.Companion.publicKeyBase64
+import com.fandomatch.media.MediaService
 import com.fandomatch.users.api.TokenApi
 import com.fandomatch.users.model.PublicJwtResponse
 import org.mockito.Mockito.mock
@@ -16,4 +17,8 @@ class TestTokenApiConfig {
         `when`(mock.tokenPublicJwtGet()).thenReturn(PublicJwtResponse(publicKeyBase64))
         return mock
     }
+
+    @Bean
+    @Primary
+    fun mediaService(): MediaService = mock(MediaService::class.java)
 }

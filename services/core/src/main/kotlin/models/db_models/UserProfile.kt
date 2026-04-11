@@ -22,11 +22,11 @@ data class UserProfile(
 
     val bio: String?,
 
-    @Column(name = "avatar_url")
-    val avatarUrl: String?,
+    @Column(name = "avatar_media_id")
+    val avatarMediaId: String?,
 
-    @Column(name = "background_url")
-    val backgroundUrl: String?,
+    @Column(name = "background_media_id")
+    val backgroundMediaId: String?,
 
     val gender: String?,
 

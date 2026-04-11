@@ -1,6 +1,7 @@
 package org.example.service
 
 import com.fandomatch.core.model.*
+import com.fandomatch.media.MediaService
 import jakarta.transaction.Transactional
 import org.example.exceptions.AlreadyReactedException
 import org.example.exceptions.UserNotFoundException
@@ -24,7 +25,8 @@ class MatchesService(
     private val fandomService: FandomService,
     private val matchPendingRepository: MatchPendingRepository,
     private val matchEventProducer: MatchEventProducer,
-    private val matchActionRepository: MatchActionRepository
+    private val matchActionRepository: MatchActionRepository,
+    private val mediaService: MediaService
 ) {
     companion object {
         const val LIKE = "LIKE"
@@ -60,7 +62,7 @@ class MatchesService(
                 val candidateFandoms = fandomService.getFandoms(candidate.userId)
                 val compatibility = calculateCompatibility(currentUserFandoms, candidateFandoms)
                 val jitteredScore = compatibility + random.nextDouble(-JITTER_RANGE, JITTER_RANGE)
-                Triple(candidate.toMatchCandidateResponse(compatibility, candidateFandoms), jitteredScore, compatibility)
+                Triple(candidate.toMatchCandidateResponse(compatibility, candidateFandoms, mediaService), jitteredScore, compatibility)
             }
             .sortedByDescending { it.second }
             .take(batchSize)

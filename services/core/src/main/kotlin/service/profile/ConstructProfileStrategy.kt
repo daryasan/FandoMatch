@@ -1,6 +1,7 @@
 package org.example.service.profile
 
 import com.fandomatch.core.model.*
+import com.fandomatch.media.MediaService
 import org.example.models.ProfileData
 import org.example.util.birthDateToEpochSeconds
 import org.example.util.calculateAgeInSeconds
@@ -10,13 +11,23 @@ import org.example.util.genderStringToEnum
 abstract class ConstructProfileStrategy(
     val selector: ProfileType,
     val profileData: ProfileData,
+    val mediaService: MediaService,
 ) {
 
     abstract fun construct(): BaseUserProfile
+
+    protected fun resolveMediaItem(mediaId: String?): MediaItem? =
+        mediaId?.let {
+            MediaItem(
+                mediaId = it,
+                mediaType = MediaType.IMAGE,
+                url = mediaService.generateSignedDownloadUrl(it)
+            )
+        }
 }
 
-class ConstructOwnProfile(profileData: ProfileData) :
-    ConstructProfileStrategy(ProfileType.OWN, profileData) {
+class ConstructOwnProfile(profileData: ProfileData, mediaService: MediaService) :
+    ConstructProfileStrategy(ProfileType.OWN, profileData, mediaService) {
 
     override fun construct(): FullUserProfileResponse {
         val creds = profileData.userCredentials
@@ -29,8 +40,8 @@ class ConstructOwnProfile(profileData: ProfileData) :
             status = creds.status.name,
             createdAt = creds.createdAt,
             bio = prof.bio,
-            avatarUrl = prof.avatarUrl,
-            backgroundUrl = prof.backgroundUrl,
+            avatar = resolveMediaItem(prof.avatarMediaId),
+            background = resolveMediaItem(prof.backgroundMediaId),
             name = prof.name!!,
             gender = genderStringToEnum(prof.gender),
             birthDate = birthDateToEpochSeconds(prof.birthDate!!),
@@ -41,8 +52,8 @@ class ConstructOwnProfile(profileData: ProfileData) :
     }
 }
 
-class ConstructFriendProfile(profileData: ProfileData) :
-    ConstructProfileStrategy(ProfileType.FRIEND, profileData) {
+class ConstructFriendProfile(profileData: ProfileData, mediaService: MediaService) :
+    ConstructProfileStrategy(ProfileType.FRIEND, profileData, mediaService) {
 
     override fun construct(): FriendUserProfileResponse {
         val prof = profileData.userProfile
@@ -52,16 +63,16 @@ class ConstructFriendProfile(profileData: ProfileData) :
             username = prof.username,
             name = prof.name!!,
             bio = prof.bio,
-            avatarUrl = prof.avatarUrl,
-            backgroundUrl = prof.backgroundUrl,
+            avatar = resolveMediaItem(prof.avatarMediaId),
+            background = resolveMediaItem(prof.backgroundMediaId),
             city = cityCodeToCity(prof.city),
             fandoms = profileData.fandoms
         )
     }
 }
 
-class ConstructOtherProfile(profileData: ProfileData) :
-    ConstructProfileStrategy(ProfileType.OTHER, profileData) {
+class ConstructOtherProfile(profileData: ProfileData, mediaService: MediaService) :
+    ConstructProfileStrategy(ProfileType.OTHER, profileData, mediaService) {
 
     override fun construct(): PublicUserProfileResponse {
         val prof = profileData.userProfile
@@ -70,8 +81,8 @@ class ConstructOtherProfile(profileData: ProfileData) :
             uid = prof.userId.toString(),
             name = prof.name!!,
             bio = prof.bio,
-            avatarUrl = prof.avatarUrl,
-            backgroundUrl = prof.backgroundUrl,
+            avatar = resolveMediaItem(prof.avatarMediaId),
+            background = resolveMediaItem(prof.backgroundMediaId),
             city = cityCodeToCity(prof.city),
             fandoms = profileData.fandoms
         )

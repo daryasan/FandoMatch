@@ -1,14 +1,15 @@
 package adapter
 
 import com.fandomatch.users.api.TokenApi
+import com.fandomatch.users.api.UserApi
 import com.fandomatch.users.model.PublicJwtResponse
 import io.mockk.every
-import io.mockk.impl.annotations.InjectMockKs
-import io.mockk.impl.annotations.MockK
+import io.mockk.mockk
 import io.mockk.junit5.MockKExtension
 import org.example.client.UsersAdapter
 import org.example.exceptions.UsersNotRespondingException
 import org.junit.Assert.assertEquals
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.extension.ExtendWith
@@ -16,11 +17,15 @@ import org.junit.jupiter.api.extension.ExtendWith
 @ExtendWith(MockKExtension::class)
 class UsersAdapterTest {
 
-    @MockK
-    lateinit var tokenApi: TokenApi
+    private val tokenApi: TokenApi = mockk()
+    private val userApi: UserApi = mockk()
 
-    @InjectMockKs
-    lateinit var usersAdapter: UsersAdapter
+    private lateinit var usersAdapter: UsersAdapter
+
+    @BeforeEach
+    fun setUp() {
+        usersAdapter = UsersAdapter("test-api-key", tokenApi, userApi)
+    }
 
     @Test
     fun `getBase64PublicJwt returns key when response is valid`() {
@@ -40,5 +45,4 @@ class UsersAdapterTest {
             usersAdapter.getBase64PublicJwt()
         }
     }
-
 }

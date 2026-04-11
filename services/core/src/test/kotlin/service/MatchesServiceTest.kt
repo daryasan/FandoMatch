@@ -1,6 +1,7 @@
 package service
 
 import com.fandomatch.core.model.*
+import com.fandomatch.media.MediaService
 import io.mockk.*
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
@@ -46,6 +47,9 @@ class MatchesServiceTest {
 
     @MockK
     lateinit var matchActionRepository: MatchActionRepository
+
+    @MockK(relaxed = true)
+    lateinit var mediaService: MediaService
 
     @InjectMockKs
     private lateinit var matchesService: MatchesService

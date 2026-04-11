@@ -17,6 +17,9 @@ open class Routes {
     @Value("\${routes.url.core}")
     private lateinit var coreServiceUrl: String
 
+    @Value("\${routes.url.chats}")
+    private lateinit var chatsServiceUrl: String
+
     @Bean
     open fun gatewayRoutes(builder: RouteLocatorBuilder): RouteLocator {
         return builder.routes()
@@ -63,6 +66,20 @@ open class Routes {
                 r.path("/core/feed/**")
                     .filters { f -> f.stripPrefix(0) }
                     .uri(coreServiceUrl)
+            }
+
+            // MESSAGING SERVICE
+            .route("messaging") { r ->
+                r.path("/messaging/**")
+                    .filters { f -> f.stripPrefix(0) }
+                    .uri(chatsServiceUrl)
+            }
+
+            // MEDIA
+            .route("media") { r ->
+                r.path("/media/**")
+                    .filters { f -> f.stripPrefix(0) }
+                    .uri(chatsServiceUrl)
             }
 
             .build()

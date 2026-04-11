@@ -1,6 +1,7 @@
 package org.example.service
 
 import com.fandomatch.core.model.*
+import com.fandomatch.media.MediaService
 import jakarta.transaction.Transactional
 import org.example.exceptions.PostNotFoundException
 import org.example.exceptions.UserNotFoundException
@@ -20,7 +21,8 @@ class PostsService(
     private val postRepository: PostRepository,
     private val postLikeRepository: PostLikeRepository,
     private val commentRepository: CommentRepository,
-    private val userProfileRepository: UserProfileRepository
+    private val userProfileRepository: UserProfileRepository,
+    private val mediaService: MediaService
 ) {
 
     companion object {
@@ -46,7 +48,8 @@ class PostsService(
             authorId = userId,
             fandomId = request.fandomId?.let { UUID.fromString(it) },
             title = request.title,
-            content = request.content
+            content = request.content,
+            mediaIds = request.mediaIds?.toTypedArray() ?: emptyArray()
         )
 
         val saved = postRepository.save(post)
@@ -118,6 +121,13 @@ class PostsService(
         id = id.toString(),
         title = title,
         content = content,
-        createdAt = createdAt.atOffset(ZoneOffset.UTC)
+        createdAt = createdAt.atOffset(ZoneOffset.UTC),
+        mediaItems = mediaIds.map { mediaId ->
+            MediaItem(
+                mediaId = mediaId,
+                mediaType = MediaType.IMAGE,
+                url = mediaService.generateSignedDownloadUrl(mediaId)
+            )
+        }.ifEmpty { null }
     )
 }

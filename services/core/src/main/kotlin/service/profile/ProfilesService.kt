@@ -57,8 +57,8 @@ class ProfilesService(
         val updated = existing.copy(
             name = request.name ?: existing.name,
             bio = request.bio ?: existing.bio,
-            avatarUrl = request.avatarUrl ?: existing.avatarUrl,
-            backgroundUrl = request.backgroundUrl ?: existing.backgroundUrl,
+            avatarMediaId = request.avatarMediaId ?: existing.avatarMediaId,
+            backgroundMediaId = request.backgroundMediaId ?: existing.backgroundMediaId,
             gender = request.gender?.value ?: existing.gender,
             birthDate = request.birthDate?.let { epochSecondsToBirthDate(it) } ?: existing.birthDate,
             city = request.city?.code?.value ?: existing.city,
