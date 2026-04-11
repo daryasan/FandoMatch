@@ -17,6 +17,7 @@ open class SecurityConfig(
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         http.csrf { it.disable() }
             .authorizeHttpRequests {
+                it.requestMatchers("/messaging/ws/**").permitAll()
                 it.anyRequest().authenticated()
             }
             .addFilterBefore(
