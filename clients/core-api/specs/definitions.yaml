@@ -443,6 +443,18 @@ components:
       required:
         - username
 
+    PostMediaInput:
+      type: object
+      description: Медиа-вложение при создании поста (media_id из /media/presigned-upload + тип)
+      properties:
+        media_id:
+          type: string
+        media_type:
+          $ref: '#/components/schemas/MediaType'
+      required:
+        - media_id
+        - media_type
+
     CreatePostRequest:
       type: object
       properties:
@@ -452,10 +464,10 @@ components:
           type: string
         fandom_id:
           type: string
-        media_ids:
+        media_items:
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/PostMediaInput'
       required:
         - title
         - content

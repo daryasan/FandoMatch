@@ -8,6 +8,7 @@ import org.example.util.getMatchActionErrorResponse
 import org.example.util.getMatchCandidateBatchErrorResponse
 import org.example.util.getMatchFilterErrorResponse
 import org.example.util.onControllerRequest
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.util.*
@@ -17,6 +18,7 @@ import java.util.*
 class MatchController(
     private val matchesService: MatchesService,
     private val tokenParserService: TokenParserService,
+    @Value("\${service.api-key}") private val serviceApiKey: String,
 ) {
 
     companion object : KLogging()
@@ -56,6 +58,17 @@ class MatchController(
                 action = request.action.value
             )
         }
+    }
+
+    @PostMapping("/internal/exists")
+    fun matchExists(
+        @RequestHeader("X-Api-Key") apiKey: String,
+        @RequestBody request: Map<String, String>
+    ): ResponseEntity<Map<String, Boolean>> {
+        if (apiKey != serviceApiKey) return ResponseEntity.status(403).build()
+        val u1 = UUID.fromString(request["user_id_1"] ?: return ResponseEntity.badRequest().build())
+        val u2 = UUID.fromString(request["user_id_2"] ?: return ResponseEntity.badRequest().build())
+        return ResponseEntity.ok(mapOf("exists" to matchesService.areFriends(u1, u2)))
     }
 
     @PostMapping("/filter")

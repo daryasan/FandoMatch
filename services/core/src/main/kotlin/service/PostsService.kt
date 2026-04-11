@@ -5,8 +5,10 @@ import com.fandomatch.media.MediaService
 import jakarta.transaction.Transactional
 import org.example.exceptions.PostNotFoundException
 import org.example.exceptions.UserNotFoundException
+import org.example.models.db_models.MediaItemRecord
 import org.example.models.db_models.PostLike
 import org.example.repository.CommentRepository
+import org.example.repository.MediaItemRepository
 import org.example.repository.PostLikeRepository
 import org.example.repository.PostRepository
 import org.example.repository.UserProfileRepository
@@ -22,7 +24,8 @@ class PostsService(
     private val postLikeRepository: PostLikeRepository,
     private val commentRepository: CommentRepository,
     private val userProfileRepository: UserProfileRepository,
-    private val mediaService: MediaService
+    private val mediaService: MediaService,
+    private val mediaItemRepository: MediaItemRepository
 ) {
 
     companion object {
@@ -43,16 +46,25 @@ class PostsService(
         )
     }
 
+    @Transactional
     fun createPost(userId: UUID, request: CreatePostRequest): CreatePostResponse {
+        val mediaInputs = request.mediaItems ?: emptyList()
+
         val post = org.example.models.db_models.Post(
             authorId = userId,
             fandomId = request.fandomId?.let { UUID.fromString(it) },
             title = request.title,
             content = request.content,
-            mediaIds = request.mediaIds?.toTypedArray() ?: emptyArray()
+            mediaIds = mediaInputs.map { it.mediaId }.toTypedArray()
         )
 
         val saved = postRepository.save(post)
+
+        if (mediaInputs.isNotEmpty()) {
+            mediaItemRepository.saveAll(
+                mediaInputs.map { MediaItemRecord(mediaId = it.mediaId, mediaType = it.mediaType.value) }
+            )
+        }
 
         return CreatePostResponse(
             status = ResponseStatus.SUCCESS,
@@ -117,17 +129,24 @@ class PostsService(
         )
     }
 
-    private fun org.example.models.db_models.Post.toDto() = Post(
-        id = id.toString(),
-        title = title,
-        content = content,
-        createdAt = createdAt.atOffset(ZoneOffset.UTC),
-        mediaItems = mediaIds.map { mediaId ->
-            MediaItem(
-                mediaId = mediaId,
-                mediaType = MediaType.IMAGE,
-                url = mediaService.generateSignedDownloadUrl(mediaId)
-            )
-        }.ifEmpty { null }
-    )
+    private fun org.example.models.db_models.Post.toDto(): Post {
+        val mediaTypeMap = if (mediaIds.isNotEmpty()) {
+            mediaItemRepository.findAllByMediaIdIn(mediaIds.toList()).associate { it.mediaId to it.mediaType }
+        } else {
+            emptyMap()
+        }
+
+        return Post(
+            id = id.toString(),
+            title = title,
+            content = content,
+            createdAt = createdAt.atOffset(ZoneOffset.UTC),
+            mediaItems = mediaIds.map { mediaId ->
+                val typeStr = mediaTypeMap[mediaId]
+                val mediaType = typeStr?.let { t -> MediaType.values().firstOrNull { it.value == t } }
+                    ?: MediaType.IMAGE
+                MediaItem(mediaId = mediaId, mediaType = mediaType, url = mediaService.generateSignedDownloadUrl(mediaId))
+            }.ifEmpty { null }
+        )
+    }
 }

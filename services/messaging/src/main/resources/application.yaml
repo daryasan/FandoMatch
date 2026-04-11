@@ -1,0 +1,29 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+
+spring:
+  jpa:
+    open-in-view: false
+  kafka:
+    consumer:
+      group-id: messaging-service-group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+        spring.json.type.mapping: |-
+          userChangedEvent:com.fandomatch.core.model.UserChangedEvent,
+          matchEvent:com.fandomatch.core.model.MatchEvent
+    admin:
+      auto-create: true
+  logging:
+    level:
+      org.apache.kafka: INFO
+      org.apache.kafka.clients: INFO
+      org.apache.kafka.clients.NetworkClient: INFO
+      org.apache.kafka.clients.FetchSessionHandler: INFO
+      org.springframework.kafka: INFO
+      root: DEBUG

@@ -1,0 +1,37 @@
+server:
+  port: 8083
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5435/fdmatch_messaging
+    username: postgres
+    password: 1234
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  kafka:
+    bootstrap-servers: localhost:9092
+
+service:
+  api-key: b2a43cf3-fe80-4575-9b1c-8971a5a50359
+
+clients:
+  users-service:
+    url: http://localhost:8081
+  core-service:
+    url: http://localhost:8082
+
+media:
+  s3:
+    bucket: fandomatch-local
+    region: ru-central1
+    access-key: minioadmin
+    secret-key: minioadmin
+    upload-ttl-minutes: 5
+    download-ttl-minutes: 60

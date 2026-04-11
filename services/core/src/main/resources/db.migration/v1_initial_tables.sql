@@ -1,3 +1,9 @@
+create table if not exists media_item (
+    media_id   text primary key,
+    media_type text not null,
+    created_at timestamp not null default now()
+);
+
 create table if not exists user_profile (
     user_id          uuid primary key,
     username         text not null unique,
