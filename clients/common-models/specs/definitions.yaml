@@ -77,3 +77,14 @@ components:
         - userId1
         - userId2
 
+    LikeEvent:
+      type: object
+      properties:
+        likerId:
+          type: string
+        likedUserId:
+          type: string
+      required:
+        - likerId
+        - likedUserId
+

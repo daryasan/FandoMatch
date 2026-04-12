@@ -2,13 +2,16 @@ package org.example.service
 
 import com.fandomatch.core.model.*
 import com.fandomatch.media.MediaService
+import com.fandomatch.notifications.PushNotificationService
 import jakarta.transaction.Transactional
+import org.example.client.UsersNotificationAdapter
 import org.example.exceptions.AlreadyReactedException
 import org.example.exceptions.UserNotFoundException
 import org.example.models.db_models.Match
 import org.example.models.db_models.MatchAction
 import org.example.models.db_models.MatchFilter
 import org.example.repository.*
+import org.example.stream.out.LikeEventProducer
 import org.example.stream.out.MatchEventProducer
 import org.example.util.toMatchCandidateResponse
 import org.example.util.toMatchPending
@@ -26,7 +29,10 @@ class MatchesService(
     private val matchPendingRepository: MatchPendingRepository,
     private val matchEventProducer: MatchEventProducer,
     private val matchActionRepository: MatchActionRepository,
-    private val mediaService: MediaService
+    private val mediaService: MediaService,
+    private val likeEventProducer: LikeEventProducer,
+    private val usersNotificationAdapter: UsersNotificationAdapter,
+    private val pushNotificationService: PushNotificationService
 ) {
     companion object {
         const val LIKE = "LIKE"
@@ -108,10 +114,23 @@ class MatchesService(
             val savedMatch = matchRepository.save(match)
             matchEventProducer.sendMatchEvent(savedMatch.id!!, first, second)
 
+            usersNotificationAdapter.getFcmToken(userId)?.let { token ->
+                pushNotificationService.send(token, "Новый матч!", "У вас новый матч!")
+            }
+            usersNotificationAdapter.getFcmToken(targetUserId)?.let { token ->
+                pushNotificationService.send(token, "Новый матч!", "У вас новый матч!")
+            }
+
             MatchActionResult(
                 status = MatchActionResult.Status.MATCH,
             )
         } else {
+            if (action == LIKE) {
+                likeEventProducer.send(userId, targetUserId)
+                usersNotificationAdapter.getFcmToken(targetUserId)?.let { token ->
+                    pushNotificationService.send(token, "Кто-то оценил ваш профиль!", "Зайдите и посмотрите!")
+                }
+            }
             MatchActionResult(
                 status = if (action == LIKE) MatchActionResult.Status.LIKED else MatchActionResult.Status.DISLIKED,
             )

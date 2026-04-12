@@ -2,6 +2,7 @@ package org.example.service
 
 import com.fandomatch.media.MediaService
 import com.fandomatch.messaging.model.*
+import com.fandomatch.notifications.PushNotificationService
 import org.example.client.CoreAdapter
 import org.example.client.UsersAdapter
 import org.example.exceptions.CannotChatWithSelfException
@@ -27,7 +28,8 @@ class ChatsService(
     private val usersAdapter: UsersAdapter,
     private val coreAdapter: CoreAdapter,
     private val mediaService: MediaService,
-    private val notificationService: NotificationService
+    private val notificationService: NotificationService,
+    private val pushNotificationService: PushNotificationService
 ) {
 
     @Transactional(readOnly = true)
@@ -128,6 +130,11 @@ class ChatsService(
         }
 
         notificationService.pushMessage(targetUserId, currentUserId, message.toDto(targetUserId, mediaTypeMap))
+
+        usersAdapter.getFcmToken(targetUserId)?.let { fcmToken ->
+            val preview = if (message.content.length > 50) message.content.take(50) + "…" else message.content
+            pushNotificationService.send(fcmToken, "Новое сообщение", preview)
+        }
 
         val senderName = resolveDisplayName(currentUserId)
         val recipientName = resolveDisplayName(targetUserId)

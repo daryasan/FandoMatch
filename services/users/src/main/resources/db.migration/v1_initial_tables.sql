@@ -54,3 +54,9 @@ create index IF NOT EXISTS user_index_uid ON "user"(uid);
 create index IF NOT EXISTS user_index_username ON "user"(username);
 comment on table "user" is 'Таблица с минимальными регистрационными данными пользователя';
 
+CREATE TABLE IF NOT EXISTS device_token (
+  user_id UUID PRIMARY KEY,
+  fcm_token TEXT NOT NULL,
+  updated_at TIMESTAMP NOT NULL DEFAULT now()
+);
+
