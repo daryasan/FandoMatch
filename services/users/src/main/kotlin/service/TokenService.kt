@@ -60,6 +60,7 @@ class TokenService(
         logger.info { "Saved refresh token for user ${user.username}" }
 
         return AuthTokens(
+            uuid = user.uid!!,
             accessToken = access.token,
             refreshToken = refresh.token
         )
@@ -99,6 +100,7 @@ class TokenService(
         )
 
         return AuthTokens(
+            uuid = user.uid!!,
             accessToken = newAccess.token,
             refreshToken = refreshToken
         )

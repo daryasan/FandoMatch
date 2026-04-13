@@ -36,6 +36,7 @@ class AuthController(
             UserRegistrationResponse(
                 status = ResponseStatus.SUCCESS,
                 successResponse = RefreshAndAccessTokens(
+                    uuid = tokens.uuid,
                     accessToken = tokens.accessToken,
                     refreshToken = tokens.refreshToken
                 )
@@ -58,6 +59,7 @@ class AuthController(
             UserLoginResponse(
                 status = ResponseStatus.SUCCESS,
                 successResponse = RefreshAndAccessTokens(
+                    uuid = tokens.uuid,
                     accessToken = tokens.accessToken,
                     refreshToken = tokens.refreshToken
                 )

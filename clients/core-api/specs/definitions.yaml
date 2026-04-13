@@ -33,7 +33,7 @@ components:
   schemas:
 
     # -------------------------
-    # MEDIA (inline — importMappings в build.gradle.kts переиспользует com.fandomatch.core.model)
+    # MEDIA
     # -------------------------
 
     MediaType:
@@ -144,8 +144,8 @@ components:
             status:
               type: string
             created_at:
-              type: string
-              format: date-time
+              type: long
+              description: epoch seconds
             bio:
               type: string
             avatar:
@@ -176,6 +176,7 @@ components:
             - age
             - status
             - created_at
+            - fandoms
 
     PublicUserProfileResponse:
       allOf:
@@ -198,9 +199,13 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/Fandom'
+            has_current_user_reacted:
+              type: boolean
           required:
             - uid
             - name
+            - has_current_user_reacted
+            - fandoms
 
     FriendUserProfileResponse:
       allOf:
@@ -243,9 +248,6 @@ components:
           type: string
         gender:
           $ref: '#/components/schemas/Gender'
-        birth_date:
-          type: long
-          description: birth date in epoch seconds
         city:
           $ref: '#/components/schemas/City'
 
@@ -351,7 +353,7 @@ components:
         fandoms:
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/Fandom'
         compatibility:
           type: integer
       required:
@@ -403,24 +405,50 @@ components:
     MatchFilterRequest:
       type: object
       properties:
+        filters:
+          $ref: '#/components/schemas/MatchFilter'
+      required:
+        - filters
+
+    MatchFilter:
+      type: object
+      properties:
         gender:
-          $ref: '#/components/schemas/Gender'
+          type: array
+          items:
+            $ref: '#/components/schemas/Gender'
         age_from:
           type: integer
         age_to:
           type: integer
-        city:
-          $ref: '#/components/schemas/City'
+        only_in_user_city:
+          type: boolean
         fandom_category:
-          type: string
+          type: array
+          items:
+            $ref: '#/components/schemas/FandomCategory'
         fandom_id:
-          type: string
+          type: array
+          items:
+            $ref: '#/components/schemas/Fandom'
 
     MatchFilterResponse:
       type: object
       properties:
         status:
           $ref: '#/components/schemas/ResponseStatus'
+        errorResponse:
+          $ref: '#/components/schemas/Error'
+      required:
+        - status
+
+    CurrentFiltersResponse:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ResponseStatus'
+        successResponse:
+          $ref: '#/components/schemas/MatchFilter'
         errorResponse:
           $ref: '#/components/schemas/Error'
       required:
@@ -434,14 +462,15 @@ components:
     PostsGetRequest:
       type: object
       properties:
-        username:
+        uuid:
           type: string
-        page:
-          type: integer
+        cursor_timestamp:
+          type: int64
+          description: time in epoch seconds as a cursor (last received post)
         size:
           type: integer
       required:
-        - username
+        - uuid
 
     PostMediaInput:
       type: object
@@ -481,9 +510,13 @@ components:
           type: string
         content:
           type: string
+        fandoms:
+          type: array
+          items:
+            $ref: '#/components/schemas/Fandom'
         created_at:
-          type: string
-          format: date-time
+          type: long
+          description: epoch seconds
         media_items:
           type: array
           items:
@@ -538,13 +571,21 @@ components:
             properties:
               id:
                 type: string
-              author:
+              author_name:
+                type: string
+              author_username:
+                type: string
+              author_avatar_url:
                 type: string
               content:
                 type: string
               created_at:
-                type: string
-                format: date-time
+                type: long
+            required:
+              - id
+              - author_username
+              - content
+              - created_at
       required:
         - comments
 
@@ -560,6 +601,7 @@ components:
       required:
         - status
 
+    # TODO добавить возможность убрать свой лайк (параметр isLike?)
     PostLikeSuccess:
       type: object
       properties:
@@ -579,6 +621,19 @@ components:
       required:
         - status
 
+    GetFeedRequest:
+      type: object
+      properties:
+        uuid:
+          type: string
+        batch_size:
+          type: integer
+        cursor_timestamp:
+          type: int64
+      required:
+        - uuid
+        - batch_size
+
 
     # -------------------------
     # FANDOMS
@@ -587,10 +642,10 @@ components:
     FandomsGetRequest:
       type: object
       properties:
-        username:
+        uuid:
           type: string
       required:
-        - username
+        - uuid
 
     FandomListData:
       type: object
@@ -621,11 +676,31 @@ components:
           type: string
         name:
           type: string
-        description:
-          type: string
+        category:
+          $ref: '#/components/schemas/FandomCategory'
       required:
         - id
         - name
+
+    FandomCategory:
+      type: string
+      enum:
+        - ANIME_MANGA
+        - BOOKS
+        - CARTOONS
+        - FILMS
+        - TV_SERIES
+        - GAMES
+        - TABLETOP_GAMES
+        - MUSIC
+        - THEATER_MUSICALS
+        - PODCASTS
+        - COMICS
+        - CELEBRITIES
+        - SPORTS
+        - HISTORY
+        - MYTHOLOGY
+        - OTHER
 
     FandomCategoryListData:
       type: object
@@ -657,27 +732,19 @@ components:
         description:
           type: string
         category:
-          type: string
-        author_username:
+          $ref: '#/components/schemas/FandomCategory'
+        author_uuid:
           type: string
       required:
         - name
-        - author_username
-
-    FandomRequestCreateSuccess:
-      type: object
-      properties:
-        status:
-          type: string
-          enum: [RECEIVED]
+        - author_uuid
+        - category
 
     FandomRequestCreateResponse:
       type: object
       properties:
         status:
           $ref: '#/components/schemas/ResponseStatus'
-        successResponse:
-          $ref: '#/components/schemas/FandomRequestCreateSuccess'
         errorResponse:
           $ref: '#/components/schemas/Error'
       required:

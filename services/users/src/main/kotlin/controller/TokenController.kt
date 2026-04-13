@@ -32,6 +32,7 @@ class TokenController(
             RefreshTokenResponse(
                 status = ResponseStatus.SUCCESS,
                 successResponse = RefreshAndAccessTokens(
+                    uuid = tokens.uuid,
                     accessToken = tokens.accessToken,
                     refreshToken = tokens.refreshToken
                 )

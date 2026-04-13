@@ -128,6 +128,20 @@ paths:
               schema:
                 $ref: './definitions.yaml#/components/schemas/MatchFilterResponse'
 
+  /core/match/get_current_filters:
+    get:
+      description: Установка получения текущих фильтров пользователя
+      tags:
+        - match
+      security:
+        - bearerAuth: [ ]
+      responses:
+        '200':
+          description: Фильтры сохранены
+          content:
+            application/json:
+              schema:
+                $ref: './definitions.yaml#/components/schemas/CurrentFiltersResponse'
 
   # -------------------------
   # POSTS
@@ -254,15 +268,12 @@ paths:
         - feed
       security:
         - bearerAuth: []
-      parameters:
-        - name: page
-          in: query
-          schema:
-            type: integer
-        - name: size
-          in: query
-          schema:
-            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './definitions.yaml#/components/schemas/GetFeedRequest'
       responses:
         '200':
           description: Лента
@@ -295,27 +306,6 @@ paths:
               schema:
                 $ref: './definitions.yaml#/components/schemas/FandomListResponse'
 
-  /core/fandoms/all:
-    get:
-      description: Получение всех фандомов (с пагинацией)
-      tags:
-        - fandom
-      parameters:
-        - name: page
-          in: query
-          schema:
-            type: integer
-        - name: size
-          in: query
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: Список фандомов
-          content:
-            application/json:
-              schema:
-                $ref: './definitions.yaml#/components/schemas/FandomListResponse'
 
   /core/fandoms/categories:
     get:

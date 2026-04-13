@@ -14,3 +14,6 @@ class AlreadyReactedException(userId: String) :
 
 class PostNotFoundException(postId: String) :
     BusinessException(ErrorCode.POST_NOT_FOUND.name, "Post $postId not found")
+
+class FandomCategoryNotFoundException(id: String) :
+    BusinessException(ErrorCode.FANDOM_CATEGORY_NOT_FOUND.name, "Fandom category $id not found")

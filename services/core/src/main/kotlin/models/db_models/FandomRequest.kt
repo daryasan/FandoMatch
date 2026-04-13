@@ -18,8 +18,8 @@ data class FandomRequest(
 
     val category: String? = null,
 
-    @Column(name = "author_username", nullable = false)
-    val authorUsername: String,
+    @Column(name = "author_uuid", nullable = false)
+    val authorUuid: String,
 
     @Column(nullable = false)
     val status: String = "PENDING",

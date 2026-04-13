@@ -228,11 +228,15 @@ components:
     RefreshAndAccessTokens:
       type: object
       properties:
+        uuid:
+          type: string
+          format: uuid
         access_token:
           type: string
         refresh_token:
           type: string
       required:
+        - uuid
         - access_token
         - refresh_token
 
