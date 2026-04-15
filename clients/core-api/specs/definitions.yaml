@@ -88,7 +88,8 @@ components:
       type: object
       properties:
         cursor_timestamp:
-          type: int64
+          type: integer
+          format: int64
           description: time in epoch seconds as a cursor (last received item)
         size:
           type: integer
@@ -272,30 +273,11 @@ components:
     City:
       type: object
       properties:
-        code:
-          type: string
-          enum:
-            - MOSCOW
-            - SAINT_PETERSBURG
-            - NOVOSIBIRSK
-            - YEKATERINBURG
-            - KAZAN
-            - NIZHNY_NOVGOROD
-            - CHELYABINSK
-            - SAMARA
-            - ROSTOV_ON_DON
-            - UFA
-            - KRASNOYARSK
-            - VORONEZH
-            - PERM
-            - VOLGOGRAD
-            - OTHER
         name_en:
           type: string
         name_ru:
           type: string
       required:
-        - code
         - name_en
         - name_ru
 
@@ -702,7 +684,8 @@ components:
       type: object
       properties:
         cursor_timestamp:
-          type: int64
+          type: integer
+          format: int64
           description: time in epoch seconds as a cursor (last received post)
         size:
           type: integer

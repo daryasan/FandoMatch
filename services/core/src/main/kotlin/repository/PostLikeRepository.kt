@@ -14,9 +14,10 @@ interface PostLikeRepository : JpaRepository<PostLike, PostLikeId> {
 
     @Query(
         value = """
-            SELECT COUNT FROM post_like
-            WHERE post_id = <> :postId
-        """
+            SELECT COUNT(*) FROM post_like
+            WHERE post_id = :postId
+        """,
+        nativeQuery = true
     )
     fun getPostLikeCount(postId: UUID): Int
 }

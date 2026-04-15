@@ -3,11 +3,12 @@ package org.example.service.profile
 import com.fandomatch.core.model.*
 import com.fandomatch.media.MediaService
 import org.example.models.ProfileData
-import org.example.repository.PostLikeRepository
+import org.example.repository.MatchActionRepository
 import org.example.util.birthDateToEpochSeconds
 import org.example.util.calculateAgeInSeconds
 import org.example.util.cityCodeToCity
 import org.example.util.genderStringToEnum
+import java.util.UUID
 
 abstract class ConstructProfileStrategy(
     val selector: ProfileType,
@@ -75,7 +76,8 @@ class ConstructFriendProfile(profileData: ProfileData, mediaService: MediaServic
 class ConstructOtherProfile(
     profileData: ProfileData,
     mediaService: MediaService,
-    private val postLikeRepository: PostLikeRepository
+    private val matchActionRepository: MatchActionRepository,
+    private val currentUserId: UUID
 ) :
     ConstructProfileStrategy(ProfileType.OTHER, profileData, mediaService) {
 
@@ -90,7 +92,7 @@ class ConstructOtherProfile(
             background = resolveMediaItem(prof.backgroundMediaId),
             city = cityCodeToCity(prof.city),
             fandoms = profileData.fandoms,
-            hasCurrentUserReacted =
+            hasCurrentUserReacted = matchActionRepository.findByUserIdAndTargetUserId(currentUserId, prof.userId) != null
         )
     }
 }

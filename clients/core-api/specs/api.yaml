@@ -255,7 +255,7 @@ paths:
                 $ref: './definitions.yaml#/components/schemas/ExtendedPostResponse'
 
   /core/posts/{post_id}/comments:
-    get:
+    post:
       description: Получение комментариев к посту
       tags:
         - posts
@@ -306,7 +306,7 @@ paths:
   # -------------------------
 
   /core/feed:
-    get:
+    post:
       description: Лента постов мэтчей
       tags:
         - feed

@@ -4,6 +4,7 @@ import com.fandomatch.core.model.*
 import io.github.oshai.kotlinlogging.KLogging
 import org.example.service.MatchesService
 import org.example.service.TokenParserService
+import org.example.util.getCurrentFiltersErrorResponse
 import org.example.util.getMatchActionErrorResponse
 import org.example.util.getMatchCandidateBatchErrorResponse
 import org.example.util.getMatchFilterErrorResponse
@@ -69,6 +70,21 @@ class MatchController(
         val u1 = UUID.fromString(request["user_id_1"] ?: return ResponseEntity.badRequest().build())
         val u2 = UUID.fromString(request["user_id_2"] ?: return ResponseEntity.badRequest().build())
         return ResponseEntity.ok(mapOf("exists" to matchesService.areFriends(u1, u2)))
+    }
+
+    @GetMapping("/get_current_filters")
+    fun getCurrentFilters(
+        @RequestHeader("Authorization") token: String
+    ): ResponseEntity<CurrentFiltersResponse> {
+        val uuid = tokenParserService.parse(token).userId
+        return onControllerRequest(
+            logger = logger,
+            operationName = "GET /core/match/get_current_filters",
+            metaUuid = uuid.toString(),
+            errorMapper = { getCurrentFiltersErrorResponse(it) }
+        ) {
+            matchesService.getCurrentFilters(uuid)
+        }
     }
 
     @PostMapping("/filter")

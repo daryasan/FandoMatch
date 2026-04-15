@@ -45,7 +45,7 @@ class ProfilesService(
             fandoms = fandoms
         )
 
-        val strategy = strategyFactory.getStrategy(profileType, profileData)
+        val strategy = strategyFactory.getStrategy(profileType, profileData, currentUuid)
         return UserProfileResponse(status = ResponseStatus.SUCCESS, successResponse = strategy.construct())
     }
 
@@ -60,7 +60,7 @@ class ProfilesService(
             avatarMediaId = request.avatarMediaId ?: existing.avatarMediaId,
             backgroundMediaId = request.backgroundMediaId ?: existing.backgroundMediaId,
             gender = request.gender?.value ?: existing.gender,
-            city = request.city?.code?.value ?: existing.city,
+            city = request.city?.nameEn ?: existing.city,
             updatedAt = Instant.now()
         )
 
@@ -74,7 +74,7 @@ class ProfilesService(
             userProfile = updated,
             fandoms = fandoms
         )
-        val strategy = strategyFactory.getStrategy(ProfileType.OWN, profileData)
+        val strategy = strategyFactory.getStrategy(ProfileType.OWN, profileData, currentUuid)
 
         return EditUserProfileResponse(
             status = ResponseStatus.SUCCESS,

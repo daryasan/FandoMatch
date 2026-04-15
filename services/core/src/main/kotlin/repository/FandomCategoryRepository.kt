@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository
 import java.util.*
 
 @Repository
-interface FandomCategoryRepository : JpaRepository<FandomCategory, UUID>
+interface FandomCategoryRepository : JpaRepository<FandomCategory, UUID> {
+    fun findByName(name: String): FandomCategory?
+}

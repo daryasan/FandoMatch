@@ -24,10 +24,10 @@ class PostsController(
         return onControllerRequest(
             logger = logger,
             operationName = "POST /core/posts/get",
-            metaUuid = request.username,
+            metaUuid = request.uuid,
             errorMapper = { getPostListErrorResponse(it) }
         ) {
-            postsService.getPosts(request.username, request.page, request.propertySize)
+            postsService.getPosts(request.uuid, request.pagination?.cursorTimestamp, request.pagination?.propertySize)
         }
     }
 
@@ -50,12 +50,12 @@ class PostsController(
     @GetMapping("/{post_id}")
     fun getPost(
         @PathVariable("post_id") postId: String
-    ): ResponseEntity<CreatePostResponse> {
+    ): ResponseEntity<ExtendedPostResponse> {
         return onControllerRequest(
             logger = logger,
             operationName = "GET /core/posts/$postId",
             metaUuid = postId,
-            errorMapper = { getCreatePostErrorResponse(it) }
+            errorMapper = { getExtendedPostErrorResponse(it) }
         ) {
             postsService.getPost(postId)
         }
@@ -64,8 +64,7 @@ class PostsController(
     @GetMapping("/{post_id}/comments")
     fun getComments(
         @PathVariable("post_id") postId: String,
-        @RequestParam(required = false) page: Int?,
-        @RequestParam(required = false) size: Int?
+        @RequestBody request: CommentsGetRequest
     ): ResponseEntity<CommentListResponse> {
         return onControllerRequest(
             logger = logger,
@@ -73,7 +72,7 @@ class PostsController(
             metaUuid = postId,
             errorMapper = { getCommentListErrorResponse(it) }
         ) {
-            postsService.getComments(postId, page, size)
+            postsService.getComments(postId, request.cursorTimestamp, request.propertySize)
         }
     }
 

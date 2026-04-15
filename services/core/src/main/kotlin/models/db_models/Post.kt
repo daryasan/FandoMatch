@@ -2,7 +2,7 @@ package org.example.models.db_models
 
 import jakarta.persistence.*
 import java.time.Instant
-import java.util.*
+import java.util.UUID
 
 @Entity
 @Table(name = "post")
@@ -14,8 +14,8 @@ data class Post(
     @Column(name = "author_id", nullable = false)
     val authorId: UUID,
 
-    @Column(name = "fandom_id")
-    val fandomId: UUID? = null,
+    @Column(name = "fandom_ids", columnDefinition = "text[]")
+    val fandomIds: Array<String> = emptyArray(),
 
     @Column(nullable = false)
     val title: String,

@@ -43,6 +43,14 @@ fun getMatchFilterErrorResponse(exception: BusinessException) = MatchFilterRespo
     )
 )
 
+fun getCurrentFiltersErrorResponse(exception: BusinessException) = CurrentFiltersResponse(
+    status = ResponseStatus.ERROR,
+    errorResponse = Error(
+        errorCode = exception.code,
+        errorMessage = exception.message,
+    )
+)
+
 fun getPostListErrorResponse(exception: BusinessException) = PostListResponse(
     status = ResponseStatus.ERROR,
     errorResponse = Error(
@@ -52,6 +60,14 @@ fun getPostListErrorResponse(exception: BusinessException) = PostListResponse(
 )
 
 fun getCreatePostErrorResponse(exception: BusinessException) = CreatePostResponse(
+    status = ResponseStatus.ERROR,
+    errorResponse = Error(
+        errorCode = exception.code,
+        errorMessage = exception.message,
+    )
+)
+
+fun getExtendedPostErrorResponse(exception: BusinessException) = ExtendedPostResponse(
     status = ResponseStatus.ERROR,
     errorResponse = Error(
         errorCode = exception.code,
