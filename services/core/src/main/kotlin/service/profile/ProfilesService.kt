@@ -60,7 +60,6 @@ class ProfilesService(
             avatarMediaId = request.avatarMediaId ?: existing.avatarMediaId,
             backgroundMediaId = request.backgroundMediaId ?: existing.backgroundMediaId,
             gender = request.gender?.value ?: existing.gender,
-            birthDate = request.birthDate?.let { epochSecondsToBirthDate(it) } ?: existing.birthDate,
             city = request.city?.code?.value ?: existing.city,
             updatedAt = Instant.now()
         )

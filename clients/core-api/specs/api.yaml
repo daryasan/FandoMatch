@@ -56,6 +56,52 @@ paths:
               schema:
                 $ref: './definitions.yaml#/components/schemas/EditUserProfileResponse'
 
+  /core/user/profile/friends:
+    patch:
+      description: Получение списка друзей пользователя
+      tags:
+        - user
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - $ref: './definitions.yaml#/components/parameters/TokenHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './definitions.yaml#/components/schemas/GetRelatedUsersRequest'
+      responses:
+        '200':
+          description: Список друзей пользователя
+          content:
+            application/json:
+              schema:
+                $ref: './definitions.yaml#/components/schemas/FriendsResponse'
+
+  /core/user/profile/pending_requests:
+    patch:
+      description: получение списка заявок пользователя
+      tags:
+        - user
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - $ref: './definitions.yaml#/components/parameters/TokenHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './definitions.yaml#/components/schemas/GetRelatedUsersRequest'
+      responses:
+        '200':
+          description: Список заявок на лайки для пользователя
+          content:
+            application/json:
+              schema:
+                $ref: './definitions.yaml#/components/schemas/PendingRequestsResponse'
+
 
   # -------------------------
   # MATCHING
@@ -206,7 +252,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: './definitions.yaml#/components/schemas/CreatePostResponse'
+                $ref: './definitions.yaml#/components/schemas/ExtendedPostResponse'
 
   /core/posts/{post_id}/comments:
     get:
@@ -219,14 +265,12 @@ paths:
           required: true
           schema:
             type: string
-        - name: page
-          in: query
-          schema:
-            type: integer
-        - name: size
-          in: query
-          schema:
-            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './definitions.yaml#/components/schemas/CommentsGetRequest'
       responses:
         '200':
           description: Комментарии

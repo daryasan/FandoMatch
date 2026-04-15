@@ -81,8 +81,19 @@ components:
 
     EmptySuccess:
       type: object
-      properties: {}
+      properties: { }
       description: Пустой объект для успешных ответов без данных
+
+    TimestampPaginationRequest:
+      type: object
+      properties:
+        cursor_timestamp:
+          type: int64
+          description: time in epoch seconds as a cursor (last received item)
+        size:
+          type: integer
+      required:
+        - size
 
     # -------------------------
     # USER PROFILE
@@ -301,6 +312,54 @@ components:
         - status
 
 
+    GetRelatedUsersRequest:
+      type: object
+      properties:
+        uuid:
+          type: string
+      required:
+        - uuid
+
+    FriendsResponse:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ResponseStatus'
+        successResponse:
+          type: object
+          properties:
+            friends:
+              type: array
+              items:
+                $ref: '#/components/schemas/FriendUserProfileResponse'
+          required:
+            - friends
+        errorResponse:
+          $ref: '#/components/schemas/Error'
+      required:
+        - status
+
+
+    PendingRequestsResponse:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ResponseStatus'
+        successResponse:
+          type: object
+          properties:
+            requests:
+              type: array
+              items:
+                $ref: '#/components/schemas/PublicUserProfileResponse'
+          required:
+            - requests
+        errorResponse:
+          $ref: '#/components/schemas/Error'
+      required:
+        - status
+
+
     # -------------------------
     # MATCHING
     # -------------------------
@@ -464,11 +523,8 @@ components:
       properties:
         uuid:
           type: string
-        cursor_timestamp:
-          type: int64
-          description: time in epoch seconds as a cursor (last received post)
-        size:
-          type: integer
+        pagination:
+          $ref: '#/components/schemas/TimestampPaginationRequest'
       required:
         - uuid
 
@@ -510,6 +566,24 @@ components:
           type: string
         content:
           type: string
+        like_count:
+          type: integer
+        comment_count:
+          type: integer
+        author:
+          type: object
+          properties:
+            username:
+              type: string
+            uuid:
+              type: string
+            name:
+              type: string
+            avatar:
+              $ref: '#/components/schemas/MediaItem'
+          required:
+            - uuid
+            - username
         fandoms:
           type: array
           items:
@@ -526,6 +600,68 @@ components:
         - title
         - content
         - created_at
+        - author
+
+    ExtendedPostResponse:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ResponseStatus'
+        successResponse:
+          $ref: '#/components/schemas/ExtendedPost'
+        errorResponse:
+          $ref: '#/components/schemas/Error'
+      required:
+        - status
+
+    ExtendedPost:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        content:
+          type: string
+        like_count:
+          type: integer
+        comment_count:
+          type: integer
+        author:
+          type: object
+          properties:
+            username:
+              type: string
+            uuid:
+              type: string
+            name:
+              type: string
+            avatar:
+              $ref: '#/components/schemas/MediaItem'
+          required:
+            - uuid
+            - username
+        fandoms:
+          type: array
+          items:
+            $ref: '#/components/schemas/Fandom'
+        created_at:
+          type: long
+          description: epoch seconds
+        media_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/MediaItem'
+        comments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Comment'
+      required:
+        - id
+        - title
+        - content
+        - created_at
+        - author
 
     CreatePostResponse:
       type: object
@@ -561,33 +697,48 @@ components:
       required:
         - status
 
+
+    CommentsGetRequest:
+      type: object
+      properties:
+        cursor_timestamp:
+          type: int64
+          description: time in epoch seconds as a cursor (last received post)
+        size:
+          type: integer
+      required:
+        - size
+
     CommentListData:
       type: object
       properties:
         comments:
           type: array
           items:
-            type: object
-            properties:
-              id:
-                type: string
-              author_name:
-                type: string
-              author_username:
-                type: string
-              author_avatar_url:
-                type: string
-              content:
-                type: string
-              created_at:
-                type: long
-            required:
-              - id
-              - author_username
-              - content
-              - created_at
+            $ref: '#/components/schemas/Comment'
       required:
         - comments
+
+    Comment:
+      type: object
+      properties:
+        id:
+          type: string
+        author_name:
+          type: string
+        author_username:
+          type: string
+        author_avatar:
+          $ref: '#/components/schemas/MediaItem'
+        content:
+          type: string
+        created_at:
+          type: long
+      required:
+        - id
+        - author_username
+        - content
+        - created_at
 
     CommentListResponse:
       type: object
@@ -601,13 +752,12 @@ components:
       required:
         - status
 
-    # TODO добавить возможность убрать свой лайк (параметр isLike?)
     PostLikeSuccess:
       type: object
       properties:
         status:
           type: string
-          enum: [LIKED]
+          enum: [ LIKED, LIKE_REMOVED ]
 
     PostLikeResponse:
       type: object
@@ -626,13 +776,11 @@ components:
       properties:
         uuid:
           type: string
-        batch_size:
-          type: integer
-        cursor_timestamp:
-          type: int64
+        pagination:
+          $ref: '#/components/schemas/TimestampPaginationRequest'
       required:
         - uuid
-        - batch_size
+        - pagination
 
 
     # -------------------------

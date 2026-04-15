@@ -3,6 +3,7 @@ package org.example.service.profile
 import com.fandomatch.core.model.*
 import com.fandomatch.media.MediaService
 import org.example.models.ProfileData
+import org.example.repository.PostLikeRepository
 import org.example.util.birthDateToEpochSeconds
 import org.example.util.calculateAgeInSeconds
 import org.example.util.cityCodeToCity
@@ -38,7 +39,7 @@ class ConstructOwnProfile(profileData: ProfileData, mediaService: MediaService) 
             username = creds!!.username,
             email = creds.email,
             status = creds.status.name,
-            createdAt = creds.createdAt,
+            createdAt = creds.createdAt.toEpochSecond(),
             bio = prof.bio,
             avatar = resolveMediaItem(prof.avatarMediaId),
             background = resolveMediaItem(prof.backgroundMediaId),
@@ -71,7 +72,11 @@ class ConstructFriendProfile(profileData: ProfileData, mediaService: MediaServic
     }
 }
 
-class ConstructOtherProfile(profileData: ProfileData, mediaService: MediaService) :
+class ConstructOtherProfile(
+    profileData: ProfileData,
+    mediaService: MediaService,
+    private val postLikeRepository: PostLikeRepository
+) :
     ConstructProfileStrategy(ProfileType.OTHER, profileData, mediaService) {
 
     override fun construct(): PublicUserProfileResponse {
@@ -84,7 +89,8 @@ class ConstructOtherProfile(profileData: ProfileData, mediaService: MediaService
             avatar = resolveMediaItem(prof.avatarMediaId),
             background = resolveMediaItem(prof.backgroundMediaId),
             city = cityCodeToCity(prof.city),
-            fandoms = profileData.fandoms
+            fandoms = profileData.fandoms,
+            hasCurrentUserReacted =
         )
     }
 }
