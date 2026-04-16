@@ -58,13 +58,11 @@ class UserService(
     }
 
     fun findUser(
-        email: String?,
         username: String?,
     ): User {
-        if (email == null && username == null)
+        if (username == null)
             throw InvalidUserInputData("Cannot find user when all credentials are null")
-        username?.let { runCatching { return findByUsername(it) } }
-        email?.let { runCatching { return findByEmail(it) } }
+        username.let { runCatching { return findByUsername(it) } }
         throw UserNotFoundException("User not found by provided credentials")
     }
 

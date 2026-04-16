@@ -38,7 +38,7 @@ class ProfilesControllerTest {
 
     @Test
     fun `getProfile should return SUCCESS when service succeeds`() {
-        val request = UserProfileRequest(username = USERNAME)
+        val request = UserProfileRequest(uuid = USERNAME)
         val profileResponse = UserProfileResponse(
             status = ResponseStatus.SUCCESS,
             successResponse = PublicUserProfileResponse(
@@ -46,7 +46,9 @@ class ProfilesControllerTest {
                 uid = USER_ID.toString(),
                 name = "Test",
                 fandoms = listOf(),
-                hasCurrentUserReacted = false
+                hasCurrentUserReacted = false,
+                age = 20,
+                gender = Gender.FEMALE,
             )
         )
 
@@ -62,7 +64,7 @@ class ProfilesControllerTest {
 
     @Test
     fun `getProfile should return ERROR when user not found`() {
-        val request = UserProfileRequest(username = "nonexistent")
+        val request = UserProfileRequest(uuid = "nonexistent")
 
         every { tokenParserService.parse(token) } returns tokenData
         every { profilesService.getProfile(USER_ID, "nonexistent") } throws
@@ -88,7 +90,8 @@ class ProfilesControllerTest {
             age = 0L,
             status = "ACTIVE",
             createdAt = Instant.now().epochSecond,
-            fandoms = listOf()
+            fandoms = listOf(),
+            gender = Gender.FEMALE
         )
         val editResponse = EditUserProfileResponse(
             status = ResponseStatus.SUCCESS,

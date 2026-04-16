@@ -25,12 +25,12 @@ class ProfilesService(
     private val matchesService: MatchesService,
 ) {
 
-    fun findByUsername(username: String) = userProfileRepository.findByUsername(username)
-        .orElseThrow { UserNotFoundException("User not found: $username") }
+    fun findByUuid(uuid: String) = userProfileRepository.findById(UUID.fromString(uuid))
+        .orElseThrow { UserNotFoundException("User not found: $uuid") }
 
     @Transactional(readOnly = true)
-    fun getProfile(currentUuid: UUID, targetUsername: String): UserProfileResponse {
-        val targetProfile = findByUsername(targetUsername)
+    fun getProfile(currentUuid: UUID, targetUuid: String): UserProfileResponse {
+        val targetProfile = findByUuid(targetUuid)
         val profileType = determineProfileType(currentUuid, targetProfile.userId)
 
         val currentUserCredentials = if (profileType == ProfileType.OWN) {

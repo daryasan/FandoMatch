@@ -103,10 +103,10 @@ components:
     UserProfileRequest:
       type: object
       properties:
-        username:
+        uuid:
           type: string
       required:
-        - username
+        - uuid
 
     UserProfileResponse:
       type: object
@@ -186,6 +186,7 @@ components:
             - name
             - birth_date
             - age
+            - gender
             - status
             - created_at
             - fandoms
@@ -213,9 +214,16 @@ components:
                 $ref: '#/components/schemas/Fandom'
             has_current_user_reacted:
               type: boolean
+            age:
+              type: long
+              description: age in epoch seconds
+            gender:
+              $ref: '#/components/schemas/Gender'
           required:
             - uid
             - name
+            - age
+            - gender
             - has_current_user_reacted
             - fandoms
 
@@ -242,10 +250,17 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/Fandom'
+            age:
+              type: long
+              description: age in epoch seconds
+            gender:
+              $ref: '#/components/schemas/Gender'
           required:
             - uid
             - username
             - name
+            - age
+            - gender
 
     EditUserProfileRequest:
       type: object
@@ -623,6 +638,7 @@ components:
           required:
             - uuid
             - username
+            - name
         fandoms:
           type: array
           items:
@@ -644,6 +660,8 @@ components:
         - content
         - created_at
         - author
+        - like_count
+        - comment_count
 
     CreatePostResponse:
       type: object
@@ -812,6 +830,7 @@ components:
       required:
         - id
         - name
+        - category
 
     FandomCategory:
       type: string
@@ -839,7 +858,7 @@ components:
         categories:
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/FandomCategory'
       required:
         - categories
 

@@ -6,6 +6,7 @@ import com.fandomatch.notifications.PushNotificationService
 import jakarta.transaction.Transactional
 import org.example.client.UsersNotificationAdapter
 import org.example.exceptions.AlreadyReactedException
+import org.example.exceptions.FandomCategoryNotFoundException
 import org.example.exceptions.UserNotFoundException
 import org.example.models.db_models.Match
 import org.example.models.db_models.MatchAction
@@ -172,11 +173,11 @@ class MatchesService(
 
         val fandoms = filter.fandomIds?.mapNotNull { id ->
             val fandom = fandomRepository.findById(UUID.fromString(id)).orElse(null) ?: return@mapNotNull null
-            val category = fandomCategoryRepository.findById(fandom.categoryId).orElse(null)
+            val category = fandomCategoryRepository.findById(fandom.categoryId).orElseThrow { FandomCategoryNotFoundException(fandom.categoryId.toString()) }
             Fandom(
                 id = fandom.id.toString(),
                 name = fandom.name,
-                category = category?.let { FandomCategory.valueOf(it.name) }
+                category = category.let { FandomCategory.valueOf(it.name) }
             )
         }
 

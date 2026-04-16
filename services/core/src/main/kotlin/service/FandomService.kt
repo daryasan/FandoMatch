@@ -37,7 +37,9 @@ class FandomService(
     }
 
     fun getCategories(): FandomCategoryListResponse {
-        val categories = fandomCategoryRepository.findAll().map { it.name }
+        val categories = fandomCategoryRepository.findAll().map {
+            com.fandomatch.core.model.FandomCategory.valueOf(it.name)
+        }
 
         return FandomCategoryListResponse(
             status = ResponseStatus.SUCCESS,

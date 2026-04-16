@@ -1,6 +1,7 @@
 package utils
 
 import com.fandomatch.core.model.Fandom
+import com.fandomatch.core.model.FandomCategory
 import com.fandomatch.core.model.Gender
 import com.fandomatch.users.model.UserCredentials
 import org.example.models.ProfileData
@@ -40,6 +41,7 @@ fun createFandom(
 ) = Fandom(
     id = id.toString(),
     name = name,
+    category = FandomCategory.ANIME_MANGA,
 )
 
 fun createMatchFilter(

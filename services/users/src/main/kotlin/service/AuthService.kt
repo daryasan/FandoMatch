@@ -41,13 +41,12 @@ class AuthService(
 
     @Transactional
     fun login(
-        email: String?,
-        username: String?,
+        username: String,
         password: String
     ): AuthTokens {
         logger.info { "Got request for user login with username=$username" }
 
-        val foundUser = userService.findUser(email, username)
+        val foundUser = userService.findUser(username)
         userValidator.validateUserBeforeLogin(foundUser)
 
         userCredentialsService.verifyCredential(foundUser, password)

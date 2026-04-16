@@ -48,7 +48,6 @@ class AuthController(
     fun authLoginPost(@RequestBody userLoginRequest: UserLoginRequest): ResponseEntity<UserLoginResponse> {
         val tokens = try {
             authService.login(
-                email = userLoginRequest.email,
                 username = userLoginRequest.username,
                 password = userLoginRequest.hashedPassword,
             )

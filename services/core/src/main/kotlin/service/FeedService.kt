@@ -2,6 +2,7 @@ package org.example.service
 
 import com.fandomatch.core.model.*
 import com.fandomatch.media.MediaService
+import org.example.exceptions.FandomCategoryNotFoundException
 import org.example.exceptions.UserNotFoundException
 import org.example.repository.CommentRepository
 import org.example.repository.FandomCategoryRepository
@@ -71,11 +72,11 @@ class FeedService(
 
         val fandoms = if (fandomIds.isNotEmpty()) {
             fandomRepository.findAllById(fandomIds.map { UUID.fromString(it) }).map { fandom ->
-                val category = fandomCategoryRepository.findById(fandom.categoryId).orElse(null)
+                val category = fandomCategoryRepository.findById(fandom.categoryId).orElseThrow { FandomCategoryNotFoundException(fandom.categoryId.toString()) }
                 Fandom(
                     id = fandom.id.toString(),
                     name = fandom.name,
-                    category = category?.let { FandomCategory.valueOf(it.name) }
+                    category = category.let { FandomCategory.valueOf(it.name) }
                 )
             }
         } else null

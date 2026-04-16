@@ -8,7 +8,12 @@ import org.example.util.birthDateToEpochSeconds
 import org.example.util.calculateAgeInSeconds
 import org.example.util.cityCodeToCity
 import org.example.util.genderStringToEnum
+import java.time.Instant
+import java.time.LocalDate
+import java.time.LocalTime
+import java.time.ZoneOffset
 import java.util.UUID
+import kotlin.time.Duration.Companion.days
 
 abstract class ConstructProfileStrategy(
     val selector: ProfileType,
@@ -26,6 +31,10 @@ abstract class ConstructProfileStrategy(
                 url = mediaService.generateSignedDownloadUrl(it)
             )
         }
+
+    protected fun calculateAge(birthDate: LocalDate): Long {
+        return (Instant.now().epochSecond - birthDate.toEpochSecond(LocalTime.now(), ZoneOffset.UTC)) / 365
+    }
 }
 
 class ConstructOwnProfile(profileData: ProfileData, mediaService: MediaService) :
@@ -45,7 +54,7 @@ class ConstructOwnProfile(profileData: ProfileData, mediaService: MediaService) 
             avatar = resolveMediaItem(prof.avatarMediaId),
             background = resolveMediaItem(prof.backgroundMediaId),
             name = prof.name!!,
-            gender = genderStringToEnum(prof.gender),
+            gender = genderStringToEnum(prof.gender)!!,
             birthDate = birthDateToEpochSeconds(prof.birthDate!!),
             age = calculateAgeInSeconds(prof.birthDate),
             city = cityCodeToCity(prof.city),
@@ -68,7 +77,9 @@ class ConstructFriendProfile(profileData: ProfileData, mediaService: MediaServic
             avatar = resolveMediaItem(prof.avatarMediaId),
             background = resolveMediaItem(prof.backgroundMediaId),
             city = cityCodeToCity(prof.city),
-            fandoms = profileData.fandoms
+            fandoms = profileData.fandoms,
+            age = calculateAge(prof.birthDate!!),
+            gender = genderStringToEnum(prof.gender)!!
         )
     }
 }
@@ -92,7 +103,9 @@ class ConstructOtherProfile(
             background = resolveMediaItem(prof.backgroundMediaId),
             city = cityCodeToCity(prof.city),
             fandoms = profileData.fandoms,
-            hasCurrentUserReacted = matchActionRepository.findByUserIdAndTargetUserId(currentUserId, prof.userId) != null
+            hasCurrentUserReacted = matchActionRepository.findByUserIdAndTargetUserId(currentUserId, prof.userId) != null,
+            age = calculateAge(prof.birthDate!!),
+            gender = genderStringToEnum(prof.gender)!!
         )
     }
 }
