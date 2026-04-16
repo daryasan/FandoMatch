@@ -13,7 +13,7 @@ data class MatchFilter(
     @Column(name = "user_id")
     val userId: UUID,
 
-    val gender: String? = null,
+    val gender: List<String>? = null,
 
     @Column(name = "age_from")
     val ageFrom: Int? = null,
@@ -21,11 +21,12 @@ data class MatchFilter(
     @Column(name = "age_to")
     val ageTo: Int? = null,
 
-    val city: String? = null,
+    @Column(name = "only_in_user_city")
+    val onlyInUserCity: Boolean? = false,
 
-    @Column(name = "fandom_category")
-    val fandomCategory: UUID? = null,
+    @Column(name = "fandom_categories")
+    val fandomCategory: List<String>? = null,
 
-    @Column(name = "fandom_id")
-    val fandomId: UUID? = null
+    @Column(name = "fandom_ids")
+    val fandomIds: List<String>? = null
 )

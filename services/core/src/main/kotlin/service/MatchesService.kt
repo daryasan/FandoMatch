@@ -6,6 +6,7 @@ import com.fandomatch.notifications.PushNotificationService
 import jakarta.transaction.Transactional
 import org.example.client.UsersNotificationAdapter
 import org.example.exceptions.AlreadyReactedException
+import org.example.exceptions.FandomCategoryNotFoundException
 import org.example.exceptions.UserNotFoundException
 import org.example.models.db_models.Match
 import org.example.models.db_models.MatchAction
@@ -26,6 +27,8 @@ class MatchesService(
     private val userProfilesRepository: UserProfileRepository,
     private val matchFilterRepository: MatchFilterRepository,
     private val fandomService: FandomService,
+    private val fandomRepository: FandomRepository,
+    private val fandomCategoryRepository: FandomCategoryRepository,
     private val matchPendingRepository: MatchPendingRepository,
     private val matchEventProducer: MatchEventProducer,
     private val matchActionRepository: MatchActionRepository,
@@ -48,15 +51,20 @@ class MatchesService(
     fun getNextCandidates(userId: UUID, batchSize: Int): MatchCandidateBatchResponse {
         val filters = matchFilterRepository.findById(userId).orElse(MatchFilter(userId = userId))
 
+        val userCity = if (filters.onlyInUserCity == true) {
+            userProfilesRepository.findById(userId).orElse(null)?.city
+        } else null
+
         val poolSize = batchSize * POOL_MULTIPLIER
         val candidates = userProfilesRepository.findCandidates(
             userId = userId,
-            gender = filters.gender,
-            city = filters.city,
+            gender = filters.gender?.firstOrNull(),
+            city = userCity,
             ageFrom = filters.ageFrom,
             ageTo = filters.ageTo,
-            fandomId = filters.fandomId,
-            fandomCategory = filters.fandomCategory,
+            fandomId = filters.fandomIds?.firstOrNull()?.let { UUID.fromString(it) },
+            fandomCategory = filters.fandomCategory?.firstOrNull()
+                ?.let { name -> fandomCategoryRepository.findByName(name)?.id },
             pageable = PageRequest.of(0, poolSize)
         )
 
@@ -84,32 +92,30 @@ class MatchesService(
         )
     }
 
-
     @Transactional
     fun react(userId: UUID, targetUuid: UUID, action: String): MatchActionResponse {
         if (!userProfilesRepository.existsById(targetUuid)) {
             throw UserNotFoundException(targetUuid.toString())
         }
-        val targetUserId = targetUuid
 
-        val existingAction = matchActionRepository.findByUserIdAndTargetUserId(userId, targetUserId)
+        val existingAction = matchActionRepository.findByUserIdAndTargetUserId(userId, targetUuid)
         if (existingAction != null) {
-            throw AlreadyReactedException(targetUserId.toString())
+            throw AlreadyReactedException(targetUuid.toString())
         }
 
         val matchAction = MatchAction(
             userId = userId,
-            targetUserId = targetUserId,
+            targetUserId = targetUuid,
             action = action
         )
         matchActionRepository.save(matchAction)
-        matchPendingRepository.deleteByUserIdAndSuggestedUserId(userId, targetUserId)
+        matchPendingRepository.deleteByUserIdAndSuggestedUserId(userId, targetUuid)
 
-        val oppositeAction = hasTargetUserLikedCurrentUser(userId, targetUserId)
+        val oppositeAction = hasTargetUserLikedCurrentUser(userId, targetUuid)
         val isMutual = oppositeAction?.action == LIKE && action == LIKE
 
         val result = if (isMutual) {
-            val (first, second) = if (userId < targetUserId) userId to targetUserId else targetUserId to userId
+            val (first, second) = if (userId < targetUuid) userId to targetUuid else targetUuid to userId
             val match = Match(userId1 = first, userId2 = second)
             val savedMatch = matchRepository.save(match)
             matchEventProducer.sendMatchEvent(savedMatch.id!!, first, second)
@@ -117,22 +123,20 @@ class MatchesService(
             usersNotificationAdapter.getFcmToken(userId)?.let { token ->
                 pushNotificationService.send(token, "Новый матч!", "У вас новый матч!")
             }
-            usersNotificationAdapter.getFcmToken(targetUserId)?.let { token ->
+            usersNotificationAdapter.getFcmToken(targetUuid)?.let { token ->
                 pushNotificationService.send(token, "Новый матч!", "У вас новый матч!")
             }
 
-            MatchActionResult(
-                status = MatchActionResult.Status.MATCH,
-            )
+            MatchActionResult(status = MatchActionResult.Status.MATCH)
         } else {
             if (action == LIKE) {
-                likeEventProducer.send(userId, targetUserId)
-                usersNotificationAdapter.getFcmToken(targetUserId)?.let { token ->
+                likeEventProducer.send(userId, targetUuid)
+                usersNotificationAdapter.getFcmToken(targetUuid)?.let { token ->
                     pushNotificationService.send(token, "Кто-то оценил ваш профиль!", "Зайдите и посмотрите!")
                 }
             }
             MatchActionResult(
-                status = if (action == LIKE) MatchActionResult.Status.LIKED else MatchActionResult.Status.DISLIKED,
+                status = if (action == LIKE) MatchActionResult.Status.LIKED else MatchActionResult.Status.DISLIKED
             )
         }
 
@@ -145,6 +149,55 @@ class MatchesService(
     fun hasTargetUserLikedCurrentUser(currentUserId: UUID, targetUserId: UUID) =
         matchActionRepository.findByUserIdAndTargetUserId(targetUserId, currentUserId)
 
+    fun setFilter(userId: UUID, request: MatchFilterRequest): MatchFilterResponse {
+        val filter = MatchFilter(
+            userId = userId,
+            gender = request.filters.gender?.map { it.name },
+            onlyInUserCity = request.filters.onlyInUserCity,
+            ageFrom = request.filters.ageFrom,
+            ageTo = request.filters.ageTo,
+            fandomCategory = request.filters.fandomCategory?.map { it.name },
+            fandomIds = request.filters.fandomId?.map { it.id }
+        )
+        matchFilterRepository.save(filter)
+
+        return MatchFilterResponse(status = ResponseStatus.SUCCESS)
+    }
+
+    fun getCurrentFilters(userId: UUID): CurrentFiltersResponse {
+        val filter = matchFilterRepository.findById(userId).orElse(null)
+            ?: return CurrentFiltersResponse(
+                status = ResponseStatus.SUCCESS,
+                successResponse = MatchFilter()
+            )
+
+        val fandoms = filter.fandomIds?.mapNotNull { id ->
+            val fandom = fandomRepository.findById(UUID.fromString(id)).orElse(null) ?: return@mapNotNull null
+            val category = fandomCategoryRepository.findById(fandom.categoryId).orElseThrow { FandomCategoryNotFoundException(fandom.categoryId.toString()) }
+            Fandom(
+                id = fandom.id.toString(),
+                name = fandom.name,
+                category = category.let { FandomCategory.valueOf(it.name) }
+            )
+        }
+
+        return CurrentFiltersResponse(
+            status = ResponseStatus.SUCCESS,
+            successResponse = MatchFilter(
+                gender = filter.gender?.mapNotNull { name ->
+                    runCatching { Gender.valueOf(name) }.getOrNull()
+                },
+                ageFrom = filter.ageFrom,
+                ageTo = filter.ageTo,
+                onlyInUserCity = filter.onlyInUserCity,
+                fandomCategory = filter.fandomCategory?.mapNotNull { name ->
+                    runCatching { FandomCategory.valueOf(name) }.getOrNull()
+                },
+                fandomId = fandoms
+            )
+        )
+    }
+
     private fun calculateCompatibility(currentUserFandoms: List<Fandom>, candidateFandoms: List<Fandom>): Double {
         val currentSet = currentUserFandoms.toSet()
         val candidateSet = candidateFandoms.toSet()
@@ -153,22 +206,5 @@ class MatchesService(
         return if (currentSet.isNotEmpty() && candidateSet.isNotEmpty()) {
             (common * 100).toDouble() / min(currentSet.size, candidateSet.size)
         } else 0.0
-    }
-
-    fun setFilter(userId: UUID, request: MatchFilterRequest): MatchFilterResponse {
-        val filter = MatchFilter(
-            userId = userId,
-            gender = request.gender?.value,
-            city = request.city?.code?.value,
-            ageFrom = request.ageFrom,
-            ageTo = request.ageTo,
-            fandomCategory = request.fandomCategory?.let { UUID.fromString(it) },
-            fandomId = request.fandomId?.let { UUID.fromString(it) }
-        )
-        matchFilterRepository.save(filter)
-
-        return MatchFilterResponse(
-            status = ResponseStatus.SUCCESS,
-        )
     }
 }

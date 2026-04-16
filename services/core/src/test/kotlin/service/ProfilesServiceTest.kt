@@ -9,6 +9,7 @@ import io.mockk.junit5.MockKExtension
 import org.example.client.UsersAdapter
 import org.example.exceptions.UserNotFoundException
 import org.example.models.ProfileData
+import org.example.repository.MatchActionRepository
 import org.example.repository.UserProfileRepository
 import org.example.service.FandomService
 import org.example.service.MatchesService
@@ -51,6 +52,9 @@ class ProfilesServiceTest {
     @MockK(relaxed = true)
     lateinit var mediaService: MediaService
 
+    @MockK
+    lateinit var matchActionRepository : MatchActionRepository
+
     @InjectMockKs
     private lateinit var profilesService: ProfilesService
 
@@ -63,7 +67,9 @@ class ProfilesServiceTest {
         every { userProfileRepository.findByUsername(USERNAME) } returns Optional.of(userProfile)
         every { usersAdapter.getUserCredentialsByUuid(USER_ID) } returns creds
         every { fandomService.getFandoms(USER_ID) } returns fandoms
-        every { strategyFactory.getStrategy(ProfileType.OWN, any()) } answers {
+        every {
+            strategyFactory.getStrategy(ProfileType.OWN, any(), USER_ID)
+        } answers {
             ConstructOwnProfile(secondArg(), mediaService)
         }
 
@@ -82,7 +88,7 @@ class ProfilesServiceTest {
         every { userProfileRepository.findByUsername(TARGET_USERNAME) } returns Optional.of(targetProfile)
         every { fandomService.getFandoms(TARGET_USER_ID) } returns fandoms
         every { matchesService.areFriends(USER_ID, TARGET_USER_ID) } returns true
-        every { strategyFactory.getStrategy(ProfileType.FRIEND, any()) } answers {
+        every { strategyFactory.getStrategy(ProfileType.FRIEND, any(), USER_ID) } answers {
             ConstructFriendProfile(secondArg(), mediaService)
         }
 
@@ -101,8 +107,8 @@ class ProfilesServiceTest {
         every { userProfileRepository.findByUsername(TARGET_USERNAME) } returns Optional.of(targetProfile)
         every { fandomService.getFandoms(TARGET_USER_ID) } returns fandoms
         every { matchesService.areFriends(USER_ID, TARGET_USER_ID) } returns false
-        every { strategyFactory.getStrategy(ProfileType.OTHER, any()) } answers {
-            ConstructOtherProfile(secondArg(), mediaService)
+        every { strategyFactory.getStrategy(ProfileType.OTHER, any(), USER_ID) } answers {
+            ConstructOtherProfile(secondArg(), mediaService, matchActionRepository, USER_ID)
         }
 
         val result = profilesService.getProfile(USER_ID, TARGET_USERNAME)
@@ -136,7 +142,7 @@ class ProfilesServiceTest {
         every { userProfileRepository.save(any()) } answers { firstArg() }
         every { usersAdapter.getUserCredentialsByUuid(USER_ID) } returns creds
         every { fandomService.getFandoms(USER_ID) } returns fandoms
-        every { strategyFactory.getStrategy(ProfileType.OWN, any()) } answers {
+        every { strategyFactory.getStrategy(ProfileType.OWN, any(), USER_ID) } answers {
             ConstructOwnProfile(secondArg(), mediaService)
         }
 

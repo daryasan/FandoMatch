@@ -25,12 +25,12 @@ class ProfilesService(
     private val matchesService: MatchesService,
 ) {
 
-    fun findByUsername(username: String) = userProfileRepository.findByUsername(username)
-        .orElseThrow { UserNotFoundException("User not found: $username") }
+    fun findByUuid(uuid: String) = userProfileRepository.findById(UUID.fromString(uuid))
+        .orElseThrow { UserNotFoundException("User not found: $uuid") }
 
     @Transactional(readOnly = true)
-    fun getProfile(currentUuid: UUID, targetUsername: String): UserProfileResponse {
-        val targetProfile = findByUsername(targetUsername)
+    fun getProfile(currentUuid: UUID, targetUuid: String): UserProfileResponse {
+        val targetProfile = findByUuid(targetUuid)
         val profileType = determineProfileType(currentUuid, targetProfile.userId)
 
         val currentUserCredentials = if (profileType == ProfileType.OWN) {
@@ -45,7 +45,7 @@ class ProfilesService(
             fandoms = fandoms
         )
 
-        val strategy = strategyFactory.getStrategy(profileType, profileData)
+        val strategy = strategyFactory.getStrategy(profileType, profileData, currentUuid)
         return UserProfileResponse(status = ResponseStatus.SUCCESS, successResponse = strategy.construct())
     }
 
@@ -60,8 +60,7 @@ class ProfilesService(
             avatarMediaId = request.avatarMediaId ?: existing.avatarMediaId,
             backgroundMediaId = request.backgroundMediaId ?: existing.backgroundMediaId,
             gender = request.gender?.value ?: existing.gender,
-            birthDate = request.birthDate?.let { epochSecondsToBirthDate(it) } ?: existing.birthDate,
-            city = request.city?.code?.value ?: existing.city,
+            city = request.city?.nameEn ?: existing.city,
             updatedAt = Instant.now()
         )
 
@@ -75,7 +74,7 @@ class ProfilesService(
             userProfile = updated,
             fandoms = fandoms
         )
-        val strategy = strategyFactory.getStrategy(ProfileType.OWN, profileData)
+        val strategy = strategyFactory.getStrategy(ProfileType.OWN, profileData, currentUuid)
 
         return EditUserProfileResponse(
             status = ResponseStatus.SUCCESS,

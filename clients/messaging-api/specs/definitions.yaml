@@ -57,7 +57,7 @@ components:
 
 
     # -------------------------
-    # MEDIA (inline — importMappings в build.gradle.kts переиспользует com.fandomatch.core.model)
+    # MEDIA
     # -------------------------
 
     MediaType:
@@ -252,6 +252,8 @@ components:
     ChatMessagesRequest:
       type: object
       properties:
+        chat_id:
+          type: string
         before_timestamp:
           type: integer
           format: int64
@@ -259,6 +261,7 @@ components:
         size:
           type: integer
       required:
+        - chat_id
         - size
 
     ChatMessagesData:

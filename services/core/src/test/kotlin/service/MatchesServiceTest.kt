@@ -8,6 +8,7 @@ import io.mockk.impl.annotations.MockK
 import io.mockk.junit5.MockKExtension
 import org.example.exceptions.AlreadyReactedException
 import org.example.exceptions.UserNotFoundException
+import org.example.models.db_models.Match
 import org.example.models.db_models.MatchAction
 import org.example.models.db_models.MatchFilter
 import org.example.models.db_models.MatchPending
@@ -116,7 +117,7 @@ class MatchesServiceTest {
         every { matchPendingRepository.deleteByUserIdAndSuggestedUserId(USER_ID, TARGET_USER_ID) } just runs
         every { matchActionRepository.findByUserIdAndTargetUserId(TARGET_USER_ID, USER_ID) } returns oppositeAction
         every { matchRepository.save(any()) } answers {
-            val arg = firstArg<org.example.models.db_models.Match>()
+            val arg = firstArg<Match>()
             arg.copy(id = UUID.randomUUID())
         }
         every { matchEventProducer.sendMatchEvent(any(), any(), any()) } just runs
@@ -208,9 +209,11 @@ class MatchesServiceTest {
     @Test
     fun `setFilter should save filter and return success`() {
         val request = MatchFilterRequest(
-            gender = Gender.MALE,
-            ageFrom = 18,
-            ageTo = 30
+            filters = MatchFilter(
+                gender = listOf(Gender.MALE),
+                ageFrom = 18,
+                ageTo = 30
+            )
         )
 
         every { matchFilterRepository.save(any()) } answers { firstArg() }
@@ -220,14 +223,16 @@ class MatchesServiceTest {
         assertEquals(ResponseStatus.SUCCESS, result.status)
         verify(exactly = 1) {
             matchFilterRepository.save(match {
-                it.userId == USER_ID && it.gender == "MALE" && it.ageFrom == 18 && it.ageTo == 30
+                it.userId == USER_ID && it.gender == listOf("MALE") && it.ageFrom == 18 && it.ageTo == 30
             })
         }
     }
 
     @Test
     fun `setFilter should handle null filter values`() {
-        val request = MatchFilterRequest()
+        val request = MatchFilterRequest(
+            filters = MatchFilter()
+        )
 
         every { matchFilterRepository.save(any()) } answers { firstArg() }
 

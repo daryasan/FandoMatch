@@ -22,24 +22,10 @@ class FandomController(
         return onControllerRequest(
             logger = logger,
             operationName = "POST /core/fandoms/user",
-            metaUuid = request.username,
+            metaUuid = request.uuid,
             errorMapper = { getFandomListErrorResponse(it) }
         ) {
-            fandomService.getUserFandoms(request.username)
-        }
-    }
-
-    @GetMapping("/all")
-    fun getAllFandoms(
-        @RequestParam(required = false) page: Int?,
-        @RequestParam(required = false) size: Int?
-    ): ResponseEntity<FandomListResponse> {
-        return onControllerRequest(
-            logger = logger,
-            operationName = "GET /core/fandoms/all",
-            errorMapper = { getFandomListErrorResponse(it) }
-        ) {
-            fandomService.getAllFandomsPaginated(page, size)
+            fandomService.getUserFandoms(request.uuid)
         }
     }
 
@@ -61,7 +47,7 @@ class FandomController(
         return onControllerRequest(
             logger = logger,
             operationName = "POST /core/fandoms/request-new",
-            metaUuid = request.authorUsername,
+            metaUuid = request.authorUuid,
             errorMapper = { getFandomRequestCreateErrorResponse(it) }
         ) {
             fandomService.requestNewFandom(request)

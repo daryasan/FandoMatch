@@ -34,7 +34,7 @@ class ProfilesController(
             metaUuid = uuid.toString(),
             errorMapper = { getUserProfileErrorResponse(it) }
         ) {
-            profilesService.getProfile(uuid, request.username)
+            profilesService.getProfile(uuid, request.uuid)
         }
     }
 

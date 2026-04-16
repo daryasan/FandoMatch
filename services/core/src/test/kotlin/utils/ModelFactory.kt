@@ -1,6 +1,8 @@
 package utils
 
 import com.fandomatch.core.model.Fandom
+import com.fandomatch.core.model.FandomCategory
+import com.fandomatch.core.model.Gender
 import com.fandomatch.users.model.UserCredentials
 import org.example.models.ProfileData
 import org.example.models.db_models.*
@@ -36,29 +38,28 @@ fun createUserProfile(
 fun createFandom(
     id: UUID = UUID.randomUUID(),
     name: String = "Anime",
-    description: String? = "Anime fandom"
 ) = Fandom(
     id = id.toString(),
     name = name,
-    description = description
+    category = FandomCategory.ANIME_MANGA,
 )
 
 fun createMatchFilter(
     userId: UUID = Constants.USER_ID,
-    gender: String? = null,
+    gender: String = Gender.FEMALE.name,
     ageFrom: Int? = null,
     ageTo: Int? = null,
-    city: String? = null,
+    onlyInUserCity: Boolean? = null,
     fandomCategory: UUID? = null,
     fandomId: UUID? = null
 ) = MatchFilter(
     userId = userId,
-    gender = gender,
+    gender = listOf(gender),
     ageFrom = ageFrom,
     ageTo = ageTo,
-    city = city,
-    fandomCategory = fandomCategory,
-    fandomId = fandomId
+    onlyInUserCity = onlyInUserCity,
+    fandomCategory = listOf(fandomCategory.toString()),
+    fandomIds = listOf(fandomId.toString())
 )
 
 fun createMatchAction(

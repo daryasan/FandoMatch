@@ -1,5 +1,6 @@
 package org.example.controller
 
+import com.fandomatch.core.model.GetFeedRequest
 import com.fandomatch.core.model.PostListResponse
 import io.github.oshai.kotlinlogging.KLogging
 import org.example.service.FeedService
@@ -21,8 +22,7 @@ class FeedController(
     @GetMapping("/feed")
     fun getFeed(
         @RequestHeader("Authorization") token: String,
-        @RequestParam(required = false) page: Int?,
-        @RequestParam(required = false) size: Int?
+        @RequestBody request: GetFeedRequest
     ): ResponseEntity<PostListResponse> {
         val uuid = tokenParserService.parse(token).userId
         return onControllerRequest(
@@ -31,7 +31,7 @@ class FeedController(
             metaUuid = uuid.toString(),
             errorMapper = { getPostListErrorResponse(it) }
         ) {
-            feedService.getFeed(uuid, page, size)
+            feedService.getFeed(uuid, request.pagination.cursorTimestamp, request.pagination.propertySize)
         }
     }
 }

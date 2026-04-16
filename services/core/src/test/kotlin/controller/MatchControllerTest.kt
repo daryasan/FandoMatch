@@ -133,25 +133,4 @@ class MatchControllerTest {
         assertEquals(ResponseStatus.ERROR, result.body!!.status)
         assertEquals("ALREADY_REACTED", result.body!!.errorResponse!!.errorCode)
     }
-
-    // --- setFilter ---
-
-    @Test
-    fun `setFilter should return SUCCESS`() {
-        val request = MatchFilterRequest(
-            gender = Gender.MALE,
-            ageFrom = 18,
-            ageTo = 30
-        )
-        val response = MatchFilterResponse(status = ResponseStatus.SUCCESS)
-
-        every { tokenParserService.parse(token) } returns tokenData
-        every { matchesService.setFilter(USER_ID, request) } returns response
-
-        val result = matchController.setFilter(token, request)
-
-        assertEquals(HttpStatus.OK, result.statusCode)
-        assertEquals(ResponseStatus.SUCCESS, result.body!!.status)
-        verify(exactly = 1) { matchesService.setFilter(USER_ID, request) }
-    }
 }

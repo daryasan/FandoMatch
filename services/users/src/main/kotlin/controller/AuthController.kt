@@ -36,6 +36,7 @@ class AuthController(
             UserRegistrationResponse(
                 status = ResponseStatus.SUCCESS,
                 successResponse = RefreshAndAccessTokens(
+                    uuid = tokens.uuid,
                     accessToken = tokens.accessToken,
                     refreshToken = tokens.refreshToken
                 )
@@ -47,7 +48,6 @@ class AuthController(
     fun authLoginPost(@RequestBody userLoginRequest: UserLoginRequest): ResponseEntity<UserLoginResponse> {
         val tokens = try {
             authService.login(
-                email = userLoginRequest.email,
                 username = userLoginRequest.username,
                 password = userLoginRequest.hashedPassword,
             )
@@ -58,6 +58,7 @@ class AuthController(
             UserLoginResponse(
                 status = ResponseStatus.SUCCESS,
                 successResponse = RefreshAndAccessTokens(
+                    uuid = tokens.uuid,
                     accessToken = tokens.accessToken,
                     refreshToken = tokens.refreshToken
                 )

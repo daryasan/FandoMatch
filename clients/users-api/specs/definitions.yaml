@@ -73,13 +73,12 @@ components:
     UserLoginRequest:
       type: object
       properties:
-        email:
-          type: string
         username:
           type: string
         hashed_password:
           type: string
       required:
+        - username
         - hashed_password
 
     UserLoginResponse:
@@ -228,11 +227,15 @@ components:
     RefreshAndAccessTokens:
       type: object
       properties:
+        uuid:
+          type: string
+          format: uuid
         access_token:
           type: string
         refresh_token:
           type: string
       required:
+        - uuid
         - access_token
         - refresh_token
 

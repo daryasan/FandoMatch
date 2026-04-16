@@ -17,6 +17,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.http.HttpStatus
 import utils.Constants.USER_ID
 import utils.Constants.USERNAME
+import java.time.Instant
 import java.time.OffsetDateTime
 import java.time.ZoneOffset
 
@@ -37,13 +38,17 @@ class ProfilesControllerTest {
 
     @Test
     fun `getProfile should return SUCCESS when service succeeds`() {
-        val request = UserProfileRequest(username = USERNAME)
+        val request = UserProfileRequest(uuid = USERNAME)
         val profileResponse = UserProfileResponse(
             status = ResponseStatus.SUCCESS,
             successResponse = PublicUserProfileResponse(
                 profileType = ProfileType.OTHER,
                 uid = USER_ID.toString(),
-                name = "Test"
+                name = "Test",
+                fandoms = listOf(),
+                hasCurrentUserReacted = false,
+                age = 20,
+                gender = Gender.FEMALE,
             )
         )
 
@@ -59,11 +64,11 @@ class ProfilesControllerTest {
 
     @Test
     fun `getProfile should return ERROR when user not found`() {
-        val request = UserProfileRequest(username = "nonexistent")
+        val request = UserProfileRequest(uuid = "nonexistent")
 
         every { tokenParserService.parse(token) } returns tokenData
         every { profilesService.getProfile(USER_ID, "nonexistent") } throws
-                UserNotFoundException("nonexistent")
+            UserNotFoundException("nonexistent")
 
         val result = profilesController.getProfile(token, request)
 
@@ -84,7 +89,9 @@ class ProfilesControllerTest {
             birthDate = 946684800L,
             age = 0L,
             status = "ACTIVE",
-            createdAt = OffsetDateTime.of(2024, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC)
+            createdAt = Instant.now().epochSecond,
+            fandoms = listOf(),
+            gender = Gender.FEMALE
         )
         val editResponse = EditUserProfileResponse(
             status = ResponseStatus.SUCCESS,
@@ -107,7 +114,7 @@ class ProfilesControllerTest {
 
         every { tokenParserService.parse(token) } returns tokenData
         every { profilesService.editProfile(USER_ID, request) } throws
-                UserNotFoundException(USER_ID.toString())
+            UserNotFoundException(USER_ID.toString())
 
         val result = profilesController.editProfile(token, request)
 

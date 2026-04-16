@@ -56,7 +56,7 @@ create table if not exists fandom_request (
     name            TEXT NOT NULL,
     description     text,
     category        text,
-    author_username text not null,
+    author_uuid text not null,
     status          text not null default 'PENDING'
         check (status in ('PENDING', 'APPROVED', 'REJECTED')),
     created_at      timestamp not null default now()
