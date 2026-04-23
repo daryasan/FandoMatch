@@ -102,8 +102,11 @@ containers:
 
 volumes:
   users-db-data:
-    size: 10Gib
+    type: ssd
+    size: 2Gib
   core-db-data:
-    size: 10Gib
+    type: ssd
+    size: 2Gib
   messaging-db-data:
-    size: 10Gib
+    type: ssd
+    size: 2GiB
