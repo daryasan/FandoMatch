@@ -27,14 +27,6 @@ clients:
   core-service:
     url: http://localhost:8082
 
-media:
-  s3:
-    bucket: fandomatch
-    region: ru-central1
-    access-key: YCAJE1BujfcirzO0aHi7XKrIi
-    secret-key: YCNgp2QJ7108w49yO1gH2USeMVypphyTTeVbQaMQ
-    upload-ttl-minutes: 5
-    download-ttl-minutes: 60
 
 #notifications:
 #  firebase:
