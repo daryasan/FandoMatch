@@ -1,0 +1,20 @@
+meta {
+  id: core-get-friends
+  name: Get Friends
+  type: http
+  method: PATCH
+}
+
+patch {
+  url: http://localhost:8080/core/user/profile/friends
+}
+
+headers {
+Authorization: {{auth_token}}
+  Content-Type: application/json
+}
+
+body:json {
+  {"uuid":"550e8400-e29b-41d4-a716-446655440000"}
+}
+

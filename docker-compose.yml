@@ -102,13 +102,15 @@ services:
       SERVICE_API_KEY: ${SERVICE_API_KEY}
       ACCESS_EXPIRATION: ${ACCESS_EXPIRATION}
       REFRESH_EXPIRATION_DAYS: ${REFRESH_EXPIRATION_DAYS}
+      FIREBASE_CREDENTIALS_JSON: ${FIREBASE_CREDENTIALS_JSON}
+      FIREBASE_PROJECT_ID: ${FIREBASE_PROJECT_ID}
     depends_on:
       users-db:
         condition: service_healthy
       kafka:
         condition: service_healthy
     healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:8081/actuator/health || exit 1"]
+      test: ["CMD-SHELL", "curl -f http://users:8081/actuator/health || exit 1"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -123,6 +125,8 @@ services:
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
       SPRING_PROFILES_ACTIVE: uat
       SERVICE_API_KEY: ${SERVICE_API_KEY}
+      FIREBASE_CREDENTIALS_JSON: ${FIREBASE_CREDENTIALS_JSON}
+      FIREBASE_PROJECT_ID: ${FIREBASE_PROJECT_ID}
       S3_BUCKET: ${S3_BUCKET}
       S3_REGION: ${S3_REGION}
       S3_ACCESS_KEY: ${S3_ACCESS_KEY}
@@ -131,7 +135,7 @@ services:
       core-db:
         condition: service_healthy
       users:
-        condition: service_started
+        condition: service_healthy
       kafka:
         condition: service_healthy
 
@@ -139,14 +143,17 @@ services:
     build:
       context: .
       dockerfile: services/messaging/Dockerfile
-    container_name: chats
+    container_name: messaging
     environment:
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
       SPRING_PROFILES_ACTIVE: uat
       S3_BUCKET: ${S3_BUCKET}
+      SERVICE_API_KEY: ${SERVICE_API_KEY}
       S3_REGION: ${S3_REGION}
       S3_ACCESS_KEY: ${S3_ACCESS_KEY}
       S3_SECRET_KEY: ${S3_SECRET_KEY}
+      FIREBASE_CREDENTIALS_JSON: ${FIREBASE_CREDENTIALS_JSON}
+      FIREBASE_PROJECT_ID: ${FIREBASE_PROJECT_ID}
     depends_on:
       messaging-db:
         condition: service_healthy

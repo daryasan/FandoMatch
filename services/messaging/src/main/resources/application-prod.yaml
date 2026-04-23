@@ -1,3 +1,12 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: always
+
 server:
   port: 8083
 
@@ -36,7 +45,7 @@ media:
     upload-ttl-minutes: 5
     download-ttl-minutes: 60
 
-notifications:
-  firebase:
-    credentials-json: ${FIREBASE_CREDENTIALS_JSON}
-    project-id: ${FIREBASE_PROJECT_ID}
+#notifications:
+#  firebase:
+#    credentials-json: ${FIREBASE_CREDENTIALS_JSON}
+#    project-id: ${FIREBASE_PROJECT_ID}

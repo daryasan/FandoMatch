@@ -1,0 +1,20 @@
+meta {
+  id: auth-logout
+  name: Logout
+  type: http
+  method: POST
+}
+
+post {
+  url: http://localhost:8080/auth/logout
+}
+
+headers {
+Authorization: {{auth_token}}
+  Content-Type: application/json
+}
+
+body:json {
+  {}
+}
+

@@ -5,11 +5,6 @@ plugins {
     kotlin("plugin.jpa")
     id("org.springframework.boot")
     id("io.spring.dependency-management")
-    id("nu.studer.jooq")
-}
-
-jooq {
-    version = "3.18.7"
 }
 
 dependencyManagement {
@@ -44,7 +39,6 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-configuration-processor")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
-    implementation("org.springframework.boot:spring-boot-starter-jooq")
 
     // logging
     implementation("io.github.oshai:kotlin-logging-jvm:7.0.3")
@@ -52,7 +46,6 @@ dependencies {
     // db
     implementation("org.postgresql:postgresql:42.7.3")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-    jooqGenerator("org.postgresql:postgresql")
 
     // jwt
     implementation("io.jsonwebtoken:jjwt-api:0.12.3")

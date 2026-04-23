@@ -1,0 +1,19 @@
+meta {
+  id: core-fandoms-request-new
+  name: Request New Fandom
+  type: http
+  method: POST
+}
+
+post {
+  url: http://localhost:8080/core/fandoms/request-new
+}
+
+headers {
+Content-Type: application/json
+}
+
+body:json {
+  {"name":"New Fandom","description":"Desc","category":"GAMES","author_uuid":"550e8400-e29b-41d4-a716-446655440000"}
+}
+

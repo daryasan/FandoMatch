@@ -1,0 +1,21 @@
+meta {
+  id: auth-register
+  name: Auth Register
+  type: http
+  method: POST
+}
+
+post {
+  url: http://localhost:8080/auth/register
+}
+
+headers {
+Content-Type: application/json
+}
+
+body:json {
+  {"email":"test@mail.com","username":"testuser","birth_date":946684800,"name":"Test","hashed_password":"$2a$10$..."}
+}
+tests {
+const r=pm.response.json(); if(r.successResponse?.access_token){let t=r.successResponse.access_token; bru.setVar("auth_token",t.startsWith("Bearer ")?t:"Bearer "+t); console.log("✅ Token saved");}
+}

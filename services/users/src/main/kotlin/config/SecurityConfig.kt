@@ -24,6 +24,7 @@ open class SecurityConfig(
                 it.requestMatchers("/auth/login").permitAll()
                 it.requestMatchers("/token/refresh").permitAll()
                 it.requestMatchers("/token/public-jwt").permitAll()
+                it.requestMatchers("/actuator/health").permitAll()
                 it.anyRequest().authenticated()
             }
             .addFilterBefore(apiKeyAuthFilter, UsernamePasswordAuthenticationFilter::class.java)

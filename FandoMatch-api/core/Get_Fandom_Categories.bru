@@ -1,0 +1,15 @@
+meta {
+  name: Get Fandom Categories
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://localhost:8080/core/fandoms/categories
+  body: none
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}

@@ -1,0 +1,20 @@
+meta {
+  id: core-match-next
+  name: Get Next Candidates
+  type: http
+  method: POST
+}
+
+post {
+  url: http://localhost:8080/core/match/next
+}
+
+headers {
+Authorization: {{auth_token}}
+  Content-Type: application/json
+}
+
+body:json {
+  {"batch_size":10}
+}
+
