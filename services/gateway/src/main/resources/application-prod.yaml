@@ -5,4 +5,4 @@ routes:
   url:
     users: ${USERS_SERVICE_URL}
     core: ${CORE_SERVICE_URL}
-    chats: ${CHATS_SERVICE_URL}
+    messaging: ${MESSAGING_SERVICE_URL}

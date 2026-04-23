@@ -111,7 +111,7 @@ class UserServiceTest {
         val user = createUser(EMAIL, USERNAME)
         every { userRepository.findByEmail(EMAIL) } returns user
 
-        val result = userService.findUser(email = EMAIL, username = null)
+        val result = userService.findUser(username = null)
 
         assertEquals(user, result)
         verify(exactly = 1) { userRepository.findByEmail(EMAIL) }
@@ -120,7 +120,7 @@ class UserServiceTest {
     @Test
     fun `findUser should throw InvalidUserInputData when all credentials are null`() {
         assertThrows<InvalidUserInputData> {
-            userService.findUser(null, null)
+            userService.findUser(null)
         }
     }
 
@@ -131,7 +131,7 @@ class UserServiceTest {
         every { userRepository.findByUsername(USERNAME) } returns null
         every { userRepository.findByEmail(EMAIL) } returns user
 
-        val result = userService.findUser(EMAIL, USERNAME)
+        val result = userService.findUser(USERNAME)
 
         assertEquals(user, result)
 
@@ -145,7 +145,7 @@ class UserServiceTest {
         every { userRepository.findByEmail(EMAIL) } returns null
 
         assertThrows<UserNotFoundException> {
-            userService.findUser(EMAIL, USERNAME)
+            userService.findUser(USERNAME)
         }
     }
 }

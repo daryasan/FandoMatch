@@ -25,6 +25,7 @@ import utils.Constants.NAME
 import utils.Constants.PASSWORD
 import utils.Constants.USERNAME
 import utils.createUser
+import java.util.UUID
 
 @ExtendWith(MockKExtension::class)
 class AuthServiceTest {
@@ -53,7 +54,8 @@ class AuthServiceTest {
         val user = createUser(EMAIL, USERNAME)
         val expectedTokens = AuthTokens(
             accessToken = "access-123",
-            refreshToken = "refresh-123"
+            refreshToken = "refresh-123",
+            uuid = UUID.randomUUID()
         )
 
         every { userService.createUser(EMAIL, USERNAME) } returns user
@@ -82,19 +84,20 @@ class AuthServiceTest {
         val user = createUser(EMAIL, USERNAME)
         val expectedTokens = AuthTokens(
             accessToken = "access-login",
-            refreshToken = "refresh-login"
+            refreshToken = "refresh-login",
+            uuid = UUID.randomUUID()
         )
 
-        every { userService.findUser(EMAIL, USERNAME) } returns user
+        every { userService.findUser(EMAIL) } returns user
         every { userValidator.validateUserBeforeLogin(user) } just runs
         every { userCredentialsService.verifyCredential(user, PASSWORD) } just runs
         every { tokenService.generateAndSaveTokens(user) } returns expectedTokens
 
         // when
-        val result = authService.login(EMAIL, USERNAME, PASSWORD)
+        val result = authService.login(EMAIL, PASSWORD)
 
         // then
-        verify(exactly = 1) { userService.findUser(EMAIL, USERNAME) }
+        verify(exactly = 1) { userService.findUser(EMAIL) }
         verify(exactly = 1) { userValidator.validateUserBeforeLogin(user) }
         verify(exactly = 1) { userCredentialsService.verifyCredential(user, PASSWORD) }
         verify(exactly = 1) { tokenService.generateAndSaveTokens(user) }

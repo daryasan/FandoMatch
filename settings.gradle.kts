@@ -15,13 +15,12 @@ pluginManagement {
 
         // OpenAPI Generator
         id("org.openapi.generator") version "7.6.0"
-
-        // Jooq Codegen
-        id("nu.studer.jooq") version "9.0"
     }
-}
-plugins {
-    id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0"
+    repositories {
+        gradlePluginPortal()
+        mavenCentral()
+        google()
+    }
 }
 
 rootProject.name = "fandomatch"
@@ -34,7 +33,7 @@ include(
     "services:users",
     "services:core",
     "services:gateway",
+    "services:messaging",
     "libs:media-lib",
     "libs:notifications-lib"
 )
-include("services:messaging")

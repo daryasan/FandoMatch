@@ -27,16 +27,8 @@ clients:
   core-service:
     url: http://localhost:8082
 
-media:
-  s3:
-    bucket: fandomatch-local
-    region: ru-central1
-    access-key: minioadmin
-    secret-key: minioadmin
-    upload-ttl-minutes: 5
-    download-ttl-minutes: 60
 
-notifications:
-  firebase:
-    credentials-json: ${FIREBASE_CREDENTIALS_JSON}
-    project-id: ${FIREBASE_PROJECT_ID}
+#notifications:
+#  firebase:
+#    credentials-json: ${FIREBASE_CREDENTIALS_JSON}
+#    project-id: ${FIREBASE_PROJECT_ID}

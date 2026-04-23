@@ -18,11 +18,9 @@ fun userRegistrationRequest(
 )
 
 fun userLoginRequest(
-    email: String? = Constants.EMAIL,
     username: String = Constants.USERNAME,
     password: String = Constants.PASSWORD
 ) = UserLoginRequest(
-    email = email,
     username = username,
     hashedPassword = password
 )

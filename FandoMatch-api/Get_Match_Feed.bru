@@ -1,0 +1,20 @@
+meta {
+  id: core-feed
+  name: Get Match Feed
+  type: http
+  method: POST
+}
+
+post {
+  url: http://localhost:8080/core/feed
+}
+
+headers {
+Authorization: {{auth_token}}
+  Content-Type: application/json
+}
+
+body:json {
+  {"uuid":"550e8400-e29b-41d4-a716-446655440000","pagination":{"cursor_timestamp":0,"size":15}}
+}
+

@@ -5,4 +5,4 @@ routes:
   url:
     users: http://users:8081
     core: http://core:8082
-    chats: http://chats:8083
+    messaging: http://messaging:8083
