@@ -123,9 +123,9 @@ sequenceDiagram
 
 ```
 1. POST /messaging/media/presigned-upload  { media_type: IMAGE }
-   ← { media_id, upload_url, expires_at }
+   messaging returns { media_id, upload_url, expires_at }
 
-2. PUT {upload_url}  ← байты файла (напрямую в S3)
+2. PUT {upload_url}  ← file byte array (напрямую в S3)
 
 3. SEND /app/chats/{receiverId}/send
    → { content: "смотри", media_ids: ["<media_id>"], timestamp }
