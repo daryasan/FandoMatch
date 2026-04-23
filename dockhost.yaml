@@ -1,44 +1,19 @@
 version: 1
-project: fandomatch
+project: fdmatch
 
 environment:
-  GLOBAL_VAR: value
-
-containers:
-  users-db:
-    image: postgres:15
-    volumes:
-      - name: users-db-data
-        mountPath: /var/lib/postgresql/data
-
-  core-db:
-    image: postgres:15
-    volumes:
-      - name: core-db-data
-        mountPath: /var/lib/postgresql/data
-
-  messaging-db:
-    image: postgres:15
-    volumes:
-      - name: messaging-db-data
-        mountPath: /var/lib/postgresql/data
-
-  kafka:
-    image: confluentinc/cp-kafka:7.9.0
-    ports: '9092'
-
-  gateway:
-    image: daryasan/fdmatch-gateway:latest
-    ports: '8080'
-
-  users:
-    image: daryasan/fdmatch-users:latest
-
-  core:
-    image: daryasan/fdmatch-core:latest
-
-  messaging:
-    image: daryasan/fdmatch-messaging:latest
+  variables:
+    JWT_PRIVATE_KEY: ${JWT_PRIVATE_KEY}
+    JWT_PUBLIC_KEY: ${JWT_PUBLIC_KEY}
+    SERVICE_API_KEY: ${SERVICE_API_KEY}
+    ACCESS_EXPIRATION: ${ACCESS_EXPIRATION}
+    REFRESH_EXPIRATION_DAYS: ${REFRESH_EXPIRATION_DAYS}
+    S3_BUCKET: ${S3_BUCKET}
+    S3_REGION: ${S3_REGION}
+    S3_ACCESS_KEY: ${S3_ACCESS_KEY}
+    S3_SECRET_KEY: ${S3_SECRET_KEY}
+    FIREBASE_CREDENTIALS_JSON: ${FIREBASE_CREDENTIALS_JSON}
+    FIREBASE_PROJECT_ID: ${FIREBASE_PROJECT_ID}
 
 volumes:
   users-db-data:
@@ -50,3 +25,123 @@ volumes:
   messaging-db-data:
     type: ssd
     size: 2Gib
+
+containers:
+  users-db:
+    image: postgres:15
+    variables:
+      POSTGRES_DB: fdmatch_users
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 5432
+    volumes:
+      - name: users-db-data
+        mountPath: /var/lib/postgresql/data
+
+  core-db:
+    image: postgres:15
+    variables:
+      POSTGRES_DB: fdmatch_core
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 5432
+    volumes:
+      - name: core-db-data
+        mountPath: /var/lib/postgresql/data
+
+  messaging-db:
+    image: postgres:15
+    variables:
+      POSTGRES_DB: fdmatch_messaging
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 5432
+    volumes:
+      - name: messaging-db-data
+        mountPath: /var/lib/postgresql/data
+
+  kafka:
+    image: confluentinc/cp-kafka:7.9.0
+    variables:
+      KAFKA_PROCESS_ROLES: "broker,controller"
+      KAFKA_NODE_ID: "1"
+      CLUSTER_ID: "MkU3OEVBNTcwNTJENDM2Qk"
+      KAFKA_CONTROLLER_QUORUM_VOTERS: "1@kafka:9093"
+      KAFKA_LISTENERS: "PLAINTEXT://:9092,CONTROLLER://:9093"
+      KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://kafka:9092"
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: "PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT"
+      KAFKA_CONTROLLER_LISTENER_NAMES: "CONTROLLER"
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: "1"
+    ports:
+      - 9092
+
+  gateway:
+    image: daryasan/fdmatch-gateway:latest
+    variables:
+      SPRING_PROFILES_ACTIVE: prod
+      USERS_SERVICE_URL: http://users:8081
+      CORE_SERVICE_URL: http://core:8082
+      MESSAGING_SERVICE_URL: http://messaging:8083
+    ports:
+      - 8080
+
+  users:
+    image: daryasan/fdmatch-users:latest
+    variables:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      SPRING_DATASOURCE_URL: jdbc:postgresql://users-db:5432/fdmatch_users
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      JWT_PRIVATE_KEY: $JWT_PRIVATE_KEY
+      JWT_PUBLIC_KEY: $JWT_PUBLIC_KEY
+      SERVICE_API_KEY: $SERVICE_API_KEY
+      ACCESS_EXPIRATION: $ACCESS_EXPIRATION
+      REFRESH_EXPIRATION_DAYS: $REFRESH_EXPIRATION_DAYS
+    ports:
+      - 8081
+
+  core:
+    image: daryasan/fdmatch-core:latest
+    variables:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      SPRING_DATASOURCE_URL: jdbc:postgresql://core-db:5432/fdmatch_core
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      JWT_PRIVATE_KEY: $JWT_PRIVATE_KEY
+      JWT_PUBLIC_KEY: $JWT_PUBLIC_KEY
+      SERVICE_API_KEY: $SERVICE_API_KEY
+      S3_BUCKET: $S3_BUCKET
+      S3_REGION: $S3_REGION
+      S3_ACCESS_KEY: $S3_ACCESS_KEY
+      S3_SECRET_KEY: $S3_SECRET_KEY
+      FIREBASE_CREDENTIALS_JSON: $FIREBASE_CREDENTIALS_JSON
+      FIREBASE_PROJECT_ID: $FIREBASE_PROJECT_ID
+      CLIENTS_USERS_SERVICE_URL: http://users:8081
+    ports:
+      - 8082
+
+  messaging:
+    image: daryasan/fdmatch-messaging:latest
+    variables:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      SPRING_DATASOURCE_URL: jdbc:postgresql://messaging-db:5432/fdmatch_messaging
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      S3_BUCKET: $S3_BUCKET
+      S3_REGION: $S3_REGION
+      S3_ACCESS_KEY: $S3_ACCESS_KEY
+      S3_SECRET_KEY: $S3_SECRET_KEY
+    ports:
+      - 8083
+
+network:
+  ports:
+    gateway-port:
+      service: gateway
+      port: 8080
