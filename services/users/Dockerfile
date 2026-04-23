@@ -1,8 +1,6 @@
 FROM gradle:8.5-jdk21 AS builder
 WORKDIR /app
 COPY . .
-ENV GRADLE_OPTS="-Xms512m -Xmx1536m -XX:MaxMetaspaceSize=512m"
-COPY gradle.properties /app/gradle.properties
 RUN gradle :services:users:bootJar --no-daemon
 
 FROM eclipse-temurin:21-jre
