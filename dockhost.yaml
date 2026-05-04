@@ -82,7 +82,7 @@ containers:
       - 9092
 
   gateway:
-    image: daryasssan/fandomatch:fdmatch-gateway
+    image: daryasssan/fandomatch/fdmatch-gateway
     variables:
       SPRING_PROFILES_ACTIVE: prod
       USERS_SERVICE_URL: http://users:8081
