@@ -82,7 +82,7 @@ containers:
       - 9092
 
   gateway:
-    image: daryasssan/fandomatch/fdmatch-gateway:latest
+    image: daryasssan/fandomatch:fdmatch-gateway
     variables:
       SPRING_PROFILES_ACTIVE: prod
       USERS_SERVICE_URL: http://users:8081
@@ -92,7 +92,7 @@ containers:
       - 8080
 
   users:
-    image: daryasssan/fandomatch/fdmatch-users:latest
+    image: daryasssan/fandomatch/fdmatch-users
     variables:
       SPRING_PROFILES_ACTIVE: prod
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
@@ -108,7 +108,7 @@ containers:
       - 8081
 
   core:
-    image: daryasssan/fandomatch/fdmatch-core:latest
+    image: daryasssan/fandomatch/fdmatch-core
     variables:
       SPRING_PROFILES_ACTIVE: prod
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
@@ -129,7 +129,7 @@ containers:
       - 8082
 
   messaging:
-    image: daryasssan/fandomatch/fdmatch-messaging:latest
+    image: daryasssan/fandomatch/fdmatch-messaging
     variables:
       SPRING_PROFILES_ACTIVE: prod
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
