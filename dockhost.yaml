@@ -65,6 +65,9 @@ containers:
 
   kafka:
     image: confluentinc/cp-kafka:7.9.0
+    resources:         
+        memory: 2GiB  
+        cpu: 2  
     variables:
       KAFKA_PROCESS_ROLES: "broker,controller"
       KAFKA_NODE_ID: "1"
