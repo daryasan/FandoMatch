@@ -1,6 +1,7 @@
 package org.example.service
 
 import io.github.oshai.kotlinlogging.KLogging
+import jakarta.transaction.Transactional
 import org.example.exception.UserCredentialMismatchException
 import org.example.exception.UserCredentialNotFoundException
 import org.example.model.db_models.User
@@ -52,7 +53,16 @@ class UserCredentialsService(
 
     fun changePassword(user: User, oldPassword: String, newPassword: String) {
         verifyCredential(user, oldPassword)
+        updatePasswordCredential(user, newPassword)
+        logger.info { "Password changed successfully for user ${user.username}" }
+    }
 
+    fun resetPassword(user: User, newPassword: String) {
+        updatePasswordCredential(user, newPassword)
+        logger.info { "Password reset successfully for user ${user.username}" }
+    }
+
+    private fun updatePasswordCredential(user: User, newPassword: String) {
         val passwordCredential = user.credentials.find { it.credentialType == CredentialType.PASSWORD }
             ?: throw UserCredentialNotFoundException(CredentialType.PASSWORD.name)
 
@@ -63,6 +73,5 @@ class UserCredentialsService(
         passwordCredential.salt = newSalt
 
         credentialsRepository.save(passwordCredential)
-        logger.info { "Password changed successfully for user ${user.username}" }
     }
 }

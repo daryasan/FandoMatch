@@ -53,4 +53,17 @@ class FandomController(
             fandomService.requestNewFandom(request)
         }
     }
+
+    @GetMapping("/search")
+    fun searchFandoms(
+        @RequestParam query: String
+    ): ResponseEntity<FandomListResponse> {
+        return onControllerRequest(
+            logger = logger,
+            operationName = "GET /core/fandoms/search",
+            errorMapper = { getFandomListErrorResponse(it) }
+        ) {
+            fandomService.searchFandoms(query)
+        }
+    }
 }

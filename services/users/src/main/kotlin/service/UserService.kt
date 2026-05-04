@@ -1,13 +1,18 @@
 package org.example.service
 
 import io.github.oshai.kotlinlogging.KLogging
+import jakarta.transaction.Transactional
 import org.example.exception.EmailAlreadyExistsException
 import org.example.exception.InvalidUserInputData
+import org.example.exception.UserAlreadyDeletedException
 import org.example.exception.UserNotFoundException
 import org.example.exception.UsernameAlreadyExistsException
 import org.example.model.db_models.DeviceToken
 import org.example.model.db_models.User
+import org.example.model.db_models.enums.TokenType
+import org.example.model.db_models.enums.UserStatus
 import org.example.repository.DeviceTokenRepository
+import org.example.repository.TokenRepository
 import org.example.repository.UserRepository
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.stereotype.Service
@@ -18,6 +23,7 @@ import java.util.*
 class UserService(
     private val userRepository: UserRepository,
     private val tokenService: TokenService,
+    private val tokenRepository: TokenRepository,
     private val deviceTokenRepository: DeviceTokenRepository,
 ) {
 
@@ -71,9 +77,49 @@ class UserService(
         return user ?: throw UserNotFoundException(username)
     }
 
-    private fun findByEmail(email: String): User {
+    fun findByEmail(email: String): User {
         val user = userRepository.findByEmail(email)
         return user ?: throw UserNotFoundException(email)
+    }
+
+    @Transactional
+    fun deleteUser(accessToken: String): User {
+        val user = findUserByToken(accessToken)
+        if (user.status == UserStatus.DELETED) {
+            throw UserAlreadyDeletedException(user.uid.toString())
+        }
+        val deletedUser = User(
+            uid = user.uid,
+            email = user.email,
+            username = user.username,
+            createdAt = user.createdAt,
+            status = UserStatus.DELETED,
+        )
+        val revokeTargets = tokenRepository.findAllByUserAndTokenTypeAndRevokedFalse(user, TokenType.ACCESS) +
+                tokenRepository.findAllByUserAndTokenTypeAndRevokedFalse(user, TokenType.REFRESH)
+        revokeTargets.forEach { it.revoked = true }
+        tokenRepository.saveAll(revokeTargets)
+        val saved = userRepository.save(deletedUser)
+        logger.info { "Soft-deleted user uid=${user.uid}" }
+        return saved
+    }
+
+    @Transactional
+    fun changeEmail(accessToken: String, newEmail: String): User {
+        val user = findUserByToken(accessToken)
+        userRepository.findByEmail(newEmail)?.let {
+            if (it.uid != user.uid) throw EmailAlreadyExistsException(newEmail)
+        }
+        val updated = User(
+            uid = user.uid,
+            email = newEmail,
+            username = user.username,
+            createdAt = user.createdAt,
+            status = user.status,
+        )
+        val saved = userRepository.save(updated)
+        logger.info { "Changed email for user uid=${user.uid}" }
+        return saved
     }
 
     fun saveDeviceToken(userId: UUID, fcmToken: String) {

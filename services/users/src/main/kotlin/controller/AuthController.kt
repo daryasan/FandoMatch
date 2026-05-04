@@ -1,7 +1,23 @@
 package org.example.controller
 
-import com.fandomatch.users.model.*
+import com.fandomatch.users.model.ChangePasswordRequest
+import com.fandomatch.users.model.ChangePasswordResponse
+import com.fandomatch.users.model.CheckVerificationCodeRequest
+import com.fandomatch.users.model.CheckVerificationCodeResponse
+import com.fandomatch.users.model.Error
+import com.fandomatch.users.model.LogoutResponse
+import com.fandomatch.users.model.RefreshAndAccessTokens
+import com.fandomatch.users.model.ResetPasswordRequest
+import com.fandomatch.users.model.ResetPasswordResponse
+import com.fandomatch.users.model.ResponseStatus
+import com.fandomatch.users.model.SendVerificationCodeRequest
+import com.fandomatch.users.model.SendVerificationCodeResponse
+import com.fandomatch.users.model.UserLoginRequest
+import com.fandomatch.users.model.UserLoginResponse
+import com.fandomatch.users.model.UserRegistrationRequest
+import com.fandomatch.users.model.UserRegistrationResponse
 import org.example.exception.BusinessException
+import org.example.exception.InvalidVerificationCodeException
 import org.example.service.AuthService
 import org.example.utils.getErrorChangePasswordResponse
 import org.example.utils.getErrorLoginResponse
@@ -88,5 +104,65 @@ class AuthController(
     @PostMapping("/logout")
     fun authLogoutPost(): ResponseEntity<LogoutResponse> {
         return ResponseEntity.ok(LogoutResponse(status = ResponseStatus.SUCCESS))
+    }
+
+    @PostMapping("/verification-code")
+    fun sendVerificationCode(
+        @RequestBody request: SendVerificationCodeRequest
+    ): ResponseEntity<SendVerificationCodeResponse> {
+        return try {
+            authService.sendVerificationCode(request.email)
+            ResponseEntity.ok(SendVerificationCodeResponse(status = ResponseStatus.SUCCESS))
+        } catch (e: Exception) {
+            ResponseEntity.ok(
+                SendVerificationCodeResponse(
+                    status = ResponseStatus.ERROR,
+                    errorResponse = Error(errorCode = "INTERNAL_ERROR", errorMessage = e.message)
+                )
+            )
+        }
+    }
+
+    @PostMapping("/check-verification-code")
+    fun checkVerificationCode(
+        @RequestBody request: CheckVerificationCodeRequest
+    ): ResponseEntity<CheckVerificationCodeResponse> {
+        return try {
+            val result = authService.checkVerificationCode(request.email, request.code)
+            ResponseEntity.ok(
+                CheckVerificationCodeResponse(status = ResponseStatus.SUCCESS, result = result)
+            )
+        } catch (e: BusinessException) {
+            ResponseEntity.ok(
+                CheckVerificationCodeResponse(
+                    status = ResponseStatus.ERROR,
+                    errorResponse = Error(errorCode = e.code, errorMessage = e.message)
+                )
+            )
+        }
+    }
+
+    @PostMapping("/reset-password")
+    fun resetPassword(
+        @RequestBody request: ResetPasswordRequest
+    ): ResponseEntity<ResetPasswordResponse> {
+        return try {
+            authService.resetPassword(request.email, request.code, request.newPassword)
+            ResponseEntity.ok(ResetPasswordResponse(status = ResponseStatus.SUCCESS))
+        } catch (e: InvalidVerificationCodeException) {
+            ResponseEntity.ok(
+                ResetPasswordResponse(
+                    status = ResponseStatus.ERROR,
+                    errorResponse = Error(errorCode = e.code, errorMessage = e.message)
+                )
+            )
+        } catch (e: Exception) {
+            ResponseEntity.ok(
+                ResetPasswordResponse(
+                    status = ResponseStatus.ERROR,
+                    errorResponse = Error(errorCode = "INTERNAL_ERROR", errorMessage = e.message)
+                )
+            )
+        }
     }
 }

@@ -22,6 +22,9 @@ open class SecurityConfig(
             .authorizeHttpRequests {
                 it.requestMatchers("/auth/register").permitAll()
                 it.requestMatchers("/auth/login").permitAll()
+                it.requestMatchers("/auth/verification-code").permitAll()
+                it.requestMatchers("/auth/check-verification-code").permitAll()
+                it.requestMatchers("/auth/reset-password").permitAll()
                 it.requestMatchers("/token/refresh").permitAll()
                 it.requestMatchers("/token/public-jwt").permitAll()
                 it.requestMatchers("/actuator/health").permitAll()

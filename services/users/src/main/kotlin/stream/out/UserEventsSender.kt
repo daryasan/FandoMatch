@@ -19,15 +19,24 @@ class UserEventsSender(
 
     fun sendUserCreatedEvent(user: User, eventType: EventType, name: String, birthDate: Long) {
         val event = user.toChangedEvent(eventType, name, birthDate)
+        sendEvent(event)
+    }
+
+    fun sendUserEvent(user: User, eventType: EventType) {
+        val event = user.toChangedEvent(eventType)
+        sendEvent(event)
+    }
+
+    private fun sendEvent(event: UserChangedEvent) {
         kafkaTemplate.send(TOPIC_NAME, event.uid, event)
             .whenComplete { result, ex ->
                 if (ex == null) {
                     logger.info(
-                        "UserCreatedEvent sent successfully: userId={}, offset={}, partition={}",
-                        event.uid, result.recordMetadata.offset(), result.recordMetadata.partition()
+                        "UserEvent sent successfully: userId={}, type={}, offset={}, partition={}",
+                        event.uid, event.eventType, result.recordMetadata.offset(), result.recordMetadata.partition()
                     )
                 } else {
-                    logger.error("Failed to send UserCreatedEvent for userId={}", event.uid, ex)
+                    logger.error("Failed to send UserEvent for userId={}", event.uid, ex)
                 }
             }
     }

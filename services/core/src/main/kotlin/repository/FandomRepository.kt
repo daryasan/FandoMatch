@@ -13,4 +13,6 @@ interface FandomRepository : JpaRepository<Fandom, UUID> {
             "FROM UserFandom uf " +
             "WHERE uf.userId = :userId")
     fun findAllByUserId(@Param("userId") userId: UUID): List<Fandom>
+
+    fun findByNameContainingIgnoreCase(query: String): List<Fandom>
 }

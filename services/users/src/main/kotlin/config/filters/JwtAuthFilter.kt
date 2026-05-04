@@ -1,9 +1,11 @@
 package org.example.config.filters
 
 import io.github.oshai.kotlinlogging.KLogging
+import io.jsonwebtoken.JwtException
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
+import org.example.exception.BusinessException
 import org.example.service.security.JwtService
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.authority.SimpleGrantedAuthority
@@ -32,11 +34,23 @@ class JwtAuthFilter(
 
         val token = header.removePrefix("Bearer ").trim()
 
-        val userDetails = jwtService.validateAndLoadUser(token)
-        val auth = UsernamePasswordAuthenticationToken(userDetails, null, listOf(SimpleGrantedAuthority("ROLE_USER")))
-
-        SecurityContextHolder.getContext().authentication = auth
-
+        try {
+            val userDetails = jwtService.validateAndLoadUser(token)
+            val auth = UsernamePasswordAuthenticationToken(userDetails, null, listOf(SimpleGrantedAuthority("ROLE_USER")))
+            SecurityContextHolder.getContext().authentication = auth
+        } catch (e: BusinessException) {
+            logger.warn { "Invalid JWT: ${e.message}" }
+            response.sendError(HttpServletResponse.SC_FORBIDDEN, "Invalid or expired token")
+            return
+        } catch (e: JwtException) {
+            logger.warn { "Invalid JWT: ${e.message}" }
+            response.sendError(HttpServletResponse.SC_FORBIDDEN, "Invalid or expired token")
+            return
+        } catch (e: IllegalArgumentException) {
+            logger.warn { "Malformed JWT claims: ${e.message}" }
+            response.sendError(HttpServletResponse.SC_FORBIDDEN, "Invalid or expired token")
+            return
+        }
         filterChain.doFilter(request, response)
     }
 }

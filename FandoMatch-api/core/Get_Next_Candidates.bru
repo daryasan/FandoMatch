@@ -6,15 +6,17 @@ meta {
 
 post {
   url: http://localhost:8080/core/match/next
-  body: none
+  body: json
   auth: none
 }
 
 headers {
-  Authorization: {{auth_token}}
+  Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJqdGkiOiI1NmRlZDNmNi01M2NhLTRhYjItYTdmMi05NWFjMTgzYjg1YjQiLCJzdWIiOiIxNWViOWIwYS1lMWRkLTRiZTktYjY0ZS00MjQwMTVlNWEwYzYiLCJ1c2VybmFtZSI6InF3ZXJ0eTEiLCJpYXQiOjE3Nzc0MTU3MjksImV4cCI6MTc3NzQxOTMyOX0.Wv3lbR6zhoQm7SBO6plySKqhhkyuazze-GgCnzvt6on8PZ6MqCQFDvzq4yzokI74OsyErVmTlUmIBMGzUMtSl-CHHR0t3tpn5iQiRQDpmMGz4anoYuB3pVc6aqdF8icpnMPZmu2STwPV-V1F0V9Aj9U4zWnnZmf6QzjumgZf_oybJZOEzcn652skzahHcZr1WgczEnskC3cJGSXbNUpqFaziZ4ZmPOba_2UeVLmvO9uLGHxodkOv7qxIdMODDknzXZpaEkXXih7nw-HTHqypuBLmz-iU5oX8czoocOvco8M8l8ebD0NZ-1nHdae_lHVnaes05OHSHYU2LcVjnMwmHA
   Content-Type: application/json
 }
 
 body:json {
-  {"batch_size":10}
+  {
+    "batch_size": 10
+  }
 }

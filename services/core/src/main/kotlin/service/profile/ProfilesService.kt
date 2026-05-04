@@ -110,6 +110,16 @@ class ProfilesService(
         }
     }
 
+    fun deleteProfile(userChangedEvent: UserChangedEvent) {
+        val userId = UUID.fromString(userChangedEvent.uid)
+        if (userProfileRepository.existsById(userId)) {
+            userProfileRepository.deleteById(userId)
+            logger.info { "UserProfile deleted for userId=$userId" }
+        } else {
+            logger.warn { "UserProfile not found for userId=$userId on DELETED, skipping" }
+        }
+    }
+
     private fun determineProfileType(currentUuid: UUID, targetUuid: UUID): ProfileType {
         if (currentUuid == targetUuid) {
             return ProfileType.OWN

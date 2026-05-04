@@ -1,8 +1,10 @@
 package org.example.config
 
+import io.jsonwebtoken.JwtException
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
+import org.example.exceptions.UsersNotRespondingException
 import org.example.service.TokenParserService
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.authority.SimpleGrantedAuthority
@@ -33,12 +35,20 @@ class JwtAuthFilterConfig(
                 null,
                 listOf(SimpleGrantedAuthority("ROLE_USER"))
             )
-
             SecurityContextHolder.getContext().authentication = auth
-            filterChain.doFilter(request, response)
-        } catch (e: Exception) {
+        } catch (e: UsersNotRespondingException) {
+            logger.error("Users service unavailable during JWT parsing: ${e.message}")
+            response.sendError(HttpServletResponse.SC_SERVICE_UNAVAILABLE, "Auth service unavailable")
+            return
+        } catch (e: JwtException) {
             logger.warn("Invalid JWT: ${e.message}")
             response.sendError(HttpServletResponse.SC_FORBIDDEN, "Invalid or expired token")
+            return
+        } catch (e: IllegalArgumentException) {
+            logger.warn("Malformed JWT claims: ${e.message}")
+            response.sendError(HttpServletResponse.SC_FORBIDDEN, "Invalid or expired token")
+            return
         }
+        filterChain.doFilter(request, response)
     }
 }

@@ -899,3 +899,101 @@ components:
           $ref: '#/components/schemas/Error'
       required:
         - status
+
+    # -------------------------
+    # USER PREFERENCES
+    # -------------------------
+
+    UserPreferences:
+      type: object
+      properties:
+        match_notifications_enabled:
+          type: boolean
+        message_notifications_enabled:
+          type: boolean
+        hide_my_posts_from_non_matches:
+          type: boolean
+      required:
+        - match_notifications_enabled
+        - message_notifications_enabled
+        - hide_my_posts_from_non_matches
+
+    UserPreferencesResponse:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ResponseStatus'
+        successResponse:
+          $ref: '#/components/schemas/UserPreferences'
+        errorResponse:
+          $ref: '#/components/schemas/Error'
+      required:
+        - status
+
+    UpdateUserPreferencesRequest:
+      type: object
+      properties:
+        match_notifications_enabled:
+          type: boolean
+        message_notifications_enabled:
+          type: boolean
+        hide_my_posts_from_non_matches:
+          type: boolean
+      required:
+        - match_notifications_enabled
+        - message_notifications_enabled
+        - hide_my_posts_from_non_matches
+
+    # -------------------------
+    # CITIES
+    # -------------------------
+
+    CitySearchData:
+      type: object
+      properties:
+        cities:
+          type: array
+          items:
+            $ref: '#/components/schemas/City'
+      required:
+        - cities
+
+    CitySearchResponse:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ResponseStatus'
+        successResponse:
+          $ref: '#/components/schemas/CitySearchData'
+        errorResponse:
+          $ref: '#/components/schemas/Error'
+      required:
+        - status
+
+    # -------------------------
+    # COMMENTS (CREATE)
+    # -------------------------
+
+    CreateCommentRequest:
+      type: object
+      properties:
+        content:
+          type: string
+        timestamp:
+          type: integer
+          format: int64
+          description: Время отправки в epoch seconds (для отображения, сервер использует server time)
+      required:
+        - content
+
+    CreateCommentResponse:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ResponseStatus'
+        successResponse:
+          $ref: '#/components/schemas/Comment'
+        errorResponse:
+          $ref: '#/components/schemas/Error'
+      required:
+        - status

@@ -114,3 +114,11 @@ fun getFandomRequestCreateErrorResponse(exception: BusinessException) = FandomRe
         errorMessage = exception.message,
     )
 )
+
+fun getCreateCommentErrorResponse(exception: BusinessException) = CreateCommentResponse(
+    status = ResponseStatus.ERROR,
+    errorResponse = Error(
+        errorCode = exception.code,
+        errorMessage = exception.message,
+    )
+)

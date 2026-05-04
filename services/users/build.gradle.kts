@@ -16,6 +16,8 @@ dependencyManagement {
 dependencies {
     implementation(project(":clients:users-api"))
     implementation(project(":clients:common-models"))
+    implementation(project(":libs:notifications-lib"))
+    implementation("org.springframework.boot:spring-boot-starter-mail")
 
     // test
     testImplementation(kotlin("test"))

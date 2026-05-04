@@ -21,7 +21,7 @@ class UserCredential(
     val credentialType: CredentialType,
 
     @Column(name = "hash")
-    var hash: String? = null,
+    var hash: String = "",
 
     @Column(name = "salt")
     var salt: String? = null,

@@ -119,6 +119,27 @@ class PostsService(
     }
 
     @Transactional
+    fun sendComment(userId: UUID, postId: String, content: String): CreateCommentResponse {
+        val postUuid = UUID.fromString(postId)
+
+        if (!postRepository.existsById(postUuid)) {
+            throw PostNotFoundException(postId)
+        }
+
+        val comment = org.example.models.db_models.Comment(
+            postId = postUuid,
+            authorId = userId,
+            content = content,
+        )
+        val saved = commentRepository.save(comment)
+
+        return CreateCommentResponse(
+            status = ResponseStatus.SUCCESS,
+            successResponse = saved.toCommentDto()
+        )
+    }
+
+    @Transactional
     fun likePost(userId: UUID, postId: String): PostLikeResponse {
         val postUuid = UUID.fromString(postId)
 

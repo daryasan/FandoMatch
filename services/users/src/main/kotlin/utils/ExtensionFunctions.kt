@@ -14,12 +14,13 @@ fun User.toUserCredentials() = UserCredentials(
         UserStatus.ACTIVE -> UserCredentials.Status.ACTIVE
         UserStatus.BANNED -> UserCredentials.Status.BANNED
         UserStatus.DISABLED -> UserCredentials.Status.DISABLED
+        UserStatus.DELETED -> UserCredentials.Status.DISABLED
     },
     createdAt = createdAt.atOffset(ZoneOffset.ofHours(3)),
     email = email,
 )
 
-fun User.toChangedEvent(eventType: EventType, name: String, birthDate: Long) = UserChangedEvent(
+fun User.toChangedEvent(eventType: EventType, name: String? = null, birthDate: Long? = null) = UserChangedEvent(
     uid = this.uid.toString(),
     email = this.email,
     username = this.username,
@@ -30,6 +31,7 @@ fun User.toChangedEvent(eventType: EventType, name: String, birthDate: Long) = U
         UserStatus.ACTIVE -> com.fandomatch.core.model.UserStatus.ACTIVE
         UserStatus.BANNED -> com.fandomatch.core.model.UserStatus.BANNED
         UserStatus.DISABLED -> com.fandomatch.core.model.UserStatus.DISABLED
+        UserStatus.DELETED -> com.fandomatch.core.model.UserStatus.DELETED
     },
     eventType = eventType
 )

@@ -20,8 +20,9 @@ class UserEventConsumer(
         logger.info { "Received UserChangedEvent: uid=${event.uid}, type=${event.eventType}" }
 
         when (event.eventType) {
-            EventType.CREATED ->  profilesService.createProfile(event)
+            EventType.CREATED -> profilesService.createProfile(event)
             EventType.UPDATED -> profilesService.updateProfileCredentials(event)
+            EventType.DELETED -> profilesService.deleteProfile(event)
         }
     }
 }

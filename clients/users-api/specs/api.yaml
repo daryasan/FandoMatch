@@ -197,3 +197,100 @@ paths:
               schema:
                 $ref: '../definitions.yaml#/components/schemas/GetUserCredentialsResponse'
 
+  /users/profile:
+    delete:
+      description: Удаление профиля текущего пользователя (soft delete)
+      tags:
+        - user
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - $ref: './definitions.yaml#/components/parameters/TokenHeader'
+      responses:
+        '200':
+          description: Результат удаления профиля
+          content:
+            application/json:
+              schema:
+                $ref: './definitions.yaml#/components/schemas/DeleteProfileResponse'
+
+  /users/email:
+    patch:
+      description: Смена email текущего пользователя
+      tags:
+        - user
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - $ref: './definitions.yaml#/components/parameters/TokenHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './definitions.yaml#/components/schemas/ChangeEmailRequest'
+      responses:
+        '200':
+          description: Результат смены email
+          content:
+            application/json:
+              schema:
+                $ref: './definitions.yaml#/components/schemas/ChangeEmailResponse'
+
+  /auth/verification-code:
+    post:
+      description: Отправить код подтверждения на email
+      tags:
+        - auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './definitions.yaml#/components/schemas/SendVerificationCodeRequest'
+      responses:
+        '200':
+          description: Результат отправки кода
+          content:
+            application/json:
+              schema:
+                $ref: './definitions.yaml#/components/schemas/SendVerificationCodeResponse'
+
+  /auth/check-verification-code:
+    post:
+      description: Проверить введённый код подтверждения
+      tags:
+        - auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './definitions.yaml#/components/schemas/CheckVerificationCodeRequest'
+      responses:
+        '200':
+          description: Результат проверки кода
+          content:
+            application/json:
+              schema:
+                $ref: './definitions.yaml#/components/schemas/CheckVerificationCodeResponse'
+
+  /auth/reset-password:
+    post:
+      description: Сбросить пароль с помощью кода подтверждения
+      tags:
+        - auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './definitions.yaml#/components/schemas/ResetPasswordRequest'
+      responses:
+        '200':
+          description: Результат сброса пароля
+          content:
+            application/json:
+              schema:
+                $ref: './definitions.yaml#/components/schemas/ResetPasswordResponse'
+

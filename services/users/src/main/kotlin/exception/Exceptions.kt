@@ -34,3 +34,9 @@ class UserCredentialNotFoundException(credentialType: String) :
 class TokenRefreshingException(message: String) : BusinessException(
     ErrorCode.REFRESH_TOKEN_INVALID.name, message
 )
+
+class InvalidVerificationCodeException(message: String = "Verification code is invalid or expired") :
+    BusinessException(ErrorCode.VERIFICATION_CODE_INVALID.name, message)
+
+class UserAlreadyDeletedException(uid: String) :
+    BusinessException(ErrorCode.USER_INACTIVE.name, "User with uid=$uid is already deleted")

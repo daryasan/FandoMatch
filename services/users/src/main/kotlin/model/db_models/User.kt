@@ -26,14 +26,9 @@ class User(
     val status: UserStatus = UserStatus.ACTIVE,
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = [CascadeType.ALL], orphanRemoval = true)
-    val tokens: Set<Token> = emptySet(),
+    var tokens: Set<Token> = emptySet(),
 
-    @OneToMany(
-        mappedBy = "user",
-        fetch = FetchType.LAZY,
-        cascade = [CascadeType.ALL],
-        orphanRemoval = true
-    )
-    val credentials: MutableSet<UserCredential> = mutableSetOf()
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = [CascadeType.ALL], orphanRemoval = true)
+    var credentials: Set<UserCredential> = HashSet()
 
 )

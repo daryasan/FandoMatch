@@ -54,6 +54,7 @@ components:
       enum:
         - CREATED
         - UPDATED
+        - DELETED
 
     UserStatus:
       type: string
@@ -62,6 +63,7 @@ components:
         - ACTIVE
         - DISABLED
         - BANNED
+        - DELETED
 
     MatchEvent:
       type: object

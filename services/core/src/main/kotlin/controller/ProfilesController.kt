@@ -1,11 +1,9 @@
 package org.example.controller
 
-import com.fandomatch.core.model.EditUserProfileRequest
-import com.fandomatch.core.model.EditUserProfileResponse
-import com.fandomatch.core.model.UserProfileRequest
-import com.fandomatch.core.model.UserProfileResponse
+import com.fandomatch.core.model.*
 import io.github.oshai.kotlinlogging.KLogging
 import org.example.service.TokenParserService
+import org.example.service.UserPreferencesService
 import org.example.service.profile.ProfilesService
 import org.example.util.getEditUserProfileErrorResponse
 import org.example.util.getUserProfileErrorResponse
@@ -17,7 +15,8 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/core/user")
 class ProfilesController(
     private val profilesService: ProfilesService,
-    private val tokenParserService: TokenParserService
+    private val tokenParserService: TokenParserService,
+    private val userPreferencesService: UserPreferencesService,
 ) {
 
     companion object : KLogging()
@@ -53,6 +52,25 @@ class ProfilesController(
         ) {
             profilesService.editProfile(uuid, request)
         }
+    }
+
+    @GetMapping("/preferences")
+    fun getPreferences(
+        @RequestHeader("Authorization") token: String
+    ): ResponseEntity<UserPreferencesResponse> {
+        val uuid = tokenParserService.parse(token).userId
+        logger.info("GET /core/user/preferences called for uuid=$uuid")
+        return ResponseEntity.ok(userPreferencesService.getPreferences(uuid))
+    }
+
+    @PatchMapping("/preferences")
+    fun updatePreferences(
+        @RequestHeader("Authorization") token: String,
+        @RequestBody request: UpdateUserPreferencesRequest
+    ): ResponseEntity<UserPreferencesResponse> {
+        val uuid = tokenParserService.parse(token).userId
+        logger.info("PATCH /core/user/preferences called for uuid=$uuid")
+        return ResponseEntity.ok(userPreferencesService.updatePreferences(uuid, request))
     }
 
 }

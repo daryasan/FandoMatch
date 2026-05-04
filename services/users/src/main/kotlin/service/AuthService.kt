@@ -15,6 +15,7 @@ class AuthService(
     private val userCredentialsService: UserCredentialsService,
     private val userValidator: UserValidator,
     private val userEventsSender: UserEventsSender,
+    private val verificationCodeService: VerificationCodeService,
 ) {
 
     companion object : KLogging()
@@ -52,9 +53,27 @@ class AuthService(
         userCredentialsService.verifyCredential(foundUser, password)
         return tokenService.generateAndSaveTokens(foundUser)
     }
-
+    @Transactional
     fun changePassword(accessToken: String, oldPassword: String, newPassword: String) {
         val user = userService.findUserByToken(accessToken)
         userCredentialsService.changePassword(user, oldPassword, newPassword)
+    }
+
+    fun sendVerificationCode(email: String) {
+        logger.info { "Sending verification code to email=$email" }
+        verificationCodeService.sendCode(email)
+    }
+
+    fun checkVerificationCode(email: String, code: String): Boolean {
+        logger.info { "Checking verification code for email=$email" }
+        return verificationCodeService.checkCode(email, code)
+    }
+
+    @Transactional
+    fun resetPassword(email: String, code: String, newPassword: String) {
+        logger.info { "Resetting password for email=$email" }
+        verificationCodeService.verifyAndConsume(email, code)
+        val user = userService.findByEmail(email)
+        userCredentialsService.resetPassword(user, newPassword)
     }
 }

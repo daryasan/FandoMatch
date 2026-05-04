@@ -6,15 +6,17 @@ meta {
 
 patch {
   url: http://localhost:8080/core/user/profile/pending_requests
-  body: none
+  body: json
   auth: none
 }
 
 headers {
-  Authorization: {{auth_token}}
+  Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJqdGkiOiI2NTY4M2RiYS1mZjUzLTRlYzAtODgyNi00MDg3NjkyOTI3NmIiLCJzdWIiOiI3YjQ0YmMxNi0xYjQ5LTRlOGYtYjBjMy05ZmVhNGFmOGQ1ZWEiLCJ1c2VybmFtZSI6InRlc3R1c2VyIiwiaWF0IjoxNzc3NDEyNzkyLCJleHAiOjE3Nzc0MTYzOTJ9.g3vsc3hfOGNuryI5YY-UVFcEnn-3fatGGKIkurCN2XACcsLdWF9u3f8i2Nsy6lANKVRPFgca7Im7vOb8L8btUZfLGAc9AWsFfWRW_J006WnVzjB4dRNp9NXKCwurr-IU06KxOknuUkg0CFJhypfZHzKQ-qZR61yzeJ23yajw1ap5cm5HPLX1CwZHISJCk9SC-B-dLBBxlIPgHuOu7-JP-Q0gzjc234qSGJd2qcwxCiTw1FdIEeqDQ8rzTCfvltMCcPm_l5ZMSSJXDZVk4e-Em85opAamUgHOFi-iw85JhC9tF8aDxOVXZor4y7GIgUNZ7m1t_xr9EKTbefJ_FnM2cg
   Content-Type: application/json
 }
 
 body:json {
-  {"uuid":"550e8400-e29b-41d4-a716-446655440000"}
+  {
+    "uuid": "7b44bc16-1b49-4e8f-b0c3-9fea4af8d5ea"
+  }
 }

@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 @Configuration
-@EnableConfigurationProperties(NotificationsConfig::class)
+@EnableConfigurationProperties(NotificationsConfig::class, EmailConfig::class)
 open class NotificationsAutoConfiguration(private val notificationsConfig: NotificationsConfig) {
 
     @Bean

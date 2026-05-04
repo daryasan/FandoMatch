@@ -262,4 +262,100 @@ components:
           type: string
           nullable: true
 
+    # /users/profile DELETE
+    DeleteProfileResponse:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ResponseStatus'
+        errorResponse:
+          $ref: '#/components/schemas/Error'
+      required:
+        - status
 
+    # /users/email PATCH
+    ChangeEmailRequest:
+      type: object
+      properties:
+        new_email:
+          type: string
+      required:
+        - new_email
+
+    ChangeEmailResponse:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ResponseStatus'
+        errorResponse:
+          $ref: '#/components/schemas/Error'
+      required:
+        - status
+
+    # /auth/verification-code
+    SendVerificationCodeRequest:
+      type: object
+      properties:
+        email:
+          type: string
+      required:
+        - email
+
+    SendVerificationCodeResponse:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ResponseStatus'
+        errorResponse:
+          $ref: '#/components/schemas/Error'
+      required:
+        - status
+
+    # /auth/check-verification-code
+    CheckVerificationCodeRequest:
+      type: object
+      properties:
+        email:
+          type: string
+        code:
+          type: string
+      required:
+        - email
+        - code
+
+    CheckVerificationCodeResponse:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ResponseStatus'
+        result:
+          type: boolean
+        errorResponse:
+          $ref: '#/components/schemas/Error'
+      required:
+        - status
+
+    # /auth/reset-password
+    ResetPasswordRequest:
+      type: object
+      properties:
+        email:
+          type: string
+        code:
+          type: string
+        new_password:
+          type: string
+      required:
+        - email
+        - code
+        - new_password
+
+    ResetPasswordResponse:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ResponseStatus'
+        errorResponse:
+          $ref: '#/components/schemas/Error'
+      required:
+        - status

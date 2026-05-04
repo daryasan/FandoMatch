@@ -47,6 +47,19 @@ class FandomService(
         )
     }
 
+    fun searchFandoms(query: String): FandomListResponse {
+        val fandoms = fandomRepository.findByNameContainingIgnoreCase(query).map {
+            it.toDto(
+                fandomCategoryRepository.findById(it.categoryId)
+                    .orElseThrow { FandomCategoryNotFoundException(it.categoryId.toString()) }
+            )
+        }
+        return FandomListResponse(
+            status = ResponseStatus.SUCCESS,
+            successResponse = FandomListData(fandoms)
+        )
+    }
+
     fun requestNewFandom(request: FandomRequestCreate): FandomRequestCreateResponse {
         val fandomRequest = FandomRequest(
             name = request.name,

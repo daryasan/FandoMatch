@@ -11,7 +11,7 @@ paths:
   # -------------------------
 
   /core/user/profile:
-    post:
+    get:
       description: Получение профиля пользователя (полного или публичного)
       tags:
         - user
@@ -56,8 +56,46 @@ paths:
               schema:
                 $ref: './definitions.yaml#/components/schemas/EditUserProfileResponse'
 
-  /core/user/profile/friends:
+  /core/user/preferences:
+    get:
+      description: Получение настроек пользователя (уведомления, скрытие постов)
+      tags:
+        - user
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './definitions.yaml#/components/parameters/TokenHeader'
+      responses:
+        '200':
+          description: Настройки пользователя
+          content:
+            application/json:
+              schema:
+                $ref: './definitions.yaml#/components/schemas/UserPreferencesResponse'
     patch:
+      description: Обновление настроек пользователя
+      tags:
+        - user
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './definitions.yaml#/components/parameters/TokenHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './definitions.yaml#/components/schemas/UpdateUserPreferencesRequest'
+      responses:
+        '200':
+          description: Обновлённые настройки пользователя
+          content:
+            application/json:
+              schema:
+                $ref: './definitions.yaml#/components/schemas/UserPreferencesResponse'
+
+  /core/user/profile/friends:
+    get:
       description: Получение списка друзей пользователя
       tags:
         - user
@@ -80,7 +118,7 @@ paths:
                 $ref: './definitions.yaml#/components/schemas/FriendsResponse'
 
   /core/user/profile/pending_requests:
-    patch:
+    get:
       description: получение списка заявок пользователя
       tags:
         - user
@@ -194,7 +232,7 @@ paths:
   # -------------------------
 
   /core/posts/get:
-    post:
+    get:
       description: Получение постов пользователя (с пагинацией)
       tags:
         - posts
@@ -300,6 +338,34 @@ paths:
               schema:
                 $ref: './definitions.yaml#/components/schemas/PostLikeResponse'
 
+  /core/posts/{post_id}/comment:
+    post:
+      description: Отправить комментарий к посту
+      tags:
+        - posts
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: './definitions.yaml#/components/parameters/TokenHeader'
+        - name: post_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './definitions.yaml#/components/schemas/CreateCommentRequest'
+      responses:
+        '200':
+          description: Созданный комментарий
+          content:
+            application/json:
+              schema:
+                $ref: './definitions.yaml#/components/schemas/CreateCommentResponse'
+
 
   # -------------------------
   # FEED
@@ -330,6 +396,44 @@ paths:
   # -------------------------
   # FANDOMS
   # -------------------------
+
+  /core/fandoms/search:
+    get:
+      description: Поиск фандомов по строке запроса
+      tags:
+        - fandom
+      parameters:
+        - name: query
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Список найденных фандомов
+          content:
+            application/json:
+              schema:
+                $ref: './definitions.yaml#/components/schemas/FandomListResponse'
+
+  /core/cities/search:
+    get:
+      description: Поиск городов по строке запроса
+      tags:
+        - city
+      parameters:
+        - name: query
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Список найденных городов
+          content:
+            application/json:
+              schema:
+                $ref: './definitions.yaml#/components/schemas/CitySearchResponse'
 
   /core/fandoms/user:
     post:

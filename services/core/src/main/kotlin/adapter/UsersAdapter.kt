@@ -37,6 +37,7 @@ class UsersAdapter(
             logger.error { "Users api responded with ${response.status} with error ${response.errorResponse}" }
             throw UsersNotRespondingException("Empty public key")
         }
+        logger.info { "Received user info: ${response.successResponse?.username}" }
         return response.successResponse!!
     }
 

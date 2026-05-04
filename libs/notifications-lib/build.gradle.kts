@@ -13,6 +13,7 @@ dependencyManagement {
 dependencies {
     implementation("org.springframework.boot:spring-boot-autoconfigure")
     implementation("org.springframework.boot:spring-boot-starter-validation")
+    implementation("org.springframework.boot:spring-boot-starter-mail")
     implementation("com.google.firebase:firebase-admin:9.3.0")
     implementation("io.github.oshai:kotlin-logging-jvm:7.0.3")
 

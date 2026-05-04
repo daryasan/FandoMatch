@@ -91,4 +91,21 @@ class PostsController(
             postsService.likePost(uuid, postId)
         }
     }
+
+    @PostMapping("/{post_id}/comment")
+    fun sendComment(
+        @RequestHeader("Authorization") token: String,
+        @PathVariable("post_id") postId: String,
+        @RequestBody request: CreateCommentRequest
+    ): ResponseEntity<CreateCommentResponse> {
+        val uuid = tokenParserService.parse(token).userId
+        return onControllerRequest(
+            logger = logger,
+            operationName = "POST /core/posts/$postId/comment",
+            metaUuid = uuid.toString(),
+            errorMapper = { getCreateCommentErrorResponse(it) }
+        ) {
+            postsService.sendComment(uuid, postId, request.content)
+        }
+    }
 }

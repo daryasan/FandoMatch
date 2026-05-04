@@ -1,5 +1,5 @@
 package org.example.model.db_models.enums
 
 enum class UserStatus {
-    ACTIVE, DISABLED, BANNED
+    ACTIVE, DISABLED, BANNED, DELETED
 }

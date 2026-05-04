@@ -75,7 +75,7 @@ fun genderStringToEnum(gender: String?): Gender? {
     }
 }
 
-private val CITY_MAP = mapOf(
+val CITY_MAP = mapOf(
     CityEnum.MOSCOW to City(nameEn = "Moscow", nameRu = "Москва"),
     CityEnum.SAINT_PETERSBURG to City(nameEn = "Saint Petersburg", nameRu = "Санкт-Петербург"),
     CityEnum.NOVOSIBIRSK to City(nameEn = "Novosibirsk", nameRu = "Новосибирск"),
@@ -94,7 +94,7 @@ private val CITY_MAP = mapOf(
 
 fun cityCodeToCity(code: String?): City? {
     if (code == null) return null
-    return CITY_MAP[CityEnum.valueOf(code)] ?: City(nameEn = code, nameRu = code)
+    return CITY_MAP[CityEnum.valueOf(code.uppercase())] ?: City(nameEn = code, nameRu = code)
 }
 
 fun UserChangedEvent.toUserProfile(): UserProfile {
