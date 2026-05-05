@@ -142,9 +142,7 @@ containers:
       S3_SECRET_KEY: $S3_SECRET_KEY
     ports:
       - 8083
-
-network:
-  
+      
 network:
   domains:
     qxi0-vbn5-za9i.gw-1a.dockhost.net: 
