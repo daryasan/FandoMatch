@@ -144,7 +144,17 @@ containers:
       - 8083
 
 network:
+  
+network:
+  domains:
+    qxi0-vbn5-za9i.gw-1a.dockhost.net: 
   ports:
     gateway-port:
       service: gateway
       port: 8080
+  routes:
+    main-api:                   
+      domain: qxi0-vbn5-za9i.gw-1a.dockhost.net
+      path: /                   
+      service: gateway   
+      port: 8080    
