@@ -1,7 +1,7 @@
 package org.example.service
 
 import com.fandomatch.notifications.EmailService
-import io.github.oshai.kotlinlogging.KLogging
+import io.github.oshai.kotlinlogging.KotlinLogging
 import jakarta.transaction.Transactional
 import org.example.exception.InvalidVerificationCodeException
 import org.example.model.db_models.VerificationCode
@@ -18,7 +18,9 @@ class VerificationCodeService(
     @Autowired(required = false) private val emailService: EmailService?,
 ) {
 
-    companion object : KLogging() {
+    private val logger = KotlinLogging.logger {}
+
+    companion object {
         private const val CODE_LENGTH = 6
         private const val CODE_TTL_MINUTES = 15L
     }

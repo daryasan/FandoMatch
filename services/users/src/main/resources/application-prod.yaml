@@ -9,13 +9,30 @@ management:
 
 server:
   port: 8081
+  forward-headers-strategy: framework
 
 spring:
-  datasource:
-    url: ${DB_URL}
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
 
 jwt:
   privateKey: ${JWT_PRIVATE_KEY}
   publicKey: ${JWT_PUBLIC_KEY}
+  accessExpiration: ${ACCESS_EXPIRATION}
+  refreshExpirationDays: ${REFRESH_EXPIRATION_DAYS}
+
+clients:
+  core-service:
+    url: http://core:8082
+
+service:
+  api-key: ${SERVICE_API_KEY}
+
+notifications:
+  firebase:
+    credentials-json: ${FIREBASE_CREDENTIALS_JSON}
+    project-id: ${FIREBASE_PROJECT_ID}

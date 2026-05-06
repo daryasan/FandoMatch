@@ -2,7 +2,7 @@ package org.example.stream.out
 
 import com.fandomatch.core.model.EventType
 import com.fandomatch.core.model.UserChangedEvent
-import io.github.oshai.kotlinlogging.KLogging
+import io.github.oshai.kotlinlogging.KotlinLogging
 import org.example.model.db_models.User
 import org.example.utils.toChangedEvent
 import org.springframework.kafka.core.KafkaTemplate
@@ -13,7 +13,9 @@ class UserEventsSender(
     private val kafkaTemplate: KafkaTemplate<String, UserChangedEvent>
 ) {
 
-    companion object : KLogging() {
+    private val logger = KotlinLogging.logger {}
+
+    companion object {
         const val TOPIC_NAME = "user-changed-events"
     }
 

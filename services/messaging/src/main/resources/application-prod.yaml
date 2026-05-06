@@ -11,12 +11,6 @@ server:
   port: 8083
 
 spring:
-  datasource:
-    url: jdbc:postgresql://${DB_HOST}:5432/fdmatch_messaging
-    username: ${DB_USER}
-    password: ${DB_PASSWORD}
-    driver-class-name: org.postgresql.Driver
-
   jpa:
     hibernate:
       ddl-auto: validate
@@ -24,17 +18,14 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
 
-  kafka:
-    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
-
 service:
   api-key: ${SERVICE_API_KEY}
 
 clients:
   users-service:
-    url: ${USERS_SERVICE_URL}
+    url: ${CLIENTS_USERS_SERVICE_URL}
   core-service:
-    url: ${CORE_SERVICE_URL}
+    url: ${CLIENTS_CORE_SERVICE_URL}
 
 media:
   s3:
@@ -45,7 +36,7 @@ media:
     upload-ttl-minutes: 5
     download-ttl-minutes: 60
 
-#notifications:
-#  firebase:
-#    credentials-json: ${FIREBASE_CREDENTIALS_JSON}
-#    project-id: ${FIREBASE_PROJECT_ID}
+notifications:
+  firebase:
+    credentials-json: ${FIREBASE_CREDENTIALS_JSON}
+    project-id: ${FIREBASE_PROJECT_ID}

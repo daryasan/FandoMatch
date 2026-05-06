@@ -71,7 +71,9 @@ services:
   # ---------------- MICROSERVICES ----------------
 
   gateway:
-    build: ./services/gateway
+    build:
+      context: .
+      dockerfile: services/gateway/Dockerfile
     container_name: gateway
     ports:
       - "8080:8080"

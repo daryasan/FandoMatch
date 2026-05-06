@@ -9,16 +9,15 @@ management:
 
 server:
   port: 8082
+  forward-headers-strategy: framework
 
 spring:
-  datasource:
-    url: ${DB_URL}
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
-
   jpa:
     hibernate:
       ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
 
 jwt:
   privateKey: ${JWT_PRIVATE_KEY}
@@ -26,7 +25,10 @@ jwt:
 
 clients:
   users-service:
-    url: ${USERS_SERVICE_URL}
+    url: ${CLIENTS_USERS_SERVICE_URL}
+
+service:
+  api-key: ${SERVICE_API_KEY}
 
 media:
   s3:
@@ -37,7 +39,7 @@ media:
     upload-ttl-minutes: 5
     download-ttl-minutes: 60
 
-#notifications:
-#  firebase:
-#    credentials-json: ${FIREBASE_CREDENTIALS_JSON}
-#    project-id: ${FIREBASE_PROJECT_ID}
+notifications:
+  firebase:
+    credentials-json: ${FIREBASE_CREDENTIALS_JSON}
+    project-id: ${FIREBASE_PROJECT_ID}

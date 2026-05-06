@@ -1,6 +1,6 @@
 package org.example.service.security
 
-import io.github.oshai.kotlinlogging.KLogging
+import io.github.oshai.kotlinlogging.KotlinLogging
 import io.jsonwebtoken.Jwts
 import jakarta.annotation.PostConstruct
 import org.example.config.JwtProperties
@@ -31,7 +31,7 @@ class JwtService(
     private val userRepository: UserRepository
 ) {
 
-    companion object : KLogging()
+    private val logger = KotlinLogging.logger {}
 
     private lateinit var privateKey: PrivateKey
     private lateinit var publicKey: PublicKey

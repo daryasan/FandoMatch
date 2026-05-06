@@ -1,6 +1,6 @@
 package org.example.service
 
-import io.github.oshai.kotlinlogging.KLogging
+import io.github.oshai.kotlinlogging.KotlinLogging
 import org.example.exception.TokenRefreshingException
 import org.example.model.AuthTokens
 import org.example.model.db_models.Token
@@ -18,7 +18,9 @@ class TokenService(
     private val jwtService: JwtService,
 ) {
 
-    companion object : KLogging() {
+    private val logger = KotlinLogging.logger {}
+
+    companion object {
         const val TOKEN_PREFIX = "Bearer "
     }
 

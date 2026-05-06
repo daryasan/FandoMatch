@@ -1,6 +1,6 @@
 package org.example.service
 
-import io.github.oshai.kotlinlogging.KLogging
+import io.github.oshai.kotlinlogging.KotlinLogging
 import jakarta.transaction.Transactional
 import org.example.exception.UserCredentialMismatchException
 import org.example.exception.UserCredentialNotFoundException
@@ -19,7 +19,7 @@ class UserCredentialsService(
     private val saltGenerator: SaltGenerator,
 ) {
 
-    companion object : KLogging()
+    private val logger = KotlinLogging.logger {}
 
     fun createCredentials(user: User, password: String): UserCredential {
         val passwordSalt = saltGenerator.generateSalt()

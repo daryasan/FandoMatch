@@ -1,6 +1,6 @@
 package org.example.service
 
-import io.github.oshai.kotlinlogging.KLogging
+import io.github.oshai.kotlinlogging.KotlinLogging
 import jakarta.transaction.Transactional
 import org.example.exception.EmailAlreadyExistsException
 import org.example.exception.InvalidUserInputData
@@ -27,7 +27,7 @@ class UserService(
     private val deviceTokenRepository: DeviceTokenRepository,
 ) {
 
-    companion object : KLogging()
+    private val logger = KotlinLogging.logger {}
 
     fun createUser(
         email: String,

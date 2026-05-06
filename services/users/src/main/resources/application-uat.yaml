@@ -39,3 +39,8 @@ clients:
 
 service:
   api-key: ${SERVICE_API_KEY}
+
+notifications:
+  firebase:
+    credentials-json: ${FIREBASE_CREDENTIALS_JSON}
+    project-id: ${FIREBASE_PROJECT_ID}

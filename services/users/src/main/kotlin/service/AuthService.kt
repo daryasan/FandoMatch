@@ -1,7 +1,7 @@
 package org.example.service
 
 import com.fandomatch.core.model.EventType
-import io.github.oshai.kotlinlogging.KLogging
+import io.github.oshai.kotlinlogging.KotlinLogging
 import jakarta.transaction.Transactional
 import org.example.model.AuthTokens
 import org.example.service.validation.UserValidator
@@ -18,7 +18,7 @@ class AuthService(
     private val verificationCodeService: VerificationCodeService,
 ) {
 
-    companion object : KLogging()
+    private val logger = KotlinLogging.logger {}
 
     fun register(
         email: String,

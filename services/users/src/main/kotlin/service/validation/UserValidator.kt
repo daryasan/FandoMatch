@@ -1,6 +1,6 @@
 package org.example.service.validation
 
-import io.github.oshai.kotlinlogging.KLogging
+import io.github.oshai.kotlinlogging.KotlinLogging
 import org.example.exception.UserInactiveException
 import org.example.model.db_models.User
 import org.example.model.db_models.enums.UserStatus
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component
 @Component
 class UserValidator {
 
-    companion object : KLogging()
+    private val logger = KotlinLogging.logger {}
 
 
     fun validateUserBeforeLogin(user: User) {

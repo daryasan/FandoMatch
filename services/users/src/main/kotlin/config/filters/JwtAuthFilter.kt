@@ -1,6 +1,6 @@
 package org.example.config.filters
 
-import io.github.oshai.kotlinlogging.KLogging
+import io.github.oshai.kotlinlogging.KotlinLogging
 import io.jsonwebtoken.JwtException
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
@@ -18,7 +18,7 @@ class JwtAuthFilter(
     private val jwtService: JwtService
 ) : OncePerRequestFilter() {
 
-    companion object : KLogging()
+    private val logger = KotlinLogging.logger {}
 
     override fun doFilterInternal(
         request: HttpServletRequest,
