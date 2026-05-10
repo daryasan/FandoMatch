@@ -13,3 +13,4 @@ interface CommentRepository : JpaRepository<Comment, UUID> {
     fun findByPostIdAndCreatedAtBeforeOrderByCreatedAtAsc(postId: UUID, before: Instant, pageable: Pageable): List<Comment>
     fun countByPostId(postId: UUID): Long
 }
+
