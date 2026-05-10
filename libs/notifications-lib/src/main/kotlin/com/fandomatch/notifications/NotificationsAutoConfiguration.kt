@@ -8,10 +8,17 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.mail.javamail.JavaMailSender
 
 @Configuration
 @EnableConfigurationProperties(NotificationsConfig::class, EmailConfig::class)
 open class NotificationsAutoConfiguration(private val notificationsConfig: NotificationsConfig) {
+
+    @Bean
+    @ConditionalOnProperty(name = ["spring.mail.host"])
+    open fun emailService(mailSender: JavaMailSender, emailConfig: EmailConfig): EmailService {
+        return EmailService(mailSender, emailConfig)
+    }
 
     @Bean
     @ConditionalOnMissingBean

@@ -1,4 +1,4 @@
-package org.example.config.filters
+package org.example.config
 
 import io.github.oshai.kotlinlogging.KotlinLogging
 import jakarta.servlet.FilterChain
@@ -23,7 +23,7 @@ class ApiKeyAuthFilter(
         response: HttpServletResponse,
         filterChain: FilterChain
     ) {
-        val apiKey = request.getHeader("X-API-Key") ?: request.getHeader("X-Service-API-Key")
+        val apiKey = request.getHeader("X-Service-API-Key")
         if (apiKey != null && apiKey == validApiKey) {
             val auth = UsernamePasswordAuthenticationToken(
                 "service-account",

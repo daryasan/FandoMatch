@@ -5,6 +5,10 @@ management:
         include: health
 
 spring:
+  flyway:
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+    baseline-version: 0
   jpa:
     open-in-view: false
   kafka:
@@ -29,4 +33,3 @@ spring:
       org.apache.kafka.clients.NetworkClient: INFO
       org.apache.kafka.clients.FetchSessionHandler: INFO
       org.springframework.kafka: INFO
-      root: DEBUG

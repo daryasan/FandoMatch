@@ -44,6 +44,8 @@ class AuthController(
                 password = userRegistrationRequest.hashedPassword,
                 birthDate = userRegistrationRequest.birthDate,
                 name = userRegistrationRequest.name,
+                gender = userRegistrationRequest.gender,
+                avatarMediaId = userRegistrationRequest.avatarMediaId,
             )
         } catch (e: BusinessException) {
             return ResponseEntity.ok(getErrorRegistrationResponse(e))

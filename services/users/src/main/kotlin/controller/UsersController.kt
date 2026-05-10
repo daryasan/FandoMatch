@@ -61,11 +61,15 @@ class UsersController(
 
     @PutMapping("/device-token")
     fun saveDeviceToken(
-        @RequestHeader("Authorization") authorization: String,
+        @RequestHeader("Authorization", required = false) authorization: String?,
         @RequestBody request: DeviceTokenRequest
     ): ResponseEntity<Void> {
-        val user = userService.findUserByToken(authorization)
-        userService.saveDeviceToken(user.uid!!, request.fcmToken)
+        val userId = if (!authorization.isNullOrBlank()) {
+            userService.findUserByToken(authorization).uid!!
+        } else {
+            UUID.fromString(request.userId ?: return ResponseEntity.badRequest().build())
+        }
+        userService.saveDeviceToken(userId, request.fcmToken)
         return ResponseEntity.ok().build()
     }
 

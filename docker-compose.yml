@@ -12,7 +12,7 @@ services:
     ports:
       - "5433:5432"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
       interval: 5s
       retries: 5
 
@@ -26,7 +26,7 @@ services:
     ports:
       - "5434:5432"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
       interval: 5s
       retries: 5
 
@@ -40,7 +40,7 @@ services:
     ports:
       - "5435:5432"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
       interval: 5s
       retries: 5
 
@@ -62,7 +62,7 @@ services:
     ports:
       - "9092:9092"
     healthcheck:
-      test: ["CMD-SHELL", "kafka-topics --bootstrap-server localhost:9092 --list"]
+      test: [ "CMD-SHELL", "kafka-topics --bootstrap-server localhost:9092 --list" ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -104,13 +104,14 @@ services:
       REFRESH_EXPIRATION_DAYS: ${REFRESH_EXPIRATION_DAYS}
       FIREBASE_CREDENTIALS_JSON: ${FIREBASE_CREDENTIALS_JSON}
       FIREBASE_PROJECT_ID: ${FIREBASE_PROJECT_ID}
+      EMAIL_SENDER_PASSWORD: ${EMAIL_SENDER_PASSWORD}
     depends_on:
       users-db:
         condition: service_healthy
       kafka:
         condition: service_healthy
     healthcheck:
-      test: ["CMD-SHELL", "curl -f http://users:8081/actuator/health || exit 1"]
+      test: [ "CMD-SHELL", "curl -fs -H 'Connection: close' http://localhost:8081/actuator/health || exit 1" ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -122,6 +123,8 @@ services:
       dockerfile: services/core/Dockerfile
     container_name: core
     environment:
+      SPRING_FLYWAY_BASELINE_ON_MIGRATE: "true"
+      SPRING_FLYWAY_BASELINE_VERSION: "1"
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
       SPRING_PROFILES_ACTIVE: uat
       SERVICE_API_KEY: ${SERVICE_API_KEY}

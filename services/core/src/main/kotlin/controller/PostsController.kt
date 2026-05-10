@@ -19,15 +19,17 @@ class PostsController(
 
     @PostMapping("/get")
     fun getPosts(
+        @RequestHeader("Authorization", required = false) authorization: String?,
         @RequestBody request: PostsGetRequest
     ): ResponseEntity<PostListResponse> {
+        val viewerUserId = authorization?.let { runCatching { tokenParserService.parse(it).userId }.getOrNull() }
         return onControllerRequest(
             logger = logger,
             operationName = "POST /core/posts/get",
             metaUuid = request.uuid,
             errorMapper = { getPostListErrorResponse(it) }
         ) {
-            postsService.getPosts(request.uuid, request.pagination?.cursorTimestamp, request.pagination?.propertySize)
+            postsService.getPosts(request.uuid, request.pagination?.cursorTimestamp, request.pagination?.propertySize, viewerUserId)
         }
     }
 
@@ -49,15 +51,17 @@ class PostsController(
 
     @GetMapping("/{post_id}")
     fun getPost(
+        @RequestHeader("Authorization", required = false) authorization: String?,
         @PathVariable("post_id") postId: String
     ): ResponseEntity<ExtendedPostResponse> {
+        val viewerUserId = authorization?.let { runCatching { tokenParserService.parse(it).userId }.getOrNull() }
         return onControllerRequest(
             logger = logger,
             operationName = "GET /core/posts/$postId",
             metaUuid = postId,
             errorMapper = { getExtendedPostErrorResponse(it) }
         ) {
-            postsService.getPost(postId)
+            postsService.getPost(postId, viewerUserId)
         }
     }
 

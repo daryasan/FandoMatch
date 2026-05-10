@@ -18,9 +18,6 @@ data class Post(
     val fandomIds: Array<String> = emptyArray(),
 
     @Column(nullable = false)
-    val title: String,
-
-    @Column(nullable = false)
     val content: String,
 
     @Column(name = "media_ids", columnDefinition = "text[]")

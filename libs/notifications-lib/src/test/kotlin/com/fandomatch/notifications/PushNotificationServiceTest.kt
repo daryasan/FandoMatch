@@ -86,4 +86,23 @@ class PushNotificationServiceTest {
 
         verify(exactly = 1) { firebaseMessaging.send(any()) }
     }
+
+    @Test
+    fun `sendDataMessage sends message without notification`() {
+        every { firebaseMessaging.send(any()) } returns "msg-id"
+
+        service.sendDataMessage("fcm-token", mapOf("type" to "chat", "chatId" to "abc"))
+
+        verify(exactly = 1) { firebaseMessaging.send(any()) }
+    }
+
+    @Test
+    fun `sendDataMessage does not throw when FirebaseMessagingException occurs`() {
+        val exception = mockk<FirebaseMessagingException>(relaxed = true)
+        every { firebaseMessaging.send(any()) } throws exception
+
+        assertThatNoException().isThrownBy {
+            service.sendDataMessage("bad-token", mapOf("type" to "match"))
+        }
+    }
 }

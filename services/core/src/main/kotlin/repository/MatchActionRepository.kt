@@ -7,4 +7,6 @@ import java.util.*
 interface MatchActionRepository : JpaRepository<MatchAction, UUID> {
 
     fun findByUserIdAndTargetUserId(userId: UUID, targetUserId: UUID): MatchAction?
+
+    fun findAllByTargetUserIdAndAction(targetUserId: UUID, action: String): List<MatchAction>
 }

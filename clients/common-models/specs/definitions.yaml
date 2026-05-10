@@ -33,6 +33,14 @@ components:
           format: int64
           nullable: true
           description: "Дата рождения, Unix epoch seconds (UTC)"
+        gender:
+          type: string
+          nullable: true
+          description: "Пол пользователя (MALE, FEMALE, OTHER); передаётся при регистрации"
+        avatarMediaId:
+          type: string
+          nullable: true
+          description: "ID медиа аватара; передаётся при регистрации"
         createdAt:
           type: string
           format: date-time

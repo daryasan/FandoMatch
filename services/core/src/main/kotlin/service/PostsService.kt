@@ -37,7 +37,7 @@ class PostsService(
         private const val DEFAULT_SIZE = 20
     }
 
-    fun getPosts(uuid: String, cursorTimestamp: Long?, size: Int?): PostListResponse {
+    fun getPosts(uuid: String, cursorTimestamp: Long?, size: Int?, viewerUserId: UUID? = null): PostListResponse {
         val userId = UUID.fromString(uuid)
         if (!userProfileRepository.existsById(userId)) {
             throw UserNotFoundException(uuid)
@@ -53,7 +53,7 @@ class PostsService(
 
         return PostListResponse(
             status = ResponseStatus.SUCCESS,
-            successResponse = PostListData(posts.map { it.toPost() })
+            successResponse = PostListData(posts.map { it.toPost(viewerUserId) })
         )
     }
 
@@ -63,8 +63,7 @@ class PostsService(
 
         val post = org.example.models.db_models.Post(
             authorId = userId,
-            fandomIds = request.fandomId?.let { arrayOf(it) } ?: emptyArray(),
-            title = request.title,
+            fandomIds = request.fandomIds?.toTypedArray() ?: emptyArray(),
             content = request.content,
             mediaIds = mediaInputs.map { it.mediaId }.toTypedArray()
         )
@@ -79,11 +78,11 @@ class PostsService(
 
         return CreatePostResponse(
             status = ResponseStatus.SUCCESS,
-            successResponse = saved.toPost()
+            successResponse = saved.toPost(userId)
         )
     }
 
-    fun getPost(postId: String): ExtendedPostResponse {
+    fun getPost(postId: String, viewerUserId: UUID? = null): ExtendedPostResponse {
         val postUuid = UUID.fromString(postId)
         val post = postRepository.findById(postUuid)
             .orElseThrow { PostNotFoundException(postId) }
@@ -93,7 +92,7 @@ class PostsService(
 
         return ExtendedPostResponse(
             status = ResponseStatus.SUCCESS,
-            successResponse = post.toExtendedDto(comments)
+            successResponse = post.toExtendedDto(comments, viewerUserId)
         )
     }
 
@@ -172,35 +171,39 @@ class PostsService(
     }
 
     private fun org.example.models.db_models.Post.toExtendedDto(
-        comments: List<org.example.models.db_models.Comment>
+        comments: List<org.example.models.db_models.Comment>,
+        viewerUserId: UUID? = null
     ): ExtendedPost {
-        val base = toExtendedPost()
+        val base = toExtendedPost(viewerUserId)
         return ExtendedPost(
             id = base.id,
-            title = base.title,
             content = base.content,
             author = base.author,
             createdAt = base.createdAt,
             likeCount = base.likeCount,
             commentCount = base.commentCount,
+            isLikedByCurrentUser = base.isLikedByCurrentUser,
             fandoms = base.fandoms,
             mediaItems = base.mediaItems,
             comments = comments.map { it.toCommentDto() }
         )
     }
 
-    private fun org.example.models.db_models.Post.toPost(): Post {
+    private fun org.example.models.db_models.Post.toPost(viewerUserId: UUID? = null): Post {
         val author = userProfileRepository.findById(authorId)
             .orElseThrow { UserNotFoundException(authorId.toString()) }
 
-        val mediaTypeMap = if (mediaIds.isNotEmpty()) {
-            mediaItemRepository.findAllByMediaIdIn(mediaIds.toList()).associate { it.mediaId to it.mediaType }
+        val safeFandomIds = fandomIds ?: emptyArray()
+        val safeMediaIds = mediaIds ?: emptyArray()
+
+        val mediaTypeMap = if (safeMediaIds.isNotEmpty()) {
+            mediaItemRepository.findAllByMediaIdIn(safeMediaIds.toList()).associate { it.mediaId to it.mediaType }
         } else {
             emptyMap()
         }
 
-        val fandoms = if (fandomIds.isNotEmpty()) {
-            fandomRepository.findAllById(fandomIds.map { UUID.fromString(it) }).map { fandom ->
+        val fandoms = if (safeFandomIds.isNotEmpty()) {
+            fandomRepository.findAllById(safeFandomIds.map { UUID.fromString(it) }).map { fandom ->
                 val category = fandomCategoryRepository.findById(fandom.categoryId)
                     .orElseThrow { FandomCategoryNotFoundException(fandom.categoryId.toString()) }
                 Fandom(
@@ -213,7 +216,60 @@ class PostsService(
 
         return Post(
             id = id!!.toString(),
-            title = title,
+            content = content,
+            createdAt = createdAt.epochSecond,
+            author = PostAuthor(
+                username = author.username,
+                uuid = author.userId.toString(),
+                name = author.name ?: author.username,
+                avatar = author.avatarMediaId?.let { mediaId ->
+                    MediaItem(
+                        mediaId = mediaId,
+                        mediaType = MediaType.IMAGE,
+                        url = mediaService.generateSignedDownloadUrl(mediaId)
+                    )
+                }
+            ),
+            likeCount = postLikeRepository.getPostLikeCount(id),
+            commentCount = commentRepository.countByPostId(id).toInt(),
+            isLikedByCurrentUser = viewerUserId?.let { postLikeRepository.existsByUserIdAndPostId(it, id!!) } ?: false,
+            fandoms = fandoms,
+            mediaItems = safeMediaIds.map { mediaId ->
+                val typeStr = mediaTypeMap[mediaId]
+                val mediaType = typeStr?.let { t -> MediaType.entries.firstOrNull { it.value == t } }
+                    ?: MediaType.IMAGE
+                MediaItem(mediaId = mediaId, mediaType = mediaType, url = mediaService.generateSignedDownloadUrl(mediaId))
+            }.ifEmpty { null }
+        )
+    }
+
+    private fun org.example.models.db_models.Post.toExtendedPost(viewerUserId: UUID? = null): ExtendedPost {
+        val author = userProfileRepository.findById(authorId)
+            .orElseThrow { UserNotFoundException(authorId.toString()) }
+
+        val safeFandomIds = fandomIds ?: emptyArray()
+        val safeMediaIds = mediaIds ?: emptyArray()
+
+        val mediaTypeMap = if (safeMediaIds.isNotEmpty()) {
+            mediaItemRepository.findAllByMediaIdIn(safeMediaIds.toList()).associate { it.mediaId to it.mediaType }
+        } else {
+            emptyMap()
+        }
+
+        val fandoms = if (safeFandomIds.isNotEmpty()) {
+            fandomRepository.findAllById(safeFandomIds.map { UUID.fromString(it) }).map { fandom ->
+                val category = fandomCategoryRepository.findById(fandom.categoryId)
+                    .orElseThrow { FandomCategoryNotFoundException(fandom.categoryId.toString()) }
+                Fandom(
+                    id = fandom.id.toString(),
+                    name = fandom.name,
+                    category = category.let { FandomCategory.valueOf(it.name) }
+                )
+            }
+        } else null
+
+        return ExtendedPost(
+            id = id!!.toString(),
             content = content,
             createdAt = createdAt.epochSecond,
             author = PostAuthor(
@@ -230,59 +286,9 @@ class PostsService(
             ),
             likeCount = postLikeRepository.getPostLikeCount(id!!),
             commentCount = commentRepository.countByPostId(id!!).toInt(),
+            isLikedByCurrentUser = viewerUserId?.let { postLikeRepository.existsByUserIdAndPostId(it, id!!) } ?: false,
             fandoms = fandoms,
-            mediaItems = mediaIds.map { mediaId ->
-                val typeStr = mediaTypeMap[mediaId]
-                val mediaType = typeStr?.let { t -> MediaType.values().firstOrNull { it.value == t } }
-                    ?: MediaType.IMAGE
-                MediaItem(mediaId = mediaId, mediaType = mediaType, url = mediaService.generateSignedDownloadUrl(mediaId))
-            }.ifEmpty { null }
-        )
-    }
-
-    private fun org.example.models.db_models.Post.toExtendedPost(): ExtendedPost {
-        val author = userProfileRepository.findById(authorId)
-            .orElseThrow { UserNotFoundException(authorId.toString()) }
-
-        val mediaTypeMap = if (mediaIds.isNotEmpty()) {
-            mediaItemRepository.findAllByMediaIdIn(mediaIds.toList()).associate { it.mediaId to it.mediaType }
-        } else {
-            emptyMap()
-        }
-
-        val fandoms = if (fandomIds.isNotEmpty()) {
-            fandomRepository.findAllById(fandomIds.map { UUID.fromString(it) }).map { fandom ->
-                val category = fandomCategoryRepository.findById(fandom.categoryId)
-                    .orElseThrow { FandomCategoryNotFoundException(fandom.categoryId.toString()) }
-                Fandom(
-                    id = fandom.id.toString(),
-                    name = fandom.name,
-                    category = category.let { FandomCategory.valueOf(it.name) }
-                )
-            }
-        } else null
-
-        return ExtendedPost(
-            id = id!!.toString(),
-            title = title,
-            content = content,
-            createdAt = createdAt.epochSecond,
-            author = ExtendedPostAuthor(
-                username = author.username,
-                uuid = author.userId.toString(),
-                name = author.name ?: author.username,
-                avatar = author.avatarMediaId?.let { mediaId ->
-                    MediaItem(
-                        mediaId = mediaId,
-                        mediaType = MediaType.IMAGE,
-                        url = mediaService.generateSignedDownloadUrl(mediaId)
-                    )
-                }
-            ),
-            likeCount = postLikeRepository.getPostLikeCount(id!!),
-            commentCount = commentRepository.countByPostId(id!!).toInt(),
-            fandoms = fandoms,
-            mediaItems = mediaIds.map { mediaId ->
+            mediaItems = safeMediaIds.map { mediaId ->
                 val typeStr = mediaTypeMap[mediaId]
                 val mediaType = typeStr?.let { t -> MediaType.values().firstOrNull { it.value == t } }
                     ?: MediaType.IMAGE

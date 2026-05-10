@@ -132,8 +132,11 @@ class ChatsService(
         notificationService.pushMessage(targetUserId, currentUserId, message.toDto(targetUserId, mediaTypeMap))
 
         usersAdapter.getFcmToken(targetUserId)?.let { fcmToken ->
-            val preview = if (message.content.length > 50) message.content.take(50) + "…" else message.content
-            pushNotificationService.send(fcmToken, "Новое сообщение", preview)
+            pushNotificationService.sendDataMessage(fcmToken, mapOf(
+                "type" to "chat",
+                "chatId" to chat.id.toString(),
+                "name" to resolveDisplayName(currentUserId)
+            ))
         }
 
         val senderName = resolveDisplayName(currentUserId)

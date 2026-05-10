@@ -20,7 +20,9 @@ interface UserProfileRepository : JpaRepository<UserProfile, UUID> {
             SELECT ma.target_user_id FROM match_action ma WHERE ma.user_id = :userId
         )
         AND up.user_id NOT IN (
-            SELECT mp.suggested_user_id FROM match_pending mp WHERE mp.user_id = :userId
+            SELECT m.user_id_2 FROM match m WHERE m.user_id_1 = :userId
+            UNION
+            SELECT m.user_id_1 FROM match m WHERE m.user_id_2 = :userId
         )
         AND (CAST(:gender AS VARCHAR) IS NULL OR up.gender = :gender)
         AND (CAST(:city AS VARCHAR) IS NULL OR up.city = :city)

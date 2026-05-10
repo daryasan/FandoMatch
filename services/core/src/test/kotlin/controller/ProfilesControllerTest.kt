@@ -9,6 +9,7 @@ import org.example.controller.ProfilesController
 import org.example.exceptions.UserNotFoundException
 import org.example.models.UserTokenData
 import org.example.service.TokenParserService
+import org.example.service.UserPreferencesService
 import org.example.service.profile.ProfilesService
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
@@ -29,6 +30,9 @@ class ProfilesControllerTest {
 
     @MockK
     lateinit var tokenParserService: TokenParserService
+
+    @MockK
+    lateinit var userPreferencesService: UserPreferencesService
 
     @InjectMockKs
     private lateinit var profilesController: ProfilesController

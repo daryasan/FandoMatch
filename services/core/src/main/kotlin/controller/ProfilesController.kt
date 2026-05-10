@@ -6,6 +6,8 @@ import org.example.service.TokenParserService
 import org.example.service.UserPreferencesService
 import org.example.service.profile.ProfilesService
 import org.example.util.getEditUserProfileErrorResponse
+import org.example.util.getFriendsErrorResponse
+import org.example.util.getPendingRequestsErrorResponse
 import org.example.util.getUserProfileErrorResponse
 import org.example.util.onControllerRequest
 import org.springframework.http.ResponseEntity
@@ -51,6 +53,36 @@ class ProfilesController(
             errorMapper = { getEditUserProfileErrorResponse(it) }
         ) {
             profilesService.editProfile(uuid, request)
+        }
+    }
+
+    @GetMapping("/profile/pending_requests")
+    fun getPendingRequests(
+        @RequestHeader("Authorization") token: String
+    ): ResponseEntity<PendingRequestsResponse> {
+        val uuid = tokenParserService.parse(token).userId
+        return onControllerRequest(
+            logger = logger,
+            operationName = "GET /core/user/profile/pending_requests",
+            metaUuid = uuid.toString(),
+            errorMapper = { getPendingRequestsErrorResponse(it) }
+        ) {
+            profilesService.getPendingRequests(uuid)
+        }
+    }
+
+    @GetMapping("/profile/friends")
+    fun getFriends(
+        @RequestHeader("Authorization") token: String
+    ): ResponseEntity<FriendsResponse> {
+        val uuid = tokenParserService.parse(token).userId
+        return onControllerRequest(
+            logger = logger,
+            operationName = "GET /core/user/profile/friends",
+            metaUuid = uuid.toString(),
+            errorMapper = { getFriendsErrorResponse(it) }
+        ) {
+            profilesService.getFriends(uuid)
         }
     }
 

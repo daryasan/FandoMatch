@@ -67,6 +67,11 @@ open class Routes {
                     .filters { f -> f.stripPrefix(0) }
                     .uri(coreServiceUrl)
             }
+            .route("core-cities") { r ->
+                r.path("/core/cities/**")
+                    .filters { f -> f.stripPrefix(0) }
+                    .uri(coreServiceUrl)
+            }
 
             // MESSAGING SERVICE
             .route("messaging") { r ->

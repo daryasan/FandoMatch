@@ -34,10 +34,12 @@ class UserService(
         username: String,
     ): User {
         userRepository.findByUsername(username)?.let {
-            throw UsernameAlreadyExistsException(username)
+            if (it.status == UserStatus.DELETED) userRepository.delete(it)
+            else throw UsernameAlreadyExistsException(username)
         }
         userRepository.findByEmail(email)?.let {
-            throw EmailAlreadyExistsException(email)
+            if (it.status == UserStatus.DELETED) userRepository.delete(it)
+            else throw EmailAlreadyExistsException(email)
         }
 
         val userToSave = User(
@@ -88,20 +90,13 @@ class UserService(
         if (user.status == UserStatus.DELETED) {
             throw UserAlreadyDeletedException(user.uid.toString())
         }
-        val deletedUser = User(
-            uid = user.uid,
-            email = user.email,
-            username = user.username,
-            createdAt = user.createdAt,
-            status = UserStatus.DELETED,
-        )
         val revokeTargets = tokenRepository.findAllByUserAndTokenTypeAndRevokedFalse(user, TokenType.ACCESS) +
                 tokenRepository.findAllByUserAndTokenTypeAndRevokedFalse(user, TokenType.REFRESH)
         revokeTargets.forEach { it.revoked = true }
         tokenRepository.saveAll(revokeTargets)
-        val saved = userRepository.save(deletedUser)
+        userRepository.updateStatus(user.uid!!, UserStatus.DELETED.name)
         logger.info { "Soft-deleted user uid=${user.uid}" }
-        return saved
+        return userRepository.findById(user.uid!!).orElseThrow { UserNotFoundException("id") }
     }
 
     @Transactional
@@ -110,16 +105,9 @@ class UserService(
         userRepository.findByEmail(newEmail)?.let {
             if (it.uid != user.uid) throw EmailAlreadyExistsException(newEmail)
         }
-        val updated = User(
-            uid = user.uid,
-            email = newEmail,
-            username = user.username,
-            createdAt = user.createdAt,
-            status = user.status,
-        )
-        val saved = userRepository.save(updated)
+        userRepository.updateEmail(user.uid!!, newEmail)
         logger.info { "Changed email for user uid=${user.uid}" }
-        return saved
+        return userRepository.findById(user.uid!!).orElseThrow { UserNotFoundException("id") }
     }
 
     fun saveDeviceToken(userId: UUID, fcmToken: String) {

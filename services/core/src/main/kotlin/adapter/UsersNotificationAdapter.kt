@@ -1,4 +1,4 @@
-package org.example.client
+package org.example.adapter
 
 import com.fandomatch.users.api.UserApi
 import com.fandomatch.users.model.GetFcmTokenRequest

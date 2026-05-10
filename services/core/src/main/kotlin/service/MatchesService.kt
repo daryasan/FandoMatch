@@ -4,7 +4,7 @@ import com.fandomatch.core.model.*
 import com.fandomatch.media.MediaService
 import com.fandomatch.notifications.PushNotificationService
 import jakarta.transaction.Transactional
-import org.example.client.UsersNotificationAdapter
+import org.example.adapter.UsersNotificationAdapter
 import org.example.exceptions.AlreadyReactedException
 import org.example.exceptions.FandomCategoryNotFoundException
 import org.example.exceptions.UserNotFoundException
@@ -48,6 +48,19 @@ class MatchesService(
         return matchRepository.existsByUserId1AndUserId2(first, second)
     }
 
+    fun getPendingRequestUserIds(userId: UUID): List<UUID> {
+        return matchActionRepository.findAllByTargetUserIdAndAction(userId, LIKE)
+            .filter { matchActionRepository.findByUserIdAndTargetUserId(userId, it.userId) == null }
+            .filter { !areFriends(userId, it.userId) }
+            .map { it.userId }
+    }
+
+    fun getFriendIds(userId: UUID): List<UUID> {
+        return matchRepository.getAllUserMatches(userId).map { match ->
+            if (match.userId1 == userId) match.userId2 else match.userId1
+        }
+    }
+
     fun getNextCandidates(userId: UUID, batchSize: Int): MatchCandidateBatchResponse {
         val filters = matchFilterRepository.findById(userId).orElse(MatchFilter(userId = userId))
 
@@ -72,6 +85,7 @@ class MatchesService(
         val currentUserFandoms = fandomService.getFandoms(userId)
 
         val suggested = candidates
+            .filter { it.birthDate != null && it.gender != null && it.name != null }
             .map { candidate ->
                 val candidateFandoms = fandomService.getFandoms(candidate.userId)
                 val compatibility = calculateCompatibility(currentUserFandoms, candidateFandoms)
@@ -120,20 +134,27 @@ class MatchesService(
             val savedMatch = matchRepository.save(match)
             matchEventProducer.sendMatchEvent(savedMatch.id!!, first, second)
 
+            val userProfile = userProfilesRepository.findById(userId).orElse(null)
+            val targetProfile = userProfilesRepository.findById(targetUuid).orElse(null)
             usersNotificationAdapter.getFcmToken(userId)?.let { token ->
-                pushNotificationService.send(token, "Новый матч!", "У вас новый матч!")
+                pushNotificationService.sendDataMessage(token, mapOf(
+                    "type" to "match",
+                    "userId" to targetUuid.toString(),
+                    "name" to (targetProfile?.name ?: targetProfile?.username ?: targetUuid.toString())
+                ))
             }
             usersNotificationAdapter.getFcmToken(targetUuid)?.let { token ->
-                pushNotificationService.send(token, "Новый матч!", "У вас новый матч!")
+                pushNotificationService.sendDataMessage(token, mapOf(
+                    "type" to "match",
+                    "userId" to userId.toString(),
+                    "name" to (userProfile?.name ?: userProfile?.username ?: userId.toString())
+                ))
             }
 
             MatchActionResult(status = MatchActionResult.Status.MATCH)
         } else {
             if (action == LIKE) {
                 likeEventProducer.send(userId, targetUuid)
-                usersNotificationAdapter.getFcmToken(targetUuid)?.let { token ->
-                    pushNotificationService.send(token, "Кто-то оценил ваш профиль!", "Зайдите и посмотрите!")
-                }
             }
             MatchActionResult(
                 status = if (action == LIKE) MatchActionResult.Status.LIKED else MatchActionResult.Status.DISLIKED

@@ -9,12 +9,14 @@ fun userRegistrationRequest(
     password: String = Constants.PASSWORD,
     name: String = Constants.NAME,
     birthDate: Long = Constants.BIRTH_DATE,
+    gender: String = Constants.GENDER,
 ) = UserRegistrationRequest(
     email = email,
     username = username,
     hashedPassword = password,
     name = name,
     birthDate = birthDate,
+    gender = gender,
 )
 
 fun userLoginRequest(

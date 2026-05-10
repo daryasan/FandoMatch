@@ -44,6 +44,7 @@ fun UserProfile.toMatchCandidateResponse(
     name = name!!,
     uuid = userId.toString(),
     age = calculateAge(birthDate!!),
+    gender = genderStringToEnum(gender)!!,
     city = cityCodeToCity(city),
     avatar = avatarMediaId?.let { MediaItem(mediaId = it, mediaType = MediaType.IMAGE, url = mediaService.generateSignedDownloadUrl(it)) },
     compatibility = compatibility.toInt(),
@@ -94,7 +95,9 @@ val CITY_MAP = mapOf(
 
 fun cityCodeToCity(code: String?): City? {
     if (code == null) return null
-    return CITY_MAP[CityEnum.valueOf(code.uppercase())] ?: City(nameEn = code, nameRu = code)
+    val cityEnum = runCatching { CityEnum.valueOf(code.uppercase()) }.getOrNull()
+    return if (cityEnum != null) CITY_MAP[cityEnum] ?: City(nameEn = code, nameRu = code)
+    else City(nameEn = code, nameRu = code)
 }
 
 fun UserChangedEvent.toUserProfile(): UserProfile {
@@ -102,9 +105,9 @@ fun UserChangedEvent.toUserProfile(): UserProfile {
         userId = UUID.fromString(this.uid),
         username = this.username,
         bio = null,
-        avatarMediaId = null,
+        avatarMediaId = this.avatarMediaId,
         backgroundMediaId = null,
-        gender = null,
+        gender = this.gender,
         city = null,
         name = this.name,
         birthDate = this.birthDate?.let {

@@ -37,4 +37,21 @@ class PushNotificationService(private val firebaseApp: FirebaseApp) {
             logger.error { "Failed to send push notification to token $fcmToken: ${e.message}" }
         }
     }
+
+    fun sendDataMessage(
+        fcmToken: String,
+        data: Map<String, String>
+    ) {
+        val message = Message.builder()
+            .setToken(fcmToken)
+            .putAllData(data)
+            .build()
+
+        try {
+            FirebaseMessaging.getInstance(firebaseApp).send(message)
+            logger.info { "Data push message sent to token=$fcmToken with keys=${data.keys}" }
+        } catch (e: FirebaseMessagingException) {
+            logger.error { "Failed to send data push message to token $fcmToken: ${e.message}" }
+        }
+    }
 }

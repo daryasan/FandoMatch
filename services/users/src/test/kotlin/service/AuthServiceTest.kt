@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import utils.Constants.BIRTH_DATE
 import utils.Constants.EMAIL
+import utils.Constants.GENDER
 import utils.Constants.NAME
 import utils.Constants.PASSWORD
 import utils.Constants.USERNAME
@@ -63,16 +64,16 @@ class AuthServiceTest {
             user = user,
             credentialType = CredentialType.PASSWORD
         )
-        every { userEventsSender.sendUserCreatedEvent(user, any(), NAME, BIRTH_DATE) } just runs
+        every { userEventsSender.sendUserCreatedEvent(user, any(), NAME, BIRTH_DATE, GENDER, null) } just runs
         every { tokenService.generateAndSaveTokens(user) } returns expectedTokens
 
         // when
-        val result = authService.register(EMAIL, USERNAME, PASSWORD, BIRTH_DATE, NAME)
+        val result = authService.register(EMAIL, USERNAME, PASSWORD, BIRTH_DATE, NAME, GENDER)
 
         // then
         verify(exactly = 1) { userService.createUser(EMAIL, USERNAME) }
         verify(exactly = 1) { userCredentialsService.createCredentials(user, PASSWORD) }
-        verify(exactly = 1) { userEventsSender.sendUserCreatedEvent(user, any(), NAME, BIRTH_DATE) }
+        verify(exactly = 1) { userEventsSender.sendUserCreatedEvent(user, any(), NAME, BIRTH_DATE, GENDER, null) }
         verify(exactly = 1) { tokenService.generateAndSaveTokens(user) }
 
         assertEquals(expectedTokens, result)

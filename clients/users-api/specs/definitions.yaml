@@ -49,12 +49,20 @@ components:
           type: string
         hashed_password:
           type: string
+        gender:
+          type: string
+          description: "Пол пользователя (MALE, FEMALE, OTHER)"
+        avatar_media_id:
+          type: string
+          nullable: true
+          description: "ID медиа аватара (опционально)"
       required:
         - email
         - username
         - hashed_password
         - name
         - birth_date
+        - gender
 
     UserRegistrationResponse:
       type: object
@@ -244,6 +252,9 @@ components:
       properties:
         fcm_token:
           type: string
+        user_id:
+          type: string
+          nullable: true
       required:
         - fcm_token
 

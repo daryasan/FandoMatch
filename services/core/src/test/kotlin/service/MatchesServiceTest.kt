@@ -2,19 +2,20 @@ package service
 
 import com.fandomatch.core.model.*
 import com.fandomatch.media.MediaService
+import com.fandomatch.notifications.PushNotificationService
 import io.mockk.*
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
 import io.mockk.junit5.MockKExtension
+import org.example.adapter.UsersNotificationAdapter
 import org.example.exceptions.AlreadyReactedException
 import org.example.exceptions.UserNotFoundException
 import org.example.models.db_models.Match
-import org.example.models.db_models.MatchAction
-import org.example.models.db_models.MatchFilter
 import org.example.models.db_models.MatchPending
 import org.example.repository.*
 import org.example.service.FandomService
 import org.example.service.MatchesService
+import org.example.stream.out.LikeEventProducer
 import org.example.stream.out.MatchEventProducer
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
@@ -41,6 +42,12 @@ class MatchesServiceTest {
     lateinit var fandomService: FandomService
 
     @MockK
+    lateinit var fandomRepository: FandomRepository
+
+    @MockK
+    lateinit var fandomCategoryRepository: FandomCategoryRepository
+
+    @MockK
     lateinit var matchPendingRepository: MatchPendingRepository
 
     @MockK
@@ -51,6 +58,15 @@ class MatchesServiceTest {
 
     @MockK(relaxed = true)
     lateinit var mediaService: MediaService
+
+    @MockK
+    lateinit var likeEventProducer: LikeEventProducer
+
+    @MockK
+    lateinit var usersNotificationAdapter: UsersNotificationAdapter
+
+    @MockK(relaxed = true)
+    lateinit var pushNotificationService: PushNotificationService
 
     @InjectMockKs
     private lateinit var matchesService: MatchesService
@@ -85,6 +101,7 @@ class MatchesServiceTest {
         every { matchActionRepository.save(any()) } answers { firstArg() }
         every { matchPendingRepository.deleteByUserIdAndSuggestedUserId(USER_ID, TARGET_USER_ID) } just runs
         every { matchActionRepository.findByUserIdAndTargetUserId(TARGET_USER_ID, USER_ID) } returns null
+        every { likeEventProducer.send(USER_ID, TARGET_USER_ID) } just runs
 
         val result = matchesService.react(USER_ID, TARGET_USER_ID, "LIKE")
 
@@ -105,6 +122,8 @@ class MatchesServiceTest {
 
         assertEquals(ResponseStatus.SUCCESS, result.status)
         assertEquals(MatchActionResult.Status.DISLIKED, result.successResponse!!.status)
+        // no like event should be produced for DISLIKE
+        verify(exactly = 0) { likeEventProducer.send(any(), any()) }
     }
 
     @Test
@@ -121,6 +140,9 @@ class MatchesServiceTest {
             arg.copy(id = UUID.randomUUID())
         }
         every { matchEventProducer.sendMatchEvent(any(), any(), any()) } just runs
+        every { userProfilesRepository.findById(USER_ID) } returns Optional.of(createUserProfile(userId = USER_ID))
+        every { userProfilesRepository.findById(TARGET_USER_ID) } returns Optional.of(createUserProfile(userId = TARGET_USER_ID))
+        every { usersNotificationAdapter.getFcmToken(any()) } returns null
 
         val result = matchesService.react(USER_ID, TARGET_USER_ID, "LIKE")
 

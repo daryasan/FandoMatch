@@ -56,22 +56,25 @@ class FeedService(
 
         return PostListResponse(
             status = ResponseStatus.SUCCESS,
-            successResponse = PostListData(posts.map { it.toDto() })
+            successResponse = PostListData(posts.map { it.toDto(userId) })
         )
     }
 
-    private fun org.example.models.db_models.Post.toDto(): Post {
+    private fun org.example.models.db_models.Post.toDto(viewerUserId: UUID): Post {
         val author = userProfileRepository.findById(authorId)
             .orElseThrow { UserNotFoundException(authorId.toString()) }
 
-        val mediaTypeMap = if (mediaIds.isNotEmpty()) {
-            mediaItemRepository.findAllByMediaIdIn(mediaIds.toList()).associate { it.mediaId to it.mediaType }
+        val safeFandomIds = fandomIds ?: emptyArray()
+        val safeMediaIds = mediaIds ?: emptyArray()
+
+        val mediaTypeMap = if (safeMediaIds.isNotEmpty()) {
+            mediaItemRepository.findAllByMediaIdIn(safeMediaIds.toList()).associate { it.mediaId to it.mediaType }
         } else {
             emptyMap()
         }
 
-        val fandoms = if (fandomIds.isNotEmpty()) {
-            fandomRepository.findAllById(fandomIds.map { UUID.fromString(it) }).map { fandom ->
+        val fandoms = if (safeFandomIds.isNotEmpty()) {
+            fandomRepository.findAllById(safeFandomIds.map { UUID.fromString(it) }).map { fandom ->
                 val category = fandomCategoryRepository.findById(fandom.categoryId).orElseThrow { FandomCategoryNotFoundException(fandom.categoryId.toString()) }
                 Fandom(
                     id = fandom.id.toString(),
@@ -83,13 +86,12 @@ class FeedService(
 
         return Post(
             id = id!!.toString(),
-            title = title,
             content = content,
             createdAt = createdAt.epochSecond,
             author = PostAuthor(
                 username = author.username,
                 uuid = author.userId.toString(),
-                name = author.name,
+                name = author.name ?: author.username,
                 avatar = author.avatarMediaId?.let { mediaId ->
                     MediaItem(
                         mediaId = mediaId,
@@ -100,8 +102,9 @@ class FeedService(
             ),
             likeCount = postLikeRepository.getPostLikeCount(id!!),
             commentCount = commentRepository.countByPostId(id!!).toInt(),
+            isLikedByCurrentUser = postLikeRepository.existsByUserIdAndPostId(viewerUserId, id!!),
             fandoms = fandoms,
-            mediaItems = mediaIds.map { mediaId ->
+            mediaItems = safeMediaIds.map { mediaId ->
                 val typeStr = mediaTypeMap[mediaId]
                 val mediaType = typeStr?.let { t -> MediaType.values().firstOrNull { it.value == t } }
                     ?: MediaType.IMAGE

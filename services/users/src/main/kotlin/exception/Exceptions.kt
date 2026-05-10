@@ -39,4 +39,7 @@ class InvalidVerificationCodeException(message: String = "Verification code is i
     BusinessException(ErrorCode.VERIFICATION_CODE_INVALID.name, message)
 
 class UserAlreadyDeletedException(uid: String) :
-    BusinessException(ErrorCode.USER_INACTIVE.name, "User with uid=$uid is already deleted")
+    BusinessException(ErrorCode.USER_DELETED.name, "User with uid=$uid is already deleted")
+
+class UserDeletedException(uid: String) :
+    BusinessException(ErrorCode.USER_DELETED.name, "User with uid=$uid has been deleted")

@@ -19,8 +19,8 @@ class UserEventsSender(
         const val TOPIC_NAME = "user-changed-events"
     }
 
-    fun sendUserCreatedEvent(user: User, eventType: EventType, name: String, birthDate: Long) {
-        val event = user.toChangedEvent(eventType, name, birthDate)
+    fun sendUserCreatedEvent(user: User, eventType: EventType, name: String, birthDate: Long, gender: String, avatarMediaId: String? = null) {
+        val event = user.toChangedEvent(eventType, name, birthDate, gender, avatarMediaId)
         sendEvent(event)
     }
 

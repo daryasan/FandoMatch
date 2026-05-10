@@ -273,10 +273,13 @@ components:
           type: string
         name:
           type: string
-        gender:
-          $ref: '#/components/schemas/Gender'
         city:
           $ref: '#/components/schemas/City'
+        fandom_ids:
+          type: array
+          items:
+            type: string
+          description: "Список ID фандомов пользователя (заменяет текущие)"
 
     Gender:
       type: string
@@ -402,6 +405,8 @@ components:
           type: string
         age:
           type: integer
+        gender:
+          $ref: '#/components/schemas/Gender'
         city:
           $ref: '#/components/schemas/City'
         avatar:
@@ -416,6 +421,7 @@ components:
         - uuid
         - name
         - age
+        - gender
         - compatibility
         - fandoms
         - username
@@ -540,18 +546,18 @@ components:
     CreatePostRequest:
       type: object
       properties:
-        title:
-          type: string
         content:
           type: string
-        fandom_id:
-          type: string
+        fandom_ids:
+          type: array
+          items:
+            type: string
+          description: "Список ID фандомов поста"
         media_items:
           type: array
           items:
             $ref: '#/components/schemas/PostMediaInput'
       required:
-        - title
         - content
 
     Post:
@@ -559,14 +565,14 @@ components:
       properties:
         id:
           type: string
-        title:
-          type: string
         content:
           type: string
         like_count:
           type: integer
         comment_count:
           type: integer
+        is_liked_by_current_user:
+          type: boolean
         author:
           type: object
           properties:
@@ -581,6 +587,7 @@ components:
           required:
             - uuid
             - username
+            - name
         fandoms:
           type: array
           items:
@@ -594,10 +601,12 @@ components:
             $ref: '#/components/schemas/MediaItem'
       required:
         - id
-        - title
         - content
         - created_at
         - author
+        - like_count
+        - comment_count
+        - is_liked_by_current_user
 
     ExtendedPostResponse:
       type: object
@@ -616,14 +625,14 @@ components:
       properties:
         id:
           type: string
-        title:
-          type: string
         content:
           type: string
         like_count:
           type: integer
         comment_count:
           type: integer
+        is_liked_by_current_user:
+          type: boolean
         author:
           type: object
           properties:
@@ -656,12 +665,12 @@ components:
             $ref: '#/components/schemas/Comment'
       required:
         - id
-        - title
         - content
         - created_at
         - author
         - like_count
         - comment_count
+        - is_liked_by_current_user
 
     CreatePostResponse:
       type: object

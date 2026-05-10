@@ -45,6 +45,8 @@ dependencies {
 
     // db
     implementation("org.postgresql:postgresql:42.7.3")
+    implementation("org.flywaydb:flyway-core")
+    implementation("org.flywaydb:flyway-database-postgresql")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 
     // jwt

@@ -122,3 +122,19 @@ fun getCreateCommentErrorResponse(exception: BusinessException) = CreateCommentR
         errorMessage = exception.message,
     )
 )
+
+fun getPendingRequestsErrorResponse(exception: BusinessException) = PendingRequestsResponse(
+    status = ResponseStatus.ERROR,
+    errorResponse = Error(
+        errorCode = exception.code,
+        errorMessage = exception.message,
+    )
+)
+
+fun getFriendsErrorResponse(exception: BusinessException) = FriendsResponse(
+    status = ResponseStatus.ERROR,
+    errorResponse = Error(
+        errorCode = exception.code,
+        errorMessage = exception.message,
+    )
+)

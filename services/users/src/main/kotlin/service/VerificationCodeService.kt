@@ -41,7 +41,7 @@ class VerificationCodeService(
         if (emailService != null) {
             emailService.sendVerificationCode(email, code)
         } else {
-            logger.warn { "EmailService is not configured — verification code for $email: $code" }
+            logger.warn { "EmailService is not configured, verification code for $email was not sent" }
         }
     }
 

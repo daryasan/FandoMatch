@@ -26,4 +26,3 @@ spring:
       org.apache.kafka.clients.NetworkClient: INFO
       org.apache.kafka.clients.FetchSessionHandler: INFO
       org.springframework.kafka: INFO
-      root: DEBUG

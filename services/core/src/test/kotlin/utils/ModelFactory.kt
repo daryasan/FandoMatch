@@ -58,8 +58,8 @@ fun createMatchFilter(
     ageFrom = ageFrom,
     ageTo = ageTo,
     onlyInUserCity = onlyInUserCity,
-    fandomCategory = listOf(fandomCategory.toString()),
-    fandomIds = listOf(fandomId.toString())
+    fandomCategory = fandomCategory?.let { listOf(it.toString()) },
+    fandomIds = fandomId?.let { listOf(it.toString()) }
 )
 
 fun createMatchAction(

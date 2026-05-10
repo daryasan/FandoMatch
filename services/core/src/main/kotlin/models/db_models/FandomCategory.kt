@@ -7,7 +7,6 @@ import java.util.*
 @Table(name = "fandom_category")
 data class FandomCategory(
     @Id
-    @GeneratedValue
     val id: UUID,
 
     @Column(unique = true, nullable = false)

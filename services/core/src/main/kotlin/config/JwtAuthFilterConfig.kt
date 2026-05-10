@@ -17,6 +17,8 @@ class JwtAuthFilterConfig(
     private val tokenParserService: TokenParserService
 ) : OncePerRequestFilter() {
 
+    override fun shouldNotFilterErrorDispatch() = true
+
     override fun doFilterInternal(
         request: HttpServletRequest,
         response: HttpServletResponse,
@@ -44,11 +46,15 @@ class JwtAuthFilterConfig(
             return
         } catch (e: JwtException) {
             logger.warn { "Invalid JWT: ${e.message}" }
-            response.sendError(HttpServletResponse.SC_FORBIDDEN, "Invalid or expired token")
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid or expired token")
             return
         } catch (e: IllegalArgumentException) {
             logger.warn { "Malformed JWT claims: ${e.message}" }
-            response.sendError(HttpServletResponse.SC_FORBIDDEN, "Invalid or expired token")
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid or expired token")
+            return
+        } catch (e: Exception) {
+            logger.error { "Unexpected error during token validation: ${e.message}" }
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Authentication failed")
             return
         }
         filterChain.doFilter(request, response)

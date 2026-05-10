@@ -17,3 +17,6 @@ class PostNotFoundException(postId: String) :
 
 class FandomCategoryNotFoundException(id: String) :
     BusinessException(ErrorCode.FANDOM_CATEGORY_NOT_FOUND.name, "Fandom category $id not found")
+
+class ProfileIncompleteException(userId: String) :
+    BusinessException(ErrorCode.PROFILE_INCOMPLETE.name, "Profile $userId is incomplete (missing required fields)")

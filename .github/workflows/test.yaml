@@ -1,13 +1,15 @@
-name: Microservice Test Coverage
+name: Microservice CI
 
 on:
   pull_request:
     branches:
       - master
+    types: [opened, synchronize, reopened, closed]
 
 jobs:
-  test-users:
+  test:
     runs-on: ubuntu-latest
+    if: github.event.action != 'closed' || github.event.pull_request.merged == false
 
     permissions:
       contents: read
@@ -47,53 +49,45 @@ jobs:
           java-version: 21
           cache: gradle
 
-      - name: Set up Docker
-        uses: docker/setup-buildx-action@v3
-
       - name: Grant execute permission for Gradle Wrapper
         run: chmod +x gradlew
 
       - name: Generate OpenAPI models
         run: ./gradlew openApiGenerate
 
-      - name: Run tests with coverage
-        run: ./gradlew :services:users:test :services:users:jacocoTestReport
+      - name: Run tests
+        run: ./gradlew :services:users:test
 
-      - name: Generate coverage report summary
-        id: jacoco
-        uses: madrapps/jacoco-report@v1.6
+  build-and-push:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
         with:
-          paths: services/users/build/reports/jacoco/test/jacocoTestReport.xml
-          token: ${{ secrets.GITHUB_TOKEN }}
-          min-coverage-overall: 0
-          min-coverage-changed-files: 0
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Upload coverage report
-        uses: actions/upload-artifact@v4
-        with:
-          name: coverage-report
-          path: services/users/build/reports/jacoco/test/html
-
-
-      - name: Comment coverage on PR
-        if: github.event_name == 'pull_request'
-        uses: marocchino/sticky-pull-request-comment@v2
-        with:
-          recreate: true
-          token: ${{ secrets.GITHUB_TOKEN }}
-          header: coverage-report
-          message: |
-            ## Test Coverage Report
-
-            **Total Coverage:** ${{ steps.jacoco.outputs.coverage-overall }}%
-
-            **Changed Files Coverage:** ${{ steps.jacoco.outputs.coverage-changed-files }}%
-
-            _Generated automatically by CI_
-
-      - name: Upload coverage report
-        uses: actions/upload-artifact@v4
-        with:
-          name: coverage-report
-          path: build/reports/jacoco/jacocoRootReport/html
-
+      - name: Build and push images
+        run: |
+          SERVICES=(
+            "gateway:services/gateway/Dockerfile"
+            "users:services/users/Dockerfile"
+            "matches:services/core/Dockerfile"
+            "notifications:services/messaging/Dockerfile"
+          )
+          for entry in "${SERVICES[@]}"; do
+            service="${entry%%:*}"
+            dockerfile="${entry#*:}"
+            image="daryasssan/fandomatch:fdmatch-${service}"
+            echo "Building $image from $dockerfile"
+            docker build --platform linux/amd64 -f "$dockerfile" -t "$image" .
+            docker push "$image"
+          done

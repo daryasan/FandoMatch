@@ -5,6 +5,18 @@ management:
         include: health
 
 spring:
+  mail:
+    host: smtp.mail.ru
+    port: 465
+    username: fandomatch@mail.ru
+    password: ${EMAIL_SENDER_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          ssl:
+            enable: true
+
   jpa:
     open-in-view: false
   kafka:
@@ -21,11 +33,15 @@ spring:
     admin:
       auto-create: true
 
-  logging:
-    level:
-      org.apache.kafka: INFO
-      org.apache.kafka.clients: INFO
-      org.apache.kafka.clients.NetworkClient: INFO
-      org.apache.kafka.clients.FetchSessionHandler: INFO
-      org.springframework.kafka: INFO
-      root: DEBUG
+notifications:
+  email:
+    from: fandomatch@mail.ru
+
+logging:
+  level:
+    org.apache.kafka: INFO
+    org.apache.kafka.clients: INFO
+    org.apache.kafka.clients.NetworkClient: INFO
+    org.apache.kafka.clients.FetchSessionHandler: INFO
+    org.springframework.kafka: INFO
+    org.apache.coyote.http11.Http11Processor: WARN

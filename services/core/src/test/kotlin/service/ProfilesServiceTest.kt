@@ -10,6 +10,7 @@ import org.example.client.UsersAdapter
 import org.example.exceptions.UserNotFoundException
 import org.example.models.ProfileData
 import org.example.repository.MatchActionRepository
+import org.example.repository.UserFandomRepository
 import org.example.repository.UserProfileRepository
 import org.example.service.FandomService
 import org.example.service.MatchesService
@@ -53,7 +54,10 @@ class ProfilesServiceTest {
     lateinit var mediaService: MediaService
 
     @MockK
-    lateinit var matchActionRepository : MatchActionRepository
+    lateinit var matchActionRepository: MatchActionRepository
+
+    @MockK
+    lateinit var userFandomRepository: UserFandomRepository
 
     @InjectMockKs
     private lateinit var profilesService: ProfilesService

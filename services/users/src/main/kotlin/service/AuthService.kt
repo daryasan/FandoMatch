@@ -25,7 +25,9 @@ class AuthService(
         username: String,
         password: String,
         birthDate: Long,
-        name: String
+        name: String,
+        gender: String,
+        avatarMediaId: String? = null,
     ): AuthTokens {
         logger.info { "Got request for user registration with username=$username" }
 
@@ -35,7 +37,7 @@ class AuthService(
         )
 
         userCredentialsService.createCredentials(savedUser, password)
-        userEventsSender.sendUserCreatedEvent(savedUser, EventType.CREATED, name, birthDate)
+        userEventsSender.sendUserCreatedEvent(savedUser, EventType.CREATED, name, birthDate, gender, avatarMediaId)
 
         return tokenService.generateAndSaveTokens(savedUser)
     }
