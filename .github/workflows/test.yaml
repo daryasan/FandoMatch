@@ -80,8 +80,8 @@ jobs:
           SERVICES=(
             "gateway:services/gateway/Dockerfile"
             "users:services/users/Dockerfile"
-            "matches:services/core/Dockerfile"
-            "notifications:services/messaging/Dockerfile"
+            "core:services/core/Dockerfile"
+            "messaging:services/messaging/Dockerfile"
           )
           for entry in "${SERVICES[@]}"; do
             service="${entry%%:*}"
