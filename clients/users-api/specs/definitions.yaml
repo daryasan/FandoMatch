@@ -50,8 +50,7 @@ components:
         hashed_password:
           type: string
         gender:
-          type: string
-          description: "Пол пользователя (MALE, FEMALE, OTHER)"
+          $ref: '#/components/schemas/Gender'
         avatar_media_id:
           type: string
           nullable: true
@@ -370,3 +369,10 @@ components:
           $ref: '#/components/schemas/Error'
       required:
         - status
+
+    Gender:
+      type: string
+      enum:
+        - MALE
+        - FEMALE
+        - OTHER

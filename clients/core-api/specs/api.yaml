@@ -11,7 +11,7 @@ paths:
   # -------------------------
 
   /core/user/profile:
-    get:
+    post:
       description: Получение профиля пользователя (полного или публичного)
       tags:
         - user
@@ -95,7 +95,7 @@ paths:
                 $ref: './definitions.yaml#/components/schemas/UserPreferencesResponse'
 
   /core/user/profile/friends:
-    get:
+    post:
       description: Получение списка друзей пользователя
       tags:
         - user
@@ -118,7 +118,7 @@ paths:
                 $ref: './definitions.yaml#/components/schemas/FriendsResponse'
 
   /core/user/profile/pending_requests:
-    get:
+    post:
       description: получение списка заявок пользователя
       tags:
         - user
@@ -221,7 +221,7 @@ paths:
         - bearerAuth: [ ]
       responses:
         '200':
-          description: Фильтры сохранены
+          description: Текущие фильтры
           content:
             application/json:
               schema:
@@ -232,7 +232,7 @@ paths:
   # -------------------------
 
   /core/posts/get:
-    get:
+    post:
       description: Получение постов пользователя (с пагинацией)
       tags:
         - posts

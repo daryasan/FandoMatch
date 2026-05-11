@@ -19,7 +19,7 @@ class FeedController(
 
     companion object : KLogging()
 
-    @GetMapping("/feed")
+    @PostMapping("/feed")
     fun getFeed(
         @RequestHeader("Authorization") token: String,
         @RequestBody request: GetFeedRequest
