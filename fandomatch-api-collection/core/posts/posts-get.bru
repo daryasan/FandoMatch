@@ -1,0 +1,26 @@
+meta {
+  name: posts/get
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8080/core/posts/get
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  Authorization: Bearer {{token}}
+}
+
+body:json {
+  {
+    "uuid": "432d50b6-adc5-4a26-b3c0-4ad4e8b236d2",
+    "pagination": {
+      "cursor_timestamp": 0,
+      "size": 20
+    }
+  }
+}

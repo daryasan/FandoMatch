@@ -15,19 +15,14 @@ components:
       properties:
         uid:
           type: string
-          description: "Уникальный идентификатор пользователя"
         email:
           type: string
           format: email
-          nullable: true
-          description: "Email пользователя, может быть null"
         username:
           type: string
-          description: "Имя пользователя"
         name:
           type: string
           nullable: true
-          description: "Отображаемое имя; для CREATED передаётся при регистрации"
         birthDate:
           type: integer
           format: int64
@@ -36,11 +31,9 @@ components:
         gender:
           type: string
           nullable: true
-          description: "Пол пользователя (MALE, FEMALE, OTHER); передаётся при регистрации"
         avatarMediaId:
           type: string
           nullable: true
-          description: "ID медиа аватара; передаётся при регистрации"
         createdAt:
           type: string
           format: date-time

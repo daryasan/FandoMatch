@@ -1,6 +1,12 @@
 package org.example.service.profile
 
-import com.fandomatch.core.model.*
+import com.fandomatch.core.model.BaseUserProfile
+import com.fandomatch.core.model.FriendUserProfileResponse
+import com.fandomatch.core.model.FullUserProfileResponse
+import com.fandomatch.core.model.MediaItem
+import com.fandomatch.core.model.MediaType
+import com.fandomatch.core.model.ProfileType
+import com.fandomatch.core.model.PublicUserProfileResponse
 import com.fandomatch.media.MediaService
 import org.example.exceptions.ProfileIncompleteException
 import org.example.models.ProfileData
@@ -9,12 +15,9 @@ import org.example.util.birthDateToEpochSeconds
 import org.example.util.calculateAgeInSeconds
 import org.example.util.cityCodeToCity
 import org.example.util.genderStringToEnum
-import java.time.Instant
 import java.time.LocalDate
-import java.time.LocalTime
-import java.time.ZoneOffset
+import java.time.Period
 import java.util.UUID
-import kotlin.time.Duration.Companion.days
 
 abstract class ConstructProfileStrategy(
     val selector: ProfileType,
@@ -34,7 +37,7 @@ abstract class ConstructProfileStrategy(
         }
 
     protected fun calculateAge(birthDate: LocalDate): Long {
-        return (Instant.now().epochSecond - birthDate.toEpochSecond(LocalTime.now(), ZoneOffset.UTC)) / 365
+        return Period.between(birthDate, LocalDate.now()).years.toLong()
     }
 }
 

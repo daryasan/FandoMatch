@@ -1,0 +1,22 @@
+meta {
+  name: fandoms/user
+  type: http
+  seq: 2
+}
+
+post {
+  url: https://xsqs-1dmk-iemo.gw-1a.dockhost.net/core/fandoms/user
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  Authorization: Bearer {{token}}
+}
+
+body:json {
+  {
+    "uuid": "432d50b6-adc5-4a26-b3c0-4ad4e8b236d2"
+  }
+}

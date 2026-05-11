@@ -1,0 +1,22 @@
+meta {
+  name: users/device-token
+  type: http
+  seq: 2
+}
+
+put {
+  url: http://localhost:8080/users/device-token
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{token}}
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "fcm_token": "firebase_device_token"
+  }
+}

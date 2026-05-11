@@ -1,0 +1,16 @@
+meta {
+  name: user/preferences
+  type: http
+  seq: 11
+}
+
+get {
+  url: http://localhost:8080/core/user/preferences
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{token}}
+  Content-Type: application/json
+}

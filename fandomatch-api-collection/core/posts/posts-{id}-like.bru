@@ -1,0 +1,16 @@
+meta {
+  name: posts/{id}/like
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8080/core/posts/69a4dea0-3ce6-4045-bcc5-c30152969ac2/like
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{token}}
+  Content-Type: application/json
+}

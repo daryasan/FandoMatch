@@ -38,6 +38,5 @@ bin/
 ### Mac OS ###
 .DS_Store
 
-FandoMatch-api
 fandomatch-collection.sh
 .env

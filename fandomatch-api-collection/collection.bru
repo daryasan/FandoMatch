@@ -1,0 +1,17 @@
+auth {
+  mode: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+vars:pre-request {
+  prod_host: https://xsqs-1dmk-iemo.gw-1a.dockhost.net
+  uat_host: http://localhost:8080
+  api_key: b2a43cf3-fe80-4575-9b1c-8971a5a50359
+}
+
+vars:post-response {
+  bearer_token: bru.getRequestVar("token");
+}

@@ -1,0 +1,20 @@
+meta {
+  name: cities/search?query={query}
+  type: http
+  seq: 1
+}
+
+get {
+  url: http://localhost:8080/core/cities/search?query=
+  body: json
+  auth: none
+}
+
+params:query {
+  query: 
+}
+
+headers {
+  Content-Type: application/json
+  Authorization: Bearer {{token}}
+}

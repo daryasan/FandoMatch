@@ -57,6 +57,9 @@ dependencies {
 
     // kafka
     implementation("org.springframework.kafka:spring-kafka")
+
+    //infra
+    implementation("io.micrometer:micrometer-registry-prometheus")
 }
 
 tasks.test {

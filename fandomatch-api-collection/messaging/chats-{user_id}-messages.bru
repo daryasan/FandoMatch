@@ -1,0 +1,23 @@
+meta {
+  name: chats/{user_id}/messages
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:8080/messaging/chats/15a58a77-aeb5-4f5c-842c-0cc26ecb25f0/messages
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{token}}
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "chat_id": "452eeefe-cff8-49af-b7a0-4142ea098998",
+    "size": 50
+  }
+}

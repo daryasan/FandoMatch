@@ -1,0 +1,23 @@
+meta {
+  name: posts/{id}/comments
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://localhost:8080/core/posts/d4710eea-c265-4609-bdee-48dc9c97e36f/comments
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  Authorization: Bearer {{token}}
+}
+
+body:json {
+  {
+    "cursor_timestamp": 0,
+    "size": 20
+  }
+}

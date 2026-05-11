@@ -1,0 +1,20 @@
+meta {
+  name: internal/device-token
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8080/users/internal/device-token
+  body: json
+  auth: none
+}
+
+headers {
+  X-API-Key: b2a43cf3-fe80-4575-9b1c-8971a5a50359
+  Content-Type: application/json
+}
+
+body:json {
+  {"user_id":"be4e37bc-fd8e-4b12-94ef-a3114e5f9e9d"}
+}

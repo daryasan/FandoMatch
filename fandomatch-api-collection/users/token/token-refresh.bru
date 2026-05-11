@@ -1,0 +1,21 @@
+meta {
+  name: token/refresh
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:8080/token/refresh
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "refresh_token": "74bfb5e8-0bbf-43e0-ac36-6806099f2e74"
+  }
+}

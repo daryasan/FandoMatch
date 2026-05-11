@@ -27,6 +27,9 @@ dependencies {
     kapt("org.springframework.boot:spring-boot-configuration-processor")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.boot:spring-boot-starter-webflux")
+
+    //infra
+    implementation("io.micrometer:micrometer-registry-prometheus")
 }
 
 tasks.test {

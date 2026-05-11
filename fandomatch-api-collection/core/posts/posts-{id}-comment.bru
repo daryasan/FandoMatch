@@ -1,0 +1,23 @@
+meta {
+  name: posts/{id}/comment
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:8080/core/posts/d4710eea-c265-4609-bdee-48dc9c97e36f/comment
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{token}}
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "content": "Отличный пост!",
+    "timestamp": 1746389640
+  }
+}

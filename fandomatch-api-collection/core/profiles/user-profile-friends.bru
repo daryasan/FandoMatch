@@ -1,0 +1,22 @@
+meta {
+  name: user/profile/friends
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://localhost:8080/core/user/profile/friends
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{token}}
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "uuid": "1432d50b6-adc5-4a26-b3c0-4ad4e8b236d2"
+  }
+}

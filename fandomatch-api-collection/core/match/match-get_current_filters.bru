@@ -1,0 +1,26 @@
+meta {
+  name: match/get_current_filters
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{prod_host}}/core/match/get_current_filters
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{token}}
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    
+  }
+}
+
+vars:pre-request {
+  auth_token: 
+}

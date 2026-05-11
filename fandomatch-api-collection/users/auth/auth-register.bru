@@ -1,0 +1,33 @@
+meta {
+  name: auth/register
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{uat_host}}/auth/register
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "email": "darya_smile17@mail.ru",
+    "username": "daryasan",
+    "birth_date": 946684800,
+    "name": "Darya",
+    "gender": "FEMALE",
+    "hashed_password": "qwerty"
+  }
+}
+
+script:post-response {
+  if (res.body.successResponse != null) {
+    bru.setVar("token", res.body.successResponse.access_token);
+     bru.serVar("cur_uuid", res.body.successResponse.uuid);
+  }
+}
