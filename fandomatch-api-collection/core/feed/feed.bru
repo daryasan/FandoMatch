@@ -1,0 +1,26 @@
+meta {
+  name: feed
+  type: http
+  seq: 1
+}
+
+get {
+  url: https://xsqs-1dmk-iemo.gw-1a.dockhost.net/core/feed
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{token}}
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "uuid": "e4cd1288-05b3-43ac-b714-5ec0c253eb9f",
+    "pagination": {
+      "cursor_timestamp": 0,
+      "size": 15
+    }
+  }
+}

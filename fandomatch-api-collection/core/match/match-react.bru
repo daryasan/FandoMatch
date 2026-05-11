@@ -1,0 +1,27 @@
+meta {
+  name: match/react
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:8080/core/match/react
+  body: json
+  auth: inherit
+}
+
+headers {
+  Authorization: Bearer {{token}}
+}
+
+body:json {
+  {
+    "target_uuid": "15a58a77-aeb5-4f5c-842c-0cc26ecb25f0",
+    "action": "LIKE"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

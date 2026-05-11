@@ -1,0 +1,31 @@
+meta {
+  name: upload image
+  type: http
+  seq: 6
+}
+
+put {
+  url: https://fandomatch.storage.yandexcloud.net/da753d4d-a83d-4a85-8c40-0046fff4ff2f?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260510T151231Z&X-Amz-SignedHeaders=host&X-Amz-Credential=YCAJE1BujfcirzO0aHi7XKrIi%2F20260510%2Fru-central1%2Fs3%2Faws4_request&X-Amz-Expires=300&X-Amz-Signature=d5bf2175530a87ee8ec403b2dfbc5e0f23cd73212f068af21799af71dd4c5549
+  body: file
+  auth: inherit
+}
+
+params:query {
+  X-Amz-Algorithm: AWS4-HMAC-SHA256
+  X-Amz-Date: 20260510T151231Z
+  X-Amz-SignedHeaders: host
+  X-Amz-Credential: YCAJE1BujfcirzO0aHi7XKrIi%2F20260510%2Fru-central1%2Fs3%2Faws4_request
+  X-Amz-Expires: 300
+  X-Amz-Signature: d5bf2175530a87ee8ec403b2dfbc5e0f23cd73212f068af21799af71dd4c5549
+}
+
+body:file {
+  file: @file(/Users/desudakova/Downloads/ВКР_Судакова.pdf) @contentType(application/pdf)
+}
+
+settings {
+  encodeUrl: false
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+}

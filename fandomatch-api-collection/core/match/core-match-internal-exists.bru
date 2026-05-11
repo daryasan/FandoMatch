@@ -1,0 +1,28 @@
+meta {
+  name: core/match/internal/exists
+  type: http
+  seq: 9
+}
+
+post {
+  url: http://localhost:8080/core/match/internal/exists
+  body: json
+  auth: inherit
+}
+
+headers {
+  x-api-key: {{api_key}}
+  ~Authorization: Bearer {{token}}
+}
+
+body:json {
+  {
+    "user_id_2": "15a58a77-aeb5-4f5c-842c-0cc26ecb25f0",
+    "user_id_1": "432d50b6-adc5-4a26-b3c0-4ad4e8b236d2" 
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

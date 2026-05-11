@@ -1,0 +1,27 @@
+meta {
+  name: core/user/profile
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:8080/core/user/profile
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{token}}
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "uuid": "432d50b6-adc5-4a26-b3c0-4ad4e8b236d2"
+  }
+}
+
+vars:pre-request {
+  auth_token: eyJhbGciOiJSUzI1NiJ9.eyJqdGkiOiJhOTdmM2MyMi0yMTc4LTRhNTYtYjRjYy1iOTk1YThhMGNmZWQiLCJzdWIiOiI3YjQ0YmMxNi0xYjQ5LTRlOGYtYjBjMy05ZmVhNGFmOGQ1ZWEiLCJ1c2VybmFtZSI6InRlc3R1c2VyIiwiaWF0IjoxNzc2OTc5NTcyLCJleHAiOjE3NzY5ODA0NzJ9.lo5jdhuZM8mUF1ZJdHu88_10ZxubCQX1O5ZvMpmCkPWbjiJj60Czr1RlYtrfUW_AhHe0HCk-n5ilR2lhZbksY-njhZkNXT6f7PoiSyywrdRbzLinL4FzOQPi1Qq4YK1yT6xlFJTT9K5sSaW6KSfSjCoFoXHmjvNCtJqClRDfYkJW6nYmNT54Rp47ccSB5PXo7M5vlI7ag0oWcdwrSN4JJs2aZTWdMO3KDnNOFILxKSPrI-gMPD1BsvmVRu8sw86_ViwXJpeauZWQbRpBOKoendFLs01ECM8JaFNITLFFeRBKeYz6i_D20kp4l7jrQIJAjuGyScX2yL86NXw-W-o6xA
+  ~auth_token: eyJhbGciOiJSUzI1NiJ9.eyJqdGkiOiJhOTdmM2MyMi0yMTc4LTRhNTYtYjRjYy1iOTk1YThhMGNmZWQiLCJzdWIiOiI3YjQ0YmMxNi0xYjQ5LTRlOGYtYjBjMy05ZmVhNGFmOGQ1ZWEiLCJ1c2VybmFtZSI6InRlc3R1c2VyIiwiaWF0IjoxNzc2OTc5NTcyLCJleHAiOjE3NzY5ODA0NzJ9.lo5jdhuZM8mUF1ZJdHu88_10ZxubCQX1O5ZvMpmCkPWbjiJj60Czr1RlYtrfUW_AhHe0HCk-n5ilR2lhZbksY-njhZkNXT6f7PoiSyywrdRbzLinL4FzOQPi1Qq4YK1yT6xlFJTT9K5sSaW6KSfSjCoFoXHmjvNCtJqClRDfYkJW6nYmNT54Rp47ccSB5PXo7M5vlI7ag0oWcdwrSN4JJs2aZTWdMO3KDnNOFILxKSPrI-gMPD1BsvmVRu8sw86_ViwXJpeauZWQbRpBOKoendFLs01ECM8JaFNITLFFeRBKeYz6i_D20kp4l7jrQIJAjuGyScX2yL86NXw-W-o6xA
+}

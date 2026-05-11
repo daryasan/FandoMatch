@@ -166,3 +166,30 @@ Gateway проксирует эти префиксы без собственны
 | `/core/user/**`, `/core/fandoms/**`, `/core/posts/**`, `/core/match/**`, `/core/feed/**`, `/core/cities/**` | код ответа core service | коды core service или gateway/upstream errors |
 | `/messaging/**`, `/media/**` | код ответа messaging service | коды messaging service или gateway/upstream errors |
 | `GET /actuator/health` | `200` | `503`, если health-check DOWN |
+
+## Администрирование
+
+Если нужно выполнить SQL напрямую в контейенре БД:
+``psql -h core-db -U postgres -d fdmatch_core``
+``ваш SQL-скрипт``
+
+#### Полезные скрипты
+- Скрипт для дропа всех таблиц
+``DROP SCHEMA public CASCADE;
+CREATE SCHEMA public;
+GRANT ALL ON SCHEMA public TO public;``
+
+- Вставка фандомов
+``INSERT INTO fandom (name, category_id) VALUES
+    ('One Piece',           (SELECT id FROM fandom_category WHERE name = 'ANIME_MANGA')),
+    ('Но-Энор',             (SELECT id FROM fandom_category WHERE name = 'OTHER')),
+    ('My Chemical Romance', (SELECT id FROM fandom_category WHERE name = 'MUSIC')),
+    ('Ведьмак',             (SELECT id FROM fandom_category WHERE name = 'BOOKS')),
+    ('Утиные истории',      (SELECT id FROM fandom_category WHERE name = 'CARTOONS')),
+    ('Бэтмен',              (SELECT id FROM fandom_category WHERE name = 'COMICS')),
+    ('Star Wars',           (SELECT id FROM fandom_category WHERE name = 'TV_SERIES')),
+    ('Dungeons and Dragons',(SELECT id FROM fandom_category WHERE name = 'TABLETOP_GAMES')),
+    ('The Beatles',         (SELECT id FROM fandom_category WHERE name = 'MUSIC')),
+    ('Стража! Стража!',     (SELECT id FROM fandom_category WHERE name = 'BOOKS')),
+    ('Легенды Олимпа',      (SELECT id FROM fandom_category WHERE name = 'MYTHOLOGY')),
+    ('Волкодав',            (SELECT id FROM fandom_category WHERE name = 'BOOKS'));``

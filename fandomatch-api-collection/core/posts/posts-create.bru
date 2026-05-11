@@ -1,0 +1,24 @@
+meta {
+  name: posts/create
+  type: http
+  seq: 15
+}
+
+post {
+  url: http://localhost:8080/core/posts/create
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{token}}
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "title": "My Post",
+    "content": "Hello world",
+    "fandom_ids": ["fa748f2d-2229-41ba-afad-961140fa8f97"]
+  }
+}

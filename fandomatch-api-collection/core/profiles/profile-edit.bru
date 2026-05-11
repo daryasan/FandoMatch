@@ -1,0 +1,31 @@
+meta {
+  name: profile/edit
+  type: http
+  seq: 2
+}
+
+patch {
+  url: http://localhost:8080/core/user/profile/edit
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{token}}
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "bio": "Updated bio",
+    "name": "qwerty",
+    "city": {
+      "name_en": "MOSCOW",
+      "name_ru": "Москва"
+    },
+    "fandom_ids": [
+      "550e8400-e29b-41d4-a716-446655440000",
+      "f3f90cf5-fb41-46a9-936c-83e5368a8808"
+    ]
+  }
+}

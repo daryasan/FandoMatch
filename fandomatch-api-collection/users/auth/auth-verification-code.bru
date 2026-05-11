@@ -1,0 +1,21 @@
+meta {
+  name: auth/verification-code
+  type: http
+  seq: 6
+}
+
+post {
+  url: http://eefb-jd1u-ifmj.sw-1a.dockhost.net:32140/auth/verification-code
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "email": "suddasha044@gmail.com"
+  }
+}

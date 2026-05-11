@@ -1,0 +1,23 @@
+meta {
+  name: chats/{user_id}/send
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:8080/messaging/chats/15a58a77-aeb5-4f5c-842c-0cc26ecb25f0/send
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{token}}
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "content": "Привет",
+    "timestamp": "17766935414"
+  }
+}

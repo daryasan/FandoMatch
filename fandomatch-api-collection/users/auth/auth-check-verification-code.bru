@@ -1,0 +1,22 @@
+meta {
+  name: auth/check-verification-code
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:8080/auth/check-verification-code
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "email": "darya_smile17@mail.ru",
+    "code": "029570"
+  }
+}
