@@ -65,7 +65,7 @@ class PostsController(
         }
     }
 
-    @GetMapping("/{post_id}/comments")
+    @PostMapping("/{post_id}/comments")
     fun getComments(
         @PathVariable("post_id") postId: String,
         @RequestBody request: CommentsGetRequest

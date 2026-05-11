@@ -1,6 +1,7 @@
 package org.example.service
 
 import com.fandomatch.core.model.EventType
+import com.fandomatch.users.model.Gender
 import io.github.oshai.kotlinlogging.KotlinLogging
 import jakarta.transaction.Transactional
 import org.example.model.AuthTokens
@@ -26,7 +27,7 @@ class AuthService(
         password: String,
         birthDate: Long,
         name: String,
-        gender: String,
+        gender: Gender,
         avatarMediaId: String? = null,
     ): AuthTokens {
         logger.info { "Got request for user registration with username=$username" }
@@ -37,7 +38,7 @@ class AuthService(
         )
 
         userCredentialsService.createCredentials(savedUser, password)
-        userEventsSender.sendUserCreatedEvent(savedUser, EventType.CREATED, name, birthDate, gender, avatarMediaId)
+        userEventsSender.sendUserCreatedEvent(savedUser, EventType.CREATED, name, birthDate, gender.value, avatarMediaId)
 
         return tokenService.generateAndSaveTokens(savedUser)
     }

@@ -56,7 +56,7 @@ class ProfilesController(
         }
     }
 
-    @GetMapping("/profile/pending_requests")
+    @PostMapping("/profile/pending_requests")
     fun getPendingRequests(
         @RequestHeader("Authorization") token: String
     ): ResponseEntity<PendingRequestsResponse> {
@@ -71,7 +71,7 @@ class ProfilesController(
         }
     }
 
-    @GetMapping("/profile/friends")
+    @PostMapping("/profile/friends")
     fun getFriends(
         @RequestHeader("Authorization") token: String
     ): ResponseEntity<FriendsResponse> {

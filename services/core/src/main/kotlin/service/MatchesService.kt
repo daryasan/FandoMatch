@@ -62,7 +62,7 @@ class MatchesService(
     }
 
     fun getNextCandidates(userId: UUID, batchSize: Int): MatchCandidateBatchResponse {
-        val filters = matchFilterRepository.findById(userId).orElse(MatchFilter(userId = userId))
+        val filters = matchFilterRepository.findById(userId).orElse(MatchFilter(userId = userId))!!
 
         val userCity = if (filters.onlyInUserCity == true) {
             userProfilesRepository.findById(userId).orElse(null)?.city
@@ -85,6 +85,7 @@ class MatchesService(
         val currentUserFandoms = fandomService.getFandoms(userId)
 
         val suggested = candidates
+            .asSequence()
             .filter { it.birthDate != null && it.gender != null && it.name != null }
             .map { candidate ->
                 val candidateFandoms = fandomService.getFandoms(candidate.userId)
@@ -95,9 +96,10 @@ class MatchesService(
             .sortedByDescending { it.second }
             .take(batchSize)
             .map { it.first }
+            .toList()
 
         if (suggested.isNotEmpty()) {
-            matchPendingRepository.saveAll(suggested.map { it.toMatchPending(userId) })
+            suggested.forEach { matchPendingRepository.insertIgnore(userId, UUID.fromString(it.uuid)) }
         }
 
         return MatchCandidateBatchResponse(
@@ -137,18 +139,22 @@ class MatchesService(
             val userProfile = userProfilesRepository.findById(userId).orElse(null)
             val targetProfile = userProfilesRepository.findById(targetUuid).orElse(null)
             usersNotificationAdapter.getFcmToken(userId)?.let { token ->
-                pushNotificationService.sendDataMessage(token, mapOf(
-                    "type" to "match",
-                    "userId" to targetUuid.toString(),
-                    "name" to (targetProfile?.name ?: targetProfile?.username ?: targetUuid.toString())
-                ))
+                pushNotificationService.sendDataMessage(
+                    token, mapOf(
+                        "type" to "match",
+                        "userId" to targetUuid.toString(),
+                        "name" to (targetProfile?.name ?: targetProfile?.username ?: targetUuid.toString())
+                    )
+                )
             }
             usersNotificationAdapter.getFcmToken(targetUuid)?.let { token ->
-                pushNotificationService.sendDataMessage(token, mapOf(
-                    "type" to "match",
-                    "userId" to userId.toString(),
-                    "name" to (userProfile?.name ?: userProfile?.username ?: userId.toString())
-                ))
+                pushNotificationService.sendDataMessage(
+                    token, mapOf(
+                        "type" to "match",
+                        "userId" to userId.toString(),
+                        "name" to (userProfile?.name ?: userProfile?.username ?: userId.toString())
+                    )
+                )
             }
 
             MatchActionResult(status = MatchActionResult.Status.MATCH)
@@ -194,7 +200,8 @@ class MatchesService(
 
         val fandoms = filter.fandomIds?.mapNotNull { id ->
             val fandom = fandomRepository.findById(UUID.fromString(id)).orElse(null) ?: return@mapNotNull null
-            val category = fandomCategoryRepository.findById(fandom.categoryId).orElseThrow { FandomCategoryNotFoundException(fandom.categoryId.toString()) }
+            val category = fandomCategoryRepository.findById(fandom.categoryId)
+                .orElseThrow { FandomCategoryNotFoundException(fandom.categoryId.toString()) }
             Fandom(
                 id = fandom.id.toString(),
                 name = fandom.name,

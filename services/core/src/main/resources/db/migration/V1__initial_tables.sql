@@ -163,7 +163,6 @@ create table if not exists match_filter (
         foreign key (fandom_id) references fandom (id)
 );
 
--- Add fandom_ids column to post if it doesn't exist yet (for existing databases)
 DO $$
 BEGIN
     IF NOT EXISTS (
@@ -175,5 +174,4 @@ BEGIN
 END
 $$;
 
--- Backfill any NULL fandom_ids that may have been added without a default
 UPDATE post SET fandom_ids = '{}' WHERE fandom_ids IS NULL;
