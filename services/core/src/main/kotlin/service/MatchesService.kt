@@ -44,7 +44,7 @@ class MatchesService(
     }
 
     fun areFriends(user1: UUID, user2: UUID): Boolean {
-        val (first, second) = if (user1 < user2) user1 to user2 else user2 to user1
+        val (first, second) = if (user1.toString() < user2.toString()) user1 to user2 else user2 to user1
         return matchRepository.existsByUserId1AndUserId2(first, second)
     }
 
@@ -131,7 +131,7 @@ class MatchesService(
         val isMutual = oppositeAction?.action == LIKE && action == LIKE
 
         val result = if (isMutual) {
-            val (first, second) = if (userId < targetUuid) userId to targetUuid else targetUuid to userId
+            val (first, second) = if (userId.toString() < targetUuid.toString()) userId to targetUuid else targetUuid to userId
             val match = Match(userId1 = first, userId2 = second)
             val savedMatch = matchRepository.save(match)
             matchEventProducer.sendMatchEvent(savedMatch.id!!, first, second)
