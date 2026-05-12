@@ -5,7 +5,7 @@ meta {
 }
 
 post {
-  url: http://localhost:8080/core/user/profile
+  url: {{prod_host}}/core/user/profile
   body: json
   auth: none
 }
@@ -17,7 +17,7 @@ headers {
 
 body:json {
   {
-    "uuid": "432d50b6-adc5-4a26-b3c0-4ad4e8b236d2"
+    "uuid": "{{cur_uuid}}"
   }
 }
 

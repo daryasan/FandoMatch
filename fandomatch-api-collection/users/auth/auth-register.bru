@@ -5,7 +5,7 @@ meta {
 }
 
 post {
-  url: {{uat_host}}/auth/register
+  url: {{prod_host}}/auth/register
   body: json
   auth: none
 }
@@ -16,8 +16,8 @@ headers {
 
 body:json {
   {
-    "email": "darya_smile17@mail.ru",
-    "username": "daryasan",
+    "email": "suddasha04@mail.ru",
+    "username": "daryasssan",
     "birth_date": 946684800,
     "name": "Darya",
     "gender": "FEMALE",
@@ -28,6 +28,6 @@ body:json {
 script:post-response {
   if (res.body.successResponse != null) {
     bru.setVar("token", res.body.successResponse.access_token);
-     bru.serVar("cur_uuid", res.body.successResponse.uuid);
+     bru.setVar("cur_uuid", res.body.successResponse.uuid);
   }
 }

@@ -5,7 +5,7 @@ meta {
 }
 
 patch {
-  url: http://localhost:8080/core/user/profile/edit
+  url: {{prod_host}}/core/user/profile/edit
   body: json
   auth: none
 }
@@ -17,15 +17,14 @@ headers {
 
 body:json {
   {
-    "bio": "Updated bio",
-    "name": "qwerty",
+    "bio": "fandomatch dev",
+    "name": "Даша",
     "city": {
       "name_en": "MOSCOW",
       "name_ru": "Москва"
     },
     "fandom_ids": [
-      "550e8400-e29b-41d4-a716-446655440000",
-      "f3f90cf5-fb41-46a9-936c-83e5368a8808"
+      "e99cf2b7-012b-4441-b82d-42439c85dab0"
     ]
   }
 }

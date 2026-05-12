@@ -17,6 +17,11 @@ spring:
           ssl:
             enable: true
 
+  flyway:
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+    baseline-version: 0
+
   jpa:
     open-in-view: false
   kafka:
