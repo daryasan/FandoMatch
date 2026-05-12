@@ -4,12 +4,31 @@ global:
 scrape_configs:
   - job_name: 'prometheus'
     static_configs:
-      - targets: ['localhost:9090']
+      - targets: [ 'localhost:9090' ]
 
   - job_name: 'node-exporter'
     static_configs:
-      - targets: ['node-exporter:9100']
+      - targets: [ 'node-exporter:9100' ]
 
   - job_name: 'cadvisor'
     static_configs:
-      - targets: ['cadvisor:8080']
+      - targets: [ 'cadvisor:8080' ]
+  - job_name: 'users-service'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: [ 'users:8081' ]
+
+  - job_name: 'core-service'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: [ 'core:8082' ]
+
+  - job_name: 'messaging-service'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: [ 'messaging:8083' ]
+
+  - job_name: 'gateway-service'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: [ 'gateway:8080' ]
