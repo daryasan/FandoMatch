@@ -12,11 +12,11 @@ import org.example.exceptions.ProfileIncompleteException
 import org.example.models.ProfileData
 import org.example.repository.MatchActionRepository
 import org.example.util.birthDateToEpochSeconds
-import org.example.util.calculateAgeInSeconds
 import org.example.util.cityCodeToCity
 import org.example.util.genderStringToEnum
 import java.time.LocalDate
 import java.time.Period
+import java.time.ZoneOffset
 import java.util.UUID
 
 abstract class ConstructProfileStrategy(
@@ -37,7 +37,7 @@ abstract class ConstructProfileStrategy(
         }
 
     protected fun calculateAge(birthDate: LocalDate): Long {
-        return Period.between(birthDate, LocalDate.now()).years.toLong()
+        return Period.between(birthDate, LocalDate.now(ZoneOffset.UTC)).years.toLong()
     }
 }
 
@@ -63,7 +63,7 @@ class ConstructOwnProfile(profileData: ProfileData, mediaService: MediaService) 
             name = name,
             gender = gender,
             birthDate = birthDateToEpochSeconds(birthDate),
-            age = calculateAgeInSeconds(birthDate),
+            age = calculateAge(birthDate),
             city = cityCodeToCity(prof.city),
             fandoms = profileData.fandoms
         )

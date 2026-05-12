@@ -52,7 +52,7 @@ fun UserProfile.toMatchCandidateResponse(
 )
 
 fun calculateAge(birthDate: LocalDate): Int {
-    return Period.between(birthDate, LocalDate.now()).years
+    return Period.between(birthDate, LocalDate.now(ZoneOffset.UTC)).years
 }
 
 fun birthDateToEpochSeconds(birthDate: LocalDate): Long {
