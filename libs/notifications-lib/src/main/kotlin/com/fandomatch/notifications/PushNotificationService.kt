@@ -1,6 +1,7 @@
 package com.fandomatch.notifications
 
 import com.google.firebase.FirebaseApp
+import com.google.firebase.messaging.AndroidConfig
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.FirebaseMessagingException
 import com.google.firebase.messaging.Message
@@ -44,6 +45,11 @@ class PushNotificationService(private val firebaseApp: FirebaseApp) {
     ) {
         val message = Message.builder()
             .setToken(fcmToken)
+            .setAndroidConfig(
+                AndroidConfig.builder()
+                    .setPriority(AndroidConfig.Priority.HIGH)
+                    .build()
+            )
             .putAllData(data)
             .build()
 

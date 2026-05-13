@@ -3,8 +3,7 @@ package org.example.controller
 import com.fandomatch.core.model.*
 import io.github.oshai.kotlinlogging.KLogging
 import org.example.service.FandomService
-import org.example.util.*
-import org.springframework.http.ResponseEntity
+import org.example.util.*import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -64,6 +63,19 @@ class FandomController(
             errorMapper = { getFandomListErrorResponse(it) }
         ) {
             fandomService.searchFandoms(query)
+        }
+    }
+
+    @PostMapping("/fandom_oneshot")
+    fun fandomOneshot(
+        @RequestBody request: FandomOneshotRequest
+    ): ResponseEntity<FandomOneshotResponse> {
+        return onControllerRequest(
+            logger = logger,
+            operationName = "POST /core/fandoms/fandom_oneshot",
+            errorMapper = { getFandomOneshotErrorResponse(it) }
+        ) {
+            fandomService.fandomOneshot(request)
         }
     }
 }

@@ -154,7 +154,7 @@ components:
         last_message_timestamp:
           type: integer
           format: int64
-          description: Время последнего сообщения (epoch millis)
+          description: Время последнего сообщения (epoch секунды)
         new_messages_count:
           type: integer
       required:
@@ -177,7 +177,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: Время отправки (epoch millis)
+          description: Время отправки (epoch секунды)
         media_items:
           type: array
           items:
@@ -199,7 +199,7 @@ components:
         before_timestamp:
           type: integer
           format: int64
-          description: Курсор — вернуть чаты старше этого timestamp (epoch millis)
+          description: Курсор — вернуть чаты старше этого timestamp (epoch секунды)
         size:
           type: integer
       required:
@@ -257,7 +257,7 @@ components:
         before_timestamp:
           type: integer
           format: int64
-          description: Курсор — вернуть сообщения старше этого timestamp (epoch millis)
+          description: Курсор — вернуть сообщения старше этого timestamp (epoch секунды)
         size:
           type: integer
       required:

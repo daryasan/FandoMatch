@@ -18,7 +18,6 @@ class TestDatabaseConfig : ApplicationContextInitializer<ConfigurableApplication
                     "spring.datasource.password=${TestPostgresContainer.password}",
                 ).applyTo(context.environment)
             } catch (e: Exception) {
-                // Docker not available or API version mismatch — fall back to application-test.yaml datasource
             }
         }
     }

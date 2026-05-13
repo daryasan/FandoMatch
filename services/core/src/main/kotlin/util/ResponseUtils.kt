@@ -131,6 +131,10 @@ fun getPendingRequestsErrorResponse(exception: BusinessException) = PendingReque
     )
 )
 
+fun getFandomOneshotErrorResponse(@Suppress("UNUSED_PARAMETER") exception: BusinessException) = FandomOneshotResponse(
+    status = FandomOneshotStatus.CATEGORY_NOT_FOUND
+)
+
 fun getFriendsErrorResponse(exception: BusinessException) = FriendsResponse(
     status = ResponseStatus.ERROR,
     errorResponse = Error(

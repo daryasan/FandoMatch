@@ -132,6 +132,7 @@ containers:
 
   messaging:
     image: daryasssan/fandomatch:fdmatch-messaging
+    replicas: 1
     variables:
       SPRING_PROFILES_ACTIVE: prod
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092

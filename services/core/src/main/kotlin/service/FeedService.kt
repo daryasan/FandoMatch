@@ -38,20 +38,18 @@ class FeedService(
     fun getFeed(userId: UUID, cursorTimestamp: Long?, size: Int): PostListResponse {
         val matches = matchRepository.getAllUserMatches(userId)
 
-        val matchedUserIds = matches.flatMap { match ->
+        val matchedOtherUserIds = matches.flatMap { match ->
             listOf(match.userId1, match.userId2)
         }.filter { it != userId }.distinct()
 
-        val posts = if (matchedUserIds.isEmpty()) {
-            emptyList()
+       val authorIds = (matchedOtherUserIds + userId).distinct()
+
+        val pageable = PageRequest.of(DEFAULT_PAGE, size)
+        val posts = if (cursorTimestamp != null) {
+            val cursor = Instant.ofEpochSecond(cursorTimestamp)
+            postRepository.findByAuthorIdInAndCreatedAtBeforeOrderByCreatedAtDesc(authorIds, cursor, pageable)
         } else {
-            val pageable = PageRequest.of(DEFAULT_PAGE, size)
-            if (cursorTimestamp != null) {
-                val cursor = Instant.ofEpochSecond(cursorTimestamp)
-                postRepository.findByAuthorIdInAndCreatedAtBeforeOrderByCreatedAtDesc(matchedUserIds, cursor, pageable)
-            } else {
-                postRepository.findByAuthorIdInOrderByCreatedAtDesc(matchedUserIds, pageable)
-            }
+            postRepository.findByAuthorIdInOrderByCreatedAtDesc(authorIds, pageable)
         }
 
         return PostListResponse(

@@ -15,4 +15,6 @@ interface FandomRepository : JpaRepository<Fandom, UUID> {
     fun findAllByUserId(@Param("userId") userId: UUID): List<Fandom>
 
     fun findByNameContainingIgnoreCase(query: String): List<Fandom>
+
+    fun findByCategoryIdAndName(categoryId: UUID, name: String): Fandom?
 }

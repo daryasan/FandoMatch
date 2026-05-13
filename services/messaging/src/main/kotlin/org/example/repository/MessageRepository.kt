@@ -24,7 +24,11 @@ interface MessageRepository : JpaRepository<Message, UUID> {
 
     fun findTopByChatIdOrderByTimestampDesc(chatId: UUID): Message?
 
-    fun countByChatIdAndSenderIdNotAndIsReadFalse(chatId: UUID, senderId: UUID): Int
+    @Query("""
+        SELECT COUNT(m) FROM Message m
+        WHERE m.chatId = :chatId AND m.senderId != :userId AND m.isRead = false
+    """)
+    fun countUnreadByChatIdForUser(@Param("chatId") chatId: UUID, @Param("userId") userId: UUID): Int
 
     @Modifying
     @Query("""
