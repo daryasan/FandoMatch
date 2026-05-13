@@ -141,7 +141,7 @@ components:
     ChatPreview:
       type: object
       properties:
-        chat_id:
+        user_id:
           type: string
         participant_name:
           type: string
@@ -158,7 +158,7 @@ components:
         new_messages_count:
           type: integer
       required:
-        - chat_id
+        - user_id
         - participant_name
         - last_message
         - is_last_message_from_this_user
@@ -303,7 +303,7 @@ components:
         timestamp:
           type: integer
           format: int64
-          description: Время отправки на клиенте (epoch millis)
+          description: Время отправки на клиенте (epoch секунды)
       required:
         - content
         - timestamp
