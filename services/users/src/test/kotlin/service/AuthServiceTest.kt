@@ -14,11 +14,13 @@ import org.example.service.AuthService
 import org.example.service.TokenService
 import org.example.service.UserCredentialsService
 import org.example.service.UserService
+import org.example.service.VerificationCodeService
 import org.example.service.validation.UserValidator
 import org.example.stream.out.UserEventsSender
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
+import com.fandomatch.users.model.Gender
 import utils.Constants.BIRTH_DATE
 import utils.Constants.EMAIL
 import utils.Constants.GENDER
@@ -46,6 +48,9 @@ class AuthServiceTest {
     @MockK
     lateinit var userEventsSender: UserEventsSender
 
+    @MockK
+    lateinit var verificationCodeService: VerificationCodeService
+
     @InjectMockKs
     private lateinit var authService: AuthService
 
@@ -68,7 +73,7 @@ class AuthServiceTest {
         every { tokenService.generateAndSaveTokens(user) } returns expectedTokens
 
         // when
-        val result = authService.register(EMAIL, USERNAME, PASSWORD, BIRTH_DATE, NAME, GENDER)
+        val result = authService.register(EMAIL, USERNAME, PASSWORD, BIRTH_DATE, NAME, Gender.valueOf(GENDER))
 
         // then
         verify(exactly = 1) { userService.createUser(EMAIL, USERNAME) }

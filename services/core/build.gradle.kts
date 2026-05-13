@@ -28,6 +28,7 @@ dependencies {
     testImplementation("org.testcontainers:junit-jupiter")
     testImplementation("org.testcontainers:postgresql")
     testImplementation("org.springframework.security:spring-security-test")
+    testImplementation("com.google.firebase:firebase-admin:9.3.0")
 
 
     // spring
@@ -64,6 +65,7 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+    environment("DOCKER_API_VERSION", "1.47")
 }
 
 kotlin {

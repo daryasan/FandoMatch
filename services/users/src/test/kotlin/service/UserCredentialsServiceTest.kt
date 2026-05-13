@@ -87,7 +87,7 @@ class UserCredentialsServiceTest {
             salt = PASSWORD_SALT
         )
 
-        user.credentials.add(credential)
+        user.credentials = setOf(credential)
 
         every { passwordHasherService.matches(PASSWORD, storedHash, PASSWORD_SALT) } returns true
 
@@ -119,7 +119,7 @@ class UserCredentialsServiceTest {
             salt = PASSWORD_SALT
         )
 
-        user.credentials.add(credential)
+        user.credentials = setOf(credential)
 
         every { passwordHasherService.matches(wrongPassword, storedHash, PASSWORD_SALT) } returns false
 

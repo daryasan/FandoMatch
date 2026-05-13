@@ -68,7 +68,7 @@ class ProfilesServiceTest {
         val creds = createUserCredentials()
         val fandoms = listOf(createFandom())
 
-        every { userProfileRepository.findByUsername(USERNAME) } returns Optional.of(userProfile)
+        every { userProfileRepository.findById(USER_ID) } returns Optional.of(userProfile)
         every { usersAdapter.getUserCredentialsByUuid(USER_ID) } returns creds
         every { fandomService.getFandoms(USER_ID) } returns fandoms
         every {
@@ -77,7 +77,7 @@ class ProfilesServiceTest {
             ConstructOwnProfile(secondArg(), mediaService)
         }
 
-        val result = profilesService.getProfile(USER_ID, USERNAME)
+        val result = profilesService.getProfile(USER_ID, USER_ID.toString())
 
         assertEquals(ResponseStatus.SUCCESS, result.status)
         verify(exactly = 1) { usersAdapter.getUserCredentialsByUuid(USER_ID) }
@@ -89,14 +89,14 @@ class ProfilesServiceTest {
         val targetProfile = createUserProfile(userId = TARGET_USER_ID, username = TARGET_USERNAME)
         val fandoms = listOf(createFandom())
 
-        every { userProfileRepository.findByUsername(TARGET_USERNAME) } returns Optional.of(targetProfile)
+        every { userProfileRepository.findById(TARGET_USER_ID) } returns Optional.of(targetProfile)
         every { fandomService.getFandoms(TARGET_USER_ID) } returns fandoms
         every { matchesService.areFriends(USER_ID, TARGET_USER_ID) } returns true
         every { strategyFactory.getStrategy(ProfileType.FRIEND, any(), USER_ID) } answers {
             ConstructFriendProfile(secondArg(), mediaService)
         }
 
-        val result = profilesService.getProfile(USER_ID, TARGET_USERNAME)
+        val result = profilesService.getProfile(USER_ID, TARGET_USER_ID.toString())
 
         assertEquals(ResponseStatus.SUCCESS, result.status)
         verify(exactly = 1) { matchesService.areFriends(USER_ID, TARGET_USER_ID) }
@@ -108,14 +108,15 @@ class ProfilesServiceTest {
         val targetProfile = createUserProfile(userId = TARGET_USER_ID, username = TARGET_USERNAME)
         val fandoms = listOf(createFandom())
 
-        every { userProfileRepository.findByUsername(TARGET_USERNAME) } returns Optional.of(targetProfile)
+        every { userProfileRepository.findById(TARGET_USER_ID) } returns Optional.of(targetProfile)
         every { fandomService.getFandoms(TARGET_USER_ID) } returns fandoms
         every { matchesService.areFriends(USER_ID, TARGET_USER_ID) } returns false
+        every { matchActionRepository.findByUserIdAndTargetUserId(USER_ID, TARGET_USER_ID) } returns null
         every { strategyFactory.getStrategy(ProfileType.OTHER, any(), USER_ID) } answers {
             ConstructOtherProfile(secondArg(), mediaService, matchActionRepository, USER_ID)
         }
 
-        val result = profilesService.getProfile(USER_ID, TARGET_USERNAME)
+        val result = profilesService.getProfile(USER_ID, TARGET_USER_ID.toString())
 
         assertEquals(ResponseStatus.SUCCESS, result.status)
         verify(exactly = 1) { matchesService.areFriends(USER_ID, TARGET_USER_ID) }
@@ -124,10 +125,11 @@ class ProfilesServiceTest {
 
     @Test
     fun `getProfile should throw UserNotFoundException when user does not exist`() {
-        every { userProfileRepository.findByUsername("nonexistent") } returns Optional.empty()
+        val nonexistentId = UUID.fromString("99999999-9999-9999-9999-999999999999")
+        every { userProfileRepository.findById(nonexistentId) } returns Optional.empty()
 
         assertThrows(UserNotFoundException::class.java) {
-            profilesService.getProfile(USER_ID, "nonexistent")
+            profilesService.getProfile(USER_ID, nonexistentId.toString())
         }
     }
 

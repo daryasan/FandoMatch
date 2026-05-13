@@ -1,3 +1,5 @@
+import com.fandomatch.notifications.PushNotificationService
+import com.google.firebase.FirebaseApp
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import org.example.CoreApplication
@@ -5,6 +7,7 @@ import org.junit.jupiter.api.TestInstance
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.web.servlet.MockMvc
@@ -19,6 +22,7 @@ import java.util.*
 @AutoConfigureMockMvc
 @ContextConfiguration(initializers = [TestDatabaseConfig::class])
 @ActiveProfiles("test")
+@MockBean(classes = [PushNotificationService::class, FirebaseApp::class])
 abstract class BaseTest {
 
     @Autowired
