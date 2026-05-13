@@ -61,7 +61,30 @@ class MatchesService(
         }
     }
 
+    @jakarta.transaction.Transactional
     fun getNextCandidates(userId: UUID, batchSize: Int): MatchCandidateBatchResponse {
+        val currentUserFandoms = fandomService.getFandoms(userId)
+
+        val pending = matchPendingRepository.findAllByUserIdOrderByCreatedAtAsc(userId)
+        if (pending.isNotEmpty()) {
+            val pendingCandidates = pending
+                .take(batchSize)
+                .mapNotNull { userProfilesRepository.findById(it.suggestedUserId).orElse(null) }
+                .filter { it.birthDate != null && it.gender != null && it.name != null }
+                .map { profile ->
+                    val candidateFandoms = fandomService.getFandoms(profile.userId)
+                    val compatibility = calculateCompatibility(currentUserFandoms, candidateFandoms)
+                    profile.toMatchCandidateResponse(compatibility, candidateFandoms, mediaService)
+                }
+
+            if (pendingCandidates.isNotEmpty()) {
+                return MatchCandidateBatchResponse(
+                    status = ResponseStatus.SUCCESS,
+                    successResponse = MatchCandidateBatchData(pendingCandidates)
+                )
+            }
+        }
+
         val filters = matchFilterRepository.findById(userId).orElse(MatchFilter(userId = userId))!!
 
         val userCity = if (filters.onlyInUserCity == true) {
@@ -82,7 +105,6 @@ class MatchesService(
         )
 
         val random = Random()
-        val currentUserFandoms = fandomService.getFandoms(userId)
 
         val suggested = candidates
             .asSequence()

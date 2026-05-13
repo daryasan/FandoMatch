@@ -32,7 +32,7 @@ open class SecurityConfig(
                     "/core/fandoms/all",
                     "/core/fandoms/categories"
                 ).permitAll()
-                it.requestMatchers("/actuator/health").permitAll()
+                it.requestMatchers("/actuator/health", "/actuator/prometheus").permitAll()
                 it.requestMatchers("/core/match/internal/**").permitAll()
                 it.requestMatchers("/error").permitAll()
                 it.anyRequest().authenticated()

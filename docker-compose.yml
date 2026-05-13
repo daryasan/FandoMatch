@@ -1,6 +1,8 @@
 networks:
   monitoring:
     driver: bridge
+  default:
+    driver: bridge
 
 
 volumes:
@@ -51,6 +53,7 @@ services:
       - '--storage.tsdb.path=/prometheus'
     networks:
       - monitoring
+      - default
     ports:
       - "9090:9090"
 

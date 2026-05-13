@@ -27,7 +27,7 @@ open class SecurityConfig(
                 it.requestMatchers("/auth/reset-password").permitAll()
                 it.requestMatchers("/token/refresh").permitAll()
                 it.requestMatchers("/token/public-jwt").permitAll()
-                it.requestMatchers("/actuator/health").permitAll()
+                it.requestMatchers("/actuator/health", "/actuator/prometheus").permitAll()
                 it.anyRequest().authenticated()
             }
             .addFilterBefore(apiKeyAuthFilter, UsernamePasswordAuthenticationFilter::class.java)
