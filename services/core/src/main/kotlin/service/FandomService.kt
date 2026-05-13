@@ -11,6 +11,7 @@ import org.example.repository.FandomRequestRepository
 import org.example.repository.UserProfileRepository
 import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import java.time.Instant
 import java.util.*
 
@@ -81,4 +82,84 @@ class FandomService(
         name = name,
         category = com.fandomatch.core.model.FandomCategory.valueOf(category.name)
     )
+
+    @Transactional
+    fun fandomOneshot(request: FandomOneshotRequest): FandomOneshotResponse {
+        val insertFromPending = request.insertFromPending ?: false
+        val provided = request.fandoms ?: emptyList()
+
+        // Collect items to process
+        val itemsToInsert: List<FandomInput> = if (insertFromPending) {
+            val pending = fandomRequestRepository.findAllByStatus("PENDING")
+            if (provided.isEmpty()) {
+                // All pending → convert to FandomInput, skip those with unknown/null category
+                pending.mapNotNull { req ->
+                    val cat = req.category?.let { runCatching { com.fandomatch.core.model.FandomCategory.valueOf(it) }.getOrNull() }
+                        ?: return@mapNotNull null
+                    FandomInput(name = req.name, category = cat)
+                }
+            } else {
+                // Intersection: provided items that also exist in pending
+                val pendingKeys = pending.map { it.name to it.category }.toSet()
+                provided.filter { item -> pendingKeys.any { (n, c) -> n == item.name && c == item.category?.name } }
+            }
+        } else {
+            provided
+        }
+
+        if (itemsToInsert.isEmpty()) {
+            return FandomOneshotResponse(
+                status = FandomOneshotStatus.SUCCESS,
+                successResponse = FandomOneshotData(fandomsInserted = emptyList(), fandomsNotInserted = emptyList())
+            )
+        }
+
+        // Validate all categories upfront
+        val categoryCache = mutableMapOf<String, FandomCategory>()
+        for (item in itemsToInsert) {
+            val catName = item.category?.name ?: return FandomOneshotResponse(status = FandomOneshotStatus.CATEGORY_NOT_FOUND)
+            if (catName !in categoryCache) {
+                val cat = fandomCategoryRepository.findByName(catName)
+                    ?: return FandomOneshotResponse(status = FandomOneshotStatus.CATEGORY_NOT_FOUND)
+                categoryCache[catName] = cat
+            }
+        }
+
+        // Insert fandoms
+        val inserted = mutableListOf<FandomInput>()
+        val notInserted = mutableListOf<FandomInput>()
+
+        for (item in itemsToInsert) {
+            val dbCategory = categoryCache[item.category!!.name]!!
+            if (fandomRepository.findByCategoryIdAndName(dbCategory.id, item.name) != null) {
+                notInserted.add(item)
+            } else {
+                fandomRepository.save(
+                    org.example.models.db_models.Fandom(
+                        id = UUID.randomUUID(),
+                        categoryId = dbCategory.id,
+                        name = item.name,
+                        description = null
+                    )
+                )
+                inserted.add(item)
+            }
+        }
+
+        // Mark corresponding pending requests as APPROVED
+        if (insertFromPending && inserted.isNotEmpty()) {
+            val insertedKeys = inserted.map { it.name to it.category?.name }.toSet()
+            val toApprove = fandomRequestRepository.findAllByStatus("PENDING")
+                .filter { req -> insertedKeys.any { (n, c) -> n == req.name && c == req.category } }
+                .mapNotNull { it.id }
+            if (toApprove.isNotEmpty()) {
+                fandomRequestRepository.updateStatusByIds(toApprove, "APPROVED")
+            }
+        }
+
+        return FandomOneshotResponse(
+            status = FandomOneshotStatus.SUCCESS,
+            successResponse = FandomOneshotData(fandomsInserted = inserted, fandomsNotInserted = notInserted)
+        )
+    }
 }

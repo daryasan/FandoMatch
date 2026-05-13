@@ -71,8 +71,6 @@ class MatchesServiceTest {
     @InjectMockKs
     private lateinit var matchesService: MatchesService
 
-    // --- areFriends ---
-
     @Test
     fun `areFriends should return true when match exists`() {
         every { matchRepository.existsByUserId1AndUserId2(USER_ID, TARGET_USER_ID) } returns true
@@ -92,7 +90,6 @@ class MatchesServiceTest {
         verify { matchRepository.existsByUserId1AndUserId2(USER_ID, TARGET_USER_ID) }
     }
 
-    // --- react ---
 
     @Test
     fun `react with LIKE should return LIKED when no opposite action`() {
@@ -122,7 +119,6 @@ class MatchesServiceTest {
 
         assertEquals(ResponseStatus.SUCCESS, result.status)
         assertEquals(MatchActionResult.Status.DISLIKED, result.successResponse!!.status)
-        // no like event should be produced for DISLIKE
         verify(exactly = 0) { likeEventProducer.send(any(), any()) }
     }
 
@@ -173,8 +169,6 @@ class MatchesServiceTest {
         }
     }
 
-    // --- getNextCandidates ---
-
     @Test
     fun `getNextCandidates should return empty list when no candidates`() {
         val filter = createMatchFilter(userId = USER_ID)
@@ -223,13 +217,11 @@ class MatchesServiceTest {
         assertEquals(ResponseStatus.SUCCESS, result.status)
         assertEquals(1, result.successResponse!!.candidates.size)
         assertEquals(CANDIDATE_USER_ID.toString(), result.successResponse!!.candidates[0].uuid)
-        // Current user fandoms fetched once, candidate fandoms fetched once per candidate
         verify(exactly = 1) { fandomService.getFandoms(USER_ID) }
         verify(exactly = 1) { fandomService.getFandoms(CANDIDATE_USER_ID) }
         verify(exactly = 1) { matchPendingRepository.insertIgnore(USER_ID, CANDIDATE_USER_ID) }
     }
 
-    // --- setFilter ---
 
     @Test
     fun `setFilter should save filter and return success`() {

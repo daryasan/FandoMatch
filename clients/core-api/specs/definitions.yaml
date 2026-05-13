@@ -909,6 +909,60 @@ components:
       required:
         - status
 
+    FandomInput:
+      type: object
+      properties:
+        name:
+          type: string
+        category:
+          $ref: '#/components/schemas/FandomCategory'
+      required:
+        - name
+        - category
+
+    FandomOneshotRequest:
+      type: object
+      properties:
+        fandoms:
+          type: array
+          items:
+            $ref: '#/components/schemas/FandomInput'
+          default: []
+        insert_from_pending:
+          type: boolean
+          default: false
+
+    FandomOneshotStatus:
+      type: string
+      enum:
+        - SUCCESS
+        - CATEGORY_NOT_FOUND
+
+    FandomOneshotData:
+      type: object
+      properties:
+        fandoms_inserted:
+          type: array
+          items:
+            $ref: '#/components/schemas/FandomInput'
+        fandoms_not_inserted:
+          type: array
+          items:
+            $ref: '#/components/schemas/FandomInput'
+      required:
+        - fandoms_inserted
+        - fandoms_not_inserted
+
+    FandomOneshotResponse:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/FandomOneshotStatus'
+        successResponse:
+          $ref: '#/components/schemas/FandomOneshotData'
+      required:
+        - status
+
     # -------------------------
     # USER PREFERENCES
     # -------------------------

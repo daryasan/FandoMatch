@@ -486,3 +486,21 @@ paths:
             application/json:
               schema:
                 $ref: './definitions.yaml#/components/schemas/FandomRequestCreateResponse'
+
+  /core/fandoms/fandom_oneshot:
+    post:
+      tags:
+        - fandom
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './definitions.yaml#/components/schemas/FandomOneshotRequest'
+      responses:
+        '200':
+          description: Запрос принят
+          content:
+            application/json:
+              schema:
+                $ref: './definitions.yaml#/components/schemas/FandomOneshotResponse'

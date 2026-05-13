@@ -35,8 +35,6 @@ class MatchControllerTest {
     private val token = "Bearer test-token"
     private val tokenData = UserTokenData(userId = USER_ID, username = USERNAME)
 
-    // --- getNextBatch ---
-
     @Test
     fun `getNextBatch should return SUCCESS with candidates`() {
         val request = MatchBatchRequest(batchSize = 5)
@@ -54,8 +52,6 @@ class MatchControllerTest {
         assertEquals(ResponseStatus.SUCCESS, result.body!!.status)
         verify(exactly = 1) { matchesService.getNextCandidates(USER_ID, 5) }
     }
-
-    // --- react ---
 
     @Test
     fun `react should return SUCCESS with LIKED status`() {

@@ -40,20 +40,20 @@ class ChatsService(
             val lastMessage = messageRepository.findTopByChatIdOrderByTimestampDesc(chat.id!!)
                 ?: return@mapNotNull null
 
-            if (beforeTimestamp != null && lastMessage.timestamp >= beforeTimestamp) {
+            if (beforeTimestamp != null && lastMessage.timestamp >= beforeTimestamp * 1000) {
                 return@mapNotNull null
             }
 
             val participantId = if (chat.userId1 == userId) chat.userId2 else chat.userId1
             val participantName = resolveDisplayName(participantId)
-            val newMessagesCount = messageRepository.countByChatIdAndSenderIdNotAndIsReadFalse(chat.id, userId)
+            val newMessagesCount = messageRepository.countUnreadByChatIdForUser(chat.id, userId)
 
             ChatPreview(
                 userId = participantId.toString(),
                 participantName = participantName,
                 lastMessage = lastMessage.content,
                 isLastMessageFromThisUser = lastMessage.senderId == userId,
-                lastMessageTimestamp = lastMessage.timestamp,
+                lastMessageTimestamp = lastMessage.timestamp / 1000,
                 newMessagesCount = newMessagesCount
             )
         }.sortedByDescending { it.lastMessageTimestamp }.take(size)
@@ -88,7 +88,7 @@ class ChatsService(
 
         val messages = messageRepository.findByChatIdCursor(
             chatId = chat.id!!,
-            beforeTimestamp = beforeTimestamp,
+            beforeTimestamp = beforeTimestamp?.let { it * 1000 },
             pageable = PageRequest.of(0, size)
         )
 
@@ -142,7 +142,7 @@ class ChatsService(
 
         val senderName = resolveDisplayName(currentUserId)
         val recipientName = resolveDisplayName(targetUserId)
-        val recipientUnreadCount = messageRepository.countByChatIdAndSenderIdNotAndIsReadFalse(chat.id, targetUserId)
+        val recipientUnreadCount = messageRepository.countUnreadByChatIdForUser(chat.id, targetUserId)
 
         notificationService.pushChatPreviewUpdate(
             currentUserId,
@@ -151,7 +151,7 @@ class ChatsService(
                 participantName = recipientName,
                 lastMessage = message.content,
                 isLastMessageFromThisUser = true,
-                lastMessageTimestamp = message.timestamp,
+                lastMessageTimestamp = message.timestamp / 1000,
                 newMessagesCount = 0
             )
         )
@@ -162,7 +162,7 @@ class ChatsService(
                 participantName = senderName,
                 lastMessage = message.content,
                 isLastMessageFromThisUser = false,
-                lastMessageTimestamp = message.timestamp,
+                lastMessageTimestamp = message.timestamp / 1000,
                 newMessagesCount = recipientUnreadCount
             )
         )
@@ -202,7 +202,7 @@ class ChatsService(
             messageId = id.toString(),
             isFromThisUser = senderId == currentUserId,
             content = content,
-            timestamp = timestamp,
+            timestamp = timestamp / 1000,
             mediaItems = mediaItems
         )
     }

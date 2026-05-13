@@ -49,10 +49,10 @@ class MatchesService(
     }
 
     fun getPendingRequestUserIds(userId: UUID): List<UUID> {
-        return matchActionRepository.findAllByTargetUserIdAndAction(userId, LIKE)
-            .filter { matchActionRepository.findByUserIdAndTargetUserId(userId, it.userId) == null }
-            .filter { !areFriends(userId, it.userId) }
-            .map { it.userId }
+        return matchActionRepository.findAllByUserIdAndAction(userId, LIKE)
+            .filter { matchActionRepository.findByUserIdAndTargetUserId(it.targetUserId, userId) == null }
+            .filter { !areFriends(userId, it.targetUserId) }
+            .map { it.targetUserId }
     }
 
     fun getFriendIds(userId: UUID): List<UUID> {
