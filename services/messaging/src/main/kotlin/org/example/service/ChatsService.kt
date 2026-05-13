@@ -130,6 +130,7 @@ class ChatsService(
         }
 
         notificationService.pushMessage(targetUserId, currentUserId, message.toDto(targetUserId, mediaTypeMap))
+        notificationService.pushMessage(currentUserId, targetUserId, message.toDto(currentUserId, mediaTypeMap))
 
         usersAdapter.getFcmToken(targetUserId)?.let { fcmToken ->
             pushNotificationService.sendDataMessage(fcmToken, mapOf(
