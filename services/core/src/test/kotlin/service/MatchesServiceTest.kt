@@ -179,6 +179,7 @@ class MatchesServiceTest {
     fun `getNextCandidates should return empty list when no candidates`() {
         val filter = createMatchFilter(userId = USER_ID)
 
+        every { matchPendingRepository.findAllByUserIdOrderByCreatedAtAsc(USER_ID) } returns emptyList()
         every { matchFilterRepository.findById(USER_ID) } returns Optional.of(filter)
         every { fandomService.getFandoms(USER_ID) } returns emptyList()
         every { userProfilesRepository.findCandidates(any(), any(), any(), any(), any(), any(), any(), any()) } returns emptyList()
@@ -192,6 +193,7 @@ class MatchesServiceTest {
 
     @Test
     fun `getNextCandidates should use default filter when none exists`() {
+        every { matchPendingRepository.findAllByUserIdOrderByCreatedAtAsc(USER_ID) } returns emptyList()
         every { matchFilterRepository.findById(USER_ID) } returns Optional.empty()
         every { fandomService.getFandoms(USER_ID) } returns emptyList()
         every { userProfilesRepository.findCandidates(any(), any(), any(), any(), any(), any(), any(), any()) } returns emptyList()
@@ -209,11 +211,12 @@ class MatchesServiceTest {
         val userFandoms = listOf(sharedFandom)
         val candidateFandoms = listOf(sharedFandom)
 
+        every { matchPendingRepository.findAllByUserIdOrderByCreatedAtAsc(USER_ID) } returns emptyList()
         every { matchFilterRepository.findById(USER_ID) } returns Optional.of(filter)
         every { fandomService.getFandoms(USER_ID) } returns userFandoms
         every { userProfilesRepository.findCandidates(any(), any(), any(), any(), any(), any(), any(), any()) } returns listOf(candidate)
         every { fandomService.getFandoms(CANDIDATE_USER_ID) } returns candidateFandoms
-        every { matchPendingRepository.saveAll(any<List<MatchPending>>()) } answers { firstArg() }
+        every { matchPendingRepository.insertIgnore(any(), any()) } just runs
 
         val result = matchesService.getNextCandidates(USER_ID, 5)
 
@@ -223,7 +226,7 @@ class MatchesServiceTest {
         // Current user fandoms fetched once, candidate fandoms fetched once per candidate
         verify(exactly = 1) { fandomService.getFandoms(USER_ID) }
         verify(exactly = 1) { fandomService.getFandoms(CANDIDATE_USER_ID) }
-        verify(exactly = 1) { matchPendingRepository.saveAll(any<List<MatchPending>>()) }
+        verify(exactly = 1) { matchPendingRepository.insertIgnore(USER_ID, CANDIDATE_USER_ID) }
     }
 
     // --- setFilter ---
@@ -239,6 +242,7 @@ class MatchesServiceTest {
         )
 
         every { matchFilterRepository.save(any()) } answers { firstArg() }
+        every { matchPendingRepository.deleteAllByUserId(USER_ID) } just runs
 
         val result = matchesService.setFilter(USER_ID, request)
 
@@ -248,6 +252,7 @@ class MatchesServiceTest {
                 it.userId == USER_ID && it.gender == listOf("MALE") && it.ageFrom == 18 && it.ageTo == 30
             })
         }
+        verify(exactly = 1) { matchPendingRepository.deleteAllByUserId(USER_ID) }
     }
 
     @Test
@@ -257,6 +262,7 @@ class MatchesServiceTest {
         )
 
         every { matchFilterRepository.save(any()) } answers { firstArg() }
+        every { matchPendingRepository.deleteAllByUserId(USER_ID) } just runs
 
         val result = matchesService.setFilter(USER_ID, request)
 
@@ -266,5 +272,6 @@ class MatchesServiceTest {
                 it.userId == USER_ID && it.gender == null && it.ageFrom == null && it.ageTo == null
             })
         }
+        verify(exactly = 1) { matchPendingRepository.deleteAllByUserId(USER_ID) }
     }
 }

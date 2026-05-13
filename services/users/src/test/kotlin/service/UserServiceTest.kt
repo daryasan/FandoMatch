@@ -9,6 +9,8 @@ import org.example.exception.EmailAlreadyExistsException
 import org.example.exception.InvalidUserInputData
 import org.example.exception.UserNotFoundException
 import org.example.exception.UsernameAlreadyExistsException
+import org.example.repository.DeviceTokenRepository
+import org.example.repository.TokenRepository
 import org.example.repository.UserRepository
 import org.example.service.TokenService
 import org.example.service.UserService
@@ -29,6 +31,12 @@ class UserServiceTest {
 
     @MockK
     private lateinit var tokenService: TokenService
+
+    @MockK
+    private lateinit var tokenRepository: TokenRepository
+
+    @MockK
+    private lateinit var deviceTokenRepository: DeviceTokenRepository
 
     @InjectMockKs
     private lateinit var userService: UserService
@@ -111,7 +119,7 @@ class UserServiceTest {
         val user = createUser(EMAIL, USERNAME)
         every { userRepository.findByEmail(EMAIL) } returns user
 
-        val result = userService.findUser(username = null)
+        val result = userService.findByEmail(EMAIL)
 
         assertEquals(user, result)
         verify(exactly = 1) { userRepository.findByEmail(EMAIL) }
@@ -125,24 +133,21 @@ class UserServiceTest {
     }
 
     @Test
-    fun `findUser should try username first then email`() {
+    fun `findUser should return user when username found`() {
         val user = createUser(EMAIL, USERNAME)
 
-        every { userRepository.findByUsername(USERNAME) } returns null
-        every { userRepository.findByEmail(EMAIL) } returns user
+        every { userRepository.findByUsername(USERNAME) } returns user
 
         val result = userService.findUser(USERNAME)
 
         assertEquals(user, result)
 
         verify(exactly = 1) { userRepository.findByUsername(USERNAME) }
-        verify(exactly = 1) { userRepository.findByEmail(EMAIL) }
     }
 
     @Test
     fun `findUser should throw UserNotFoundException when no match found`() {
         every { userRepository.findByUsername(USERNAME) } returns null
-        every { userRepository.findByEmail(EMAIL) } returns null
 
         assertThrows<UserNotFoundException> {
             userService.findUser(USERNAME)

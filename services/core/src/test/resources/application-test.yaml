@@ -1,9 +1,12 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/fdmatch_core_test
+    url: jdbc:postgresql://localhost:5434/fdmatch_core_test
     username: testuser
     password: testpassword
     driver-class-name: org.postgresql.Driver
+
+  flyway:
+    enabled: false
 
   jpa:
     hibernate:
@@ -12,9 +15,26 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
 
+  kafka:
+    bootstrap-servers: localhost:9092
+    admin:
+      auto-create: false
+
 clients:
   users-service:
     url: http://localhost:8080
+
+media:
+  s3:
+    bucket: test-bucket
+    region: us-east-1
+    access-key: test-access-key
+    secret-key: test-secret-key
+
+notifications:
+  firebase:
+    credentials-json: '{}'
+    project-id: test-project
 
 logging:
   level:

@@ -26,6 +26,7 @@ dependencies {
     testImplementation("org.assertj:assertj-core:3.25.3")
     testImplementation("org.testcontainers:junit-jupiter")
     testImplementation("org.testcontainers:postgresql")
+    testImplementation("com.google.firebase:firebase-admin:9.3.0")
 
 
     // spring

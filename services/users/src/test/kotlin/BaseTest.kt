@@ -1,9 +1,12 @@
 
 import com.fandomatch.users.model.*
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.google.firebase.FirebaseApp
 import org.example.UsersApplication
+import org.example.stream.out.UserEventsSender
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.http.MediaType
 import org.springframework.test.annotation.DirtiesContext
 import org.springframework.test.context.ActiveProfiles
@@ -15,6 +18,7 @@ import org.springframework.test.web.servlet.post
 @ActiveProfiles("test")
 @ContextConfiguration(initializers = [TestDatabaseConfig::class])
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+@MockBean(classes = [FirebaseApp::class, UserEventsSender::class])
 class BaseTest {
 
     @Autowired

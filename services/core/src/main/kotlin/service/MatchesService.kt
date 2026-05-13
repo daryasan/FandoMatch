@@ -198,17 +198,19 @@ class MatchesService(
     fun hasTargetUserLikedCurrentUser(currentUserId: UUID, targetUserId: UUID) =
         matchActionRepository.findByUserIdAndTargetUserId(targetUserId, currentUserId)
 
+    @Transactional
     fun setFilter(userId: UUID, request: MatchFilterRequest): MatchFilterResponse {
         val filter = MatchFilter(
             userId = userId,
-            gender = request.filters.gender?.map { it.name },
+            gender = request.filters.gender?.map { it.name }?.takeIf { it.isNotEmpty() },
             onlyInUserCity = request.filters.onlyInUserCity,
             ageFrom = request.filters.ageFrom,
             ageTo = request.filters.ageTo,
-            fandomCategory = request.filters.fandomCategory?.map { it.name },
-            fandomIds = request.filters.fandomId?.map { it.id }
+            fandomCategory = request.filters.fandomCategory?.map { it.name }?.takeIf { it.isNotEmpty() },
+            fandomIds = request.filters.fandomId?.map { it.id }?.takeIf { it.isNotEmpty() }
         )
         matchFilterRepository.save(filter)
+        matchPendingRepository.deleteAllByUserId(userId)
 
         return MatchFilterResponse(status = ResponseStatus.SUCCESS)
     }

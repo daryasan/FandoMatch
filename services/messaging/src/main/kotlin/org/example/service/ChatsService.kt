@@ -49,7 +49,7 @@ class ChatsService(
             val newMessagesCount = messageRepository.countByChatIdAndSenderIdNotAndIsReadFalse(chat.id, userId)
 
             ChatPreview(
-                chatId = chat.id.toString(),
+                userId = participantId.toString(),
                 participantName = participantName,
                 lastMessage = lastMessage.content,
                 isLastMessageFromThisUser = lastMessage.senderId == userId,
@@ -119,7 +119,7 @@ class ChatsService(
                 senderId = currentUserId,
                 content = request.content,
                 mediaIds = request.mediaIds?.toTypedArray() ?: emptyArray(),
-                timestamp = request.timestamp
+                timestamp = request.timestamp * 1000
             )
         )
 
@@ -130,6 +130,7 @@ class ChatsService(
         }
 
         notificationService.pushMessage(targetUserId, currentUserId, message.toDto(targetUserId, mediaTypeMap))
+        notificationService.pushMessage(currentUserId, targetUserId, message.toDto(currentUserId, mediaTypeMap))
 
         usersAdapter.getFcmToken(targetUserId)?.let { fcmToken ->
             pushNotificationService.sendDataMessage(fcmToken, mapOf(
@@ -146,7 +147,7 @@ class ChatsService(
         notificationService.pushChatPreviewUpdate(
             currentUserId,
             ChatPreview(
-                chatId = chat.id.toString(),
+                userId = targetUserId.toString(),
                 participantName = recipientName,
                 lastMessage = message.content,
                 isLastMessageFromThisUser = true,
@@ -157,7 +158,7 @@ class ChatsService(
         notificationService.pushChatPreviewUpdate(
             targetUserId,
             ChatPreview(
-                chatId = chat.id.toString(),
+                userId = currentUserId.toString(),
                 participantName = senderName,
                 lastMessage = message.content,
                 isLastMessageFromThisUser = false,

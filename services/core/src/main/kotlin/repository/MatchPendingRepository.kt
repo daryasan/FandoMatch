@@ -13,6 +13,8 @@ interface MatchPendingRepository : JpaRepository<MatchPending, UUID> {
 
     fun deleteByUserIdAndSuggestedUserId(userId: UUID, suggestedUserId: UUID)
 
+    fun deleteAllByUserId(userId: UUID)
+
     @Modifying
     @Query(
         value = ("INSERT INTO match_pending (id, user_id, suggested_user_id, created_at) " +

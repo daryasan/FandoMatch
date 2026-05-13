@@ -9,13 +9,17 @@ class TestDatabaseConfig : ApplicationContextInitializer<ConfigurableApplication
         val isCi = System.getenv("CI") == "true"
 
         if (!isCi) {
-            TestPostgresContainer.start()
+            try {
+                TestPostgresContainer.start()
 
-            TestPropertyValues.of(
-                "spring.datasource.url=${TestPostgresContainer.jdbcUrl}",
-                "spring.datasource.username=${TestPostgresContainer.username}",
-                "spring.datasource.password=${TestPostgresContainer.password}",
-            ).applyTo(context.environment)
+                TestPropertyValues.of(
+                    "spring.datasource.url=${TestPostgresContainer.jdbcUrl}",
+                    "spring.datasource.username=${TestPostgresContainer.username}",
+                    "spring.datasource.password=${TestPostgresContainer.password}",
+                ).applyTo(context.environment)
+            } catch (e: Exception) {
+                // Docker not available or API version mismatch — fall back to application-test.yaml datasource
+            }
         }
     }
 }

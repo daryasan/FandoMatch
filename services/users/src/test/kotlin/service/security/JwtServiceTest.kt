@@ -1,5 +1,6 @@
 package service.security
 
+import com.google.firebase.FirebaseApp
 import org.example.UsersApplication
 import org.example.model.GeneratedToken
 import org.example.service.security.JwtService
@@ -7,6 +8,7 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.DynamicPropertyRegistry
 import org.springframework.test.context.DynamicPropertySource
@@ -16,6 +18,7 @@ import java.util.*
 
 @SpringBootTest(classes = [UsersApplication::class])
 @ActiveProfiles("test")
+@MockBean(classes = [FirebaseApp::class])
 class JwtServiceTest {
 
     @Autowired

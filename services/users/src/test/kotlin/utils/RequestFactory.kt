@@ -1,5 +1,6 @@
 package utils
 
+import com.fandomatch.users.model.Gender
 import com.fandomatch.users.model.UserLoginRequest
 import com.fandomatch.users.model.UserRegistrationRequest
 
@@ -9,7 +10,7 @@ fun userRegistrationRequest(
     password: String = Constants.PASSWORD,
     name: String = Constants.NAME,
     birthDate: Long = Constants.BIRTH_DATE,
-    gender: String = Constants.GENDER,
+    gender: Gender = Gender.valueOf(Constants.GENDER),
 ) = UserRegistrationRequest(
     email = email,
     username = username,
