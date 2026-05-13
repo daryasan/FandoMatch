@@ -242,6 +242,7 @@ class MatchesServiceTest {
         )
 
         every { matchFilterRepository.save(any()) } answers { firstArg() }
+        every { matchPendingRepository.deleteAllByUserId(USER_ID) } just runs
 
         val result = matchesService.setFilter(USER_ID, request)
 
@@ -251,6 +252,7 @@ class MatchesServiceTest {
                 it.userId == USER_ID && it.gender == listOf("MALE") && it.ageFrom == 18 && it.ageTo == 30
             })
         }
+        verify(exactly = 1) { matchPendingRepository.deleteAllByUserId(USER_ID) }
     }
 
     @Test
@@ -260,6 +262,7 @@ class MatchesServiceTest {
         )
 
         every { matchFilterRepository.save(any()) } answers { firstArg() }
+        every { matchPendingRepository.deleteAllByUserId(USER_ID) } just runs
 
         val result = matchesService.setFilter(USER_ID, request)
 
@@ -269,5 +272,6 @@ class MatchesServiceTest {
                 it.userId == USER_ID && it.gender == null && it.ageFrom == null && it.ageTo == null
             })
         }
+        verify(exactly = 1) { matchPendingRepository.deleteAllByUserId(USER_ID) }
     }
 }
