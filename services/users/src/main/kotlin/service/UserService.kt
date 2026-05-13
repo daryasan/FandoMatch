@@ -94,7 +94,7 @@ class UserService(
                 tokenRepository.findAllByUserAndTokenTypeAndRevokedFalse(user, TokenType.REFRESH)
         revokeTargets.forEach { it.revoked = true }
         tokenRepository.saveAll(revokeTargets)
-        userRepository.updateStatus(user.uid!!, UserStatus.DELETED.name)
+        userRepository.updateStatus(user.uid!!, UserStatus.DELETED)
         logger.info { "Soft-deleted user uid=${user.uid}" }
         return userRepository.findById(user.uid!!).orElseThrow { UserNotFoundException("id") }
     }
