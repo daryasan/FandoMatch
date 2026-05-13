@@ -20,7 +20,7 @@ open class SecurityConfig(
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         http.csrf { it.disable() }
             .authorizeHttpRequests {
-                it.requestMatchers("/actuator/health").permitAll()
+                it.requestMatchers("/actuator/health", "/actuator/prometheus").permitAll()
                 it.requestMatchers("/error").permitAll()
                 it.anyRequest().authenticated()
             }

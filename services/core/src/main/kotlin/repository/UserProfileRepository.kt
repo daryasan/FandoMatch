@@ -24,6 +24,9 @@ interface UserProfileRepository : JpaRepository<UserProfile, UUID> {
             UNION
             SELECT m.user_id_1 FROM match m WHERE m.user_id_2 = :userId
         )
+        AND up.user_id NOT IN (
+            SELECT mp.suggested_user_id FROM match_pending mp WHERE mp.user_id = :userId
+        )
         AND (CAST(:gender AS VARCHAR) IS NULL OR up.gender = :gender)
         AND (CAST(:city AS VARCHAR) IS NULL OR up.city = :city)
         AND (CAST(:ageFrom AS INTEGER) IS NULL OR DATE_PART('year', AGE(CURRENT_DATE, up.birth_date)) >= :ageFrom)

@@ -9,7 +9,7 @@ import java.util.*
 
 interface MatchPendingRepository : JpaRepository<MatchPending, UUID> {
 
-    fun findAllByUserId(userId: UUID): List<MatchPending>
+    fun findAllByUserIdOrderByCreatedAtAsc(userId: UUID): List<MatchPending>
 
     fun deleteByUserIdAndSuggestedUserId(userId: UUID, suggestedUserId: UUID)
 
