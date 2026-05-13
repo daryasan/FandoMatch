@@ -67,8 +67,8 @@ class MatchesService(
 
         val pending = matchPendingRepository.findAllByUserIdOrderByCreatedAtAsc(userId)
         if (pending.isNotEmpty()) {
-            val pendingCandidates = pending
-                .take(batchSize)
+            val toServe = pending.take(batchSize)
+            val pendingCandidates = toServe
                 .mapNotNull { userProfilesRepository.findById(it.suggestedUserId).orElse(null) }
                 .filter { it.birthDate != null && it.gender != null && it.name != null }
                 .map { profile ->
@@ -76,6 +76,8 @@ class MatchesService(
                     val compatibility = calculateCompatibility(currentUserFandoms, candidateFandoms)
                     profile.toMatchCandidateResponse(compatibility, candidateFandoms, mediaService)
                 }
+
+            matchPendingRepository.deleteAll(toServe)
 
             if (pendingCandidates.isNotEmpty()) {
                 return MatchCandidateBatchResponse(

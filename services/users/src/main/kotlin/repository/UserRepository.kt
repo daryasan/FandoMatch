@@ -1,6 +1,7 @@
 package org.example.repository
 
 import org.example.model.db_models.User
+import org.example.model.db_models.enums.UserStatus
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Modifying
 import org.springframework.data.jpa.repository.Query
@@ -18,5 +19,5 @@ interface UserRepository : JpaRepository<User, UUID> {
 
     @Modifying
     @Query("UPDATE User u SET u.status = :status WHERE u.uid = :uid")
-    fun updateStatus(uid: UUID, status: String)
+    fun updateStatus(uid: UUID, status: UserStatus)
 }
