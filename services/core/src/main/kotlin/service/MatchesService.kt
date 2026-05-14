@@ -123,7 +123,6 @@ class MatchesService(
         val suggested = allScored.take(batchSize).map { it.first }
 
         if (suggested.isNotEmpty()) {
-            // Cache only the candidates NOT returned in this batch, so they appear in the next call
             allScored.drop(batchSize).forEach { (_, _, candidateUserId) ->
                 matchPendingRepository.insertIgnore(userId, candidateUserId)
             }
