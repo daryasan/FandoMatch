@@ -31,6 +31,10 @@
 
 ## Администрирование
 
+Продовая Grafana: https://xsqs-1dmk-iemo.gw-1a.dockhost.net/grafana/login
+Уатная Grafana: http://localhost:3000/d/famz8b4/fdmatch-uat?orgId=1&from=now-2d&to=now&timezone=browser&var-application=core&refresh=5s
+
+
 ### Как генерить open api спеки?
 Командой ``.\gradlew.bat openApiGenerate``
 Иногда нужно две попытки для успешной генерации

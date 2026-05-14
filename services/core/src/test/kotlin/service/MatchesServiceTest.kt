@@ -1,30 +1,50 @@
 package service
 
-import com.fandomatch.core.model.*
+import com.fandomatch.core.model.Gender
+import com.fandomatch.core.model.MatchActionResult
+import com.fandomatch.core.model.MatchFilter
+import com.fandomatch.core.model.MatchFilterRequest
+import com.fandomatch.core.model.ResponseStatus
 import com.fandomatch.media.MediaService
 import com.fandomatch.notifications.PushNotificationService
-import io.mockk.*
+import io.mockk.every
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
 import io.mockk.junit5.MockKExtension
+import io.mockk.just
+import io.mockk.runs
+import io.mockk.verify
 import org.example.adapter.UsersNotificationAdapter
 import org.example.exceptions.AlreadyReactedException
 import org.example.exceptions.UserNotFoundException
 import org.example.models.db_models.Match
 import org.example.models.db_models.MatchPending
-import org.example.repository.*
+import org.example.repository.FandomCategoryRepository
+import org.example.repository.FandomRepository
+import org.example.repository.MatchActionRepository
+import org.example.repository.MatchFilterRepository
+import org.example.repository.MatchPendingRepository
+import org.example.repository.MatchRepository
+import org.example.repository.UserProfileRepository
 import org.example.service.FandomService
 import org.example.service.MatchesService
 import org.example.stream.out.LikeEventProducer
 import org.example.stream.out.MatchEventProducer
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertThrows
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
-import utils.*
 import utils.Constants.CANDIDATE_USER_ID
 import utils.Constants.TARGET_USER_ID
 import utils.Constants.USER_ID
-import java.util.*
+import utils.createFandom
+import utils.createMatchAction
+import utils.createMatchFilter
+import utils.createUserProfile
+import java.util.Optional
+import java.util.UUID
 
 @ExtendWith(MockKExtension::class)
 class MatchesServiceTest {
@@ -210,7 +230,6 @@ class MatchesServiceTest {
         every { fandomService.getFandoms(USER_ID) } returns userFandoms
         every { userProfilesRepository.findCandidates(any(), any(), any(), any(), any(), any(), any(), any()) } returns listOf(candidate)
         every { fandomService.getFandoms(CANDIDATE_USER_ID) } returns candidateFandoms
-        every { matchPendingRepository.insertIgnore(any(), any()) } just runs
 
         val result = matchesService.getNextCandidates(USER_ID, 5)
 
@@ -219,7 +238,33 @@ class MatchesServiceTest {
         assertEquals(CANDIDATE_USER_ID.toString(), result.successResponse!!.candidates[0].uuid)
         verify(exactly = 1) { fandomService.getFandoms(USER_ID) }
         verify(exactly = 1) { fandomService.getFandoms(CANDIDATE_USER_ID) }
-        verify(exactly = 1) { matchPendingRepository.insertIgnore(USER_ID, CANDIDATE_USER_ID) }
+        verify(exactly = 0) { matchPendingRepository.insertIgnore(any(), any()) }
+    }
+
+    @Test
+    fun `getNextCandidates should cache excess candidates in pending`() {
+        val batchSize = 2
+        val candidate1 = createUserProfile(userId = CANDIDATE_USER_ID, username = "candidate1")
+        val candidate2 = createUserProfile(userId = TARGET_USER_ID, username = "candidate2")
+        val extraId = UUID.randomUUID()
+        val candidate3 = createUserProfile(userId = extraId, username = "candidate3")
+        val filter = createMatchFilter(userId = USER_ID)
+        val sharedFandom = createFandom()
+
+        every { matchPendingRepository.findAllByUserIdOrderByCreatedAtAsc(USER_ID) } returns emptyList()
+        every { matchFilterRepository.findById(USER_ID) } returns Optional.of(filter)
+        every { fandomService.getFandoms(USER_ID) } returns listOf(sharedFandom)
+        every { userProfilesRepository.findCandidates(any(), any(), any(), any(), any(), any(), any(), any()) } returns listOf(candidate1, candidate2, candidate3)
+        every { fandomService.getFandoms(CANDIDATE_USER_ID) } returns listOf(sharedFandom)
+        every { fandomService.getFandoms(TARGET_USER_ID) } returns listOf(sharedFandom)
+        every { fandomService.getFandoms(extraId) } returns listOf(sharedFandom)
+        every { matchPendingRepository.insertIgnore(any(), any()) } just runs
+
+        val result = matchesService.getNextCandidates(USER_ID, batchSize)
+
+        assertEquals(ResponseStatus.SUCCESS, result.status)
+        assertEquals(batchSize, result.successResponse!!.candidates.size)
+        verify(exactly = 1) { matchPendingRepository.insertIgnore(eq(USER_ID), any()) }
     }
 
 

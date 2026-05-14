@@ -20,6 +20,9 @@ data class MessagingUser(
 
     val name: String?,
 
+    @Column(name = "avatar_media_id")
+    val avatarMediaId: String? = null,
+
     @Column(name = "updated_at", nullable = false)
     val updatedAt: Instant = Instant.now()
 )

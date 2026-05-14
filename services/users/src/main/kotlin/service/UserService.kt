@@ -29,6 +29,7 @@ class UserService(
 
     private val logger = KotlinLogging.logger {}
 
+    @Transactional
     fun createUser(
         email: String,
         username: String,
@@ -51,7 +52,11 @@ class UserService(
             logger.info { "Created user with uid: ${userToSave.uid}, username: $username" }
             return userToSave
         } catch (e: DataIntegrityViolationException) {
+            val message = e.message.orEmpty()
             logger.error { "Error creating user: duplicate data for username=$username, email=$email" }
+            if (message.contains("email", ignoreCase = true)) {
+                throw EmailAlreadyExistsException(email)
+            }
             throw UsernameAlreadyExistsException(username)
         }
     }

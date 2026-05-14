@@ -108,22 +108,24 @@ class MatchesService(
 
         val random = Random()
 
-        val suggested = candidates
+        val allScored = candidates
             .asSequence()
             .filter { it.birthDate != null && it.gender != null && it.name != null }
             .map { candidate ->
                 val candidateFandoms = fandomService.getFandoms(candidate.userId)
                 val compatibility = calculateCompatibility(currentUserFandoms, candidateFandoms)
                 val jitteredScore = compatibility + random.nextDouble(-JITTER_RANGE, JITTER_RANGE)
-                Triple(candidate.toMatchCandidateResponse(compatibility, candidateFandoms, mediaService), jitteredScore, compatibility)
+                Triple(candidate.toMatchCandidateResponse(compatibility, candidateFandoms, mediaService), jitteredScore, candidate.userId)
             }
             .sortedByDescending { it.second }
-            .take(batchSize)
-            .map { it.first }
             .toList()
 
+        val suggested = allScored.take(batchSize).map { it.first }
+
         if (suggested.isNotEmpty()) {
-            suggested.forEach { matchPendingRepository.insertIgnore(userId, UUID.fromString(it.uuid)) }
+            allScored.drop(batchSize).forEach { (_, _, candidateUserId) ->
+                matchPendingRepository.insertIgnore(userId, candidateUserId)
+            }
         }
 
         return MatchCandidateBatchResponse(

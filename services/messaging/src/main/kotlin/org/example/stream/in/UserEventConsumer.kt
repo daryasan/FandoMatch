@@ -23,6 +23,7 @@ class UserEventConsumer(
                 userId = UUID.fromString(event.uid),
                 username = event.username,
                 name = event.name,
+                avatarMediaId = event.avatarMediaId,
                 updatedAt = Instant.now()
             )
         )
