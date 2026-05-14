@@ -1,162 +1,29 @@
-# Core Service
+# Сервис Core
 
-Core service handles user profiles and matching logic.
+## Коды ошибок
 
-## Endpoints
-
-### User Profile
-
-#### `POST /core/user/profile` — getProfile
-
-```mermaid
-sequenceDiagram
-    participant Client
-    participant ProfilesController
-    participant TokenParserService
-    participant ProfilesService
-    participant UserProfileRepository
-    participant UsersAdapter
-    participant FandomService
-    participant MatchesService
-    participant ProfileStrategyFactory
-
-    Client->>ProfilesController: POST /core/user/profile (token, username)
-    ProfilesController->>TokenParserService: parse(token)
-    TokenParserService-->>ProfilesController: UserTokenData(userId)
-    ProfilesController->>ProfilesService: getProfile(uuid, username)
-    ProfilesService->>UserProfileRepository: findByUsername(username)
-    UserProfileRepository-->>ProfilesService: UserProfile
-    ProfilesService->>MatchesService: areFriends(currentUuid, targetUuid)
-    MatchesService-->>ProfilesService: Boolean
-    alt profileType == OWN
-        ProfilesService->>UsersAdapter: getUserCredentialsByUuid(currentUuid)
-        UsersAdapter-->>ProfilesService: UserCredentials
-    end
-    ProfilesService->>FandomService: getFandoms(targetUserId)
-    FandomService-->>ProfilesService: List<Fandom>
-    ProfilesService->>ProfileStrategyFactory: getStrategy(profileType, profileData)
-    ProfileStrategyFactory-->>ProfilesService: ConstructProfileStrategy
-    ProfilesService-->>ProfilesController: UserProfileResponse
-    ProfilesController-->>Client: 200 OK (UserProfileResponse)
-```
-
-#### `PATCH /core/user/profile/edit` — editProfile
-
-```mermaid
-sequenceDiagram
-    participant Client
-    participant ProfilesController
-    participant TokenParserService
-    participant ProfilesService
-    participant UserProfileRepository
-    participant UsersAdapter
-    participant FandomService
-    participant ProfileStrategyFactory
-
-    Client->>ProfilesController: PATCH /core/user/profile/edit (token, fields)
-    ProfilesController->>TokenParserService: parse(token)
-    TokenParserService-->>ProfilesController: UserTokenData(userId)
-    ProfilesController->>ProfilesService: editProfile(uuid, request)
-    ProfilesService->>UserProfileRepository: findById(uuid)
-    UserProfileRepository-->>ProfilesService: UserProfile
-    ProfilesService->>UserProfileRepository: save(updated)
-    ProfilesService->>UsersAdapter: getUserCredentialsByUuid(uuid)
-    UsersAdapter-->>ProfilesService: UserCredentials
-    ProfilesService->>FandomService: getFandoms(uuid)
-    FandomService-->>ProfilesService: List<Fandom>
-    ProfilesService->>ProfileStrategyFactory: getStrategy(OWN, profileData)
-    ProfileStrategyFactory-->>ProfilesService: ConstructOwnProfile
-    ProfilesService-->>ProfilesController: EditUserProfileResponse
-    ProfilesController-->>Client: 200 OK (EditUserProfileResponse)
-```
-
-### Matching
-
-#### `POST /core/match/next` — getNextCandidates
-
-```mermaid
-sequenceDiagram
-    participant Client
-    participant MatchController
-    participant TokenParserService
-    participant MatchesService
-    participant MatchFilterRepository
-    participant UserProfileRepository
-    participant FandomService
-    participant MatchPendingRepository
-
-    Client->>MatchController: POST /core/match/next (token, batchSize)
-    MatchController->>TokenParserService: parse(token)
-    TokenParserService-->>MatchController: UserTokenData(userId)
-    MatchController->>MatchesService: getNextCandidates(userId, batchSize)
-    MatchesService->>MatchFilterRepository: findById(userId)
-    MatchFilterRepository-->>MatchesService: MatchFilter
-    MatchesService->>UserProfileRepository: findCandidates(userId, filters, poolSize)
-    UserProfileRepository-->>MatchesService: List<UserProfile>
-    MatchesService->>FandomService: getFandoms(currentUserId)
-    FandomService-->>MatchesService: List<Fandom> (fetched once)
-    loop for each candidate
-        MatchesService->>FandomService: getFandoms(candidateId)
-        FandomService-->>MatchesService: List<Fandom>
-        Note over MatchesService: calculateCompatibility(userFandoms, candidateFandoms)
-    end
-    MatchesService->>MatchPendingRepository: saveAll(pending)
-    MatchesService-->>MatchController: MatchCandidateBatchResponse
-    MatchController-->>Client: 200 OK (MatchCandidateBatchResponse)
-```
-
-#### `POST /core/match/react` — react
-
-```mermaid
-sequenceDiagram
-    participant Client
-    participant MatchController
-    participant TokenParserService
-    participant MatchesService
-    participant UserProfileRepository
-    participant MatchActionRepository
-    participant MatchPendingRepository
-    participant MatchRepository
-    participant MatchEventProducer
-
-    Client->>MatchController: POST /core/match/react (token, targetUuid, action)
-    MatchController->>TokenParserService: parse(token)
-    TokenParserService-->>MatchController: UserTokenData(userId)
-    MatchController->>MatchesService: react(userId, targetUuid, action)
-    MatchesService->>UserProfileRepository: existsById(targetUuid)
-    UserProfileRepository-->>MatchesService: Boolean
-    MatchesService->>MatchActionRepository: findByUserIdAndTargetUserId(userId, targetUuid)
-    MatchActionRepository-->>MatchesService: null (no prior action)
-    MatchesService->>MatchActionRepository: save(MatchAction)
-    MatchesService->>MatchPendingRepository: deleteByUserIdAndSuggestedUserId(userId, targetUuid)
-    MatchesService->>MatchActionRepository: findByUserIdAndTargetUserId(targetUuid, userId)
-    MatchActionRepository-->>MatchesService: MatchAction? (opposite action)
-    alt mutual LIKE
-        MatchesService->>MatchRepository: save(Match)
-        MatchesService->>MatchEventProducer: sendMatchEvent(matchId, user1, user2)
-        MatchesService-->>MatchController: MatchActionResponse(MATCH)
-    else not mutual
-        MatchesService-->>MatchController: MatchActionResponse(LIKED/DISLIKED)
-    end
-    MatchController-->>Client: 200 OK (MatchActionResponse)
-```
-
-#### `POST /core/match/filter` — setFilter
-
-```mermaid
-sequenceDiagram
-    participant Client
-    participant MatchController
-    participant TokenParserService
-    participant MatchesService
-    participant MatchFilterRepository
-
-    Client->>MatchController: POST /core/match/filter (token, filter params)
-    MatchController->>TokenParserService: parse(token)
-    TokenParserService-->>MatchController: UserTokenData(userId)
-    MatchController->>MatchesService: setFilter(userId, request)
-    MatchesService->>MatchFilterRepository: save(MatchFilter)
-    MatchesService-->>MatchController: MatchFilterResponse(SUCCESS)
-    MatchController-->>Client: 200 OK (MatchFilterResponse)
-```
-
+| Ручка                                     | Ошибки                                                                                               |
+|-------------------------------------------|------------------------------------------------------------------------------------------------------|
+| `POST /core/user/profile`                 | `200 + USER_NOT_FOUND`, `200 + PROFILE_INCOMPLETE`;  `401`, `503`                                    |
+| `PATCH /core/user/profile/edit`           | `200 + USER_NOT_FOUND`, `200 + PROFILE_INCOMPLETE`, `200 + FANDOM_CATEGORY_NOT_FOUND`;  `401`, `503` |
+| `GET /core/user/profile/pending_requests` | `200 + FANDOM_CATEGORY_NOT_FOUND`;  `401`, `503`                                                     |
+| `GET /core/user/profile/friends`          | `200 + FANDOM_CATEGORY_NOT_FOUND`;  `401`, `503`                                                     |
+| `GET /core/user/preferences`              | `401`, `503`                                                                                         |
+| `PATCH /core/user/preferences`            | `401`, `503`                                                                                         |
+| `POST /core/match/next`                   | `200 + FANDOM_CATEGORY_NOT_FOUND`;  `401`, `503`                                                     |
+| `POST /core/match/react`                  | `200 + USER_NOT_FOUND`, `200 + ALREADY_REACTED`;  `401`, `503`                                       |
+| `GET /core/match/get_current_filters`     | `200 + FANDOM_CATEGORY_NOT_FOUND`;  `401`, `503`                                                     |
+| `POST /core/match/filter`                 | `401`, `503`                                                                                         |
+| `POST /core/match/internal/exists`        | `400`, `403`                                                                                         |
+| `POST /core/posts/get`                    | `200 + USER_NOT_FOUND`, `200 + FANDOM_CATEGORY_NOT_FOUND`                                            |
+| `POST /core/posts/create`                 | `200 + USER_NOT_FOUND`, `200 + FANDOM_CATEGORY_NOT_FOUND`;  `401`, `503`                             |
+| `GET /core/posts/{post_id}`               | `200 + POST_NOT_FOUND`, `200 + USER_NOT_FOUND`, `200 + FANDOM_CATEGORY_NOT_FOUND`                    |
+| `GET /core/posts/{post_id}/comments`      | `200 + POST_NOT_FOUND`                                                                               |
+| `POST /core/posts/{post_id}/like`         | `200 + POST_NOT_FOUND`;  `401`, `503`                                                                |
+| `POST /core/posts/{post_id}/comment`      | `200 + POST_NOT_FOUND`;  `401`, `503`                                                                |
+| `GET /core/feed`                          | `200 + USER_NOT_FOUND`, `200 + FANDOM_CATEGORY_NOT_FOUND`;  `401`, `503`                             |
+| `GET /core/fandoms/search`                | `200 + FANDOM_CATEGORY_NOT_FOUND`;  `401`, `503`                                                     |
+| `GET /core/cities/search`                 | `401`, `503`                                                                                         |
+| `POST /core/fandoms/user`                 | `200 + FANDOM_CATEGORY_NOT_FOUND`                                                                    |
+| `GET /core/fandoms/categories`            | -                                                                                                    |
+| `POST /core/fandoms/request-new`          | -                                                                                                    |
