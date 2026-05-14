@@ -97,7 +97,6 @@ def parse_wikipedia_table(url, name_col_index=0, category_col_index=None):
     return fandoms
 
 def gather_all_fandoms():
-    print("Сбор фандомов из расширенного списка страниц Википедии...")
     all_fandoms = []
 
     sources = [
@@ -191,15 +190,14 @@ def gather_all_fandoms():
             items = [item for item in items if len(item['name']) >= 2]
             all_fandoms.extend(items)
             total_added += len(items)
-            print(f"    Добавлено {len(items)}")
+            print(f"Added{len(items)}")
         except Exception as e:
-            print(f"    Ошибка: {e}")
+            print(f"Error: {e}")
         time.sleep(0.5)
 
-    print("  Загрузка основной таблицы List of fandom names...")
     main_fandoms = parse_wikipedia_table('https://en.wikipedia.org/wiki/List_of_fandom_names', name_col_index=0, category_col_index=2)
     all_fandoms.extend(main_fandoms)
-    print(f"    Добавлено {len(main_fandoms)}")
+    print(f"Added {len(main_fandoms)}")
 
     seen = set()
     unique = []
@@ -208,18 +206,18 @@ def gather_all_fandoms():
         if name_lower not in seen:
             seen.add(name_lower)
             unique.append(f)
-    print(f"Итого уникальных фандомов: {len(unique)}")
+    print(f"Unique: {len(unique)}")
     return unique
 
 def save_batches(fandoms, batch_size=BATCH_SIZE):
     total = len(fandoms)
-    print(f'Сохранение {total} фандомов порциями по {batch_size}...')
+    print(f'Saving {total} by {batch_size}...')
     for i in range(0, total, batch_size):
         batch = fandoms[i:i+batch_size]
         filename = f'fandom_batch_{i//batch_size + 1}.json'
         with open(filename, 'w', encoding='utf-8') as f:
             json.dump({"fandoms": batch}, f, ensure_ascii=False, indent=2)
-        print(f'  Сохранён {filename} (записи {i+1}–{min(i+batch_size, total)})')
+        print(f'Saved {filename} (records {i+1}–{min(i+batch_size, total)})')
 
 if __name__ == '__main__':
     try:
@@ -227,6 +225,6 @@ if __name__ == '__main__':
         if fandoms:
             save_batches(fandoms)
         else:
-            print("Не удалось найти ни одного фандома.")
+            print("no fandoms found")
     except Exception as e:
-        print(f'Критическая ошибка: {e}')
+        print(f'error: {e}')
