@@ -5,7 +5,7 @@ meta {
 }
 
 post {
-  url: {{uat_host}}/core/match/filter
+  url: {{prod_host}}/core/match/filter
   body: json
   auth: none
 }
@@ -19,7 +19,7 @@ body:json {
   {
     "filters": {
       "gender": [
-        "FEMALE"
+         "MALE"
       ],
       "age_from": 18,
       "age_to": 35,

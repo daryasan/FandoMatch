@@ -25,7 +25,13 @@ components:
         type: string
       description: Bearer JWT token
 
-
+    ServiceApiKeyHeader:
+      name: X-Api-Key
+      in: header
+      required: true
+      schema:
+        type: string
+      description: Сервисный ключ (SERVICE_API_KEY)
   # -------------------------
   # SCHEMAS
   # -------------------------

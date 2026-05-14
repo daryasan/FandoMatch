@@ -169,18 +169,33 @@ Gateway проксирует эти префиксы без собственны
 
 ## Администрирование
 
+#### Как запустить python скрипт
+
+```
+cd ~/FandoMatch/scripts          
+python3 -m venv venv             
+source venv/bin/activate       
+pip install requests beautifulsoup4   
+python fandom-oneshot.py        
+```
+
 Если нужно выполнить SQL напрямую в контейенре БД:
-``psql -h core-db -U postgres -d fdmatch_core``
-``ваш SQL-скрипт``
+```
+psql -h core-db -U postgres -d fdmatch_core
+ваш SQL-скрипт
+```
 
 #### Полезные скрипты
 - Скрипт для дропа всех таблиц
-``DROP SCHEMA public CASCADE;
+```
+DROP SCHEMA public CASCADE;
 CREATE SCHEMA public;
-GRANT ALL ON SCHEMA public TO public;``
+GRANT ALL ON SCHEMA public TO public;
+```
 
 - Вставка фандомов
-``INSERT INTO fandom (name, category_id) VALUES
+```
+INSERT INTO fandom (name, category_id) VALUES
     ('One Piece',           (SELECT id FROM fandom_category WHERE name = 'ANIME_MANGA')),
     ('Но-Энор',             (SELECT id FROM fandom_category WHERE name = 'OTHER')),
     ('My Chemical Romance', (SELECT id FROM fandom_category WHERE name = 'MUSIC')),
@@ -192,4 +207,5 @@ GRANT ALL ON SCHEMA public TO public;``
     ('The Beatles',         (SELECT id FROM fandom_category WHERE name = 'MUSIC')),
     ('Стража! Стража!',     (SELECT id FROM fandom_category WHERE name = 'BOOKS')),
     ('Легенды Олимпа',      (SELECT id FROM fandom_category WHERE name = 'MYTHOLOGY')),
-    ('Волкодав',            (SELECT id FROM fandom_category WHERE name = 'BOOKS'));``
+    ('Волкодав',            (SELECT id FROM fandom_category WHERE name = 'BOOKS'));
+```

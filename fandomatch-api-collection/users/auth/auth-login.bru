@@ -5,7 +5,7 @@ meta {
 }
 
 post {
-  url: {{uat_host}}/auth/login
+  url: {{prod_host}}/auth/login
   body: json
   auth: none
 }
@@ -16,8 +16,8 @@ headers {
 
 body:json {
   {
-    "username": "Cyberlenin",
-    "hashed_password": "qwerty"
+    "username": "maraa",
+    "hashed_password": "qwerty123!"
   }
 }
 

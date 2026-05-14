@@ -207,7 +207,7 @@ class PostsService(
                 val category = fandomCategoryRepository.findById(fandom.categoryId)
                     .orElseThrow { FandomCategoryNotFoundException(fandom.categoryId.toString()) }
                 Fandom(
-                    id = fandom.id.toString(),
+                    id = fandom.id!!.toString(),
                     name = fandom.name,
                     category = category.let { FandomCategory.valueOf(it.name) }
                 )
@@ -261,7 +261,7 @@ class PostsService(
                 val category = fandomCategoryRepository.findById(fandom.categoryId)
                     .orElseThrow { FandomCategoryNotFoundException(fandom.categoryId.toString()) }
                 Fandom(
-                    id = fandom.id.toString(),
+                    id = fandom.id!!.toString(),
                     name = fandom.name,
                     category = category.let { FandomCategory.valueOf(it.name) }
                 )
