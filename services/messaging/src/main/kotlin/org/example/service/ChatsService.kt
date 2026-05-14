@@ -46,11 +46,13 @@ class ChatsService(
 
             val participantId = if (chat.userId1 == userId) chat.userId2 else chat.userId1
             val participantName = resolveDisplayName(participantId)
+            val participantAvatarUrl = resolveAvatarUrl(participantId)
             val newMessagesCount = messageRepository.countUnreadByChatIdForUser(chat.id, userId)
 
             ChatPreview(
                 userId = participantId.toString(),
                 participantName = participantName,
+                participantAvatarUrl = participantAvatarUrl,
                 lastMessage = lastMessage.content,
                 isLastMessageFromThisUser = lastMessage.senderId == userId,
                 lastMessageTimestamp = lastMessage.timestamp / 1000,
@@ -94,6 +96,22 @@ class ChatsService(
 
         messageRepository.markAsRead(chat.id, currentUserId)
 
+        val lastMessage = messageRepository.findTopByChatIdOrderByTimestampDesc(chat.id)
+        if (lastMessage != null) {
+            notificationService.pushChatPreviewUpdate(
+                currentUserId,
+                ChatPreview(
+                    userId = targetUserId.toString(),
+                    participantName = resolveDisplayName(targetUserId),
+                    participantAvatarUrl = resolveAvatarUrl(targetUserId),
+                    lastMessage = lastMessage.content,
+                    isLastMessageFromThisUser = lastMessage.senderId == currentUserId,
+                    lastMessageTimestamp = lastMessage.timestamp / 1000,
+                    newMessagesCount = 0
+                )
+            )
+        }
+
         val allMediaIds = messages.flatMap { it.mediaIds.toList() }
         val mediaTypeMap = if (allMediaIds.isNotEmpty()) {
             mediaItemRepository.findAllByMediaIdIn(allMediaIds).associate { it.mediaId to it.mediaType }
@@ -135,7 +153,7 @@ class ChatsService(
         usersAdapter.getFcmToken(targetUserId)?.let { fcmToken ->
             pushNotificationService.sendDataMessage(fcmToken, mapOf(
                 "type" to "chat",
-                "chatId" to chat.id.toString(),
+                "userId" to currentUserId.toString(),
                 "name" to resolveDisplayName(currentUserId)
             ))
         }
@@ -149,6 +167,7 @@ class ChatsService(
             ChatPreview(
                 userId = targetUserId.toString(),
                 participantName = recipientName,
+                participantAvatarUrl = resolveAvatarUrl(targetUserId),
                 lastMessage = message.content,
                 isLastMessageFromThisUser = true,
                 lastMessageTimestamp = message.timestamp / 1000,
@@ -160,6 +179,7 @@ class ChatsService(
             ChatPreview(
                 userId = currentUserId.toString(),
                 participantName = senderName,
+                participantAvatarUrl = resolveAvatarUrl(currentUserId),
                 lastMessage = message.content,
                 isLastMessageFromThisUser = false,
                 lastMessageTimestamp = message.timestamp / 1000,
@@ -185,6 +205,12 @@ class ChatsService(
         val cached = messagingUserRepository.findById(userId).orElse(null)
         if (cached != null) return cached.name ?: cached.username
         return usersAdapter.getUsernameById(userId) ?: userId.toString()
+    }
+
+    private fun resolveAvatarUrl(userId: UUID): String? {
+        val avatarMediaId = messagingUserRepository.findById(userId).orElse(null)?.avatarMediaId
+            ?: return null
+        return mediaService.generateSignedDownloadUrl(avatarMediaId)
     }
 
     private fun Message.toDto(currentUserId: UUID, mediaTypeMap: Map<String, String>): com.fandomatch.messaging.model.Message {
