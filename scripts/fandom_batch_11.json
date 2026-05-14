@@ -1,0 +1,1056 @@
+{
+  "fandoms": [
+    {
+      "name": "Lil Wayne",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Lilly Singh",
+      "category": "OTHER"
+    },
+    {
+      "name": "Lindsey Stirling",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Linkin Park",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Lisa",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Little Mix",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Live",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Liverpool F.C.",
+      "category": "SPORTS"
+    },
+    {
+      "name": "Lizzo",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Loona",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Logic",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Lost",
+      "category": "TV_SERIES"
+    },
+    {
+      "name": "Louis Tomlinson",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Lucifer",
+      "category": "TV_SERIES"
+    },
+    {
+      "name": "Lucy",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Luke Black",
+      "category": "MUSIC"
+    },
+    {
+      "name": "M",
+      "category": "OTHER"
+    },
+    {
+      "name": "Mabel",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Machine Head",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Madonna",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Mamamoo",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Maren Morris",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Mariah Carey",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Marina Diamandis",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Matt Walsh",
+      "category": "PODCASTS"
+    },
+    {
+      "name": "MattyBRaps",
+      "category": "MUSIC"
+    },
+    {
+      "name": "The Maze Runner",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Me:I",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Megadeth",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Megan Thee Stallion",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Meghan Trainor",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Melanie Martinez",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Mercedes Moné",
+      "category": "OTHER"
+    },
+    {
+      "name": "Meryl Streep",
+      "category": "OTHER"
+    },
+    {
+      "name": "The Meteors",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Michael Jackson",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Middle-Earth",
+      "category": "BOOKS"
+    },
+    {
+      "name": "MIKA",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Miley Cyrus",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Minnesota United FC",
+      "category": "SPORTS"
+    },
+    {
+      "name": "Monsta X",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Morissette",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Mother Mother",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Motörhead",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Muse",
+      "category": "MUSIC"
+    },
+    {
+      "name": "My Chemical Romance",
+      "category": "MUSIC"
+    },
+    {
+      "name": "My Little Pony: Friendship Is Magic",
+      "category": "TV_SERIES"
+    },
+    {
+      "name": "Mystery Science Theater 3000",
+      "category": "TV_SERIES"
+    },
+    {
+      "name": "N",
+      "category": "OTHER"
+    },
+    {
+      "name": "NCT",
+      "category": "MUSIC"
+    },
+    {
+      "name": "NMIXX",
+      "category": "MUSIC"
+    },
+    {
+      "name": "The Neighbourhood",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Neil Diamond",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Neil Young",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Neon Genesis Evangelion",
+      "category": "ANIME_MANGA"
+    },
+    {
+      "name": "NewJeans",
+      "category": "MUSIC"
+    },
+    {
+      "name": "New Kids on the Block",
+      "category": "MUSIC"
+    },
+    {
+      "name": "New Model Army",
+      "category": "MUSIC"
+    },
+    {
+      "name": "New Orleans Saints",
+      "category": "SPORTS"
+    },
+    {
+      "name": "New York Rangers",
+      "category": "SPORTS"
+    },
+    {
+      "name": "Newcastle United F.C.",
+      "category": "SPORTS"
+    },
+    {
+      "name": "Newport County A.F.C.",
+      "category": "SPORTS"
+    },
+    {
+      "name": "Neymar",
+      "category": "OTHER"
+    },
+    {
+      "name": "Niall Horan",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Nicki Minaj",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Nikocado Avocado",
+      "category": "OTHER"
+    },
+    {
+      "name": "Nine Inch Nails",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Nora Aunor",
+      "category": "OTHER"
+    },
+    {
+      "name": "Normani",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Northern Ireland national football team",
+      "category": "SPORTS"
+    },
+    {
+      "name": "Nothingface",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Nova Twins",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Novulent",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Number_i",
+      "category": "MUSIC"
+    },
+    {
+      "name": "O",
+      "category": "OTHER"
+    },
+    {
+      "name": "The Office",
+      "category": "TV_SERIES"
+    },
+    {
+      "name": "Olivia Rodrigo",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Olly Murs",
+      "category": "MUSIC"
+    },
+    {
+      "name": "One Chicago",
+      "category": "TV_SERIES"
+    },
+    {
+      "name": "One Direction",
+      "category": "MUSIC"
+    },
+    {
+      "name": "The Ordinary Boys",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Otep",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Our Flag Means Death",
+      "category": "TV_SERIES"
+    },
+    {
+      "name": "P",
+      "category": "OTHER"
+    },
+    {
+      "name": "P1Harmony",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Palaye Royale",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Paramore",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Pentagon",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Perawat Sangpotirat&Prachaya Ruangroj",
+      "category": "OTHER"
+    },
+    {
+      "name": "Perrie",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Pet Shop Boys",
+      "category": "MUSIC"
+    },
+    {
+      "name": "The Phantom of the Opera",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Phish",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Phoebe Bridgers",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Pia Wurtzbach",
+      "category": "OTHER"
+    },
+    {
+      "name": "Pixey",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Pixie Lott",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Porcelain Black",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Poppy",
+      "category": "MUSIC"
+    },
+    {
+      "name": "ppcocaine",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Press Hit Play",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Psych",
+      "category": "TV_SERIES"
+    },
+    {
+      "name": "Q",
+      "category": "OTHER"
+    },
+    {
+      "name": "Qveen Herby",
+      "category": "MUSIC"
+    },
+    {
+      "name": "R",
+      "category": "OTHER"
+    },
+    {
+      "name": "Rangers F.C.",
+      "category": "SPORTS"
+    },
+    {
+      "name": "RBD",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Real Madrid",
+      "category": "SPORTS"
+    },
+    {
+      "name": "Red Dwarf",
+      "category": "TV_SERIES"
+    },
+    {
+      "name": "Red Rising",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Red Velvet",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Remi Wolf",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Reneé Rapp",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Rescene",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Rick and Morty",
+      "category": "TV_SERIES"
+    },
+    {
+      "name": "Ricky Martin",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Rico Nasty",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Rihanna",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Rina Sawayama",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Rita Ora",
+      "category": "MUSIC"
+    },
+    {
+      "name": "RizBar",
+      "category": "SPORTS"
+    },
+    {
+      "name": "RM",
+      "category": "MUSIC"
+    },
+    {
+      "name": "The Room",
+      "category": "FILMS"
+    },
+    {
+      "name": "Rosalía",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Rosé",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Ruel",
+      "category": "MUSIC"
+    },
+    {
+      "name": "S",
+      "category": "OTHER"
+    },
+    {
+      "name": "Sabrina Carpenter",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Saiko",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Sakura Gakuin",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Sakurazaka46",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Salman Khan",
+      "category": "OTHER"
+    },
+    {
+      "name": "Sam Callahan",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Sam Smith",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Sarah Geronimo",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Saweetie",
+      "category": "MUSIC"
+    },
+    {
+      "name": "SB19",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Schoolyard Heroes",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Scotland men's national football team",
+      "category": "SPORTS"
+    },
+    {
+      "name": "Scotty McCreery",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Scuderia Ferrari",
+      "category": "SPORTS"
+    },
+    {
+      "name": "Seattle Seahawks",
+      "category": "SPORTS"
+    },
+    {
+      "name": "Selena Gomez",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Seventeen",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Sexyy Red",
+      "category": "MUSIC"
+    },
+    {
+      "name": "SF9",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Shakib Khan",
+      "category": "OTHER"
+    },
+    {
+      "name": "Shakira",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Sharon Cuneta",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Shawn Mendes",
+      "category": "MUSIC"
+    },
+    {
+      "name": "SHINee",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Sia",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Sistar",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Six",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Skillet",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Slayer",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Slayyyter",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Slipknot",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Sơn Tùng M-TP",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Spiritbox",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Star Trek",
+      "category": "TV_SERIES"
+    },
+    {
+      "name": "STAYC",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Stargate",
+      "category": "FILMS"
+    },
+    {
+      "name": "Stef Sanjati",
+      "category": "OTHER"
+    },
+    {
+      "name": "Stefflon Don",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Stephen Colbert",
+      "category": "OTHER"
+    },
+    {
+      "name": "Stray Kids",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Subwoolfer",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Super Junior",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Suppasit Jongcheveevat",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Swansea City A.F.C.",
+      "category": "SPORTS"
+    },
+    {
+      "name": "SZA",
+      "category": "MUSIC"
+    },
+    {
+      "name": "T",
+      "category": "OTHER"
+    },
+    {
+      "name": "T-ARA",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Take That",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Tamar Braxton",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Tate McRae",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Tawan Vihokratana&Thitipoom Techaapaikhun",
+      "category": "OTHER"
+    },
+    {
+      "name": "Taylor Swift",
+      "category": "MUSIC"
+    },
+    {
+      "name": "TINI",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Texas A&M",
+      "category": "SPORTS"
+    },
+    {
+      "name": "The9",
+      "category": "MUSIC"
+    },
+    {
+      "name": "The Price Is Right",
+      "category": "TV_SERIES"
+    },
+    {
+      "name": "theSTART",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Thirty Seconds to Mars",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Thomas Sanders",
+      "category": "OTHER"
+    },
+    {
+      "name": "Timothée Chalamet",
+      "category": "OTHER"
+    },
+    {
+      "name": "Tinashe",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Tkay Maidza",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Tokio Hotel",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Tom Hiddleston",
+      "category": "OTHER"
+    },
+    {
+      "name": "Toni Braxton",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Tori Amos",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Travis Scott",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Trey Songz",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Tri.be",
+      "category": "MUSIC"
+    },
+    {
+      "name": "True Blood",
+      "category": "TV_SERIES"
+    },
+    {
+      "name": "TVXQ",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Twenty One Pilots",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Twice",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Twilight",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Twisted Method",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Twisted Sister",
+      "category": "MUSIC"
+    },
+    {
+      "name": "TXT",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Tyla",
+      "category": "MUSIC"
+    },
+    {
+      "name": "U",
+      "category": "OTHER"
+    },
+    {
+      "name": "Uggie",
+      "category": "OTHER"
+    },
+    {
+      "name": "U-KISS",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Ungu",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Union J",
+      "category": "MUSIC"
+    },
+    {
+      "name": "UP10TION",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Uriah Heep",
+      "category": "MUSIC"
+    },
+    {
+      "name": "V",
+      "category": "OTHER"
+    },
+    {
+      "name": "Vachirawit Chivaaree",
+      "category": "OTHER"
+    },
+    {
+      "name": "Vachirawit ChivaareeandMetawin Opas-iamkajorn",
+      "category": "OTHER"
+    },
+    {
+      "name": "Valley",
+      "category": "MUSIC"
+    },
+    {
+      "name": "The Vamps",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Van Morrison",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Vice Ganda",
+      "category": "OTHER"
+    },
+    {
+      "name": "Victon",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Victoria Monet",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Vilma Santos",
+      "category": "OTHER"
+    },
+    {
+      "name": "Vintage Trouble",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Vlogbrothers",
+      "category": "OTHER"
+    },
+    {
+      "name": "Viviz",
+      "category": "MUSIC"
+    },
+    {
+      "name": "W",
+      "category": "OTHER"
+    },
+    {
+      "name": "Wake Up to Wogan",
+      "category": "OTHER"
+    },
+    {
+      "name": "Wales national football team",
+      "category": "SPORTS"
+    },
+    {
+      "name": "Waterparks",
+      "category": "MUSIC"
+    },
+    {
+      "name": "The Warning (band)",
+      "category": "MUSIC"
+    },
+    {
+      "name": "WayV",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Weeekly",
+      "category": "MUSIC"
+    },
+    {
+      "name": "\"Weird Al\" Yankovic",
+      "category": "MUSIC"
+    },
+    {
+      "name": "The Weeknd",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Wellington PhoenixFC",
+      "category": "SPORTS"
+    },
+    {
+      "name": "Wet Leg",
+      "category": "MUSIC"
+    },
+    {
+      "name": "The White Stripes",
+      "category": "MUSIC"
+    },
+    {
+      "name": "The Who",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Whitney Houston",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Winner",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Winter Soldier",
+      "category": "FILMS"
+    },
+    {
+      "name": "Wisp",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Wiz Khalifa",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Woo!ah!",
+      "category": "MUSIC"
+    },
+    {
+      "name": "X",
+      "category": "OTHER"
+    },
+    {
+      "name": "The X-Files",
+      "category": "TV_SERIES"
+    },
+    {
+      "name": "Xena: Warrior Princess",
+      "category": "TV_SERIES"
+    },
+    {
+      "name": "Xdinary Heroes",
+      "category": "MUSIC"
+    },
+    {
+      "name": "XG",
+      "category": "MUSIC"
+    },
+    {
+      "name": "XLOV",
+      "category": "MUSIC"
+    },
+    {
+      "name": "xQc",
+      "category": "OTHER"
+    },
+    {
+      "name": "X:IN",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Y",
+      "category": "OTHER"
+    },
+    {
+      "name": "Yaeji",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Yeule",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Yūka Kageyama",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Yungblud",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Yuzuru Hanyu",
+      "category": "OTHER"
+    },
+    {
+      "name": "Z",
+      "category": "OTHER"
+    },
+    {
+      "name": "Zara Larsson",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Zayn Malik",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Zendaya",
+      "category": "OTHER"
+    },
+    {
+      "name": "Zerobaseone",
+      "category": "MUSIC"
+    }
+  ]
+}

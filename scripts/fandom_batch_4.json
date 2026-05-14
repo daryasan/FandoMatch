@@ -1,0 +1,2004 @@
+{
+  "fandoms": [
+    {
+      "name": "Hermann Kesten Medal",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Epic",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Icelandic Literary Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Madan Puraskar",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Sense of Gender Awards",
+      "category": "BOOKS"
+    },
+    {
+      "name": "View history",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Pushkin Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Libertarian",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Kitschies",
+      "category": "BOOKS"
+    },
+    {
+      "name": "women",
+      "category": "BOOKS"
+    },
+    {
+      "name": "edition",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Tiraz",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Hammett Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Sibert Medal",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Marsh Biography Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Nona Balakian Citation for Excellence in Reviewing",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Women's Prize for Fiction",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Candide",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Endeavour Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Numismatics",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Epistle",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Lu Xun Literary Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Kerala Sahitya Akademi Award for Literary Criticism",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Premio de Novela Ciudad de Torrevieja",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Encyclopedic",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Colorado Book Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Upload file",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Atlantic Book Awards & Festival",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Anthology",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Next Generation Indie Book Awards",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Prix Littéraire Valery Larbaud",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Children's Literature Legacy Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Ayukawa Tetsuya Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Cartier Diamond Dagger",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Austrian State Prize for European Literature",
+      "category": "BOOKS"
+    },
+    {
+      "name": "National Book Critics Circle Awards",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Nazi",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Deutsche Akademie für Sprache und Dichtung",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Nestlé Smarties Book Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "States",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Naguib Mahfouz Medal for Literature",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Bancroft Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Windham–Campbell Literature Prizes",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Strega Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "American Book Awards",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Renaissance",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Ecclesiastical",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Bessie Head Literature Awards",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Pictures of the Old World",
+      "category": "FILMS"
+    },
+    {
+      "name": "Helsingin Sanomat",
+      "category": "FILMS"
+    },
+    {
+      "name": "Manila by Night",
+      "category": "FILMS"
+    },
+    {
+      "name": "A City of Sadness",
+      "category": "FILMS"
+    },
+    {
+      "name": "Gone with the Wind",
+      "category": "FILMS"
+    },
+    {
+      "name": "Maynila sa mga Kuko ng Liwanag",
+      "category": "FILMS"
+    },
+    {
+      "name": "Die Hard",
+      "category": "FILMS"
+    },
+    {
+      "name": "Time of Violence",
+      "category": "FILMS"
+    },
+    {
+      "name": "Bicycle Thieves",
+      "category": "FILMS"
+    },
+    {
+      "name": "Os Verdes Anos",
+      "category": "FILMS"
+    },
+    {
+      "name": "Pinocchio",
+      "category": "FILMS"
+    },
+    {
+      "name": "Hedgehog in the Fog",
+      "category": "FILMS"
+    },
+    {
+      "name": "Rolling Stone",
+      "category": "FILMS"
+    },
+    {
+      "name": "Monty Python's Life of Brian",
+      "category": "FILMS"
+    },
+    {
+      "name": "Los Olvidados",
+      "category": "FILMS"
+    },
+    {
+      "name": "Lawrence of Arabia",
+      "category": "FILMS"
+    },
+    {
+      "name": "Vámonos con Pancho Villa",
+      "category": "FILMS"
+    },
+    {
+      "name": "Jackal of Nahueltoro",
+      "category": "FILMS"
+    },
+    {
+      "name": "The Lord of the Rings: The Fellowship of the Ring",
+      "category": "FILMS"
+    },
+    {
+      "name": "Teddy Bear",
+      "category": "FILMS"
+    },
+    {
+      "name": "Farewell My Concubine",
+      "category": "FILMS"
+    },
+    {
+      "name": "The Shawshank Redemption",
+      "category": "FILMS"
+    },
+    {
+      "name": "In the Mood for Love",
+      "category": "FILMS"
+    },
+    {
+      "name": "Anantha Rathiriya",
+      "category": "FILMS"
+    },
+    {
+      "name": "Johnny Guitar",
+      "category": "FILMS"
+    },
+    {
+      "name": "An Cailín Ciúin (The Quiet Girl)",
+      "category": "FILMS"
+    },
+    {
+      "name": "Carol",
+      "category": "FILMS"
+    },
+    {
+      "name": "Casablanca",
+      "category": "FILMS"
+    },
+    {
+      "name": "Some Like It Hot",
+      "category": "FILMS"
+    },
+    {
+      "name": "Battleship Potemkin",
+      "category": "FILMS"
+    },
+    {
+      "name": "Dancing in the Rain",
+      "category": "FILMS"
+    },
+    {
+      "name": "Limite",
+      "category": "FILMS"
+    },
+    {
+      "name": "Burning",
+      "category": "FILMS"
+    },
+    {
+      "name": "Christian",
+      "category": "FILMS"
+    },
+    {
+      "name": "The Third Man",
+      "category": "FILMS"
+    },
+    {
+      "name": "The Cremator",
+      "category": "FILMS"
+    },
+    {
+      "name": "The Poseidon Adventure",
+      "category": "FILMS"
+    },
+    {
+      "name": "Crónica de un niño solo",
+      "category": "FILMS"
+    },
+    {
+      "name": "Alpine Fire",
+      "category": "FILMS"
+    },
+    {
+      "name": "Nausicaä of the Valley of the Wind",
+      "category": "FILMS"
+    },
+    {
+      "name": "The Round-Up",
+      "category": "FILMS"
+    },
+    {
+      "name": "The Texas Chain Saw Massacre",
+      "category": "FILMS"
+    },
+    {
+      "name": "Brokeback Mountain",
+      "category": "FILMS"
+    },
+    {
+      "name": "no",
+      "category": "FILMS"
+    },
+    {
+      "name": "SFX",
+      "category": "FILMS"
+    },
+    {
+      "name": "Julio comienza en julio",
+      "category": "FILMS"
+    },
+    {
+      "name": "The Dark Knight",
+      "category": "FILMS"
+    },
+    {
+      "name": "Viridiana",
+      "category": "FILMS"
+    },
+    {
+      "name": "Seance",
+      "category": "FILMS"
+    },
+    {
+      "name": "Rashomon",
+      "category": "FILMS"
+    },
+    {
+      "name": "Time Out London",
+      "category": "FILMS"
+    },
+    {
+      "name": "Prisioneros de la tierra",
+      "category": "FILMS"
+    },
+    {
+      "name": "This Is Spinal Tap",
+      "category": "FILMS"
+    },
+    {
+      "name": "HitFix",
+      "category": "FILMS"
+    },
+    {
+      "name": "Variety",
+      "category": "FILMS"
+    },
+    {
+      "name": "Blinkende lygter",
+      "category": "FILMS"
+    },
+    {
+      "name": "The Chasers",
+      "category": "FILMS"
+    },
+    {
+      "name": "Entertainment Weekly",
+      "category": "FILMS"
+    },
+    {
+      "name": "Spring in a Small Town",
+      "category": "FILMS"
+    },
+    {
+      "name": "Who's Singin' Over There?",
+      "category": "FILMS"
+    },
+    {
+      "name": "Get Carter",
+      "category": "FILMS"
+    },
+    {
+      "name": "The Sweet Hereafter",
+      "category": "FILMS"
+    },
+    {
+      "name": "Semana",
+      "category": "FILMS"
+    },
+    {
+      "name": "Turkish Delight",
+      "category": "FILMS"
+    },
+    {
+      "name": "The March of Fools",
+      "category": "FILMS"
+    },
+    {
+      "name": "El Pez que Fuma",
+      "category": "FILMS"
+    },
+    {
+      "name": "The Times of India",
+      "category": "FILMS"
+    },
+    {
+      "name": "The Phantom Carriage",
+      "category": "FILMS"
+    },
+    {
+      "name": "Los Angeles Daily News",
+      "category": "FILMS"
+    },
+    {
+      "name": "Saving Private Ryan",
+      "category": "FILMS"
+    },
+    {
+      "name": "The Red Light Bandit",
+      "category": "FILMS"
+    },
+    {
+      "name": "Soldaat van Oranje",
+      "category": "FILMS"
+    },
+    {
+      "name": "The Two Towers",
+      "category": "FILMS"
+    },
+    {
+      "name": "The Strategy of the Snail",
+      "category": "FILMS"
+    },
+    {
+      "name": "Mon oncle Antoine",
+      "category": "FILMS"
+    },
+    {
+      "name": "Reconstituirea",
+      "category": "FILMS"
+    },
+    {
+      "name": "The Firemen's Ball",
+      "category": "FILMS"
+    },
+    {
+      "name": "Airplane!",
+      "category": "FILMS"
+    },
+    {
+      "name": "Hotdog",
+      "category": "FILMS"
+    },
+    {
+      "name": "Black God, White Devil",
+      "category": "FILMS"
+    },
+    {
+      "name": "Rocky",
+      "category": "FILMS"
+    },
+    {
+      "name": "Mother India",
+      "category": "FILMS"
+    },
+    {
+      "name": "Close-Up",
+      "category": "FILMS"
+    },
+    {
+      "name": "It's a Wonderful Life",
+      "category": "FILMS"
+    },
+    {
+      "name": "Memories of Underdevelopment",
+      "category": "FILMS"
+    },
+    {
+      "name": "The Observer",
+      "category": "FILMS"
+    },
+    {
+      "name": "The Hollywood Reporter",
+      "category": "FILMS"
+    },
+    {
+      "name": "Tokyo Story",
+      "category": "FILMS"
+    },
+    {
+      "name": "Sholay",
+      "category": "FILMS"
+    },
+    {
+      "name": "Hoop Dreams",
+      "category": "FILMS"
+    },
+    {
+      "name": "The Elementary School",
+      "category": "FILMS"
+    },
+    {
+      "name": "The Deer",
+      "category": "FILMS"
+    },
+    {
+      "name": "What's Opera, Doc?",
+      "category": "FILMS"
+    },
+    {
+      "name": "Boyz n the Hood",
+      "category": "FILMS"
+    },
+    {
+      "name": "Serenity",
+      "category": "FILMS"
+    },
+    {
+      "name": "Pura Handa Kaluwara",
+      "category": "FILMS"
+    },
+    {
+      "name": "Seven Samurai",
+      "category": "FILMS"
+    },
+    {
+      "name": "Rushprint",
+      "category": "FILMS"
+    },
+    {
+      "name": "Baji",
+      "category": "FILMS"
+    },
+    {
+      "name": "Irish Independent",
+      "category": "FILMS"
+    },
+    {
+      "name": "Ni Liv",
+      "category": "FILMS"
+    },
+    {
+      "name": "The Rules of the Game",
+      "category": "FILMS"
+    },
+    {
+      "name": "Come and See",
+      "category": "FILMS"
+    },
+    {
+      "name": "The Chosun Ilbo",
+      "category": "FILMS"
+    },
+    {
+      "name": "The Housemaid",
+      "category": "FILMS"
+    },
+    {
+      "name": "Kinema Junpo",
+      "category": "FILMS"
+    },
+    {
+      "name": "Brief Encounter",
+      "category": "FILMS"
+    },
+    {
+      "name": "Days of Being Wild",
+      "category": "FILMS"
+    },
+    {
+      "name": "Picnic at Hanging Rock",
+      "category": "FILMS"
+    },
+    {
+      "name": "Nosferatu",
+      "category": "FILMS"
+    },
+    {
+      "name": "Yol",
+      "category": "FILMS"
+    },
+    {
+      "name": "SonntagsZeitung",
+      "category": "FILMS"
+    },
+    {
+      "name": "Time Out",
+      "category": "FILMS"
+    },
+    {
+      "name": "The Commitments",
+      "category": "FILMS"
+    },
+    {
+      "name": "Eliso",
+      "category": "FILMS"
+    },
+    {
+      "name": "China Daily",
+      "category": "FILMS"
+    },
+    {
+      "name": "Himala",
+      "category": "FILMS"
+    },
+    {
+      "name": "Shadows of Forgotten Ancestors",
+      "category": "FILMS"
+    },
+    {
+      "name": "Toy Story",
+      "category": "FILMS"
+    },
+    {
+      "name": "es",
+      "category": "FILMS"
+    },
+    {
+      "name": "Sight & Sound",
+      "category": "FILMS"
+    },
+    {
+      "name": "Umut",
+      "category": "FILMS"
+    },
+    {
+      "name": "Giv'at Halfon Eina Ona",
+      "category": "FILMS"
+    },
+    {
+      "name": "The Rocky Horror Picture Show",
+      "category": "FILMS"
+    },
+    {
+      "name": "Persona",
+      "category": "FILMS"
+    },
+    {
+      "name": "The Empire Strikes Back",
+      "category": "FILMS"
+    },
+    {
+      "name": "Autumn Ball",
+      "category": "FILMS"
+    },
+    {
+      "name": "Avanti Popolo",
+      "category": "FILMS"
+    },
+    {
+      "name": "Monty Python and the Holy Grail",
+      "category": "FILMS"
+    },
+    {
+      "name": "The Godfather",
+      "category": "FILMS"
+    },
+    {
+      "name": "Bashu, the Little Stranger",
+      "category": "FILMS"
+    },
+    {
+      "name": "Atanarjuat: The Fast Runner",
+      "category": "FILMS"
+    },
+    {
+      "name": "Children of Nature",
+      "category": "FILMS"
+    },
+    {
+      "name": "Folha de S.Paulo",
+      "category": "FILMS"
+    },
+    {
+      "name": "ru",
+      "category": "FILMS"
+    },
+    {
+      "name": "Mayabazar",
+      "category": "FILMS"
+    },
+    {
+      "name": "Outlook",
+      "category": "FILMS"
+    },
+    {
+      "name": "Memories of Murder",
+      "category": "FILMS"
+    },
+    {
+      "name": "Zwartboek",
+      "category": "FILMS"
+    },
+    {
+      "name": "Flåklypa Grand Prix",
+      "category": "FILMS"
+    },
+    {
+      "name": "New Scientist",
+      "category": "FILMS"
+    },
+    {
+      "name": "Marketa Lazarova",
+      "category": "FILMS"
+    },
+    {
+      "name": "Blazing Saddles",
+      "category": "FILMS"
+    },
+    {
+      "name": "Wired",
+      "category": "FILMS"
+    },
+    {
+      "name": "Empire",
+      "category": "FILMS"
+    },
+    {
+      "name": "Blade Runner",
+      "category": "FILMS"
+    },
+    {
+      "name": "Cosy Dens",
+      "category": "FILMS"
+    },
+    {
+      "name": "Ebony",
+      "category": "FILMS"
+    },
+    {
+      "name": "Obaltan",
+      "category": "FILMS"
+    },
+    {
+      "name": "Télérama",
+      "category": "FILMS"
+    },
+    {
+      "name": "Hollywood Reporter",
+      "category": "FILMS"
+    },
+    {
+      "name": "Inspector Palmu's Mistake",
+      "category": "FILMS"
+    },
+    {
+      "name": "Mirror",
+      "category": "FILMS"
+    },
+    {
+      "name": "Chaplin",
+      "category": "FILMS"
+    },
+    {
+      "name": "A Better Tomorrow",
+      "category": "FILMS"
+    },
+    {
+      "name": "Tale of Tales",
+      "category": "FILMS"
+    },
+    {
+      "name": "Superman",
+      "category": "FILMS"
+    },
+    {
+      "name": "Man with a Movie Camera",
+      "category": "FILMS"
+    },
+    {
+      "name": "de",
+      "category": "FILMS"
+    },
+    {
+      "name": "La Ciénaga",
+      "category": "FILMS"
+    },
+    {
+      "name": "Steadycam",
+      "category": "FILMS"
+    },
+    {
+      "name": "Once Were Warriors",
+      "category": "FILMS"
+    },
+    {
+      "name": "Aina",
+      "category": "FILMS"
+    },
+    {
+      "name": "sv",
+      "category": "FILMS"
+    },
+    {
+      "name": "The Unknown Soldier",
+      "category": "FILMS"
+    },
+    {
+      "name": "Manila in the Claws of Light",
+      "category": "FILMS"
+    },
+    {
+      "name": "Bowling for Columbine",
+      "category": "FILMS"
+    },
+    {
+      "name": "Citizen Kane",
+      "category": "FILMS"
+    },
+    {
+      "name": "Hürriyet",
+      "category": "FILMS"
+    },
+    {
+      "name": "The Castle",
+      "category": "FILMS"
+    },
+    {
+      "name": "The Piano",
+      "category": "FILMS"
+    },
+    {
+      "name": "Sunday Telegraph",
+      "category": "FILMS"
+    },
+    {
+      "name": "Digital Spy",
+      "category": "FILMS"
+    },
+    {
+      "name": "Dui Prithibi",
+      "category": "FILMS"
+    },
+    {
+      "name": "Nickel Odeon",
+      "category": "FILMS"
+    },
+    {
+      "name": "Tko pjeva zlo ne misli",
+      "category": "FILMS"
+    },
+    {
+      "name": "The Return of the King",
+      "category": "FILMS"
+    },
+    {
+      "name": "Don't Look Now",
+      "category": "FILMS"
+    },
+    {
+      "name": "The Italian Job",
+      "category": "FILMS"
+    },
+    {
+      "name": "Castle in the Sky",
+      "category": "FILMS"
+    },
+    {
+      "name": "Vertigo",
+      "category": "FILMS"
+    },
+    {
+      "name": "Dry Summer",
+      "category": "FILMS"
+    },
+    {
+      "name": "Total Film",
+      "category": "FILMS"
+    },
+    {
+      "name": "My Friend Ivan Lapshin",
+      "category": "FILMS"
+    },
+    {
+      "name": "Cahiers du cinéma",
+      "category": "FILMS"
+    },
+    {
+      "name": "Roman Holiday",
+      "category": "FILMS"
+    },
+    {
+      "name": "Hong Kil-dong",
+      "category": "FILMS"
+    },
+    {
+      "name": "Titash Ekti Nadir Naam",
+      "category": "FILMS"
+    },
+    {
+      "name": "Do You Remember Dolly Bell?",
+      "category": "FILMS"
+    },
+    {
+      "name": "The Exorcist",
+      "category": "FILMS"
+    },
+    {
+      "name": "The Night of Counting the Years",
+      "category": "FILMS"
+    },
+    {
+      "name": "My Favourite Film",
+      "category": "FILMS"
+    },
+    {
+      "name": "The Athletic",
+      "category": "FILMS"
+    },
+    {
+      "name": "Trainspotting",
+      "category": "FILMS"
+    },
+    {
+      "name": "Kevade",
+      "category": "FILMS"
+    },
+    {
+      "name": "Playback",
+      "category": "FILMS"
+    },
+    {
+      "name": "Pather Panchali",
+      "category": "FILMS"
+    },
+    {
+      "name": "West Side Story",
+      "category": "FILMS"
+    },
+    {
+      "name": "The Guardian",
+      "category": "FILMS"
+    },
+    {
+      "name": "1[a]",
+      "category": "GAMES"
+    },
+    {
+      "name": "350",
+      "category": "GAMES"
+    },
+    {
+      "name": "204",
+      "category": "GAMES"
+    },
+    {
+      "name": "200",
+      "category": "GAMES"
+    },
+    {
+      "name": "Blitz: The League",
+      "category": "GAMES"
+    },
+    {
+      "name": "Call of Juarez",
+      "category": "GAMES"
+    },
+    {
+      "name": "Ninja JaJaMaru-kun",
+      "category": "GAMES"
+    },
+    {
+      "name": "Ōkami",
+      "category": "GAMES"
+    },
+    {
+      "name": ".hack",
+      "category": "GAMES"
+    },
+    {
+      "name": "Rod Land",
+      "category": "GAMES"
+    },
+    {
+      "name": "Itadaki Street",
+      "category": "GAMES"
+    },
+    {
+      "name": "Burgertime",
+      "category": "GAMES"
+    },
+    {
+      "name": "Infinity",
+      "category": "GAMES"
+    },
+    {
+      "name": "Brothers in Arms",
+      "category": "GAMES"
+    },
+    {
+      "name": "Puzzle League",
+      "category": "GAMES"
+    },
+    {
+      "name": "Grand Theft Auto",
+      "category": "GAMES"
+    },
+    {
+      "name": "Shinobi",
+      "category": "GAMES"
+    },
+    {
+      "name": "Banjo-Kazooie",
+      "category": "GAMES"
+    },
+    {
+      "name": "Pirate Ship Higemaru",
+      "category": "GAMES"
+    },
+    {
+      "name": "Point Blank",
+      "category": "GAMES"
+    },
+    {
+      "name": "Thief",
+      "category": "GAMES"
+    },
+    {
+      "name": "Jet Moto",
+      "category": "GAMES"
+    },
+    {
+      "name": "Jagged Alliance",
+      "category": "GAMES"
+    },
+    {
+      "name": "Video game franchises",
+      "category": "GAMES"
+    },
+    {
+      "name": "Saints Row",
+      "category": "GAMES"
+    },
+    {
+      "name": "Shantae",
+      "category": "GAMES"
+    },
+    {
+      "name": "Shining",
+      "category": "GAMES"
+    },
+    {
+      "name": "DC Comics",
+      "category": "GAMES"
+    },
+    {
+      "name": "Contra",
+      "category": "GAMES"
+    },
+    {
+      "name": "Combat Wings",
+      "category": "GAMES"
+    },
+    {
+      "name": "Gundam",
+      "category": "GAMES"
+    },
+    {
+      "name": "Speedball",
+      "category": "GAMES"
+    },
+    {
+      "name": "Carmageddon",
+      "category": "GAMES"
+    },
+    {
+      "name": "Train Simulator",
+      "category": "GAMES"
+    },
+    {
+      "name": "Pilotwings",
+      "category": "GAMES"
+    },
+    {
+      "name": "Uridium",
+      "category": "GAMES"
+    },
+    {
+      "name": "Harvest Moon",
+      "category": "GAMES"
+    },
+    {
+      "name": "Daytona USA",
+      "category": "GAMES"
+    },
+    {
+      "name": "Exerion",
+      "category": "GAMES"
+    },
+    {
+      "name": "Cruis'n",
+      "category": "GAMES"
+    },
+    {
+      "name": "Patapon",
+      "category": "GAMES"
+    },
+    {
+      "name": "Backyard Sports",
+      "category": "GAMES"
+    },
+    {
+      "name": "Tropico",
+      "category": "GAMES"
+    },
+    {
+      "name": "Command & Conquer",
+      "category": "GAMES"
+    },
+    {
+      "name": "Doom",
+      "category": "GAMES"
+    },
+    {
+      "name": "Deus Ex",
+      "category": "GAMES"
+    },
+    {
+      "name": "Geometry Wars",
+      "category": "GAMES"
+    },
+    {
+      "name": "Tales from Space",
+      "category": "GAMES"
+    },
+    {
+      "name": "Truxton",
+      "category": "GAMES"
+    },
+    {
+      "name": "Momotaro Dentetsu",
+      "category": "GAMES"
+    },
+    {
+      "name": "Beat Hazard",
+      "category": "GAMES"
+    },
+    {
+      "name": "Kao the Kangaroo",
+      "category": "GAMES"
+    },
+    {
+      "name": "Blazing Angels",
+      "category": "GAMES"
+    },
+    {
+      "name": "Xenogears",
+      "category": "GAMES"
+    },
+    {
+      "name": "Ogre",
+      "category": "GAMES"
+    },
+    {
+      "name": "Matt Hazard",
+      "category": "GAMES"
+    },
+    {
+      "name": "Columns",
+      "category": "GAMES"
+    },
+    {
+      "name": "Two Worlds",
+      "category": "GAMES"
+    },
+    {
+      "name": "Battlestations",
+      "category": "GAMES"
+    },
+    {
+      "name": "Crysis",
+      "category": "GAMES"
+    },
+    {
+      "name": "Rakugaki Ōkoku",
+      "category": "GAMES"
+    },
+    {
+      "name": "Street Fighter",
+      "category": "GAMES"
+    },
+    {
+      "name": "Everybody's Golf",
+      "category": "GAMES"
+    },
+    {
+      "name": "Media mix",
+      "category": "GAMES"
+    },
+    {
+      "name": "Driver",
+      "category": "GAMES"
+    },
+    {
+      "name": "All articles with unsourced statements",
+      "category": "GAMES"
+    },
+    {
+      "name": "Dungeon Explorer",
+      "category": "GAMES"
+    },
+    {
+      "name": "Disaster Report",
+      "category": "GAMES"
+    },
+    {
+      "name": "Hearts of Iron",
+      "category": "GAMES"
+    },
+    {
+      "name": "Jetpac",
+      "category": "GAMES"
+    },
+    {
+      "name": "Science Adventure",
+      "category": "GAMES"
+    },
+    {
+      "name": "Story of Seasons",
+      "category": "GAMES"
+    },
+    {
+      "name": "Yakuza",
+      "category": "GAMES"
+    },
+    {
+      "name": "Castle Shikigami",
+      "category": "GAMES"
+    },
+    {
+      "name": "Mass Effect",
+      "category": "GAMES"
+    },
+    {
+      "name": "Ni no Kuni",
+      "category": "GAMES"
+    },
+    {
+      "name": "Namco Anthology",
+      "category": "GAMES"
+    },
+    {
+      "name": "Space Harrier",
+      "category": "GAMES"
+    },
+    {
+      "name": "Bubble Bobble",
+      "category": "GAMES"
+    },
+    {
+      "name": "Moto Racer",
+      "category": "GAMES"
+    },
+    {
+      "name": "Pole Position",
+      "category": "GAMES"
+    },
+    {
+      "name": "Power Pros",
+      "category": "GAMES"
+    },
+    {
+      "name": "Warhammer Fantasy",
+      "category": "GAMES"
+    },
+    {
+      "name": "Mario Party",
+      "category": "GAMES"
+    },
+    {
+      "name": "direct-to-video",
+      "category": "GAMES"
+    },
+    {
+      "name": "Car Mechanic Simulator",
+      "category": "GAMES"
+    },
+    {
+      "name": "Frogger",
+      "category": "GAMES"
+    },
+    {
+      "name": "Plants vs. Zombies",
+      "category": "GAMES"
+    },
+    {
+      "name": "Heiankyo Alien",
+      "category": "GAMES"
+    },
+    {
+      "name": "Star Soldier",
+      "category": "GAMES"
+    },
+    {
+      "name": "Zaxxon",
+      "category": "GAMES"
+    },
+    {
+      "name": "'Splosion Man",
+      "category": "GAMES"
+    },
+    {
+      "name": "Mercenaries",
+      "category": "GAMES"
+    },
+    {
+      "name": "Metroid",
+      "category": "GAMES"
+    },
+    {
+      "name": "Keyboardmania",
+      "category": "GAMES"
+    },
+    {
+      "name": "Famicom Grand Prix",
+      "category": "GAMES"
+    },
+    {
+      "name": "Senran Kagura",
+      "category": "GAMES"
+    },
+    {
+      "name": "Bus Simulator",
+      "category": "GAMES"
+    },
+    {
+      "name": "Might and Magic",
+      "category": "GAMES"
+    },
+    {
+      "name": "Mirror's Edge",
+      "category": "GAMES"
+    },
+    {
+      "name": "King's Quest",
+      "category": "GAMES"
+    },
+    {
+      "name": "Xenoblade Chronicles",
+      "category": "GAMES"
+    },
+    {
+      "name": "Sabreman",
+      "category": "GAMES"
+    },
+    {
+      "name": "After Burner",
+      "category": "GAMES"
+    },
+    {
+      "name": "Monaco GP",
+      "category": "GAMES"
+    },
+    {
+      "name": "Rumble Roses",
+      "category": "GAMES"
+    },
+    {
+      "name": "Blue Dragon",
+      "category": "GAMES"
+    },
+    {
+      "name": "Zumba Fitness",
+      "category": "GAMES"
+    },
+    {
+      "name": "Gradius",
+      "category": "GAMES"
+    },
+    {
+      "name": "DonPachi",
+      "category": "GAMES"
+    },
+    {
+      "name": "PixelJunk",
+      "category": "GAMES"
+    },
+    {
+      "name": "Subnautica",
+      "category": "GAMES"
+    },
+    {
+      "name": "Virtua Fighter",
+      "category": "GAMES"
+    },
+    {
+      "name": "Crimson Skies",
+      "category": "GAMES"
+    },
+    {
+      "name": "Trine",
+      "category": "GAMES"
+    },
+    {
+      "name": "Yooka-Laylee",
+      "category": "GAMES"
+    },
+    {
+      "name": "Dead to Rights",
+      "category": "GAMES"
+    },
+    {
+      "name": "Rhythm Heaven",
+      "category": "GAMES"
+    },
+    {
+      "name": "Q*bert",
+      "category": "GAMES"
+    },
+    {
+      "name": "Virtua Striker",
+      "category": "GAMES"
+    },
+    {
+      "name": "Star Force",
+      "category": "GAMES"
+    },
+    {
+      "name": "Buster Bros.",
+      "category": "GAMES"
+    },
+    {
+      "name": "Megami Tensei",
+      "category": "GAMES"
+    },
+    {
+      "name": "Leisure Suit Larry",
+      "category": "GAMES"
+    },
+    {
+      "name": "Minecraft",
+      "category": "GAMES"
+    },
+    {
+      "name": "Truck Simulator",
+      "category": "GAMES"
+    },
+    {
+      "name": "The Legend of Heroes",
+      "category": "GAMES"
+    },
+    {
+      "name": "Cool Boarders",
+      "category": "GAMES"
+    },
+    {
+      "name": "Moving Out",
+      "category": "GAMES"
+    },
+    {
+      "name": "Total War",
+      "category": "GAMES"
+    },
+    {
+      "name": "Numan Athletics",
+      "category": "GAMES"
+    },
+    {
+      "name": "Fat Princess",
+      "category": "GAMES"
+    },
+    {
+      "name": "BoxBoy!",
+      "category": "GAMES"
+    },
+    {
+      "name": "Kinect Sports",
+      "category": "GAMES"
+    },
+    {
+      "name": "Road Rash",
+      "category": "GAMES"
+    },
+    {
+      "name": "Orcs Must Die!",
+      "category": "GAMES"
+    },
+    {
+      "name": "Penumbra",
+      "category": "GAMES"
+    },
+    {
+      "name": "Metal Slug",
+      "category": "GAMES"
+    },
+    {
+      "name": "Giga Wing",
+      "category": "GAMES"
+    },
+    {
+      "name": "Samurai Warriors",
+      "category": "GAMES"
+    },
+    {
+      "name": "White Knight Chronicles",
+      "category": "GAMES"
+    },
+    {
+      "name": "Strider",
+      "category": "GAMES"
+    },
+    {
+      "name": "Black & White",
+      "category": "GAMES"
+    },
+    {
+      "name": "Zork",
+      "category": "GAMES"
+    },
+    {
+      "name": "Television shows",
+      "category": "GAMES"
+    },
+    {
+      "name": "Disney Infinity",
+      "category": "GAMES"
+    },
+    {
+      "name": "Ace Combat",
+      "category": "GAMES"
+    },
+    {
+      "name": "Tom Clancy's Ghost Recon",
+      "category": "GAMES"
+    },
+    {
+      "name": "Family Party",
+      "category": "GAMES"
+    },
+    {
+      "name": "Bionic Commando",
+      "category": "GAMES"
+    },
+    {
+      "name": "Bit.Trip",
+      "category": "GAMES"
+    },
+    {
+      "name": "Wonder Boy",
+      "category": "GAMES"
+    },
+    {
+      "name": "Time Pilot",
+      "category": "GAMES"
+    },
+    {
+      "name": "Five Nights at Freddy's",
+      "category": "GAMES"
+    },
+    {
+      "name": "Alone in the Dark",
+      "category": "GAMES"
+    },
+    {
+      "name": "eXceed",
+      "category": "GAMES"
+    },
+    {
+      "name": "Descent",
+      "category": "GAMES"
+    },
+    {
+      "name": "Famicom Tantei Club",
+      "category": "GAMES"
+    },
+    {
+      "name": "Tenchu",
+      "category": "GAMES"
+    },
+    {
+      "name": "Sega Rally",
+      "category": "GAMES"
+    },
+    {
+      "name": "Rugby League",
+      "category": "GAMES"
+    },
+    {
+      "name": "Lips",
+      "category": "GAMES"
+    },
+    {
+      "name": "Guild Wars",
+      "category": "GAMES"
+    },
+    {
+      "name": "The House of the Dead",
+      "category": "GAMES"
+    },
+    {
+      "name": "MechAssault",
+      "category": "GAMES"
+    },
+    {
+      "name": "Star Fox",
+      "category": "GAMES"
+    },
+    {
+      "name": "Borderlands",
+      "category": "GAMES"
+    },
+    {
+      "name": "Zero Escape",
+      "category": "GAMES"
+    },
+    {
+      "name": "manga series",
+      "category": "GAMES"
+    },
+    {
+      "name": "Wave Race",
+      "category": "GAMES"
+    },
+    {
+      "name": "NHL",
+      "category": "GAMES"
+    },
+    {
+      "name": "Zoo Tycoon",
+      "category": "GAMES"
+    },
+    {
+      "name": "Media franchises",
+      "category": "GAMES"
+    },
+    {
+      "name": "Hatsune Miku: Project DIVA",
+      "category": "GAMES"
+    },
+    {
+      "name": "Age of Wonders",
+      "category": "GAMES"
+    },
+    {
+      "name": "Big Brain Academy",
+      "category": "GAMES"
+    },
+    {
+      "name": "Wonder Project",
+      "category": "GAMES"
+    },
+    {
+      "name": "Streaming television",
+      "category": "GAMES"
+    },
+    {
+      "name": "Earth Defense Force",
+      "category": "GAMES"
+    },
+    {
+      "name": "Momotaro Densetsu",
+      "category": "GAMES"
+    },
+    {
+      "name": "Dead Rising",
+      "category": "GAMES"
+    },
+    {
+      "name": "Pac-Man",
+      "category": "GAMES"
+    },
+    {
+      "name": "SaGa",
+      "category": "GAMES"
+    },
+    {
+      "name": "BioShock",
+      "category": "GAMES"
+    },
+    {
+      "name": "Dark Cloud",
+      "category": "GAMES"
+    },
+    {
+      "name": "Aero the Acro-Bat",
+      "category": "GAMES"
+    },
+    {
+      "name": "Dragon Slayer",
+      "category": "GAMES"
+    },
+    {
+      "name": "Europa Universalis",
+      "category": "GAMES"
+    },
+    {
+      "name": "Broken Sword",
+      "category": "GAMES"
+    },
+    {
+      "name": "Mana",
+      "category": "GAMES"
+    },
+    {
+      "name": "Amnesia",
+      "category": "GAMES"
+    },
+    {
+      "name": "Mario",
+      "category": "GAMES"
+    },
+    {
+      "name": "Armored Core",
+      "category": "GAMES"
+    },
+    {
+      "name": "Pathologic",
+      "category": "GAMES"
+    },
+    {
+      "name": "Puzzle Bobble",
+      "category": "GAMES"
+    },
+    {
+      "name": "Shenmue",
+      "category": "GAMES"
+    },
+    {
+      "name": "League of Legends",
+      "category": "GAMES"
+    },
+    {
+      "name": "Zoombinis",
+      "category": "GAMES"
+    },
+    {
+      "name": "Out Run",
+      "category": "GAMES"
+    },
+    {
+      "name": "ClayFighter",
+      "category": "GAMES"
+    },
+    {
+      "name": "Colony Wars",
+      "category": "GAMES"
+    },
+    {
+      "name": "Gran Turismo",
+      "category": "GAMES"
+    },
+    {
+      "name": "Ganbare Goemon",
+      "category": "GAMES"
+    },
+    {
+      "name": "Final Lap",
+      "category": "GAMES"
+    },
+    {
+      "name": "Tales",
+      "category": "GAMES"
+    },
+    {
+      "name": "Thunder Ceptor",
+      "category": "GAMES"
+    },
+    {
+      "name": "Gunpey",
+      "category": "GAMES"
+    },
+    {
+      "name": "Medal of Honor",
+      "category": "GAMES"
+    },
+    {
+      "name": "Resident Evil",
+      "category": "GAMES"
+    },
+    {
+      "name": "citation needed",
+      "category": "GAMES"
+    },
+    {
+      "name": "SpellForce",
+      "category": "GAMES"
+    },
+    {
+      "name": "TimeSplitters",
+      "category": "GAMES"
+    },
+    {
+      "name": "Dr. Mario",
+      "category": "GAMES"
+    },
+    {
+      "name": "Army of Two",
+      "category": "GAMES"
+    },
+    {
+      "name": "LovePlus",
+      "category": "GAMES"
+    },
+    {
+      "name": "Arkanoid",
+      "category": "GAMES"
+    },
+    {
+      "name": "Nectaris / Military Madness",
+      "category": "GAMES"
+    },
+    {
+      "name": "BloodRayne",
+      "category": "GAMES"
+    },
+    {
+      "name": "Pong",
+      "category": "GAMES"
+    },
+    {
+      "name": "Raiden",
+      "category": "GAMES"
+    },
+    {
+      "name": "Schoolgirl Strikers",
+      "category": "GAMES"
+    },
+    {
+      "name": "The Witcher",
+      "category": "GAMES"
+    },
+    {
+      "name": "Multimedia franchises",
+      "category": "GAMES"
+    },
+    {
+      "name": "South Park",
+      "category": "GAMES"
+    },
+    {
+      "name": "Quest for Glory",
+      "category": "GAMES"
+    },
+    {
+      "name": "Hotline Miami",
+      "category": "GAMES"
+    },
+    {
+      "name": "Viewtiful Joe",
+      "category": "GAMES"
+    },
+    {
+      "name": "Wolf Fang",
+      "category": "GAMES"
+    },
+    {
+      "name": "Robopon",
+      "category": "GAMES"
+    },
+    {
+      "name": "Seaman",
+      "category": "GAMES"
+    },
+    {
+      "name": "Danganronpa",
+      "category": "GAMES"
+    },
+    {
+      "name": "Shadow Warrior",
+      "category": "GAMES"
+    },
+    {
+      "name": "Kid Icarus",
+      "category": "GAMES"
+    },
+    {
+      "name": "Overcooked",
+      "category": "GAMES"
+    },
+    {
+      "name": "The Sims",
+      "category": "GAMES"
+    },
+    {
+      "name": "Tom Clancy's Splinter Cell",
+      "category": "GAMES"
+    },
+    {
+      "name": "F.E.A.R.",
+      "category": "GAMES"
+    },
+    {
+      "name": "Petz",
+      "category": "GAMES"
+    },
+    {
+      "name": "Română",
+      "category": "GAMES"
+    },
+    {
+      "name": "Spyro",
+      "category": "GAMES"
+    },
+    {
+      "name": "Torchlight",
+      "category": "GAMES"
+    },
+    {
+      "name": "Def Jam",
+      "category": "GAMES"
+    },
+    {
+      "name": "No More Heroes",
+      "category": "GAMES"
+    },
+    {
+      "name": "Ty the Tasmanian Tiger",
+      "category": "GAMES"
+    },
+    {
+      "name": "The Golf Club",
+      "category": "GAMES"
+    },
+    {
+      "name": "The Conduit",
+      "category": "GAMES"
+    },
+    {
+      "name": "Syphon Filter",
+      "category": "GAMES"
+    },
+    {
+      "name": "Babylonian Castle Saga",
+      "category": "GAMES"
+    },
+    {
+      "name": "Diablo",
+      "category": "GAMES"
+    },
+    {
+      "name": "Company of Heroes",
+      "category": "GAMES"
+    },
+    {
+      "name": "Crazy Taxi",
+      "category": "GAMES"
+    },
+    {
+      "name": "S.T.A.L.K.E.R.",
+      "category": "GAMES"
+    },
+    {
+      "name": "Prince of Persia",
+      "category": "GAMES"
+    }
+  ]
+}

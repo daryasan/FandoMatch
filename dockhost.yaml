@@ -14,6 +14,8 @@ environment:
     S3_SECRET_KEY: ${S3_SECRET_KEY}
     FIREBASE_CREDENTIALS_JSON: ${FIREBASE_CREDENTIALS_JSON}
     FIREBASE_PROJECT_ID: ${FIREBASE_PROJECT_ID}
+    GF_SECURITY_ADMIN_USER: ${GF_SECURITY_ADMIN_USER}
+    GF_SECURITY_ADMIN_PASSWORD: ${GF_SECURITY_ADMIN_PASSWORD}
 
 volumes:
   users-db-data:
@@ -23,6 +25,12 @@ volumes:
     type: ssd
     size: 2Gib
   messaging-db-data:
+    type: ssd
+    size: 2Gib
+  prometheus-data:
+    type: ssd
+    size: 5Gib
+  grafana-data:
     type: ssd
     size: 2Gib
 
@@ -130,6 +138,28 @@ containers:
     ports:
       - 8082
 
+  prometheus:
+    image: daryasssan/fandomatch:prometheus-prod
+    ports:
+      - 9090
+    volumes:
+      - name: prometheus-data
+        mountPath: /prometheus
+
+  grafana:
+    image: grafana/grafana:latest
+    variables:
+      GF_SECURITY_ADMIN_USER: $GF_SECURITY_ADMIN_USER
+      GF_SECURITY_ADMIN_PASSWORD: $GF_SECURITY_ADMIN_PASSWORD
+      GF_INSTALL_PLUGINS: grafana-piechart-panel
+      GF_SERVER_ROOT_URL: https://qxi0-vbn5-za9i.gw-1a.dockhost.net/grafana
+      GF_SERVER_SERVE_FROM_SUB_PATH: "true"
+    ports:
+      - 3000
+    volumes:
+      - name: grafana-data
+        mountPath: /var/lib/grafana
+
   messaging:
     image: daryasssan/fandomatch:fdmatch-messaging
     replicas: 1
@@ -153,14 +183,30 @@ containers:
       
 network:
   domains:
-    qxi0-vbn5-za9i.gw-1a.dockhost.net: 
+    qxi0-vbn5-za9i.gw-1a.dockhost.net:
   ports:
     gateway-port:
       service: gateway
       port: 8080
+    grafana-port:
+      service: grafana
+      port: 3000
+    prometheus-port:
+      service: prometheus
+      port: 9090
   routes:
-    main-api:                   
+    main-api:
       domain: qxi0-vbn5-za9i.gw-1a.dockhost.net
-      path: /                   
-      service: gateway   
-      port: 8080    
+      path: /
+      service: gateway
+      port: 8080
+    grafana:
+      domain: qxi0-vbn5-za9i.gw-1a.dockhost.net
+      path: /grafana
+      service: grafana
+      port: 3000
+    prometheus:
+      domain: qxi0-vbn5-za9i.gw-1a.dockhost.net
+      path: /prometheus-ui
+      service: prometheus
+      port: 9090

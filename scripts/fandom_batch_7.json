@@ -1,0 +1,2004 @@
+{
+  "fandoms": [
+    {
+      "name": "The LOGO Board Game",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Las Vegas",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Ticket to Ride",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Medina",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Kerplunk",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Blockhead!",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Articulate!",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Terraforming Mars",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Ingenious",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "A Feast for Odin",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Journey Through Europe",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Merchant of Venus",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Chicken Cha Cha Cha",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Mahjong",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Vanished Planet",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Advance to Boardwalk",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Strange Synergy",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Catan Junior",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "PÜNCT",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Caribbean",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Candy Land",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Fireball Island",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Quoridor",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Personal Preference",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Tic-tac-toe",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Figure It Out",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Gobblet",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Keltis",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Mr. Trucker",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Lost Cities",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Trouble",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Aksharit",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Eclipse: New Dawn for the Galaxy",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Blood Feud in New York",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Don't Wake Daddy",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Can't Stop",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "The Quest of the Philosopher's Stone",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Barbarossa",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Suffragetto",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Outrage!",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Space Hulk",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Giganten",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Lords of Waterdeep",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Sorry!",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Scrabble",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Battle Sheep",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Rummoli",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Upwords",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Brain Chain",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "The Farming Game",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Take the Galaxy",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Formula D",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Dungeons & Dragons",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "The Great Train Robbery",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Codenames",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Doom: The Boardgame",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Abalone",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Die Macher",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "The Mad Magazine Game",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Don't Miss the Boat",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Clans",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Blokus",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Amun-Re",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Careers",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Blue Max",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Through the Ages: A Story of Civilization",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Everdell",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "GIPF",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Catan",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Chapayev",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Polarity",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "DVONN",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Twilight Imperium",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "TEG",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Niagara",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Shogun/Samurai Swords",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Torres",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Rail Baron",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Small World",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Coin Hopping—Washington D.C.",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Elfenland",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "ZÈRTZ",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Parqués",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Santorini",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Root",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Game For Fame",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Buckaroo!",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Enchanted Forest",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Triopoly",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Agricola",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Gnip Gnop",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "A Game of War",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Bang!",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Diplomacy",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Mall Madness",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Operation",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Tantrix",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Betrayal at House on the Hill",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Diamant",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "San Marco",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Carcassonne",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Girl Talk",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Labyrinth",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Timberland",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Coppit",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Jaipur",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Mouse Trap",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Cartagena",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Kill Doctor Lucky",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Dixit",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Escape from Atlantis",
+      "category": "TABLETOP_GAMES"
+    },
+    {
+      "name": "Barbados",
+      "category": "MUSIC"
+    },
+    {
+      "name": "Bert",
+      "category": "COMICS"
+    },
+    {
+      "name": "Awantury i wybryki małej małpki Fiki-Miki",
+      "category": "COMICS"
+    },
+    {
+      "name": "Cerebus the Aardvark",
+      "category": "COMICS"
+    },
+    {
+      "name": "Sjors & Sjimmie",
+      "category": "COMICS"
+    },
+    {
+      "name": "Kid Paddle",
+      "category": "COMICS"
+    },
+    {
+      "name": "De Avonturen van Pa Pinkelman",
+      "category": "COMICS"
+    },
+    {
+      "name": "Michel Vaillant",
+      "category": "COMICS"
+    },
+    {
+      "name": "Nick Knatterton",
+      "category": "COMICS"
+    },
+    {
+      "name": "Iznogoud",
+      "category": "COMICS"
+    },
+    {
+      "name": "Eric de Noorman",
+      "category": "COMICS"
+    },
+    {
+      "name": "Bessy",
+      "category": "COMICS"
+    },
+    {
+      "name": "Socker-Conny",
+      "category": "COMICS"
+    },
+    {
+      "name": "The spiffy adventures of McConey",
+      "category": "COMICS"
+    },
+    {
+      "name": "V for Vendetta",
+      "category": "COMICS"
+    },
+    {
+      "name": "Suske en Wiske",
+      "category": "COMICS"
+    },
+    {
+      "name": "Mort Cinder",
+      "category": "COMICS"
+    },
+    {
+      "name": "Sjef van Oekel",
+      "category": "COMICS"
+    },
+    {
+      "name": "De Generaal",
+      "category": "COMICS"
+    },
+    {
+      "name": "Lethargic Lad",
+      "category": "COMICS"
+    },
+    {
+      "name": "Hombres y Héroes",
+      "category": "COMICS"
+    },
+    {
+      "name": "Tom Puss",
+      "category": "COMICS"
+    },
+    {
+      "name": "El Eternauta",
+      "category": "COMICS"
+    },
+    {
+      "name": "De Geuzen",
+      "category": "COMICS"
+    },
+    {
+      "name": "Samir",
+      "category": "COMICS"
+    },
+    {
+      "name": "Zindan: The Last Ansaars",
+      "category": "COMICS"
+    },
+    {
+      "name": "The True North",
+      "category": "COMICS"
+    },
+    {
+      "name": "Madam & Eve",
+      "category": "COMICS"
+    },
+    {
+      "name": "Rebirth (graphic novel)",
+      "category": "COMICS"
+    },
+    {
+      "name": "Spirou et Fantasio",
+      "category": "COMICS"
+    },
+    {
+      "name": "Fokke & Sukke",
+      "category": "COMICS"
+    },
+    {
+      "name": "De Familie Doorzon",
+      "category": "COMICS"
+    },
+    {
+      "name": "Los Agachados",
+      "category": "COMICS"
+    },
+    {
+      "name": "Animal Urbano",
+      "category": "COMICS"
+    },
+    {
+      "name": "Fix und Foxi",
+      "category": "COMICS"
+    },
+    {
+      "name": "Anibal Cinq",
+      "category": "COMICS"
+    },
+    {
+      "name": "Majid",
+      "category": "COMICS"
+    },
+    {
+      "name": "Tekko Taks",
+      "category": "COMICS"
+    },
+    {
+      "name": "Przygody Kleksa",
+      "category": "COMICS"
+    },
+    {
+      "name": "Transubstanciação",
+      "category": "COMICS"
+    },
+    {
+      "name": "El Pantera",
+      "category": "COMICS"
+    },
+    {
+      "name": "The Tale of One Bad Rat",
+      "category": "COMICS"
+    },
+    {
+      "name": "La vengeance du comte Skarbek",
+      "category": "COMICS"
+    },
+    {
+      "name": "De Kiekeboes",
+      "category": "COMICS"
+    },
+    {
+      "name": "Pondus",
+      "category": "COMICS"
+    },
+    {
+      "name": "La Ribambelle",
+      "category": "COMICS"
+    },
+    {
+      "name": "Cori, de Scheepsjongen",
+      "category": "COMICS"
+    },
+    {
+      "name": "Pierre Tombal",
+      "category": "COMICS"
+    },
+    {
+      "name": "Captain Berlin",
+      "category": "COMICS"
+    },
+    {
+      "name": "Blake and Mortimer",
+      "category": "COMICS"
+    },
+    {
+      "name": "Arbalet",
+      "category": "COMICS"
+    },
+    {
+      "name": "El Caballero Rojo",
+      "category": "COMICS"
+    },
+    {
+      "name": "Mämmilä",
+      "category": "COMICS"
+    },
+    {
+      "name": "New Triumph",
+      "category": "COMICS"
+    },
+    {
+      "name": "Dina",
+      "category": "COMICS"
+    },
+    {
+      "name": "Ernie Pike",
+      "category": "COMICS"
+    },
+    {
+      "name": "Bárbara",
+      "category": "COMICS"
+    },
+    {
+      "name": "Arne Anka",
+      "category": "COMICS"
+    },
+    {
+      "name": "Storm",
+      "category": "COMICS"
+    },
+    {
+      "name": "Boes",
+      "category": "COMICS"
+    },
+    {
+      "name": "Mosaik",
+      "category": "COMICS"
+    },
+    {
+      "name": "Blueberry",
+      "category": "COMICS"
+    },
+    {
+      "name": "Magie Noire",
+      "category": "COMICS"
+    },
+    {
+      "name": "César and Jessica",
+      "category": "COMICS"
+    },
+    {
+      "name": "Victor",
+      "category": "COMICS"
+    },
+    {
+      "name": "Cowboy Henk",
+      "category": "COMICS"
+    },
+    {
+      "name": "Castaka",
+      "category": "COMICS"
+    },
+    {
+      "name": "Jeremiah",
+      "category": "COMICS"
+    },
+    {
+      "name": "Archipelago",
+      "category": "COMICS"
+    },
+    {
+      "name": "Viz comic",
+      "category": "COMICS"
+    },
+    {
+      "name": "Les Tuniques Bleues",
+      "category": "COMICS"
+    },
+    {
+      "name": "Boule et Bill",
+      "category": "COMICS"
+    },
+    {
+      "name": "Röde Orm",
+      "category": "COMICS"
+    },
+    {
+      "name": "Kapitan Kloss",
+      "category": "COMICS"
+    },
+    {
+      "name": "Poussy",
+      "category": "COMICS"
+    },
+    {
+      "name": "Le Petit Spirou",
+      "category": "COMICS"
+    },
+    {
+      "name": "Middle East Heroes",
+      "category": "COMICS"
+    },
+    {
+      "name": "Natacha",
+      "category": "COMICS"
+    },
+    {
+      "name": "Tytus, Romek i A'tomek",
+      "category": "COMICS"
+    },
+    {
+      "name": "Joop Klepzeiker",
+      "category": "COMICS"
+    },
+    {
+      "name": "Nippur de Lagash",
+      "category": "COMICS"
+    },
+    {
+      "name": "Ratte",
+      "category": "COMICS"
+    },
+    {
+      "name": "Dallas Barr",
+      "category": "COMICS"
+    },
+    {
+      "name": "Sigmund",
+      "category": "COMICS"
+    },
+    {
+      "name": "Modeste et Pompon",
+      "category": "COMICS"
+    },
+    {
+      "name": "Dziesięciu z wielkiej ziemi",
+      "category": "COMICS"
+    },
+    {
+      "name": "The Adventures of Luther Arkwright",
+      "category": "COMICS"
+    },
+    {
+      "name": "Titeuf",
+      "category": "COMICS"
+    },
+    {
+      "name": "Cor!!",
+      "category": "COMICS"
+    },
+    {
+      "name": "Wrath (comic)",
+      "category": "COMICS"
+    },
+    {
+      "name": "India Dreams",
+      "category": "COMICS"
+    },
+    {
+      "name": "Bruno Brazil",
+      "category": "COMICS"
+    },
+    {
+      "name": "Zig et Puce",
+      "category": "COMICS"
+    },
+    {
+      "name": "Juan Solo",
+      "category": "COMICS"
+    },
+    {
+      "name": "Week Daze",
+      "category": "COMICS"
+    },
+    {
+      "name": "Mafalda",
+      "category": "COMICS"
+    },
+    {
+      "name": "Heinz",
+      "category": "COMICS"
+    },
+    {
+      "name": "Juvies (comic)",
+      "category": "COMICS"
+    },
+    {
+      "name": "Si Juki",
+      "category": "COMICS"
+    },
+    {
+      "name": "Marshal Law",
+      "category": "COMICS"
+    },
+    {
+      "name": "The True North II",
+      "category": "COMICS"
+    },
+    {
+      "name": "Asterix and Obelix",
+      "category": "COMICS"
+    },
+    {
+      "name": "Night Warrior",
+      "category": "COMICS"
+    },
+    {
+      "name": "Franka",
+      "category": "COMICS"
+    },
+    {
+      "name": "Cottonstar",
+      "category": "COMICS"
+    },
+    {
+      "name": "Monsieur Jean",
+      "category": "COMICS"
+    },
+    {
+      "name": "Werner",
+      "category": "COMICS"
+    },
+    {
+      "name": "Kapitan Żbik",
+      "category": "COMICS"
+    },
+    {
+      "name": "Mikilo",
+      "category": "COMICS"
+    },
+    {
+      "name": "El Cazador de Aventuras",
+      "category": "COMICS"
+    },
+    {
+      "name": "Vader & Zoon",
+      "category": "COMICS"
+    },
+    {
+      "name": "Le Vieux Nick et Barbe-Noire",
+      "category": "COMICS"
+    },
+    {
+      "name": "Walenty Pompka na wojnie",
+      "category": "COMICS"
+    },
+    {
+      "name": "L'Incal",
+      "category": "COMICS"
+    },
+    {
+      "name": "Kappie",
+      "category": "COMICS"
+    },
+    {
+      "name": "Johan and Peewit",
+      "category": "COMICS"
+    },
+    {
+      "name": "Major Grom",
+      "category": "COMICS"
+    },
+    {
+      "name": "Haagse Harry",
+      "category": "COMICS"
+    },
+    {
+      "name": "Le Cycle de Cyann",
+      "category": "COMICS"
+    },
+    {
+      "name": "De Familie Fortuin",
+      "category": "COMICS"
+    },
+    {
+      "name": "Roach Killer",
+      "category": "COMICS"
+    },
+    {
+      "name": "Isabelle",
+      "category": "COMICS"
+    },
+    {
+      "name": "Straine",
+      "category": "COMICS"
+    },
+    {
+      "name": "La Patrouille des Castors",
+      "category": "COMICS"
+    },
+    {
+      "name": "Insiders",
+      "category": "COMICS"
+    },
+    {
+      "name": "La familia Burrón",
+      "category": "COMICS"
+    },
+    {
+      "name": "Le Tour du Québec en BD",
+      "category": "COMICS"
+    },
+    {
+      "name": "Bernard Prince",
+      "category": "COMICS"
+    },
+    {
+      "name": "De Rode Ridder",
+      "category": "COMICS"
+    },
+    {
+      "name": "Gofu (comic)",
+      "category": "COMICS"
+    },
+    {
+      "name": "Brouillard au pont de Tolbiac",
+      "category": "COMICS"
+    },
+    {
+      "name": "Panda",
+      "category": "COMICS"
+    },
+    {
+      "name": "Yummy Fur",
+      "category": "COMICS"
+    },
+    {
+      "name": "Jan, Jans en de Kinderen",
+      "category": "COMICS"
+    },
+    {
+      "name": "Zbeng!",
+      "category": "COMICS"
+    },
+    {
+      "name": "Largo Winch",
+      "category": "COMICS"
+    },
+    {
+      "name": "Los Supermachos",
+      "category": "COMICS"
+    },
+    {
+      "name": "Kajko i Kokosz",
+      "category": "COMICS"
+    },
+    {
+      "name": "Frantico",
+      "category": "COMICS"
+    },
+    {
+      "name": "Piratas do Tietê",
+      "category": "COMICS"
+    },
+    {
+      "name": "Tajemnica złotej maczety",
+      "category": "COMICS"
+    },
+    {
+      "name": "The Wizard of Id",
+      "category": "COMICS"
+    },
+    {
+      "name": "From Hell",
+      "category": "COMICS"
+    },
+    {
+      "name": "Douwe Dabbert",
+      "category": "COMICS"
+    },
+    {
+      "name": "Double Masque",
+      "category": "COMICS"
+    },
+    {
+      "name": "Janosik",
+      "category": "COMICS"
+    },
+    {
+      "name": "Ensamma mamman",
+      "category": "COMICS"
+    },
+    {
+      "name": "Bulletje en Boonestaak",
+      "category": "COMICS"
+    },
+    {
+      "name": "Underwater",
+      "category": "COMICS"
+    },
+    {
+      "name": "Warrior",
+      "category": "COMICS"
+    },
+    {
+      "name": "Kajtek i Koko",
+      "category": "COMICS"
+    },
+    {
+      "name": "Les Tours de Bois-Maury",
+      "category": "COMICS"
+    },
+    {
+      "name": "Buster",
+      "category": "COMICS"
+    },
+    {
+      "name": "Kapitein Rob",
+      "category": "COMICS"
+    },
+    {
+      "name": "Bamse",
+      "category": "COMICS"
+    },
+    {
+      "name": "Wick i Wacek",
+      "category": "COMICS"
+    },
+    {
+      "name": "Supa Strikas",
+      "category": "COMICS"
+    },
+    {
+      "name": "Les Cités Obscures",
+      "category": "COMICS"
+    },
+    {
+      "name": "Djinn",
+      "category": "COMICS"
+    },
+    {
+      "name": "Punaniska",
+      "category": "COMICS"
+    },
+    {
+      "name": "Koning Hollewijn",
+      "category": "COMICS"
+    },
+    {
+      "name": "Tok Tok",
+      "category": "COMICS"
+    },
+    {
+      "name": "Condorito",
+      "category": "COMICS"
+    },
+    {
+      "name": "Binio Bill",
+      "category": "COMICS"
+    },
+    {
+      "name": "Logicomix",
+      "category": "COMICS"
+    },
+    {
+      "name": "Biocosmosis",
+      "category": "COMICS"
+    },
+    {
+      "name": "Comanche",
+      "category": "COMICS"
+    },
+    {
+      "name": "Léonard",
+      "category": "COMICS"
+    },
+    {
+      "name": "Chiclete com Banana",
+      "category": "COMICS"
+    },
+    {
+      "name": "Les Maîtres de l'Orge",
+      "category": "COMICS"
+    },
+    {
+      "name": "Biebel",
+      "category": "COMICS"
+    },
+    {
+      "name": "Inspector Canardo",
+      "category": "COMICS"
+    },
+    {
+      "name": "Pilot smiglowca",
+      "category": "COMICS"
+    },
+    {
+      "name": "Exlibrium",
+      "category": "COMICS"
+    },
+    {
+      "name": "The Adventures of Jo, Zette and Jocko",
+      "category": "COMICS"
+    },
+    {
+      "name": "Quick & Flupke",
+      "category": "COMICS"
+    },
+    {
+      "name": "Kecemprengman",
+      "category": "COMICS"
+    },
+    {
+      "name": "Ultrapato",
+      "category": "COMICS"
+    },
+    {
+      "name": "Przygody Koziołka Matołka",
+      "category": "COMICS"
+    },
+    {
+      "name": "Murena",
+      "category": "COMICS"
+    },
+    {
+      "name": "Yoko Tsuno",
+      "category": "COMICS"
+    },
+    {
+      "name": "Dirty Plotte",
+      "category": "COMICS"
+    },
+    {
+      "name": "Valiant",
+      "category": "COMICS"
+    },
+    {
+      "name": "Gail",
+      "category": "COMICS"
+    },
+    {
+      "name": "Colonel Clifton",
+      "category": "COMICS"
+    },
+    {
+      "name": "Alack Sinner",
+      "category": "COMICS"
+    },
+    {
+      "name": "La Caste des Méta-Barons",
+      "category": "COMICS"
+    },
+    {
+      "name": "Bobo",
+      "category": "COMICS"
+    },
+    {
+      "name": "Buck Danny",
+      "category": "COMICS"
+    },
+    {
+      "name": "Bakelandt",
+      "category": "COMICS"
+    },
+    {
+      "name": "Van Nul tot Nu",
+      "category": "COMICS"
+    },
+    {
+      "name": "Redbeard",
+      "category": "COMICS"
+    },
+    {
+      "name": "Le Rayon U",
+      "category": "COMICS"
+    },
+    {
+      "name": "Flippie Flink",
+      "category": "COMICS"
+    },
+    {
+      "name": "Le Scorpion",
+      "category": "COMICS"
+    },
+    {
+      "name": "Lone Sloane",
+      "category": "COMICS"
+    },
+    {
+      "name": "Praedor",
+      "category": "COMICS"
+    },
+    {
+      "name": "Agence Barbare",
+      "category": "COMICS"
+    },
+    {
+      "name": "Monica's Gang",
+      "category": "COMICS"
+    },
+    {
+      "name": "Lunch",
+      "category": "COMICS"
+    },
+    {
+      "name": "Cubitus",
+      "category": "COMICS"
+    },
+    {
+      "name": "Adèle Blanc-Sec",
+      "category": "COMICS"
+    },
+    {
+      "name": "Na co dybie w wielorybie czubek nosa Eskimosa",
+      "category": "COMICS"
+    },
+    {
+      "name": "Örn Blammo",
+      "category": "COMICS"
+    },
+    {
+      "name": "Peepshow",
+      "category": "COMICS"
+    },
+    {
+      "name": "Alpha",
+      "category": "COMICS"
+    },
+    {
+      "name": "Sammy",
+      "category": "COMICS"
+    },
+    {
+      "name": "Mojicón",
+      "category": "COMICS"
+    },
+    {
+      "name": "The Smurfs",
+      "category": "COMICS"
+    },
+    {
+      "name": "Mélusine",
+      "category": "COMICS"
+    },
+    {
+      "name": "Niklos Koda",
+      "category": "COMICS"
+    },
+    {
+      "name": "ASH - Austrian Superheroes",
+      "category": "COMICS"
+    },
+    {
+      "name": "L'Eleve Ducobu",
+      "category": "COMICS"
+    },
+    {
+      "name": "Les Innommables",
+      "category": "COMICS"
+    },
+    {
+      "name": "Lúpin",
+      "category": "COMICS"
+    },
+    {
+      "name": "Sibylline",
+      "category": "COMICS"
+    },
+    {
+      "name": "Jommeke",
+      "category": "COMICS"
+    },
+    {
+      "name": "Apocalypse Mania",
+      "category": "COMICS"
+    },
+    {
+      "name": "Super Cholita",
+      "category": "COMICS"
+    },
+    {
+      "name": "Soda",
+      "category": "COMICS"
+    },
+    {
+      "name": "Calarcá",
+      "category": "COMICS"
+    },
+    {
+      "name": "Oneironaut & Other Tales",
+      "category": "COMICS"
+    },
+    {
+      "name": "Piet Pienter en Bert Bibber",
+      "category": "COMICS"
+    },
+    {
+      "name": "Níquel Náusea",
+      "category": "COMICS"
+    },
+    {
+      "name": "Birre Beer",
+      "category": "COMICS"
+    },
+    {
+      "name": "Trigan Empire",
+      "category": "COMICS"
+    },
+    {
+      "name": "Nero",
+      "category": "COMICS"
+    },
+    {
+      "name": "Viivi & Wagner",
+      "category": "COMICS"
+    },
+    {
+      "name": "The Eagle",
+      "category": "COMICS"
+    },
+    {
+      "name": "Mister Mačak",
+      "category": "COMICS"
+    },
+    {
+      "name": "Blagues Coquines",
+      "category": "COMICS"
+    },
+    {
+      "name": "La historia de la señora de la dominación",
+      "category": "COMICS"
+    },
+    {
+      "name": "Valérian and Laureline",
+      "category": "COMICS"
+    },
+    {
+      "name": "Palookaville",
+      "category": "COMICS"
+    },
+    {
+      "name": "Kabouter Wesley",
+      "category": "COMICS"
+    },
+    {
+      "name": "Geraldão",
+      "category": "COMICS"
+    },
+    {
+      "name": "To Be Announced",
+      "category": "COMICS"
+    },
+    {
+      "name": "Das kleine Arschloch",
+      "category": "COMICS"
+    },
+    {
+      "name": "Jimmy Five",
+      "category": "COMICS"
+    },
+    {
+      "name": "Kick Wilstra",
+      "category": "COMICS"
+    },
+    {
+      "name": "Jeż Jerzy",
+      "category": "COMICS"
+    },
+    {
+      "name": "Kramppeja ja Nyrjähdyksiä",
+      "category": "COMICS"
+    },
+    {
+      "name": "Urbanus",
+      "category": "COMICS"
+    },
+    {
+      "name": "Holle Pinkel",
+      "category": "COMICS"
+    },
+    {
+      "name": "Les Cantons – Rondel et Baton à la conquête du Saladier d'argent",
+      "category": "COMICS"
+    },
+    {
+      "name": "Jugurtha",
+      "category": "COMICS"
+    },
+    {
+      "name": "Oumpah-pah",
+      "category": "COMICS"
+    },
+    {
+      "name": "Marsupilami",
+      "category": "COMICS"
+    },
+    {
+      "name": "De Lustige Kapoentjes",
+      "category": "COMICS"
+    },
+    {
+      "name": "Jerry Spring",
+      "category": "COMICS"
+    },
+    {
+      "name": "Lion",
+      "category": "COMICS"
+    },
+    {
+      "name": "Captain Canuck",
+      "category": "COMICS"
+    },
+    {
+      "name": "Fokkie Flink",
+      "category": "COMICS"
+    },
+    {
+      "name": "Paulus the woodgnome",
+      "category": "COMICS"
+    },
+    {
+      "name": "Anxiety",
+      "category": "COMICS"
+    },
+    {
+      "name": "XIII",
+      "category": "COMICS"
+    },
+    {
+      "name": "Tiger",
+      "category": "COMICS"
+    },
+    {
+      "name": "Thorgal",
+      "category": "COMICS"
+    },
+    {
+      "name": "Gil Jourdan",
+      "category": "COMICS"
+    },
+    {
+      "name": "Luc Orient",
+      "category": "COMICS"
+    },
+    {
+      "name": "Giacomo C.",
+      "category": "COMICS"
+    },
+    {
+      "name": "Dirk-Jan",
+      "category": "COMICS"
+    },
+    {
+      "name": "Zilverpijl",
+      "category": "COMICS"
+    },
+    {
+      "name": "Tukano",
+      "category": "COMICS"
+    },
+    {
+      "name": "Chlorophylle",
+      "category": "COMICS"
+    },
+    {
+      "name": "Karmatron",
+      "category": "COMICS"
+    },
+    {
+      "name": "Gilles de Geus",
+      "category": "COMICS"
+    },
+    {
+      "name": "Yakari",
+      "category": "COMICS"
+    },
+    {
+      "name": "Fanfoué des Pnottas",
+      "category": "COMICS"
+    },
+    {
+      "name": "Team Muhafiz",
+      "category": "COMICS"
+    },
+    {
+      "name": "Whizzer and Chips",
+      "category": "COMICS"
+    },
+    {
+      "name": "Cupidon",
+      "category": "COMICS"
+    },
+    {
+      "name": "Night Life",
+      "category": "COMICS"
+    },
+    {
+      "name": "Zambo Dendé",
+      "category": "COMICS"
+    },
+    {
+      "name": "KOSMIK Mook",
+      "category": "COMICS"
+    },
+    {
+      "name": "Weapons of Terra Ocean",
+      "category": "COMICS"
+    },
+    {
+      "name": "Roel Dijkstra",
+      "category": "COMICS"
+    },
+    {
+      "name": "Pyrénée",
+      "category": "COMICS"
+    },
+    {
+      "name": "Book of Pages",
+      "category": "COMICS"
+    },
+    {
+      "name": "Northguard",
+      "category": "COMICS"
+    },
+    {
+      "name": "Copetin",
+      "category": "COMICS"
+    },
+    {
+      "name": "Les Eternels",
+      "category": "COMICS"
+    },
+    {
+      "name": "Benoit Brisefer",
+      "category": "COMICS"
+    },
+    {
+      "name": "I.R.$.",
+      "category": "COMICS"
+    },
+    {
+      "name": "Nemi",
+      "category": "COMICS"
+    },
+    {
+      "name": "Dungeon",
+      "category": "COMICS"
+    },
+    {
+      "name": "Scream!",
+      "category": "COMICS"
+    },
+    {
+      "name": "Louis Riel",
+      "category": "COMICS"
+    },
+    {
+      "name": "Patoruzu",
+      "category": "COMICS"
+    },
+    {
+      "name": "El Cerdotado",
+      "category": "COMICS"
+    },
+    {
+      "name": "The Adventures of Tintin",
+      "category": "COMICS"
+    },
+    {
+      "name": "Drawn & Quarterly",
+      "category": "COMICS"
+    },
+    {
+      "name": "Le Scrameustache",
+      "category": "COMICS"
+    },
+    {
+      "name": "Kalimán",
+      "category": "COMICS"
+    },
+    {
+      "name": "Lucky Luke",
+      "category": "COMICS"
+    },
+    {
+      "name": "Scott Pilgrim",
+      "category": "COMICS"
+    },
+    {
+      "name": "Sigurd",
+      "category": "COMICS"
+    },
+    {
+      "name": "Funky Koval",
+      "category": "COMICS"
+    },
+    {
+      "name": "Thieves & Kings",
+      "category": "COMICS"
+    },
+    {
+      "name": "Gaston Lagaffe",
+      "category": "COMICS"
+    },
+    {
+      "name": "Rutu Modan#Exit Wounds",
+      "category": "COMICS"
+    },
+    {
+      "name": "Dick Bos",
+      "category": "COMICS"
+    },
+    {
+      "name": "The Lil' Five",
+      "category": "COMICS"
+    },
+    {
+      "name": "Bob Morane",
+      "category": "COMICS"
+    },
+    {
+      "name": "Biblia",
+      "category": "COMICS"
+    },
+    {
+      "name": "Piet Fluwijn en Bolleke",
+      "category": "COMICS"
+    },
+    {
+      "name": "Rahan",
+      "category": "COMICS"
+    },
+    {
+      "name": "Barelli",
+      "category": "COMICS"
+    },
+    {
+      "name": "Michael Jordan",
+      "category": "CELEBRITIES"
+    },
+    {
+      "name": "Oprah Winfrey",
+      "category": "CELEBRITIES"
+    },
+    {
+      "name": "Leonardo DiCaprio",
+      "category": "CELEBRITIES"
+    },
+    {
+      "name": "Jerry Seinfeld",
+      "category": "CELEBRITIES"
+    },
+    {
+      "name": "Steven Spielberg",
+      "category": "CELEBRITIES"
+    },
+    {
+      "name": "Spice Girls",
+      "category": "CELEBRITIES"
+    },
+    {
+      "name": "Harrison Ford",
+      "category": "CELEBRITIES"
+    },
+    {
+      "name": "Robin Williams",
+      "category": "CELEBRITIES"
+    },
+    {
+      "name": "Celine Dion",
+      "category": "CELEBRITIES"
+    },
+    {
+      "name": "The Rolling Stones",
+      "category": "CELEBRITIES"
+    },
+    {
+      "name": "chivalric",
+      "category": "HISTORY"
+    },
+    {
+      "name": "decorations",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Articles containing Russian-language text",
+      "category": "HISTORY"
+    },
+    {
+      "name": "diplomatic",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Cognomens",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Ladislaus of Naples",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Buddhist surname",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Eadwig of England",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Ptolemy IX Soter",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Edward the Confessor",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Haakon I of Norway",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Italian",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Lady Jane Grey",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Armenian",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Henry VIII",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Cambodian",
+      "category": "HISTORY"
+    },
+    {
+      "name": "bugō",
+      "category": "HISTORY"
+    },
+    {
+      "name": "John III of Moldavia",
+      "category": "HISTORY"
+    },
+    {
+      "name": "John IV of Portugal",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Maiden and married names",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Philip I of Castile",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Double-barrelled",
+      "category": "HISTORY"
+    },
+    {
+      "name": "honorary",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Pages using cite ODNB with id parameter",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Cypriot",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Articles containing Breton-language text",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Fulk III of Anjou",
+      "category": "HISTORY"
+    },
+    {
+      "name": "courtesy",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Casimir II, Duke of Poland",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Joseph II, Holy Roman Emperor",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Henry, King of Portugal",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Peter I of Portugal",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Robert I, Duke of Normandy",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Henry IV of Silesia",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Luxembourgish",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Ragnvald of Sweden",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Michael of Wallachia, Transylvania and Moldavia",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Theobald IV of Champagne",
+      "category": "HISTORY"
+    },
+    {
+      "name": "monogram",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Russian",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Charles Martel of the Franks",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Henry II, Duke of Silesia",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Boleslaw II of Poland",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Elizabeth I",
+      "category": "HISTORY"
+    },
+    {
+      "name": "James III of Majorca",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Radu II of Wallachia",
+      "category": "HISTORY"
+    },
+    {
+      "name": "nomen nescio",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Charles III of Navarre",
+      "category": "HISTORY"
+    },
+    {
+      "name": "George V, Count of Nassau-Dillenburg",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Misnomer",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Sancho II of Portugal",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Bhutanese",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Latin",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Albert the Bear",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Kamehameha I of Hawaiʻi",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Henry III, Duke of Saxony",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Ferdinand I of Portugal",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Albert, Prince of Beyreuth",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Old Romanian",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Birth name",
+      "category": "HISTORY"
+    },
+    {
+      "name": "khelrtva",
+      "category": "HISTORY"
+    },
+    {
+      "name": "John, Margrave of Brandenburg-Kulmbach",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Order of the Knights of St. John of Jerusalem (Hospitaller)",
+      "category": "HISTORY"
+    },
+    {
+      "name": "John, Constable of Portugal",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Boleslaus III of Poland",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Henry III, Holy Roman Emperor",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Heinrich II, Lord of Mecklenburg",
+      "category": "HISTORY"
+    },
+    {
+      "name": "cognomen",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Pedro II of Brazil",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Sigurd II of Norway",
+      "category": "HISTORY"
+    },
+    {
+      "name": "Rupert of Germany",
+      "category": "HISTORY"
+    }
+  ]
+}

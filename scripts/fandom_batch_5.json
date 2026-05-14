@@ -1,0 +1,2004 @@
+{
+  "fandoms": [
+    {
+      "name": "Suikoden",
+      "category": "GAMES"
+    },
+    {
+      "name": "Math Blaster",
+      "category": "GAMES"
+    },
+    {
+      "name": "Monument Valley",
+      "category": "GAMES"
+    },
+    {
+      "name": "Snowboard Kids",
+      "category": "GAMES"
+    },
+    {
+      "name": "Microsoft Combat Flight Simulator",
+      "category": "GAMES"
+    },
+    {
+      "name": "Gauntlet",
+      "category": "GAMES"
+    },
+    {
+      "name": "Skylanders",
+      "category": "GAMES"
+    },
+    {
+      "name": "Lemmings",
+      "category": "GAMES"
+    },
+    {
+      "name": "ToeJam & Earl",
+      "category": "GAMES"
+    },
+    {
+      "name": "City Connection",
+      "category": "GAMES"
+    },
+    {
+      "name": "Steel Gunner",
+      "category": "GAMES"
+    },
+    {
+      "name": "Super Mega Baseball",
+      "category": "GAMES"
+    },
+    {
+      "name": "ATV Offroad Fury",
+      "category": "GAMES"
+    },
+    {
+      "name": "Family Game Night",
+      "category": "GAMES"
+    },
+    {
+      "name": "Trails",
+      "category": "GAMES"
+    },
+    {
+      "name": "Kunio-kun",
+      "category": "GAMES"
+    },
+    {
+      "name": "Tribes",
+      "category": "GAMES"
+    },
+    {
+      "name": "EverQuest",
+      "category": "GAMES"
+    },
+    {
+      "name": "Battle Gear",
+      "category": "GAMES"
+    },
+    {
+      "name": "Double Dragon",
+      "category": "GAMES"
+    },
+    {
+      "name": "Mortal Kombat",
+      "category": "GAMES"
+    },
+    {
+      "name": "most watched",
+      "category": "GAMES"
+    },
+    {
+      "name": "Qix",
+      "category": "GAMES"
+    },
+    {
+      "name": "manga",
+      "category": "GAMES"
+    },
+    {
+      "name": "Surgeon Simulator",
+      "category": "GAMES"
+    },
+    {
+      "name": "Guacamelee!",
+      "category": "GAMES"
+    },
+    {
+      "name": "Wars",
+      "category": "GAMES"
+    },
+    {
+      "name": "Family Stadium",
+      "category": "GAMES"
+    },
+    {
+      "name": "LittleBigPlanet",
+      "category": "GAMES"
+    },
+    {
+      "name": "System Shock",
+      "category": "GAMES"
+    },
+    {
+      "name": "The Legend of Zelda",
+      "category": "GAMES"
+    },
+    {
+      "name": "Border Break",
+      "category": "GAMES"
+    },
+    {
+      "name": "Batman: Arkham",
+      "category": "GAMES"
+    },
+    {
+      "name": "Excite",
+      "category": "GAMES"
+    },
+    {
+      "name": "NBA Live",
+      "category": "GAMES"
+    },
+    {
+      "name": "Sin and Punishment",
+      "category": "GAMES"
+    },
+    {
+      "name": "Alundra",
+      "category": "GAMES"
+    },
+    {
+      "name": "Chessmaster",
+      "category": "GAMES"
+    },
+    {
+      "name": "Devil May Cry",
+      "category": "GAMES"
+    },
+    {
+      "name": "Operation Wolf",
+      "category": "GAMES"
+    },
+    {
+      "name": "Jak and Daxter",
+      "category": "GAMES"
+    },
+    {
+      "name": "Dungeon Siege",
+      "category": "GAMES"
+    },
+    {
+      "name": "Little Nightmares",
+      "category": "GAMES"
+    },
+    {
+      "name": "Tekken",
+      "category": "GAMES"
+    },
+    {
+      "name": "Chrono",
+      "category": "GAMES"
+    },
+    {
+      "name": "Life Is Strange",
+      "category": "GAMES"
+    },
+    {
+      "name": "A Boy and His Blob",
+      "category": "GAMES"
+    },
+    {
+      "name": "Tetris",
+      "category": "GAMES"
+    },
+    {
+      "name": "Hang-On",
+      "category": "GAMES"
+    },
+    {
+      "name": "Killing Floor",
+      "category": "GAMES"
+    },
+    {
+      "name": "Red Steel",
+      "category": "GAMES"
+    },
+    {
+      "name": "Tobal",
+      "category": "GAMES"
+    },
+    {
+      "name": "Asheron's Call",
+      "category": "GAMES"
+    },
+    {
+      "name": "Infinity Blade",
+      "category": "GAMES"
+    },
+    {
+      "name": "The Last Blade",
+      "category": "GAMES"
+    },
+    {
+      "name": "Unreal",
+      "category": "GAMES"
+    },
+    {
+      "name": "Fatal Frame",
+      "category": "GAMES"
+    },
+    {
+      "name": "Wizardry",
+      "category": "GAMES"
+    },
+    {
+      "name": "This Is Football",
+      "category": "GAMES"
+    },
+    {
+      "name": "Deadly Premonition",
+      "category": "GAMES"
+    },
+    {
+      "name": "Super Mario",
+      "category": "GAMES"
+    },
+    {
+      "name": "Top",
+      "category": "GAMES"
+    },
+    {
+      "name": "Skate",
+      "category": "GAMES"
+    },
+    {
+      "name": "MX vs. ATV",
+      "category": "GAMES"
+    },
+    {
+      "name": "Yo-kai Watch",
+      "category": "GAMES"
+    },
+    {
+      "name": "Atelier",
+      "category": "GAMES"
+    },
+    {
+      "name": "Marvel vs. Capcom",
+      "category": "GAMES"
+    },
+    {
+      "name": "WarioWare",
+      "category": "GAMES"
+    },
+    {
+      "name": "games, toys, and merchandise",
+      "category": "GAMES"
+    },
+    {
+      "name": "Soulcalibur",
+      "category": "GAMES"
+    },
+    {
+      "name": "Dungeon Keeper",
+      "category": "GAMES"
+    },
+    {
+      "name": "粵語",
+      "category": "GAMES"
+    },
+    {
+      "name": "Championship Manager",
+      "category": "GAMES"
+    },
+    {
+      "name": "The Crew",
+      "category": "GAMES"
+    },
+    {
+      "name": "BlazBlue",
+      "category": "GAMES"
+    },
+    {
+      "name": "Zone of the Enders",
+      "category": "GAMES"
+    },
+    {
+      "name": "Donkey Kong Country",
+      "category": "GAMES"
+    },
+    {
+      "name": "Joe & Mac",
+      "category": "GAMES"
+    },
+    {
+      "name": "Arc the Lad",
+      "category": "GAMES"
+    },
+    {
+      "name": "Zombie Tycoon",
+      "category": "GAMES"
+    },
+    {
+      "name": "Nidhogg",
+      "category": "GAMES"
+    },
+    {
+      "name": "Max Payne",
+      "category": "GAMES"
+    },
+    {
+      "name": "Bomb Jack",
+      "category": "GAMES"
+    },
+    {
+      "name": "Dragon Force",
+      "category": "GAMES"
+    },
+    {
+      "name": "Exit",
+      "category": "GAMES"
+    },
+    {
+      "name": "Kirby",
+      "category": "GAMES"
+    },
+    {
+      "name": "Ninja Gaiden",
+      "category": "GAMES"
+    },
+    {
+      "name": "Bayonetta",
+      "category": "GAMES"
+    },
+    {
+      "name": "Half-Life",
+      "category": "GAMES"
+    },
+    {
+      "name": "Myst",
+      "category": "GAMES"
+    },
+    {
+      "name": "Super Robot Wars",
+      "category": "GAMES"
+    },
+    {
+      "name": "Star Ocean",
+      "category": "GAMES"
+    },
+    {
+      "name": "Colin McRae Rally",
+      "category": "GAMES"
+    },
+    {
+      "name": "Geneforge",
+      "category": "GAMES"
+    },
+    {
+      "name": "Summon Night",
+      "category": "GAMES"
+    },
+    {
+      "name": "Angry Birds",
+      "category": "GAMES"
+    },
+    {
+      "name": "Xevious",
+      "category": "GAMES"
+    },
+    {
+      "name": "Marvel",
+      "category": "GAMES"
+    },
+    {
+      "name": "Game Tengoku",
+      "category": "GAMES"
+    },
+    {
+      "name": "Aleste",
+      "category": "GAMES"
+    },
+    {
+      "name": "Phantasy Star",
+      "category": "GAMES"
+    },
+    {
+      "name": "Bomberman",
+      "category": "GAMES"
+    },
+    {
+      "name": "Silent Hill",
+      "category": "GAMES"
+    },
+    {
+      "name": "Counter-Strike",
+      "category": "GAMES"
+    },
+    {
+      "name": "Devil Children",
+      "category": "GAMES"
+    },
+    {
+      "name": "The Fancy Pants Adventures",
+      "category": "GAMES"
+    },
+    {
+      "name": "Crusader Kings",
+      "category": "GAMES"
+    },
+    {
+      "name": "Pengo",
+      "category": "GAMES"
+    },
+    {
+      "name": "Chase H.Q.",
+      "category": "GAMES"
+    },
+    {
+      "name": "de Blob",
+      "category": "GAMES"
+    },
+    {
+      "name": "Ratchet & Clank",
+      "category": "GAMES"
+    },
+    {
+      "name": "Shadow Man",
+      "category": "GAMES"
+    },
+    {
+      "name": "Splatoon",
+      "category": "GAMES"
+    },
+    {
+      "name": "Desperados",
+      "category": "GAMES"
+    },
+    {
+      "name": "Dizzy",
+      "category": "GAMES"
+    },
+    {
+      "name": "Battletoads",
+      "category": "GAMES"
+    },
+    {
+      "name": "Hidden & Dangerous",
+      "category": "GAMES"
+    },
+    {
+      "name": "Valkyrie",
+      "category": "GAMES"
+    },
+    {
+      "name": "MotorStorm",
+      "category": "GAMES"
+    },
+    {
+      "name": "Tak",
+      "category": "GAMES"
+    },
+    {
+      "name": "X-COM",
+      "category": "GAMES"
+    },
+    {
+      "name": "Wipeout",
+      "category": "GAMES"
+    },
+    {
+      "name": "Onechanbara",
+      "category": "GAMES"
+    },
+    {
+      "name": "Toukiden",
+      "category": "GAMES"
+    },
+    {
+      "name": "NieR",
+      "category": "GAMES"
+    },
+    {
+      "name": "StarTropics",
+      "category": "GAMES"
+    },
+    {
+      "name": "Pokémon Snap",
+      "category": "GAMES"
+    },
+    {
+      "name": "Battle Isle",
+      "category": "GAMES"
+    },
+    {
+      "name": "Assassin's Creed",
+      "category": "GAMES"
+    },
+    {
+      "name": "Hyperdimension Neptunia",
+      "category": "GAMES"
+    },
+    {
+      "name": "Sly Cooper",
+      "category": "GAMES"
+    },
+    {
+      "name": "The Legend of Kage",
+      "category": "GAMES"
+    },
+    {
+      "name": "Langrisser",
+      "category": "GAMES"
+    },
+    {
+      "name": "Mappy",
+      "category": "GAMES"
+    },
+    {
+      "name": "Jet Set Radio",
+      "category": "GAMES"
+    },
+    {
+      "name": "Gunstar Heroes",
+      "category": "GAMES"
+    },
+    {
+      "name": "Salamander",
+      "category": "GAMES"
+    },
+    {
+      "name": "Internet",
+      "category": "GAMES"
+    },
+    {
+      "name": "Alan Wake",
+      "category": "GAMES"
+    },
+    {
+      "name": "Altered Beast",
+      "category": "GAMES"
+    },
+    {
+      "name": "Parasite Eve",
+      "category": "GAMES"
+    },
+    {
+      "name": "Princess Maker",
+      "category": "GAMES"
+    },
+    {
+      "name": "Microsoft Flight Simulator",
+      "category": "GAMES"
+    },
+    {
+      "name": "Spider-Man",
+      "category": "GAMES"
+    },
+    {
+      "name": "Bloody Roar",
+      "category": "GAMES"
+    },
+    {
+      "name": "Katamari",
+      "category": "GAMES"
+    },
+    {
+      "name": "Mother",
+      "category": "GAMES"
+    },
+    {
+      "name": "Gothic",
+      "category": "GAMES"
+    },
+    {
+      "name": "Lost Kingdoms",
+      "category": "GAMES"
+    },
+    {
+      "name": "Dynasty Warriors",
+      "category": "GAMES"
+    },
+    {
+      "name": "Etrian Odyssey",
+      "category": "GAMES"
+    },
+    {
+      "name": "Project X Zone",
+      "category": "GAMES"
+    },
+    {
+      "name": "Dream Chronicles",
+      "category": "GAMES"
+    },
+    {
+      "name": "Rock Band",
+      "category": "GAMES"
+    },
+    {
+      "name": "Crush Pinball",
+      "category": "GAMES"
+    },
+    {
+      "name": "Ape Escape",
+      "category": "GAMES"
+    },
+    {
+      "name": "Fieldrunners",
+      "category": "GAMES"
+    },
+    {
+      "name": "Retro Game Challenge",
+      "category": "GAMES"
+    },
+    {
+      "name": "Grandia",
+      "category": "GAMES"
+    },
+    {
+      "name": "Dragon's Lair",
+      "category": "GAMES"
+    },
+    {
+      "name": "Blood",
+      "category": "GAMES"
+    },
+    {
+      "name": "The King of Fighters",
+      "category": "GAMES"
+    },
+    {
+      "name": "Ridge Racer",
+      "category": "GAMES"
+    },
+    {
+      "name": "Gunvolt",
+      "category": "GAMES"
+    },
+    {
+      "name": "Imagine",
+      "category": "GAMES"
+    },
+    {
+      "name": "Rogue Legacy",
+      "category": "GAMES"
+    },
+    {
+      "name": "Kotoba no Puzzle",
+      "category": "GAMES"
+    },
+    {
+      "name": "Sega Bass Fishing",
+      "category": "GAMES"
+    },
+    {
+      "name": "Gears of War",
+      "category": "GAMES"
+    },
+    {
+      "name": "Frostpunk",
+      "category": "GAMES"
+    },
+    {
+      "name": "Uncharted",
+      "category": "GAMES"
+    },
+    {
+      "name": "Soldier of Fortune",
+      "category": "GAMES"
+    },
+    {
+      "name": "Deer Hunter",
+      "category": "GAMES"
+    },
+    {
+      "name": "Tomodachi Collection",
+      "category": "GAMES"
+    },
+    {
+      "name": "Madden NFL",
+      "category": "GAMES"
+    },
+    {
+      "name": "Groove Coaster",
+      "category": "GAMES"
+    },
+    {
+      "name": "The Settlers",
+      "category": "GAMES"
+    },
+    {
+      "name": "Shōnen Jump",
+      "category": "GAMES"
+    },
+    {
+      "name": "Super Monkey Ball",
+      "category": "GAMES"
+    },
+    {
+      "name": "Gunbird",
+      "category": "GAMES"
+    },
+    {
+      "name": "Pitfall!",
+      "category": "GAMES"
+    },
+    {
+      "name": "Psychonauts",
+      "category": "GAMES"
+    },
+    {
+      "name": "TOCA",
+      "category": "GAMES"
+    },
+    {
+      "name": "Peggle",
+      "category": "GAMES"
+    },
+    {
+      "name": "Mount & Blade",
+      "category": "GAMES"
+    },
+    {
+      "name": "Vanguard",
+      "category": "GAMES"
+    },
+    {
+      "name": "Black Souls",
+      "category": "GAMES"
+    },
+    {
+      "name": "Turok",
+      "category": "GAMES"
+    },
+    {
+      "name": "Dies irae",
+      "category": "GAMES"
+    },
+    {
+      "name": "Red Faction",
+      "category": "GAMES"
+    },
+    {
+      "name": "Chip's Challenge",
+      "category": "GAMES"
+    },
+    {
+      "name": "G-Police",
+      "category": "GAMES"
+    },
+    {
+      "name": "Titanfall",
+      "category": "GAMES"
+    },
+    {
+      "name": "Nioh",
+      "category": "GAMES"
+    },
+    {
+      "name": "Super Smash Bros.",
+      "category": "GAMES"
+    },
+    {
+      "name": "Sonic Blast Man",
+      "category": "GAMES"
+    },
+    {
+      "name": "Rally-X",
+      "category": "GAMES"
+    },
+    {
+      "name": "Disgaea",
+      "category": "GAMES"
+    },
+    {
+      "name": "Another Code",
+      "category": "GAMES"
+    },
+    {
+      "name": "Swordquest",
+      "category": "GAMES"
+    },
+    {
+      "name": "Sniper Elite",
+      "category": "GAMES"
+    },
+    {
+      "name": "Tom Clancy's The Division",
+      "category": "GAMES"
+    },
+    {
+      "name": "Ace Attorney",
+      "category": "GAMES"
+    },
+    {
+      "name": "All articles with dead external links",
+      "category": "GAMES"
+    },
+    {
+      "name": "Legend of Legaia",
+      "category": "GAMES"
+    },
+    {
+      "name": "The Lord of the Rings",
+      "category": "GAMES"
+    },
+    {
+      "name": "Gal Gun",
+      "category": "GAMES"
+    },
+    {
+      "name": "Ground Control",
+      "category": "GAMES"
+    },
+    {
+      "name": "World Stadium",
+      "category": "GAMES"
+    },
+    {
+      "name": "Zool",
+      "category": "GAMES"
+    },
+    {
+      "name": "Bard's Tale",
+      "category": "GAMES"
+    },
+    {
+      "name": "NES Remix",
+      "category": "GAMES"
+    },
+    {
+      "name": "Tecmo Bowl",
+      "category": "GAMES"
+    },
+    {
+      "name": "Choplifter",
+      "category": "GAMES"
+    },
+    {
+      "name": "International Superstar Soccer",
+      "category": "GAMES"
+    },
+    {
+      "name": "Parodius",
+      "category": "GAMES"
+    },
+    {
+      "name": "Breakout",
+      "category": "GAMES"
+    },
+    {
+      "name": "Killzone",
+      "category": "GAMES"
+    },
+    {
+      "name": "Cyber Sled",
+      "category": "GAMES"
+    },
+    {
+      "name": "Mr. Do!",
+      "category": "GAMES"
+    },
+    {
+      "name": "Wizards & Warriors",
+      "category": "GAMES"
+    },
+    {
+      "name": "Game Party",
+      "category": "GAMES"
+    },
+    {
+      "name": "Outlast",
+      "category": "GAMES"
+    },
+    {
+      "name": "Harry Potter",
+      "category": "GAMES"
+    },
+    {
+      "name": "Fighting Vipers",
+      "category": "GAMES"
+    },
+    {
+      "name": "Flowers",
+      "category": "GAMES"
+    },
+    {
+      "name": "MLB: The Show",
+      "category": "GAMES"
+    },
+    {
+      "name": "PaRappa the Rapper",
+      "category": "GAMES"
+    },
+    {
+      "name": "Sega Ages",
+      "category": "GAMES"
+    },
+    {
+      "name": "Thunder Cross",
+      "category": "GAMES"
+    },
+    {
+      "name": "Dragon Age",
+      "category": "GAMES"
+    },
+    {
+      "name": "Mafia",
+      "category": "GAMES"
+    },
+    {
+      "name": "SOCOM",
+      "category": "GAMES"
+    },
+    {
+      "name": "Boulder Dash",
+      "category": "GAMES"
+    },
+    {
+      "name": "Close Combat",
+      "category": "GAMES"
+    },
+    {
+      "name": "RayForce",
+      "category": "GAMES"
+    },
+    {
+      "name": "Raving Rabbids",
+      "category": "GAMES"
+    },
+    {
+      "name": "The Dark Pictures",
+      "category": "GAMES"
+    },
+    {
+      "name": "RPG Maker",
+      "category": "GAMES"
+    },
+    {
+      "name": "Resistance",
+      "category": "GAMES"
+    },
+    {
+      "name": "The Lost Vikings",
+      "category": "GAMES"
+    },
+    {
+      "name": "Twilight Syndrome",
+      "category": "GAMES"
+    },
+    {
+      "name": "Film franchise",
+      "category": "GAMES"
+    },
+    {
+      "name": "Tony Hawk's",
+      "category": "GAMES"
+    },
+    {
+      "name": "Hitman",
+      "category": "GAMES"
+    },
+    {
+      "name": "The Political Machine",
+      "category": "GAMES"
+    },
+    {
+      "name": "Front Mission",
+      "category": "GAMES"
+    },
+    {
+      "name": "R.C. Pro-Am",
+      "category": "GAMES"
+    },
+    {
+      "name": "Populous",
+      "category": "GAMES"
+    },
+    {
+      "name": "Sutte Hakkun",
+      "category": "GAMES"
+    },
+    {
+      "name": "Dead Island",
+      "category": "GAMES"
+    },
+    {
+      "name": "Adventure Island",
+      "category": "GAMES"
+    },
+    {
+      "name": "Inazuma Eleven",
+      "category": "GAMES"
+    },
+    {
+      "name": "Bobby Carrot",
+      "category": "GAMES"
+    },
+    {
+      "name": "Midnight Club",
+      "category": "GAMES"
+    },
+    {
+      "name": "Return Fire",
+      "category": "GAMES"
+    },
+    {
+      "name": "Wario Land",
+      "category": "GAMES"
+    },
+    {
+      "name": "Pokémon",
+      "category": "GAMES"
+    },
+    {
+      "name": "Mariosports",
+      "category": "GAMES"
+    },
+    {
+      "name": "Just Cause",
+      "category": "GAMES"
+    },
+    {
+      "name": "Blaster Master",
+      "category": "GAMES"
+    },
+    {
+      "name": "Milon's Secret Castle",
+      "category": "GAMES"
+    },
+    {
+      "name": "Boom Blox",
+      "category": "GAMES"
+    },
+    {
+      "name": "Commandos",
+      "category": "GAMES"
+    },
+    {
+      "name": "Empire Earth",
+      "category": "GAMES"
+    },
+    {
+      "name": "Army Men",
+      "category": "GAMES"
+    },
+    {
+      "name": "Mr. Driller",
+      "category": "GAMES"
+    },
+    {
+      "name": "Thunder Force",
+      "category": "GAMES"
+    },
+    {
+      "name": "Evil Genius",
+      "category": "GAMES"
+    },
+    {
+      "name": "Darkstalkers",
+      "category": "GAMES"
+    },
+    {
+      "name": "Asphalt",
+      "category": "GAMES"
+    },
+    {
+      "name": "Dragon Quest",
+      "category": "GAMES"
+    },
+    {
+      "name": "Wasteland",
+      "category": "GAMES"
+    },
+    {
+      "name": "American McGee's Alice",
+      "category": "GAMES"
+    },
+    {
+      "name": "Mystery Dungeon",
+      "category": "GAMES"
+    },
+    {
+      "name": "America's Army",
+      "category": "GAMES"
+    },
+    {
+      "name": "Ghosts 'n Goblins",
+      "category": "GAMES"
+    },
+    {
+      "name": "Sanctum",
+      "category": "GAMES"
+    },
+    {
+      "name": "Sherlock Holmes",
+      "category": "GAMES"
+    },
+    {
+      "name": "Cotton",
+      "category": "GAMES"
+    },
+    {
+      "name": "Budget Cuts",
+      "category": "GAMES"
+    },
+    {
+      "name": "Tom Clancy's H.A.W.X",
+      "category": "GAMES"
+    },
+    {
+      "name": "Infamous",
+      "category": "GAMES"
+    },
+    {
+      "name": "Mario Kart",
+      "category": "GAMES"
+    },
+    {
+      "name": "Guardian Heroes",
+      "category": "GAMES"
+    },
+    {
+      "name": "Pikmin",
+      "category": "GAMES"
+    },
+    {
+      "name": "Track & Field",
+      "category": "GAMES"
+    },
+    {
+      "name": "Bejeweled",
+      "category": "GAMES"
+    },
+    {
+      "name": "Last Ninja",
+      "category": "GAMES"
+    },
+    {
+      "name": "Viva Piñata",
+      "category": "GAMES"
+    },
+    {
+      "name": "Time Crisis",
+      "category": "GAMES"
+    },
+    {
+      "name": "Steel Division",
+      "category": "GAMES"
+    },
+    {
+      "name": "Crash Bandicoot",
+      "category": "GAMES"
+    },
+    {
+      "name": "Shank",
+      "category": "GAMES"
+    },
+    {
+      "name": "Dungeon Defenders",
+      "category": "GAMES"
+    },
+    {
+      "name": "Payday",
+      "category": "GAMES"
+    },
+    {
+      "name": "Pro Evolution Soccer",
+      "category": "GAMES"
+    },
+    {
+      "name": "Nekopara",
+      "category": "GAMES"
+    },
+    {
+      "name": "Lists portal",
+      "category": "GAMES"
+    },
+    {
+      "name": "Sakura Wars",
+      "category": "GAMES"
+    },
+    {
+      "name": "Steel Battalion",
+      "category": "GAMES"
+    },
+    {
+      "name": "Zuma",
+      "category": "GAMES"
+    },
+    {
+      "name": "Bases Loaded",
+      "category": "GAMES"
+    },
+    {
+      "name": "Valkyrie Profile",
+      "category": "GAMES"
+    },
+    {
+      "name": "Buzz!",
+      "category": "GAMES"
+    },
+    {
+      "name": "Violence Fight",
+      "category": "GAMES"
+    },
+    {
+      "name": "Xanadu",
+      "category": "GAMES"
+    },
+    {
+      "name": "Gex",
+      "category": "GAMES"
+    },
+    {
+      "name": "Candy Crush",
+      "category": "GAMES"
+    },
+    {
+      "name": "Destroy All Humans!",
+      "category": "GAMES"
+    },
+    {
+      "name": "Gabriel Knight",
+      "category": "GAMES"
+    },
+    {
+      "name": "Quake",
+      "category": "GAMES"
+    },
+    {
+      "name": "Samurai Shodown",
+      "category": "GAMES"
+    },
+    {
+      "name": "Taito Memories",
+      "category": "GAMES"
+    },
+    {
+      "name": "Vib-Ribbon",
+      "category": "GAMES"
+    },
+    {
+      "name": "Lotus",
+      "category": "GAMES"
+    },
+    {
+      "name": "Dark Seed",
+      "category": "GAMES"
+    },
+    {
+      "name": "Project Gotham Racing",
+      "category": "GAMES"
+    },
+    {
+      "name": "Nights",
+      "category": "GAMES"
+    },
+    {
+      "name": "Railroad Tycoon",
+      "category": "GAMES"
+    },
+    {
+      "name": "NCAA Football",
+      "category": "GAMES"
+    },
+    {
+      "name": "Papa Louie",
+      "category": "GAMES"
+    },
+    {
+      "name": "Splashdown",
+      "category": "GAMES"
+    },
+    {
+      "name": "Tiger Heli",
+      "category": "GAMES"
+    },
+    {
+      "name": "Animated series",
+      "category": "GAMES"
+    },
+    {
+      "name": "Yoshi",
+      "category": "GAMES"
+    },
+    {
+      "name": "MarioRPG",
+      "category": "GAMES"
+    },
+    {
+      "name": "Croc",
+      "category": "GAMES"
+    },
+    {
+      "name": "Lumines",
+      "category": "GAMES"
+    },
+    {
+      "name": "Darius",
+      "category": "GAMES"
+    },
+    {
+      "name": "Galaxian",
+      "category": "GAMES"
+    },
+    {
+      "name": "Dance Central",
+      "category": "GAMES"
+    },
+    {
+      "name": "Dying Light",
+      "category": "GAMES"
+    },
+    {
+      "name": "Hammerin' Harry",
+      "category": "GAMES"
+    },
+    {
+      "name": "Space Invaders",
+      "category": "GAMES"
+    },
+    {
+      "name": "Giana Sisters",
+      "category": "GAMES"
+    },
+    {
+      "name": "Icewind Dale",
+      "category": "GAMES"
+    },
+    {
+      "name": "Ikari Warriors",
+      "category": "GAMES"
+    },
+    {
+      "name": "State of Decay",
+      "category": "GAMES"
+    },
+    {
+      "name": "Test Drive",
+      "category": "GAMES"
+    },
+    {
+      "name": "Bust a Groove",
+      "category": "GAMES"
+    },
+    {
+      "name": "Fossil Fighters",
+      "category": "GAMES"
+    },
+    {
+      "name": "Rampage",
+      "category": "GAMES"
+    },
+    {
+      "name": "Golden Axe",
+      "category": "GAMES"
+    },
+    {
+      "name": "Civilization",
+      "category": "GAMES"
+    },
+    {
+      "name": "KiKi KaiKai",
+      "category": "GAMES"
+    },
+    {
+      "name": "Power Stone",
+      "category": "GAMES"
+    },
+    {
+      "name": "Rush'n Attack",
+      "category": "GAMES"
+    },
+    {
+      "name": "Ecco the Dolphin",
+      "category": "GAMES"
+    },
+    {
+      "name": "Halo",
+      "category": "GAMES"
+    },
+    {
+      "name": "Chibi-Robo!",
+      "category": "GAMES"
+    },
+    {
+      "name": "The Oregon Trail",
+      "category": "GAMES"
+    },
+    {
+      "name": "Puyo Puyo",
+      "category": "GAMES"
+    },
+    {
+      "name": "MechWarrior",
+      "category": "GAMES"
+    },
+    {
+      "name": "Wagan Land",
+      "category": "GAMES"
+    },
+    {
+      "name": "FIFA",
+      "category": "GAMES"
+    },
+    {
+      "name": "Baseball Stars",
+      "category": "GAMES"
+    },
+    {
+      "name": "Trials",
+      "category": "GAMES"
+    },
+    {
+      "name": "Magical Drop",
+      "category": "GAMES"
+    },
+    {
+      "name": "Creatures",
+      "category": "GAMES"
+    },
+    {
+      "name": "Otogi",
+      "category": "GAMES"
+    },
+    {
+      "name": "Assault Heroes",
+      "category": "GAMES"
+    },
+    {
+      "name": "Hebereke",
+      "category": "GAMES"
+    },
+    {
+      "name": "television",
+      "category": "GAMES"
+    },
+    {
+      "name": "Far Cry",
+      "category": "GAMES"
+    },
+    {
+      "name": "Elden Ring",
+      "category": "GAMES"
+    },
+    {
+      "name": "MediEvil",
+      "category": "GAMES"
+    },
+    {
+      "name": "Manhunt",
+      "category": "GAMES"
+    },
+    {
+      "name": "R-Type",
+      "category": "GAMES"
+    },
+    {
+      "name": "Lists of video game franchises",
+      "category": "GAMES"
+    },
+    {
+      "name": "Football Manager",
+      "category": "GAMES"
+    },
+    {
+      "name": "Articles with permanently dead external links",
+      "category": "GAMES"
+    },
+    {
+      "name": "Legacy of Kain",
+      "category": "GAMES"
+    },
+    {
+      "name": "NASCAR",
+      "category": "GAMES"
+    },
+    {
+      "name": "Romance of the Three Kingdoms",
+      "category": "GAMES"
+    },
+    {
+      "name": "Xeno",
+      "category": "GAMES"
+    },
+    {
+      "name": "Valis",
+      "category": "GAMES"
+    },
+    {
+      "name": "Oddworld",
+      "category": "GAMES"
+    },
+    {
+      "name": "Bosconian",
+      "category": "GAMES"
+    },
+    {
+      "name": "Vampire: The Masquerade",
+      "category": "GAMES"
+    },
+    {
+      "name": "Drawn to Life",
+      "category": "GAMES"
+    },
+    {
+      "name": "Lethal Enforcers",
+      "category": "GAMES"
+    },
+    {
+      "name": "Anno",
+      "category": "GAMES"
+    },
+    {
+      "name": "Custom Robo",
+      "category": "GAMES"
+    },
+    {
+      "name": "Risen",
+      "category": "GAMES"
+    },
+    {
+      "name": "Lineage",
+      "category": "GAMES"
+    },
+    {
+      "name": "Ys",
+      "category": "GAMES"
+    },
+    {
+      "name": "Dead Frontier",
+      "category": "GAMES"
+    },
+    {
+      "name": "Final Fantasy",
+      "category": "GAMES"
+    },
+    {
+      "name": "Lists of video games",
+      "category": "GAMES"
+    },
+    {
+      "name": "Panzer Dragoon",
+      "category": "GAMES"
+    },
+    {
+      "name": "Shoot Away",
+      "category": "GAMES"
+    },
+    {
+      "name": "Neutopia",
+      "category": "GAMES"
+    },
+    {
+      "name": "God of War",
+      "category": "GAMES"
+    },
+    {
+      "name": "Injustice",
+      "category": "GAMES"
+    },
+    {
+      "name": "Rick Dangerous",
+      "category": "GAMES"
+    },
+    {
+      "name": "Syberia",
+      "category": "GAMES"
+    },
+    {
+      "name": "Television show",
+      "category": "GAMES"
+    },
+    {
+      "name": "Age of Empires",
+      "category": "GAMES"
+    },
+    {
+      "name": "Osu! Tatakae! Ouendan",
+      "category": "GAMES"
+    },
+    {
+      "name": "Prototype",
+      "category": "GAMES"
+    },
+    {
+      "name": "Densha de Go!",
+      "category": "GAMES"
+    },
+    {
+      "name": "Baraduke",
+      "category": "GAMES"
+    },
+    {
+      "name": "中文",
+      "category": "GAMES"
+    },
+    {
+      "name": "Illusion",
+      "category": "GAMES"
+    },
+    {
+      "name": "Film series",
+      "category": "GAMES"
+    },
+    {
+      "name": "Vectorman",
+      "category": "GAMES"
+    },
+    {
+      "name": "Space Quest",
+      "category": "GAMES"
+    },
+    {
+      "name": "Amped",
+      "category": "GAMES"
+    },
+    {
+      "name": "ARMA",
+      "category": "GAMES"
+    },
+    {
+      "name": "Just Dance",
+      "category": "GAMES"
+    },
+    {
+      "name": "Punch-Out!!",
+      "category": "GAMES"
+    },
+    {
+      "name": "Alien Breed",
+      "category": "GAMES"
+    },
+    {
+      "name": "Sniper: Ghost Warrior",
+      "category": "GAMES"
+    },
+    {
+      "name": "Lucky's Tale",
+      "category": "GAMES"
+    },
+    {
+      "name": "One Must Fall",
+      "category": "GAMES"
+    },
+    {
+      "name": "Ar Tonelico",
+      "category": "GAMES"
+    },
+    {
+      "name": "Bushido Blade",
+      "category": "GAMES"
+    },
+    {
+      "name": "films",
+      "category": "GAMES"
+    },
+    {
+      "name": "Rune Factory",
+      "category": "GAMES"
+    },
+    {
+      "name": "The Idolmaster",
+      "category": "GAMES"
+    },
+    {
+      "name": "Corpse Party",
+      "category": "GAMES"
+    },
+    {
+      "name": "Dead Space",
+      "category": "GAMES"
+    },
+    {
+      "name": "FlatOut",
+      "category": "GAMES"
+    },
+    {
+      "name": "Xenosaga",
+      "category": "GAMES"
+    },
+    {
+      "name": "Shadowgate",
+      "category": "GAMES"
+    },
+    {
+      "name": "Total Annihilation",
+      "category": "GAMES"
+    },
+    {
+      "name": "Galaxy Force",
+      "category": "GAMES"
+    },
+    {
+      "name": "Splatterhouse",
+      "category": "GAMES"
+    },
+    {
+      "name": "Clicker Heroes",
+      "category": "GAMES"
+    },
+    {
+      "name": "Lands of Lore",
+      "category": "GAMES"
+    },
+    {
+      "name": "Rygar",
+      "category": "GAMES"
+    },
+    {
+      "name": "Star Wars: Battlefront",
+      "category": "GAMES"
+    },
+    {
+      "name": "Forza",
+      "category": "GAMES"
+    },
+    {
+      "name": "Eastern RPGs",
+      "category": "GAMES"
+    },
+    {
+      "name": "Donkey Kong",
+      "category": "GAMES"
+    },
+    {
+      "name": "Silent Scope",
+      "category": "GAMES"
+    },
+    {
+      "name": "Sonic the Hedgehog",
+      "category": "GAMES"
+    },
+    {
+      "name": "Pillars of Eternity",
+      "category": "GAMES"
+    },
+    {
+      "name": "Road Fighter",
+      "category": "GAMES"
+    },
+    {
+      "name": "Rastan",
+      "category": "GAMES"
+    },
+    {
+      "name": "Gunslinger Stratos",
+      "category": "GAMES"
+    },
+    {
+      "name": "anime",
+      "category": "GAMES"
+    },
+    {
+      "name": "You Don't Know Jack",
+      "category": "GAMES"
+    },
+    {
+      "name": "Clubhouse Games",
+      "category": "GAMES"
+    },
+    {
+      "name": "Pushmo",
+      "category": "GAMES"
+    },
+    {
+      "name": "Onimusha",
+      "category": "GAMES"
+    },
+    {
+      "name": "SpongeBob SquarePants",
+      "category": "GAMES"
+    },
+    {
+      "name": "Battlezone",
+      "category": "GAMES"
+    },
+    {
+      "name": "Combat Mission",
+      "category": "GAMES"
+    },
+    {
+      "name": "Brain Age",
+      "category": "GAMES"
+    },
+    {
+      "name": "Elevator Action",
+      "category": "GAMES"
+    },
+    {
+      "name": "Motocross Madness",
+      "category": "GAMES"
+    },
+    {
+      "name": "Joe Danger",
+      "category": "GAMES"
+    },
+    {
+      "name": "Lode Runner",
+      "category": "GAMES"
+    },
+    {
+      "name": "Monster Rancher",
+      "category": "GAMES"
+    },
+    {
+      "name": "Defender",
+      "category": "GAMES"
+    },
+    {
+      "name": "Tempest",
+      "category": "GAMES"
+    },
+    {
+      "name": "Pokémon Play It!",
+      "category": "GAMES"
+    },
+    {
+      "name": "Türkçe",
+      "category": "GAMES"
+    },
+    {
+      "name": "Tom Clancy's",
+      "category": "GAMES"
+    },
+    {
+      "name": "Virtua Tennis",
+      "category": "GAMES"
+    },
+    {
+      "name": "Partwork",
+      "category": "GAMES"
+    },
+    {
+      "name": "Monkey Island",
+      "category": "GAMES"
+    },
+    {
+      "name": "Wario",
+      "category": "GAMES"
+    },
+    {
+      "name": "Cooking Mama",
+      "category": "GAMES"
+    },
+    {
+      "name": "Winning Run",
+      "category": "GAMES"
+    },
+    {
+      "name": "Jazz Jackrabbit",
+      "category": "GAMES"
+    },
+    {
+      "name": "Astro",
+      "category": "GAMES"
+    },
+    {
+      "name": "Kyle Hyde",
+      "category": "GAMES"
+    },
+    {
+      "name": "Space Empires",
+      "category": "GAMES"
+    },
+    {
+      "name": "Jumping Flash!",
+      "category": "GAMES"
+    },
+    {
+      "name": "Boku no Natsuyasumi",
+      "category": "GAMES"
+    },
+    {
+      "name": "Star Control",
+      "category": "GAMES"
+    },
+    {
+      "name": "Delta Force",
+      "category": "GAMES"
+    },
+    {
+      "name": "Dishonored",
+      "category": "GAMES"
+    },
+    {
+      "name": "The Evil Within",
+      "category": "GAMES"
+    },
+    {
+      "name": "StarCraft",
+      "category": "GAMES"
+    },
+    {
+      "name": "Breath of Fire",
+      "category": "GAMES"
+    },
+    {
+      "name": "Tokimeki Memorial",
+      "category": "GAMES"
+    },
+    {
+      "name": "Puzzle Quest",
+      "category": "GAMES"
+    },
+    {
+      "name": "Tom Clancy's Rainbow Six",
+      "category": "GAMES"
+    },
+    {
+      "name": "Golden Sun",
+      "category": "GAMES"
+    },
+    {
+      "name": "Divinity",
+      "category": "GAMES"
+    },
+    {
+      "name": "J.B. Harold",
+      "category": "GAMES"
+    },
+    {
+      "name": "Unravel",
+      "category": "GAMES"
+    },
+    {
+      "name": "Spy Hunter",
+      "category": "GAMES"
+    },
+    {
+      "name": "Monster Truck Madness",
+      "category": "GAMES"
+    },
+    {
+      "name": "The Legendary Starfy",
+      "category": "GAMES"
+    },
+    {
+      "name": "Kid Niki",
+      "category": "GAMES"
+    },
+    {
+      "name": "print",
+      "category": "GAMES"
+    },
+    {
+      "name": "Glory of Heracles",
+      "category": "GAMES"
+    },
+    {
+      "name": "Web series",
+      "category": "GAMES"
+    },
+    {
+      "name": "Image Fight",
+      "category": "GAMES"
+    },
+    {
+      "name": "Hard Drivin'",
+      "category": "GAMES"
+    },
+    {
+      "name": "Bendy",
+      "category": "GAMES"
+    },
+    {
+      "name": "SteamWorld",
+      "category": "GAMES"
+    },
+    {
+      "name": "Parkan",
+      "category": "GAMES"
+    },
+    {
+      "name": "Castlevania",
+      "category": "GAMES"
+    },
+    {
+      "name": "Video games portal",
+      "category": "GAMES"
+    }
+  ]
+}
