@@ -1,0 +1,2004 @@
+{
+  "fandoms": [
+    {
+      "name": "The Philobiblon",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Short story",
+      "category": "BOOKS"
+    },
+    {
+      "name": "book towns",
+      "category": "BOOKS"
+    },
+    {
+      "name": "KONS International Literary Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Geoffrey Bilson Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "hardcover",
+      "category": "BOOKS"
+    },
+    {
+      "name": "lyrics",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Play",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Literature lists",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Encore Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Paszport Polityki",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Epigram Books Fiction Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Vilenica Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Sapir Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Prémio Leya",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Johann Wolfgang von Goethe",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Jenko Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "lyric",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Prix Fénéon",
+      "category": "BOOKS"
+    },
+    {
+      "name": "NSK Neustadt Prize for Children's Literature",
+      "category": "BOOKS"
+    },
+    {
+      "name": "National Book Award for Translated Literature",
+      "category": "BOOKS"
+    },
+    {
+      "name": "PEN America",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Premio Bancarella",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Folklore",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Tie pin",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Gradam de Bhaldraithe",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Ezhuthachan Puraskaram",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Christopher Hewitt Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Learned society",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Newman Prize for Chinese Literature",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Yuva Puraskar for Meitei",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Baillie Gifford Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Lord Ruthven Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Vigil",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Premio Nadal",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Otherwise Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Jerusalem Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Yuva Puraskar",
+      "category": "BOOKS"
+    },
+    {
+      "name": "John Glassco Translation Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Jnanpith Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Premi Prudenci Bertrana",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Caine Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Clubs",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Magyar",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Religion-related",
+      "category": "BOOKS"
+    },
+    {
+      "name": "coming-of-age",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Olive Schreiner Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Irish",
+      "category": "BOOKS"
+    },
+    {
+      "name": "What links here",
+      "category": "BOOKS"
+    },
+    {
+      "name": "incantation",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Ockham New Zealand Book Awards",
+      "category": "BOOKS"
+    },
+    {
+      "name": "National Poetry Series",
+      "category": "BOOKS"
+    },
+    {
+      "name": "The Best American Poetry",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Privacy policy",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Prix Rosny-Aîné",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Silesius Poetry Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Ribbon",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Japan",
+      "category": "BOOKS"
+    },
+    {
+      "name": "FIL Literary Award in Romance Languages",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Honorary degree",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Dog ears",
+      "category": "BOOKS"
+    },
+    {
+      "name": "O. Henry Awards",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Runeberg Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Western Australian Premier's Book Awards",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Bosanski",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Janet Heidinger Kafka Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Thomas Head Raddall Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Religious",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Arthur Ellis Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Herman Voaden Playwriting Competition",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Prešeren Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Science",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Premio Campiello",
+      "category": "BOOKS"
+    },
+    {
+      "name": "fantasy",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Rainbow Awards",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Collar",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Yuva Gaurav Puraskar",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Wikipedia:WikiProject Awards",
+      "category": "BOOKS"
+    },
+    {
+      "name": "speech",
+      "category": "BOOKS"
+    },
+    {
+      "name": "National Book Critics Circle Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Erdal Oz Literature Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Guardian Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Minnesota Book Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Rossica Translation Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "St. Francis College Literary Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Nrupatunga Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Barry Ronge Fiction Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "psychological suspense",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Matt Cohen Award: In Celebration of a Writing Life",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Left Coast Crime awards",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Schneider Family Book Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Pandit Sunderlal Sharma Literature Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Academia Rossica",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Bertolt-Brecht-Literaturpreis",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Nita Kibble Literary Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "International Dublin Literary Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Satire",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Children",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Bailiff",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Jane Addams Children's Book Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "International Commission for Orders of Chivalry",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Hopwood Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "instant book",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Estate",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Book tour",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Asian American Literary Awards",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Badge",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Voltaire",
+      "category": "BOOKS"
+    },
+    {
+      "name": "McNally Robinson Book of the Year Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Bookmarks",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Digitizing",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Lulu Awards",
+      "category": "BOOKS"
+    },
+    {
+      "name": "So-Wol Poetry Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Bisexual Book Awards",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Prix Anne-Hébert",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Vicky Metcalf Award for Children's Literature",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Contents",
+      "category": "BOOKS"
+    },
+    {
+      "name": "McNally Robinson Aboriginal Book of the Year Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Prémio Camões",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Heinrich Mann Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "legend",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Pura Belpré Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "codex",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Staunch Book Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Pritzker Military Literature Award for Lifetime Achievement in Military Writing",
+      "category": "BOOKS"
+    },
+    {
+      "name": "blurbs",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Halldis Moren Vesaas Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Poetry Society",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Shaughnessy Cohen Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Kurd Laßwitz",
+      "category": "BOOKS"
+    },
+    {
+      "name": "PEN Hessell-Tiltman Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Winterset Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Book burning",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Prešeren Foundation Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Collar day",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Chivalry",
+      "category": "BOOKS"
+    },
+    {
+      "name": "The Australian/Vogel Literary Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Ruth Benedict Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Folio",
+      "category": "BOOKS"
+    },
+    {
+      "name": "adventure",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Premanand Suvarna Chandrak",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Polari Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Bibliomania",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Authors' Club Best First Novel Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Sahitya Akademi Award to Bengali Writers",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Germany",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Meyer-Whitworth Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "International Booker Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Prose",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Colby Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Ghazal",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Theakston's Old Peculier Crime Novel of the Year Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "book",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Prix Interallié",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Eesti",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Geffen Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "John W. Campbell Award for Best New Writer in Science Fiction",
+      "category": "BOOKS"
+    },
+    {
+      "name": "miniature",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Sol Plaatje Prize for Translation",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Writers' Trust Engel/Findley Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Drama",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Sir Julius Vogel Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Human trophy",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Prix Tour-Apollo Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Kingsley Tufts Poetry Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Magazines",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Kiriyama Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Canada Reads",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Children's literary awards",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Ergodic",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Libris Literatuur Prijs",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Writing",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Narmad Suvarna Chandrak",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Vayalar Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Mary Tanenbaum Award for Nonfiction",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Ho-Am Prize in the Arts",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Michael L. Printz Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Urania Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Dame",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Native Writers' Circle of the Americas",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Canadian Jewish Book Awards",
+      "category": "BOOKS"
+    },
+    {
+      "name": "folk-epics",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Fraternity",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Prix Ringuet",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Hilary Weston Writers' Trust Prize for Nonfiction",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Esther Glen Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Novelette",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Prix du roman Fnac",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Malayalam",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Arab American Book Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "list",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Grimoire",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Premio Nacional de Lingüística y Literatura",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Contact Wikipedia",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Helen and Kurt Wolff Translator's Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "myth",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Law enforcement",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Guild",
+      "category": "BOOKS"
+    },
+    {
+      "name": "W.Y. Boyd Literary Award for Excellence in Military Fiction",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Prince of Asturias Awards",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Lambda Literary Award for Transgender Literature",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Lotus Prize for Literature",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Bibliophilia",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Levstik Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Sor Juana Inés de la Cruz Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Get shortened URL",
+      "category": "BOOKS"
+    },
+    {
+      "name": "History",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Shimase Love Literature Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Officer",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Order of merit",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Collar pin",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Publishing Triangle",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Epaulette",
+      "category": "BOOKS"
+    },
+    {
+      "name": "PEN/Book-of-the-Month Club Translation Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Premio Eugenio Espejo",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Palanca Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Glass Key award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Man Asian Literary Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "PEN/Hemingway Award for Debut Novel",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Burt Award for First Nations, Métis and Inuit Literature",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Sedat Simavi Literature Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Ebooks",
+      "category": "BOOKS"
+    },
+    {
+      "name": "advance copy",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Book swapping",
+      "category": "BOOKS"
+    },
+    {
+      "name": "CASEY Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "lesbian fiction",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Leipzig Book Fair Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Caldecott Medal",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Kalaimamani Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Prize book",
+      "category": "BOOKS"
+    },
+    {
+      "name": "The Eilis Dillon Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Necklet",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Nagrada Ksaver Šandor Gjalski",
+      "category": "BOOKS"
+    },
+    {
+      "name": "non-binary",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Hermann-Hesse-Preis",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Franz Kafka Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Outstanding Latino/a Cultural Award in Literary Arts or Publications",
+      "category": "BOOKS"
+    },
+    {
+      "name": "SFRA Pioneer Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Goldsmiths Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Epyllion",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Library",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Libretto",
+      "category": "BOOKS"
+    },
+    {
+      "name": "The Bruce Alexander Memorial Historical Mystery",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Dream of the Red Chamber Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "SAARC Literary Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "ReLit Awards",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Français",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Log in",
+      "category": "BOOKS"
+    },
+    {
+      "name": "American Academy of Arts and Letters Gold Medals in Belles Lettres, Criticism and Essays",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Reviews",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Bookseller/Diagram Prize for Oddest Title of the Year",
+      "category": "BOOKS"
+    },
+    {
+      "name": "James Jones First Novel Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Lists of literary awards",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Movements",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Mystery Writers of Japan Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Wikipedia:WikiProject Orders, decorations, and medals",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Leslie Feinberg Award for Trans and Gender-Variant Literature",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Medal ribbon",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Macavity Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Friedebert Tuglas short story award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Articles with short description",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Nienke van Hichtum-prijs",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Hospitaller",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Architecture",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Ananda Puraskar",
+      "category": "BOOKS"
+    },
+    {
+      "name": "W.A Hofmeyr Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Nobility",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Fabri Literary Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Danuta Gleed Literary Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "National Book Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Sydney Taylor Book Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Battle honour",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Booker Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Pulitzer Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Coretta Scott King Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Asian/Pacific American Awards for Literature",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Deutsch",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Lambda Literary Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Collection (publishing)",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Travelogue",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Barbellion Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Gradam Uí Shúilleabháin",
+      "category": "BOOKS"
+    },
+    {
+      "name": "List of Australian literary awards",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Dynamic lists",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Community portal",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Marsh Award for Children’s Literature in Translation",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Sociology",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Yomiuri Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Royal family order",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Rose Mary Crawshay Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Conservation and restoration",
+      "category": "BOOKS"
+    },
+    {
+      "name": "(Top)",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Hans Fallada Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Maskew Miller Longman Literature Awards",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Livery collar",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Bialik Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Dagger of Daggers",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Betty Trask Prize and Awards",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Grand Prix du roman de l'Académie française",
+      "category": "BOOKS"
+    },
+    {
+      "name": "World Fantasy Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Edogawa Rampo Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Squire",
+      "category": "BOOKS"
+    },
+    {
+      "name": "limited edition",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Prix Médicis",
+      "category": "BOOKS"
+    },
+    {
+      "name": "German Book Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Bram Stoker Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "St. Louis Literary Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "winners and shortlisted authors",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Family history society",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Nederlands",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Grand prix Afrique",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Voice",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Lane Anderson Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Premio Planeta",
+      "category": "BOOKS"
+    },
+    {
+      "name": "David Higham Prize for Fiction",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Anecdote",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Merano Poetry Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Alice B Readers Awards",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Treasurer",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Heraldic",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Helsingin Sanomat Literature Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Prix de Flore",
+      "category": "BOOKS"
+    },
+    {
+      "name": "William Faulkner – William Wisdom Creative Writing Competition",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Awareness ribbon",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Swedish Crime Writers' Academy",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Prior",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Writers' Trust Distinguished Contribution Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Balint Balassi Memorial Sword Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Somerset Maugham Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Passage fee",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Harold Morton Landon Translation Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "folksong",
+      "category": "BOOKS"
+    },
+    {
+      "name": "scroll",
+      "category": "BOOKS"
+    },
+    {
+      "name": "European Union Prize for Literature",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Rogers Writers' Trust Fiction Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Poets",
+      "category": "BOOKS"
+    },
+    {
+      "name": "International Rubery Book Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Katara Prize for Arabic Novel",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Covers",
+      "category": "BOOKS"
+    },
+    {
+      "name": "France",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Rožanc Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "paranormal",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Thomas Pringle Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Tragicomedy",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Organisations",
+      "category": "BOOKS"
+    },
+    {
+      "name": "American Literary Translators Association",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Mildred L. Batchelder Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Carol Bolt Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "debut novel",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Kresnik Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Truman Capote Literary Trust",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Category:Orders, decorations, and medals",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Master of ceremonies",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Padmarajan Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Disclaimers",
+      "category": "BOOKS"
+    },
+    {
+      "name": "The New Criterion Poetry Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Anisfield-Wolf Book Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Thomas D. Clareson Award for Distinguished Service",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Children's Laureate",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Humanitarianism",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Rona Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "horror",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Nike Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Bagutta Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Juhan Smuul literary award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Vinda Karandikar Jeevan Gaurav Puraskar",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Premio Urania",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Hans Christian Andersen Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Banned books",
+      "category": "BOOKS"
+    },
+    {
+      "name": "action",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Webarchive template wayback links",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Adriano González León Biennial Novel Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Cundill History Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "The Warwick Prize for Writing",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Post-literate Society",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Dinaane Debut Fiction Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Rossica Young Translators Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Shoulder mark",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Poetry awards",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Honkaku Mystery Writers Club of Japan",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Illustration",
+      "category": "BOOKS"
+    },
+    {
+      "name": "De Boon",
+      "category": "BOOKS"
+    },
+    {
+      "name": "DSC Prize for South Asian Literature",
+      "category": "BOOKS"
+    },
+    {
+      "name": "disability history",
+      "category": "BOOKS"
+    },
+    {
+      "name": "James Duval Phelan Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Writers of the Future",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Veronika Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Dayton Literary Peace Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Poets' Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Hyundae Munhak Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Jalal Al-e Ahmad Literary Awards",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Anthony Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Neustadt International Prize for Literature",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Order of precedence",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Edgar Allan Poe Awards",
+      "category": "BOOKS"
+    },
+    {
+      "name": "PEN/Ralph Manheim Medal for Translation",
+      "category": "BOOKS"
+    },
+    {
+      "name": "sash",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Grand Prix of Literary Associations",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Sunday Times CNA Literary Awards",
+      "category": "BOOKS"
+    },
+    {
+      "name": "PEN Open Book Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Gentlemen's club",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Limerick",
+      "category": "BOOKS"
+    },
+    {
+      "name": "moral",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Toucan Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Fiction",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Bollingen Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Prix Goncourt",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Tähtivaeltaja Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Theatre",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Code of honor",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Aurealis Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Drabble",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Secret society",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Duncan Lawrie International Dagger",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Binding",
+      "category": "BOOKS"
+    },
+    {
+      "name": "List of highest",
+      "category": "BOOKS"
+    },
+    {
+      "name": "American Academy of Arts and Letters Gold Medal for Fiction, Novels, Short Stories",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Joy Cowley Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Scotiabank Giller Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Blue Metropolis Violet Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Writers",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Terms of Use",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Illuminated manuscripts",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Goldie Awards",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Shota Rustaveli State Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Europese Literatuurprijs",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Singapore Literature Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Milton Acorn People's Poetry Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Magnesia Litera Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Aspekte-Literaturpreis",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Censorship",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Grand master",
+      "category": "BOOKS"
+    },
+    {
+      "name": "National",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Developers",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Portugal Telecom Prize for Literature",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Tir na n-Og Awards",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Bankim Puraskar",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Early modern",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Reading",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Circle",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Waverton Good Read Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "General Nonfiction",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Park Kyung-ni Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Premio Aztlán Literary Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Sophie Brody Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Crime Writers' Association",
+      "category": "BOOKS"
+    },
+    {
+      "name": "RITA Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Outline",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Edasseri Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Premio Strega",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Prêmio Machado de Assis",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Prisma",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Bungei Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Engineer Mohammed Bashir Karaye Prize for Hausa Writing",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Prix Sorcières",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Medal bar",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Patrick White Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Scott Moncrieff Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Brazil",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Haiku",
+      "category": "BOOKS"
+    },
+    {
+      "name": "bookcases",
+      "category": "BOOKS"
+    },
+    {
+      "name": "The Paris Literary Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Netherlands",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Georg Büchner Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Prix des Deux-Magots",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Special pages",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Flash fiction",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Booby prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Women's Prize for Non-Fiction",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Grand Cross",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Carter G. Woodson Book Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Prix du Cercle du livre de France",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Barry Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Campaign medal",
+      "category": "BOOKS"
+    },
+    {
+      "name": "NBU-prisen",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Queen Mary Wasafiri New Writing Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Talk",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Wole Soyinka Prize for Literature in Africa",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Frankfurt Book Fair",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Shevchenko National Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Cite this page",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Anton Wildgans Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Dayne Ogilvie Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Nordic Council's Literature Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "University of Johannesburg Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "History of books",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Arthur Rense Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "All India Poetry Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Pakistan",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Championship ring",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Accolade",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Service flag",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Chandler Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Pages using sidebar with the child parameter",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Carol Shields Prize for Fiction",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Yi Sang Literary Award",
+      "category": "BOOKS"
+    },
+    {
+      "name": "High society",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Participation",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Popescu Prize",
+      "category": "BOOKS"
+    },
+    {
+      "name": "Ingeborg Bachmann Prize",
+      "category": "BOOKS"
+    }
+  ]
+}
