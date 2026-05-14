@@ -491,6 +491,8 @@ paths:
     post:
       tags:
         - fandom
+      parameters:
+        - $ref: './definitions.yaml#/components/parameters/ServiceApiKeyHeader'
       requestBody:
         required: true
         content:

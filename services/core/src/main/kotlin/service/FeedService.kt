@@ -1,6 +1,14 @@
 package org.example.service
 
-import com.fandomatch.core.model.*
+import com.fandomatch.core.model.Fandom
+import com.fandomatch.core.model.FandomCategory
+import com.fandomatch.core.model.MediaItem
+import com.fandomatch.core.model.MediaType
+import com.fandomatch.core.model.Post
+import com.fandomatch.core.model.PostAuthor
+import com.fandomatch.core.model.PostListData
+import com.fandomatch.core.model.PostListResponse
+import com.fandomatch.core.model.ResponseStatus
 import com.fandomatch.media.MediaService
 import org.example.exceptions.FandomCategoryNotFoundException
 import org.example.exceptions.UserNotFoundException
@@ -15,7 +23,7 @@ import org.example.repository.UserProfileRepository
 import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Service
 import java.time.Instant
-import java.util.*
+import java.util.UUID
 
 @Service
 class FeedService(
@@ -75,7 +83,7 @@ class FeedService(
             fandomRepository.findAllById(safeFandomIds.map { UUID.fromString(it) }).map { fandom ->
                 val category = fandomCategoryRepository.findById(fandom.categoryId).orElseThrow { FandomCategoryNotFoundException(fandom.categoryId.toString()) }
                 Fandom(
-                    id = fandom.id.toString(),
+                    id = fandom.id!!.toString(),
                     name = fandom.name,
                     category = category.let { FandomCategory.valueOf(it.name) }
                 )

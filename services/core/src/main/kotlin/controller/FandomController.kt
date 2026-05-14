@@ -3,13 +3,20 @@ package org.example.controller
 import com.fandomatch.core.model.*
 import io.github.oshai.kotlinlogging.KLogging
 import org.example.service.FandomService
-import org.example.util.*import org.springframework.http.ResponseEntity
+import org.example.util.getFandomCategoryListErrorResponse
+import org.example.util.getFandomListErrorResponse
+import org.example.util.getFandomOneshotErrorResponse
+import org.example.util.getFandomRequestCreateErrorResponse
+import org.example.util.onControllerRequest
+import org.springframework.beans.factory.annotation.Value
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/core/fandoms")
 class FandomController(
-    private val fandomService: FandomService
+    private val fandomService: FandomService,
+    @Value("\${service.api-key}") private val serviceApiKey: String,
 ) {
 
     companion object : KLogging()
@@ -68,8 +75,10 @@ class FandomController(
 
     @PostMapping("/fandom_oneshot")
     fun fandomOneshot(
+        @RequestHeader("X-Api-Key") apiKey: String,
         @RequestBody request: FandomOneshotRequest
     ): ResponseEntity<FandomOneshotResponse> {
+        if (apiKey != serviceApiKey) return ResponseEntity.status(403).build()
         return onControllerRequest(
             logger = logger,
             operationName = "POST /core/fandoms/fandom_oneshot",

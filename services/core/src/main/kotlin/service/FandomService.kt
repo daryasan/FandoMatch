@@ -2,14 +2,11 @@ package org.example.service
 
 import com.fandomatch.core.model.*
 import org.example.exceptions.FandomCategoryNotFoundException
-import org.example.exceptions.UserNotFoundException
 import org.example.models.db_models.FandomCategory
 import org.example.models.db_models.FandomRequest
 import org.example.repository.FandomCategoryRepository
 import org.example.repository.FandomRepository
 import org.example.repository.FandomRequestRepository
-import org.example.repository.UserProfileRepository
-import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.time.Instant
@@ -78,7 +75,7 @@ class FandomService(
     }
 
     private fun org.example.models.db_models.Fandom.toDto(category: FandomCategory) = Fandom(
-        id = id.toString(),
+        id = id!!.toString(),
         name = name,
         category = com.fandomatch.core.model.FandomCategory.valueOf(category.name)
     )
@@ -136,7 +133,6 @@ class FandomService(
             } else {
                 fandomRepository.save(
                     org.example.models.db_models.Fandom(
-                        id = UUID.randomUUID(),
                         categoryId = dbCategory.id,
                         name = item.name,
                         description = null

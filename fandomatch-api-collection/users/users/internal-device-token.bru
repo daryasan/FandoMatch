@@ -5,7 +5,7 @@ meta {
 }
 
 post {
-  url: http://localhost:8080/users/internal/device-token
+  url: {{prod_host}}/users/internal/device-token
   body: json
   auth: none
 }
@@ -16,5 +16,5 @@ headers {
 }
 
 body:json {
-  {"user_id":"be4e37bc-fd8e-4b12-94ef-a3114e5f9e9d"}
+  {"user_id":"{{cur_uuid}}"}
 }

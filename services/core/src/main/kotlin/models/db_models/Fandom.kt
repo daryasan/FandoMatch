@@ -8,7 +8,7 @@ import java.util.*
 data class Fandom(
     @Id
     @GeneratedValue
-    val id: UUID,
+    val id: UUID? = null,
 
     @Column(name = "category_id", nullable = false)
     val categoryId: UUID,

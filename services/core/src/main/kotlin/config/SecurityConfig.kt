@@ -23,7 +23,8 @@ open class SecurityConfig(
                     org.springframework.http.HttpMethod.POST,
                     "/core/posts/get",
                     "/core/fandoms/user",
-                    "/core/fandoms/request-new"
+                    "/core/fandoms/request-new",
+                    "/core/fandoms/fandom_oneshot"
                 ).permitAll()
                 it.requestMatchers(
                     org.springframework.http.HttpMethod.GET,
